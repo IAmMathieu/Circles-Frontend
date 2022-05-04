@@ -1,4 +1,6 @@
 // import './styles.scss';
+import { Login } from '../../features/auth/Login/Login';
+
 export const Homepage = () => {
-  return <h1>homepage</h1>;
+  return <Login />;
 };
