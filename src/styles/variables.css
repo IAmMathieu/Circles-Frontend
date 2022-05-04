@@ -1,0 +1,12 @@
+:root {
+  --background: #90c1e0;
+  --maincolor: #294154;
+  --maingradient: #41617a, #41617aff;
+  --buttonDark: #f1aa2a;
+}
+[data-theme='dark'] {
+  --background: #13293d;
+  --maincolor: #ffffff;
+  --maingradient: #d7efff, #d7efff00;
+  --buttonDark: #294154;
+}
