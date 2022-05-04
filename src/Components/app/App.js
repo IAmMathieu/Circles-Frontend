@@ -12,6 +12,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        {/* <Route path='*' element={<Error404 />} /> */}
       </Routes>
     </div>
   );
