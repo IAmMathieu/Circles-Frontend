@@ -1,0 +1,14 @@
+[
+  {
+    "email": "john@aol.fr",
+    "password": "1234"
+  },
+  {
+    "email": "doe@aol.fr",
+    "password": "1234"
+  },
+  {
+    "email": "faker@aol.fr",
+    "password": "1234"
+  }
+]
