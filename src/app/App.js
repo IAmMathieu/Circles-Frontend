@@ -6,6 +6,7 @@ import './App.scss';
 import { DarkMode } from '../features/DarkMode/DarkMode';
 // import { Counter } from '../features/counter/Counter';
 import useLocalStorage from 'use-local-storage';
+import { CirclePage } from '../features/CirclePage/CirclePage';
 
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -25,6 +26,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/circle' element={<CirclePage />} />
         {/* <Route path='*' element={<Error404 />} /> */}
       </Routes>
       <DarkMode switchTheme={switchTheme} />
