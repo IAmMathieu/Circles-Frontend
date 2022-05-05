@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import userList from '../../data/user.json';
 // Initialise the default state.
+
+
 const initialState = {
   firstname: '',
   lastname: '',
@@ -11,6 +13,7 @@ const initialState = {
   token: '',
   logged: false,
   error: false,
+  loading: false,
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 
@@ -27,6 +30,7 @@ export const authSlice = createSlice({
       state[action.payload.name] = action.payload.payload;
     },
     handleSubmit: (state, action) => {
+      
       const { email, password } = state;
       const userFind = userList.find(
         (user) => user.email === email && user.password === password
@@ -37,6 +41,7 @@ export const authSlice = createSlice({
         state.error = false;
       } else {
         state.error = true;
+        state.loading = false;
         console.log('Authentification KO');
       }
       // const regexEmail =
