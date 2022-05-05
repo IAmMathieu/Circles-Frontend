@@ -8,6 +8,7 @@ export const Input = ({ type, name, error }) => {
   return (
     <>
       <TextField
+        className='capitalize'
         id='standard-basic'
         label={name}
         variant='standard'

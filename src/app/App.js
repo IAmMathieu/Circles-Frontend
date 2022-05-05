@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router';
 import { Homepage } from '../features/Homepage/Homepage';
 import { Dashboard } from '../features/Dashboard/Dashboard';
+import { SignIn } from '../features/SignIn/SignIn';
 import './App.scss';
 import { DarkMode } from '../features/DarkMode/DarkMode';
 // import { Counter } from '../features/counter/Counter';
@@ -21,10 +22,11 @@ const App = () => {
   };
   return (
     <div className='App' data-theme={theme}>
-      <h1>Coucou</h1>
+      <h1>Coucou de App.js</h1>
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/signin' element={<SignIn />} />
         {/* <Route path='*' element={<Error404 />} /> */}
       </Routes>
       <DarkMode switchTheme={switchTheme} />

@@ -7,7 +7,6 @@ const initialState = {
   surname: '',
   email: '',
   password: '',
-  pseudo: '',
   token: '',
   logged: false,
   error: false,
@@ -44,10 +43,25 @@ export const authSlice = createSlice({
       //   const regexPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/gm;
       // if ()
     },
+
+    handleRegisterSubmit:(state, event) => {
+      const {email} = state;
+      const userAlreadyRegister = userList.find((user) => user.email === email);
+      if(userAlreadyRegister){
+        console.log('User already exist');
+        state.error = true;
+      } else {
+        console.log('Sign In ok');
+        state.logged = true;
+        
+      }
+    }
+
+    
   },
 });
 
-export const { handleChange, handleSubmit } = authSlice.actions;
+export const { handleChange, handleSubmit, handleRegisterSubmit } = authSlice.actions;
 
 // we export the reducer of our slice
 export default authSlice.reducer;
