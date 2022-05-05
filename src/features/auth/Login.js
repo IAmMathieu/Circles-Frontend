@@ -1,6 +1,6 @@
-import { Input } from '../../../Components/Common/Input/Input';
+import { Input } from '../Common/Input/Input';
 import Button from '@mui/material/Button';
-import { handleSubmit } from '../../../features/auth/authSlice';
+import { handleSubmit } from './authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 export const Login = () => {
   const dispatch = useDispatch();

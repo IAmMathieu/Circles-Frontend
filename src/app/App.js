@@ -1,9 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router';
-import { Homepage } from '../Homepage/Homepage';
-import { Dashboard } from '../Dashboard/Dashboard';
+import { Homepage } from '../features/Homepage/Homepage';
+import { Dashboard } from '../features/Dashboard/Dashboard';
 import './App.scss';
-import { DarkMode } from '../DarkMode/DarkMode';
+import { DarkMode } from '../features/DarkMode/DarkMode';
 // import { Counter } from '../features/counter/Counter';
 import useLocalStorage from 'use-local-storage';
 
