@@ -1,3 +1,13 @@
+import { useDispatch, useSelector } from 'react-redux';
+
 export const Dashboard = () => {
-  return <h1>DashBoard</h1>;
+  const dispatch = useDispatch();
+  const { surname, logged } = useSelector((state) => state.auth);
+
+  return (
+    <div className='temp'>
+      {logged && <p>{surname} Connecté</p>}
+      {!logged && <h1>Non loggé</h1>}
+    </div>
+  );
 };

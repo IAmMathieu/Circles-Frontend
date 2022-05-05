@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router';
+import { Routes, Route, Navigate } from 'react-router';
 import { Homepage } from '../features/Homepage/Homepage';
 import { Dashboard } from '../features/Dashboard/Dashboard';
 import './App.scss';
@@ -9,7 +9,9 @@ import useLocalStorage from 'use-local-storage';
 
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
 const App = () => {
+  
   // Allow automatically the theme value based on the prefer color scheme from the user.
   const [theme, setTheme] = useLocalStorage(
     'theme',
