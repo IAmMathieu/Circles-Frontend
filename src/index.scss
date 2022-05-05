@@ -4,6 +4,15 @@
 
 // Import variable for darkmode
 @import './styles/variables.css';
+@font-face {
+  font-family: "easterFont";
+  src: 
+      url("../public/fonts/regular-font.woff2") format("woff2"),
+      url("../public/fonts/black-font.woff2") format("woff2"),
+      url("../public/fonts/bold-font.woff2") format("woff2"),
+      url("../public/fonts/medium-font.woff2") format("woff2"),
+      url("../public/fonts/regularitalic-font.woff2") format("woff2");
+ }
 
 html,
 body,
@@ -14,7 +23,7 @@ body,
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'easterFont', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
