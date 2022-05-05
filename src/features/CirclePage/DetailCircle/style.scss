@@ -1,0 +1,72 @@
+.container__detail-circle {
+    width: 20%;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.header-circle{
+    
+
+    &__name{
+        font-weight: bold;
+    }
+    &__description{
+        font-weight: lighter;
+        font-size: 0.8rem;
+    }
+    &__img{
+        width: 45%;
+        margin: auto;
+        padding: 0.5rem;
+    }
+}
+
+.container__detail-admin{
+    display: flex;
+    padding: 1rem;
+
+    &--img{
+        width: 45%;
+        display: flex;
+    }
+
+    &--text{
+        padding: 0.3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: auto;
+        &--name{
+            font-weight: bold;
+        }
+        &--status{
+            font-weight: lighter;
+        }
+    }
+}
+
+.container__members{
+    padding: 0.5rem;
+
+    &__text{
+        margin: 0.5rem;
+    }
+
+    &__image{
+        display: inline-block;
+        border-radius: 50%;
+        overflow: hidden;
+        width: 4rem;
+    }
+
+    span:nth-of-type(1n+2) {
+        margin-left: -45px;
+        -webkit-mask:radial-gradient(circle 40px at 5px 50%,transparent 99%,#fff 100%);
+                mask:radial-gradient(circle 40px at 5px 50%,transparent 99%,#fff 100%);
+      }
+
+    &__image img {
+        width: 100%;
+        display: block;
+    }
+}

@@ -1,0 +1,12 @@
+.container__circle-page{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    height: 100%;
+}
+
+.container__evt{
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+}
