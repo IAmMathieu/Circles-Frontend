@@ -20,6 +20,11 @@ body,
 .App {
   height: 100%;
   background-image: url(./background.svg);
+  background-size: cover;
+}
+
+.texts {
+  color: var(--maincolor);
 }
 
 body {

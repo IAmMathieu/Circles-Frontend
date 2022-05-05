@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { handleChange } from '../../../features/auth/authSlice';
 import './Input.scss';
 
-export const Input = ({ type, name, error }) => {
+export const Input = ({ name, input, type, error }) => {
   const dispatch = useDispatch();
   return (
     <>
@@ -22,7 +22,7 @@ export const Input = ({ type, name, error }) => {
         onChange={(event) =>
           dispatch(
             handleChange({
-              name: name.toLowerCase(),
+              name: input,
               payload: event.target.value,
             })
           )
