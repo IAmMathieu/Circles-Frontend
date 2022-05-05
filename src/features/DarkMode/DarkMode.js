@@ -1,7 +1,9 @@
 import { FormControlLabel, Switch } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { borderRight } from '@mui/system';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+  right: 20,
   width: 80,
   height: 40,
   padding: 6,

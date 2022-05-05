@@ -3,10 +3,12 @@
   --maincolor: #294154;
   --maingradient: #41617a, #41617aff;
   --buttonDark: #f1aa2a;
+  --backgroundButton: #EA8122;
 }
 [data-theme='dark'] {
   --background: #13293d;
   --maincolor: #ffffff;
   --maingradient: #d7efff, #d7efff00;
   --buttonDark: #294154;
+  --backgroundButton: #EA8122;
 }

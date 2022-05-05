@@ -22,7 +22,7 @@ export const Input = ({ type, name, error }) => {
         onChange={(event) =>
           dispatch(
             handleChange({
-              name,
+              name: name.toLowerCase(),
               payload: event.target.value,
             })
           )

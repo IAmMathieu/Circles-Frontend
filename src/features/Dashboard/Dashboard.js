@@ -1,7 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export const Dashboard = () => {
-  const dispatch = useDispatch();
   const { surname, logged } = useSelector((state) => state.auth);
 
   return (

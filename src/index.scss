@@ -19,9 +19,11 @@ body,
 #root,
 .App {
   height: 100%;
+  background-image: url(./background.svg);
 }
 
 body {
+  
   margin: 0;
   font-family: 'easterFont', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
