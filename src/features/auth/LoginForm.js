@@ -2,29 +2,28 @@ import { Input } from '../Common/Input/Input';
 import { handleSubmit } from './authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './styles.scss';
 import './../../styles/variables.css';
 
 import { getStorage } from '../../utils/helperLocalStorage';
-
+import { useLoginUserQuery } from './authApi';
 export const LoginForm = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { error, logged } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    if (logged) {
-      navigate('/dashboard');
+  const [skip, setSkip] = useState(true);
+  const { data, isLoading, isFetching, isSuccess, isError } = useLoginUserQuery(
+    {
+      email: 'tourte.m@gmail.com',
+      password: '123456',
+    },
+    {
+      skip,
     }
-  }, [logged, navigate]);
+  );
 
   const handleSwitch = () => {
     const container = document.getElementById('container');
     container.classList.toggle('right-panel-active');
   };
-  const theme = getStorage('theme');
-  console.log(theme);
   return (
     <div className='container' id='container'>
       <div className='form-container sign-up-container'>
@@ -33,13 +32,12 @@ export const LoginForm = () => {
           className='register-form'
           onSubmit={(event) => {
             event.preventDefault();
-            // dispatch(handleRegisterSubmit());
           }}
         >
           <Input name='Prénom' input='firstname' type={'text'} />
           <Input name='Nom' input='lastname' type={'text'} />
           <Input name='Pseudo' input='surname' type={'text'} />
-          <Input name='E-mail' input='email' type={'email'} error={error} />
+          <Input name='E-mail' input='email' type={'email'} error={isError} />
           <Input name='Mot de passe' input='password' type={'password'} />
           <button className='button' type={'submit'}>
             Créer votre compte
@@ -52,24 +50,37 @@ export const LoginForm = () => {
           className='login-form'
           onSubmit={(event) => {
             event.preventDefault();
-            dispatch(handleSubmit());
+            // dispatch(handleSubmit());
+            // const token = getStorage('token');
+            setSkip(false);
           }}
         >
-          <Input
-            className='input'
-            color='primary'
-            name='Adresse mail'
-            input='email'
-            type='email'
-            error={error}
-          />
-          <Input
-            className='input'
-            name='Mot de passe'
-            input='password'
-            type='password'
-            error={error}
-          />
+          <div className='input__container relative flex flex-col'>
+            <Input
+              className='input'
+              color='primary'
+              name='Adresse mail'
+              input='email'
+              type='email'
+              error={isError}
+            />
+            <Input
+              className='input'
+              name='Mot de passe'
+              input='password'
+              type='password'
+              error={isError}
+            />
+
+            {isError ? (
+              <p className='text-red-500 absolute bottom-[-30px] whitespace-nowrap left-1/2 transform -translate-x-1/2 font-bold'>
+                E-mail ou mot de passe incorrect
+              </p>
+            ) : (
+              ''
+            )}
+          </div>
+
           <a className='forgot_password' href='/'>
             Mot de passe oublié?
           </a>

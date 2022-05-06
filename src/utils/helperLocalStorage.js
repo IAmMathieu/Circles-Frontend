@@ -1,8 +1,8 @@
 export const getStorage = (storage) => {
-  localStorage.getItem(storage);
+  return localStorage.getItem(storage);
 };
 export const removeStorage = (storage) => {
-  localStorage.removeItem(storage);
+  return localStorage.removeItem(storage);
 };
 export const setStorage = (storage, val) => {
   localStorage.setItem(storage, val);
