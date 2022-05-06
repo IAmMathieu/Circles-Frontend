@@ -1,6 +1,6 @@
 import React from 'react';
 import { LoginForm } from './LoginForm';
-import fullLogo from './../../fullLogoNight.svg';
+import fullLogo from '../../assets/images/fullLogoNight.svg';
 
 export const Login = () => {
   return (

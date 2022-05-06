@@ -38,9 +38,44 @@ export const authApi = createApi({
         return response;
       },
     }),
+    registerUser: builder.query({
+      /**
+       * Query for register user.
+       * @param {*} param0
+       * @returns
+       */
+      query: ({ firstname, lastname, birthdate, email, password }) => {
+        return {
+          url: 'register',
+          method: 'POST',
+          body: new URLSearchParams({
+            firstname,
+            lastname,
+            email,
+            password,
+            birthdate,
+          }),
+          header: 'Content-Type: application/x-www-form-urlencoded',
+          // credentials: 'include',
+        };
+      },
+      /**
+       * Take the response and extract the token. If token, set the token to the local storage.
+       * @param {*} response
+       * @returns
+       */
+      transformResponse: (response) => {
+        const { token } = response;
+        if (token) {
+          setStorage('token', token);
+          history.go('/dashboard');
+        }
+        return response;
+      },
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginUserQuery } = authApi;
+export const { useLoginUserQuery, useRegisterUserQuery } = authApi;
