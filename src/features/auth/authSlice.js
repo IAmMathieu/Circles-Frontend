@@ -12,7 +12,10 @@ const initialState = {
   error: false,
   // propriétés test pour le tchat
   messages:[],
-  newMessage:'',
+  newMessage: {
+    surname: '',
+    content: ''
+  },
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 
