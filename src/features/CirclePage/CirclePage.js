@@ -2,7 +2,7 @@ import { DetailCircle } from './DetailCircle/DetailCircle';
 import Chatroom from './Chatroom/Chatroom';
 import { Calendar } from '../Common/Calendar/Calendar';
 import { Evenement } from '../Common/Evenements/Evenement';
-import { Aside } from './Aside';
+import { Aside } from './Aside/Aside';
 import './CirclePage.scss';
 
 export const CirclePage = () => {
