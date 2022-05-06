@@ -8,7 +8,7 @@ export default function Messages() {
   // on utilise le hook custom useSelector
   // pour récupérer les infos du state
   // const messages = useSelector((state) => state.messages);
-  const messages = useSelector(getMessages);
+  const messages = useSelector((state) => state.auth);
 
   // on crée une référence avec useRef
   // elle nous permettra de retrouver notre composant
@@ -29,22 +29,18 @@ export default function Messages() {
     // le composant React est commit dans le DOM
     // on a donc accès à "document"
     // document.getElementById();
-
-    // 1e solution
-    // messagesRef.current.scroll(0, messagesRef.current.scrollHeight);
-
-    // 2e solution
     hiddenElementRef.current.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   return (
     <ul className="messages" ref={messagesRef}>
-      {messages.map((message) => (
+      {console.log(messages)}
+      {/* {messages.map((message) => ( */}
         <Message
-          key={message.id}
-          {...message}
+          // key={message.id}
+          // {...message}
         />
-      ))}
+      {/* ))} */}
       <div ref={hiddenElementRef} />
     </ul>
   );

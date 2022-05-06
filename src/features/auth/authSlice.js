@@ -4,13 +4,15 @@ import userList from '../../data/user.json';
 const initialState = {
   firstname: '',
   lastname: '',
-  surname: '',
-  email: '',
-  password: '',
-  pseudo: '',
+  surname: 'EB',
+  email: 'test@test.com',
+  password: '123',
   token: '',
   logged: false,
   error: false,
+  // propriétés test pour le tchat
+  messages:[],
+  newMessage:'',
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 
