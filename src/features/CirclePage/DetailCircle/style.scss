@@ -1,12 +1,11 @@
 .container__detail-circle {
-    width: 20%;
-    background-color: white;
+    width: 15%;
+    background-color: rgba(255, 255, 255, 0.6);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 0.5rem;
 }
 
 .header-circle{
-    
-
     &__name{
         font-weight: bold;
     }

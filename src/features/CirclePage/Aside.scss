@@ -1,0 +1,41 @@
+.circle__aside{
+    width: 10%;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    &--logo{
+        padding: 0.8rem;
+    }
+    &--logo img{
+        width: 100%;
+        margin: auto;
+    }
+
+    &__list{
+        padding: 1rem;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        
+        &--circle{
+            width: 80%;
+
+        }
+        &--circle img{
+            padding: 0.2rem;
+        }
+
+        &--icons{
+            width: 50%;
+        }
+        &--icons img{
+            padding: 0.2rem;
+        }
+        
+    }
+}
+
