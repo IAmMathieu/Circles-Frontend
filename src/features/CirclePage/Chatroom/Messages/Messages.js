@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import Message from './../Message/Message';
 import { getMessages } from './../selectors';
-// import './style.scss';
+import './style.scss';
 
 export default function Messages() {
   // on utilise le hook custom useSelector
@@ -34,11 +34,14 @@ export default function Messages() {
 
   return (
     <ul className="messages" ref={messagesRef}>
-      {console.log(messages)}
+      {console.log("Contenu de messages : ", messages)}
+      {console.log("Contenu de state.messages : ", useSelector((state) => state.auth))}
+      {console.log("Contenu de messages.surname : ", messages.surname)}
       {/* {messages.map((message) => ( */}
         <Message
           // key={message.id}
-          // {...message}
+          surname={messages.surname}
+
         />
       {/* ))} */}
       <div ref={hiddenElementRef} />
