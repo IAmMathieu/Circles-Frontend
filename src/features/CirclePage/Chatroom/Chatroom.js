@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Messages from './Messages/Messages';
 import Form from './Form/Form';
-// import Settings from './Settings/Settings';
 import { wsConnect } from './action';
-// import './style.scss';
+import './Chatroom.scss';
 
 
 export default function Chatroom() {
@@ -18,8 +17,6 @@ export default function Chatroom() {
 
   return (
     <div className="chatroom">
-      <p>Ici vivra le bloc de tchat</p>
-      {/* <Settings /> */}
       <Messages />
       <Form />
     </div>

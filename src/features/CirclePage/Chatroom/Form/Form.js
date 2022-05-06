@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { sendMessage, changeInputValue } from './../action';
-// import './style.scss';
+import './style.scss';
 
 export default function Form() {
   // on récupère la méthode "dispatch" du store

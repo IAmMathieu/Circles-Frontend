@@ -2,14 +2,12 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 // import classNames from 'classnames';
 import { getIsMine } from './../selectors';
-// import { useSound } from 'src/hooks';
-// import messageSound from 'src/assets/sounds/message.mp3';
-// import './style.scss';
+import './style.scss';
 
 export default function Message({ surname, content }) {
   // const isMine = useSelector((state) => state.pseudo === author);
   // ici on utilise une closure
-  // on passe l'author à getIsMine, qui renverra une fonction
+  // on passe surname à getIsMine, qui renverra une fonction
   // cette fonction aura mémorisé l'author et on aura plus qu'à
   // lui passer le state
   const isMine = useSelector(getIsMine(surname));
