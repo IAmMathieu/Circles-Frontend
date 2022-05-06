@@ -7,7 +7,7 @@
  * @returns {array} liste des messages du state
  */
  export function getMessages(state) {
-    return state.messages;
+    return state.auth;
   }
   
   /**
@@ -31,7 +31,7 @@
   
   /**
    * Fonction qui compare l'auteur du message avec l'utilisateur courant
-   * @param {string} author auteur du message
+   * @param {string} surname auteur du message
    * @returns {bool} retourne true si l'auteur est le même que le pseudo
    */
-  export const getIsMine = (author) => (state) => state.pseudo === author;
+  export const getIsMine = (surname) => (state) => state.surname === surname;

@@ -3,8 +3,8 @@ import { toggleSettings, changeField, login } from './../action';
 // import './style.scss';
 
 export default function Settings() {
-  const { open, email, password } = useSelector((state) => state.settings);
-  const classnames = open ? 'settings settings--open' : 'settings';
+  const { email, password } = useSelector((state) => state.auth);
+  const classnames = 'settings';
   const dispatch = useDispatch();
 
   const handleToggle = () => {
