@@ -1,9 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import requests from '../../api/request';
+import { createSlice } from '@reduxjs/toolkit';
 import userList from '../../data/user.json';
-import { getStorage } from '../../utils/helperLocalStorage';
-import { login, logOut } from './authThunk';
 // Initialise the default state.
 
 const initialState = {
@@ -12,14 +8,6 @@ const initialState = {
   surname: '',
   email: '',
   password: '',
-  pseudo: '',
-  token: '',
-  logged: false,
-  error: false,
-  loading: false,
-  status: '',
-  tempCheck: [],
-  errorMessage: '',
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 // Tranche de state (le "slice)")

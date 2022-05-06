@@ -38,6 +38,38 @@ export const authApi = createApi({
         return response;
       },
     }),
+    registerUser: builder.query({
+      /**
+       * Query for register user.
+       * @param {*} param0
+       * @returns
+       */
+      query: ({ email, password }) => {
+        return {
+          url: 'login',
+          method: 'POST',
+          body: new URLSearchParams({
+            email: email,
+            password: password,
+          }),
+          header: 'Content-Type: application/x-www-form-urlencoded',
+          // credentials: 'include',
+        };
+      },
+      /**
+       * Take the response and extract the token. If token, set the token to the local storage.
+       * @param {*} response
+       * @returns
+       */
+      transformResponse: (response) => {
+        const { token } = response;
+        if (token) {
+          setStorage('token', token);
+          history.go('/dashboard');
+        }
+        return response;
+      },
+    }),
   }),
 });
 
