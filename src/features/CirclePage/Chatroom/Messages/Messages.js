@@ -34,9 +34,8 @@ export default function Messages() {
 
   return (
     <ul className="messages" ref={messagesRef}>
-      {console.log("Contenu de messages : ", messages)}
-      {console.log("Contenu de state.messages : ", useSelector((state) => state.auth))}
-      {console.log("Contenu de messages.surname : ", messages.surname)}
+      {/* {console.log("Contenu de messages : ", messages)}
+      {console.log("Contenu de messages.surname : ", messages.surname)} */}
       {/* {messages.map((message) => ( */}
         <Message
           // key={message.id}
