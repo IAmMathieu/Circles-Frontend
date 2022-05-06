@@ -8,6 +8,7 @@ const initialState = {
   surname: '',
   email: '',
   password: '',
+  birthdate: '',
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 // Tranche de state (le "slice)")

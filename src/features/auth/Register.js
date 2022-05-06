@@ -3,7 +3,6 @@ import Button from '@mui/material/Button';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const Register = () => {
-  const dispatch = useDispatch();
   const { error } = useSelector((state) => state.auth);
   return (
     <div>

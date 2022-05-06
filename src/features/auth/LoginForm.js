@@ -2,19 +2,28 @@ import { Input } from '../Common/Input/Input';
 import { useState } from 'react';
 import './styles.scss';
 import './../../styles/variables.css';
-
-import { useLoginUserQuery } from './authApi';
-import { useSelector } from 'react-redux';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { useLoginUserQuery, useRegisterUserQuery } from './authApi';
+import TextField from '@mui/material/TextField';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { handleChange } from '../../features/auth/authSlice';
 import { Loading } from '../Loading/Loading';
 export const LoginForm = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   // Get email and password from the slice state auth
-  const { email, password, token } = useSelector((state) => state.auth);
+  const { email, password, firstname, lastname, token, birthdate } =
+    useSelector((state) => state.auth);
   /**
    * Change the skip state, allow to fetch data from the server
    */
-  const [skip, setSkip] = useState(true);
+  const [skipLogin, setSkipLogin] = useState(true);
+  const [skipRegister, setSkipRegister] = useState(true);
+
+  const [date, setDate] = useState(Date);
   const { isLoading: loginIsLoading, isError: loginIsError } =
     useLoginUserQuery(
       {
@@ -22,10 +31,22 @@ export const LoginForm = () => {
         password,
       },
       {
-        skip,
+        skip: skipLogin,
       }
     );
-
+  const { isLoading: registerIsLoading, isError: registerIsError } =
+    useRegisterUserQuery(
+      {
+        email,
+        password,
+        firstname,
+        lastname,
+        birthdate,
+      },
+      {
+        skip: skipRegister,
+      }
+    );
   /**
    * Add classlist to the container when click
    */
@@ -40,9 +61,13 @@ export const LoginForm = () => {
         <div className='form-container sign-up-container'>
           <form
             name='register-form'
-            className='register-form'
+            className='register-form flex flex-col '
             onSubmit={(event) => {
               event.preventDefault();
+              if (token) {
+                navigate('/dashboard', { replace: true });
+              }
+              setSkipRegister(false);
             }}
           >
             <Input name='Prénom' input='firstname' type={'text'} />
@@ -55,6 +80,26 @@ export const LoginForm = () => {
               // error={loginIsError}
             />
             <Input name='Mot de passe' input='password' type={'password'} />
+            {/* <Input name='' input='date' type={'date'} /> */}
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                label='Birth date'
+                name='birthdate'
+                value={date}
+                format='yyyy-mm-dd'
+                onChange={(event) => {
+                  // const date = event.toLocaleDateString();
+                  const [date] = event.toISOString().split('T');
+                  dispatch(
+                    handleChange({
+                      name: 'birthdate',
+                      payload: date,
+                    })
+                  );
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
             <button className='button' type={'submit'}>
               Créer votre compte
             </button>
@@ -69,7 +114,7 @@ export const LoginForm = () => {
               if (token) {
                 navigate('/dashboard', { replace: true });
               }
-              setSkip(false);
+              setSkipLogin(false);
             }}
           >
             <div className='input__container relative flex flex-col'>

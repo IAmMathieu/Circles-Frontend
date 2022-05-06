@@ -44,13 +44,16 @@ export const authApi = createApi({
        * @param {*} param0
        * @returns
        */
-      query: ({ email, password }) => {
+      query: ({ firstname, lastname, birthdate, email, password }) => {
         return {
-          url: 'login',
+          url: 'register',
           method: 'POST',
           body: new URLSearchParams({
-            email: email,
-            password: password,
+            firstname,
+            lastname,
+            email,
+            password,
+            birthdate,
           }),
           header: 'Content-Type: application/x-www-form-urlencoded',
           // credentials: 'include',
@@ -75,4 +78,4 @@ export const authApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginUserQuery } = authApi;
+export const { useLoginUserQuery, useRegisterUserQuery } = authApi;
