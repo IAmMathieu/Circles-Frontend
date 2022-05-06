@@ -33,6 +33,7 @@ export const authApi = createApi({
         const { token } = response;
         if (token) {
           setStorage('token', token);
+          history.go('/dashboard');
         }
         return response;
       },

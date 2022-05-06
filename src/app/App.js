@@ -1,19 +1,17 @@
-import React, { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router';
 import { Homepage } from '../features/Homepage/Homepage';
 import { Dashboard } from '../features/Dashboard/Dashboard';
 import './App.scss';
 import { DarkMode } from '../features/DarkMode/DarkMode';
-// import { Counter } from '../features/counter/Counter';
 import useLocalStorage from 'use-local-storage';
 import { ThemeProvider } from '@emotion/react';
 import {
   MuiThemeLight,
   MuiThemeDark,
 } from '../features/Common/MUITheme/muiTheme';
-import { useNavigate } from 'react-router-dom';
-import { getStorage, removeStorage } from '../utils/helperLocalStorage';
+import { getStorage } from '../utils/helperLocalStorage';
 import { PrivateRoute } from '../features/PrivateRoute/PrivateRoute';
+import { useEffect } from 'react';
 
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -43,7 +41,9 @@ const App = () => {
           <Route
             exact
             path='/'
-            element={token ? <Navigate to='/dashboard' /> : <Homepage />}
+            element={
+              token ? <Navigate to='/dashboard' replace /> : <Homepage />
+            }
           />
           <Route
             path='/dashboard'

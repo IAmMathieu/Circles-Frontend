@@ -1,25 +1,40 @@
 import { Input } from '../Common/Input/Input';
-import { handleSubmit } from './authSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 import './styles.scss';
 import './../../styles/variables.css';
 
-import { getStorage } from '../../utils/helperLocalStorage';
 import { useLoginUserQuery } from './authApi';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 export const LoginForm = () => {
+  const navigate = useNavigate();
+  // Get email and password from the slice state auth
+  const { email, password, token } = useSelector((state) => state.auth);
+  /**
+   * Change the skip state, allow to fetch data from the server
+   */
   const [skip, setSkip] = useState(true);
-  const { data, isLoading, isFetching, isSuccess, isError } = useLoginUserQuery(
+  const {
+    isLoading,
+    isSuccess,
+    isError: loginIsError,
+  } = useLoginUserQuery(
     {
-      email: 'tourte.m@gmail.com',
-      password: '123456',
+      email,
+      password,
     },
     {
       skip,
     }
   );
-
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     navigate('/dashboard', { replace: true });
+  //   }
+  // }, [isSuccess, navigate]);
+  /**
+   * Add classlist to the container when click
+   */
   const handleSwitch = () => {
     const container = document.getElementById('container');
     container.classList.toggle('right-panel-active');
@@ -37,7 +52,12 @@ export const LoginForm = () => {
           <Input name='Prénom' input='firstname' type={'text'} />
           <Input name='Nom' input='lastname' type={'text'} />
           <Input name='Pseudo' input='surname' type={'text'} />
-          <Input name='E-mail' input='email' type={'email'} error={isError} />
+          <Input
+            name='E-mail'
+            input='email'
+            type={'email'}
+            // error={loginIsError}
+          />
           <Input name='Mot de passe' input='password' type={'password'} />
           <button className='button' type={'submit'}>
             Créer votre compte
@@ -50,8 +70,9 @@ export const LoginForm = () => {
           className='login-form'
           onSubmit={(event) => {
             event.preventDefault();
-            // dispatch(handleSubmit());
-            // const token = getStorage('token');
+            if (token) {
+              navigate('/dashboard', { replace: true });
+            }
             setSkip(false);
           }}
         >
@@ -62,17 +83,17 @@ export const LoginForm = () => {
               name='Adresse mail'
               input='email'
               type='email'
-              error={isError}
+              error={loginIsError}
             />
             <Input
               className='input'
               name='Mot de passe'
               input='password'
               type='password'
-              error={isError}
+              error={loginIsError}
             />
 
-            {isError ? (
+            {loginIsError ? (
               <p className='text-red-500 absolute bottom-[-30px] whitespace-nowrap left-1/2 transform -translate-x-1/2 font-bold'>
                 E-mail ou mot de passe incorrect
               </p>
