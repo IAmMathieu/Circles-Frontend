@@ -12,6 +12,7 @@ import {
 import { getStorage } from '../utils/helperLocalStorage';
 import { PrivateRoute } from '../features/PrivateRoute/PrivateRoute';
 import { useEffect } from 'react';
+import { NotFound } from '../features/NotFound/NotFound';
 
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -53,6 +54,7 @@ const App = () => {
               </PrivateRoute>
             }
           />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </ThemeProvider>
       <DarkMode switchTheme={switchTheme} />
