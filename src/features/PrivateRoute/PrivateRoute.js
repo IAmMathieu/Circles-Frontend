@@ -1,17 +1,13 @@
-import { useSelector } from 'react-redux';
-import { Route, Navigate, useNavigate } from 'react-router-dom';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+import { Navigate } from 'react-router-dom';
 
-export const PrivateRoute = ({ path }) => {
-  const { token, loading } = useSelector((state) => state.auth);
-  const Navigate = useNavigate();
-
-  if (loading)
-    return (
-      <Box sx={{ display: 'flex' }}>
-        <CircularProgress />
-      </Box>
-    );
-  return token ? Navigate('/dashboard') : Navigate('/');
+/**
+ * Get the token and use it for checking if the routes are ok. If the token is not ok, we are redirect to the "/" location and replace the history
+ * @param {*} param0
+ * @returns
+ */
+export const PrivateRoute = ({ token, children }) => {
+  if (!token) {
+    return <Navigate to='/' replace />;
+  }
+  return children;
 };

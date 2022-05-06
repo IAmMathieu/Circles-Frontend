@@ -70,44 +70,44 @@ export const authSlice = createSlice({
      * @param {*} state
      * @param {*} action
      */
-    logoutUser: (state, action) => {
-      localStorage.removeItem('token');
-    },
-    addTokenBegin: (state, action) => {
-      const token = getStorage('token');
-      state.token = getStorage('token', token);
-    },
+    // logoutUser: (state, action) => {
+    //   localStorage.removeItem('token');
+    // },
+    // addTokenBegin: (state, action) => {
+    //   const token = getStorage('token');
+    //   state.token = getStorage('token', token);
+    // },
   },
   // object qui permet de définir les actions à faire en fonction de ce qu'il se passe
-  extraReducers: {
-    // Si le logout réussi (obligé qu'il réussisse)
-    [logOut.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.email = '';
-      state.firstname = '';
-      state.lastname = '';
-      state.pseudo = '';
-      state.token = '';
-      state.logged = false;
-      state.status = '';
-    },
-    // Lorsque le loading est en attente
-    [login.pending]: (state, { payload }) => {
-      state.loading = true;
-    },
-    // lorsque le login est réussi
-    [login.fulfilled]: (state, { payload }) => {
-      // const { accessToken, user } = payload; //! A voir avec l'équipe ; un state user qui regroupe tout les éléments lié a l'user.
-      // On ajoute le token dans le storage au state de l'auth
-      const token = getStorage('token');
-      state.token = getStorage('token', token);
-      state.loading = false;
-    },
-    // Si pas réussi au niveau du login
-    [login.rejected]: (state, { payload }) => {
-      state.loading = false;
-    },
-  },
+  // extraReducers: {
+  //   // Si le logout réussi (obligé qu'il réussisse)
+  //   [logOut.fulfilled]: (state, action) => {
+  //     state.loading = false;
+  //     state.email = '';
+  //     state.firstname = '';
+  //     state.lastname = '';
+  //     state.pseudo = '';
+  //     state.token = '';
+  //     state.logged = false;
+  //     state.status = '';
+  //   },
+  //   // Lorsque le loading est en attente
+  //   [login.pending]: (state, { payload }) => {
+  //     state.loading = true;
+  //   },
+  //   // lorsque le login est réussi
+  //   [login.fulfilled]: (state, { payload }) => {
+  //     // const { accessToken, user } = payload; //! A voir avec l'équipe ; un state user qui regroupe tout les éléments lié a l'user.
+  //     // On ajoute le token dans le storage au state de l'auth
+  //     const token = getStorage('token');
+  //     state.token = getStorage('token', token);
+  //     state.loading = false;
+  //   },
+  //   // Si pas réussi au niveau du login
+  //   [login.rejected]: (state, { payload }) => {
+  //     state.loading = false;
+  //   },
+  // },
 });
 
 export const { handleChange, handleSubmit, addTokenBegin } = authSlice.actions;
