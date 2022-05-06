@@ -4,12 +4,13 @@ import { handleChange } from '../../../features/auth/authSlice';
 import 'animate.css';
 import './Input.scss';
 
-export const Input = ({ name, input, type, error, format, className }) => {
+export const Input = ({ name, input, type, error, className }) => {
   const dispatch = useDispatch();
   return (
     <>
       <TextField
-        id='standard-basic'
+        // id='standard-basic'
+        autoComplete='on'
         label={name}
         variant='standard'
         name={name}

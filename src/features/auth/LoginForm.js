@@ -56,7 +56,7 @@ export const LoginForm = () => {
   };
   return (
     <>
-      {loginIsLoading && !token && <Loading />}
+      {(loginIsLoading || registerIsLoading) && !token && <Loading />}
       <div className='container' id='container'>
         <div className='form-container sign-up-container'>
           <form
@@ -80,7 +80,6 @@ export const LoginForm = () => {
               // error={loginIsError}
             />
             <Input name='Mot de passe' input='password' type={'password'} />
-            {/* <Input name='' input='date' type={'date'} /> */}
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
                 label='Birth date'
@@ -88,7 +87,7 @@ export const LoginForm = () => {
                 value={date}
                 format='yyyy-mm-dd'
                 onChange={(event) => {
-                  // const date = event.toLocaleDateString();
+                  // Reformatage de la date pour l'envoie vers la BDD
                   const [date] = event.toISOString().split('T');
                   dispatch(
                     handleChange({

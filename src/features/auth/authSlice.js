@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import userList from '../../data/user.json';
 // Initialise the default state.
 
 const initialState = {
@@ -12,7 +11,6 @@ const initialState = {
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 // Tranche de state (le "slice)")
-//! -------------------------
 export const authSlice = createSlice({
   name: 'auth', // name of the slice
   initialState, // we give it the initialState

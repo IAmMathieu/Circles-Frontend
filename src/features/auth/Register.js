@@ -1,6 +1,6 @@
 import { Input } from '../Common/Input/Input';
 import Button from '@mui/material/Button';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export const Register = () => {
   const { error } = useSelector((state) => state.auth);
