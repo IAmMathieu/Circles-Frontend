@@ -22,7 +22,7 @@ const App = () => {
   };
   return (
     <div className='App' data-theme={theme}>
-      <h1>Coucou</h1>
+      {/* <h1>Coucou</h1> */}
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/dashboard' element={<Dashboard />} />
