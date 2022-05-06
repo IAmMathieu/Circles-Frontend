@@ -35,7 +35,7 @@ export const LoginForm = () => {
   };
   return (
     <>
-      {loginIsLoading && <Loading />}
+      {loginIsLoading && !token && <Loading />}
       <div className='container' id='container'>
         <div className='form-container sign-up-container'>
           <form
