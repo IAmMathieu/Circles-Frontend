@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.190367c4.css",
+    "main.js": "/static/js/main.5e2d2d7d.js",
+    "static/media/background.svg": "/static/media/background.2620b9e254b183a44689.svg",
+    "static/media/regularitalic-font.woff2": "/static/media/regularitalic-font.69ea19ef6ffee7cec81f.woff2",
+    "static/media/medium-font.woff2": "/static/media/medium-font.adb57a8feea9dab6fc89.woff2",
+    "static/media/bold-font.woff2": "/static/media/bold-font.845fbd9d41f3d6b34fde.woff2",
+    "static/media/black-font.woff2": "/static/media/black-font.6ebf9b9a19c37d8de944.woff2",
+    "static/media/regular-font.woff2": "/static/media/regular-font.af101f53e37c542d1233.woff2",
+    "static/media/fullLogoNight.svg": "/static/media/fullLogoNight.954981d0d511fe15c93d15c538b1bd94.svg",
+    "index.html": "/index.html",
+    "main.190367c4.css.map": "/static/css/main.190367c4.css.map",
+    "main.5e2d2d7d.js.map": "/static/js/main.5e2d2d7d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.190367c4.css",
+    "static/js/main.5e2d2d7d.js"
+  ]
+}
