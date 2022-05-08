@@ -8,8 +8,8 @@ export const MuiThemeLight = createTheme({
         contrastText: '#294154',
     },
     secondary: {
-        main: '#f1aa2a',
-        dark: '#EA8122',
+        main: '#EA8122',
+        dark: '#f1aa2a',
     }
   },
   
