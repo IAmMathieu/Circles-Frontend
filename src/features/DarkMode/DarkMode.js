@@ -52,7 +52,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 export const DarkMode = ({ switchTheme }) => {
   return (
-    <div className='fixed top-2 left-5'>
+    <div className='fixed top-2 left-10'>
       <FormControlLabel
         control={
           <MaterialUISwitch

@@ -46,7 +46,8 @@ const App = () => {
           />
           <Route
             path='/dashboard'
-            element={token ? <Dashboard /> : <Navigate to='/' />}
+            // element={token ? <Dashboard /> : <Navigate to='/' />}
+            element={<Dashboard /> }
           />
         </Routes>
       </ThemeProvider>
