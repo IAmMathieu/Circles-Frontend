@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router';
+import { Routes, Route, Navigate, useNavigate } from 'react-router';
 import { Homepage } from '../features/Homepage/Homepage';
 import { Dashboard } from '../features/Dashboard/Dashboard';
 import './App.scss';
@@ -9,19 +9,51 @@ import {
   MuiThemeLight,
   MuiThemeDark,
 } from '../features/Common/MUITheme/muiTheme';
-import { getStorage } from '../utils/helperLocalStorage';
+import { getStorage, removeStorage } from '../utils/helperLocalStorage';
 import { PrivateRoute } from '../features/PrivateRoute/PrivateRoute';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleToken } from '../features/auth/authSlice';
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-const tokenBegin = getStorage('token');
 const App = () => {
+  const dispatch = useDispatch();
+
+  //! A ajouter dans un hook custom
+  // Recuperation du state token(auth slice)
+  const { token: tokenState } = useSelector((state) => state.auth);
+  console.log(`🚀 ~ tokenState`, tokenState);
+  /**
+   * Get the token from the local storage
+   */
+  const [token, setToken] = useLocalStorage(
+    'token',
+    getStorage('token') !== null ? getStorage('token') : undefined
+  );
+  const [user_id, setUser_id] = useLocalStorage(
+    'user_id',
+    getStorage('user_id') !== null ? getStorage('user_id') : undefined
+  );
+  /**
+   * Get the token, and add it to the store(if exist)
+   */
+  useEffect(() => {
+    if (
+      token !== null &&
+      token !== undefined &&
+      user_id !== null &&
+      user_id !== undefined
+    )
+      dispatch(handleToken({ token, user_id }));
+  }, []);
+
+  //! ------------------------------
   // Get the theme based on the prefer color scheme of the user, and get it to the local storage
   const [theme, setTheme] = useLocalStorage(
     'theme',
     defaultDark ? 'dark' : 'light'
   );
-  // Get the token at the first launch, and update if changing it
-  const [token, setToken] = useLocalStorage('token', tokenBegin);
+
   /**
    * Allow to switch a theme
    */
@@ -38,13 +70,13 @@ const App = () => {
           <Route
             path='/'
             element={
-              token ? <Navigate to='/dashboard' replace /> : <Homepage />
+              tokenState ? <Navigate to='/dashboard' replace /> : <Homepage />
             }
           />
           <Route
             path='/dashboard'
             element={
-              <PrivateRoute token={token}>
+              <PrivateRoute token={tokenState}>
                 <Dashboard />
               </PrivateRoute>
             }
@@ -53,7 +85,16 @@ const App = () => {
       </ThemeProvider>
       <DarkMode switchTheme={switchTheme} />
       <button
-        onClick={() => setToken(undefined)}
+        onClick={() => {
+          dispatch(
+            handleToken({
+              token: '',
+              user_id: '',
+            })
+          );
+          setToken(undefined);
+          setUser_id(undefined);
+        }}
         type='button'
         className='logout w-5 h-5 bg-red-600 fixed bottom-5 left-5'
       ></button>
