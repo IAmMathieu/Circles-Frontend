@@ -13,7 +13,9 @@ function LeftPanel() {
       <img src={logo} alt='Logo Circles' className='leftmenu--circle-logo' />
       <img src={userPicture} className='leftmenu--user-picture' />
       <span className='leftmenu--profile-name'>{username}</span>
-      <BorderColorIcon />
+      <a href="/profil">
+        <BorderColorIcon />
+      </a>
       <hr class='leftmenu--line' />
       <h3>Activité récente</h3>
       <div className='leftmenu--recent-container'>

@@ -105,7 +105,9 @@
     }
 }
 
-.circle {
+#circle {
+    color: var(--maincolor);
+    background-color: rgba(255,255,255,.2);
     box-sizing: content-box;
     border: 1px solid #000;
     border-radius: 20px;
@@ -113,4 +115,29 @@
     width: 20vw;
     margin-right: 30px;
     scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .circle--header {
+        padding: 0;
+        font-family: 'easterFont';
+    }
+
+    .circle--img {
+        height: 100px;
+    }
+
+    .circle--description {
+        padding: 0;
+    }
+}
+
+
+
+
+
+.cardactions {
+    display: flex;
+    justify-content: space-between;
 }
