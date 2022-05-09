@@ -6,6 +6,7 @@ import startOfWeek from "date-fns/startOfWeek";
 import React, { useState } from "react";
 import { Calendar as Cal, dateFnsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import { height } from '@mui/system';
 
 const locales = {
   'fr': require("date-fns/locale/fr")

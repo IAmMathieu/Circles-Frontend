@@ -2,7 +2,7 @@ import { FormControlLabel, Switch } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
-  right: 20,
+  right: 40,
   width: 80,
   height: 40,
   padding: 6,
