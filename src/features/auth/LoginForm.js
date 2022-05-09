@@ -8,12 +8,10 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useLoginUserQuery, useRegisterUserQuery } from './authApi';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
-import { handleChange, handleToken } from '../../features/auth/authSlice';
+import { handleChange } from '../../features/auth/authSlice';
 import { Loading } from '../Loading/Loading';
 export const LoginForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   // Get email and password from the slice state auth
   const { email, password, firstname, lastname, birthdate } = useSelector(
     (state) => state.auth
@@ -25,25 +23,17 @@ export const LoginForm = () => {
   const [skipRegister, setSkipRegister] = useState(true);
 
   const [date, setDate] = useState(Date);
-  const {
-    data: loginData,
-    isLoading: loginIsLoading,
-    isError: loginIsError,
-    isSuccess: loginSuccess,
-  } = useLoginUserQuery(
-    {
-      email,
-      password,
-    },
-    {
-      skip: skipLogin,
-    }
-  );
-  // useEffect(() => {
-  //   if (loginSuccess) {
-  //     // navigate('/dashboard', { replace: true });
-  //   }
-  // }, [loginSuccess]);
+  const { isLoading: loginIsLoading, isError: loginIsError } =
+    useLoginUserQuery(
+      {
+        email,
+        password,
+      },
+      {
+        skip: skipLogin,
+      }
+    );
+
   const { isLoading: registerIsLoading, isError: registerIsError } =
     useRegisterUserQuery(
       {

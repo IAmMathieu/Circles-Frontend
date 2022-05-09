@@ -23,12 +23,18 @@ export const authApi = createApi({
           header: 'Content-Type: application/x-www-form-urlencoded',
         };
       },
+      /**
+       * Se lance lorsque la query est terminée. Elle permet d'ajouter dans le storage le token, et l'user_id(a voir si on ne le coockies pas?)
+       * @param {*} body
+       * @param {*} param1
+       */
       async onQueryStarted(body, { dispatch, queryFulfilled }) {
         queryFulfilled
           .then((result) => {
             const { token, user_id } = result.data;
             setStorage('token', token);
             setStorage('user_id', user_id);
+            // Dispatch le handletoken du slice(permet d'utiliser facilement le token et l'user_id)
             dispatch(handleToken({ token, user_id }));
           })
           .catch((error) => {

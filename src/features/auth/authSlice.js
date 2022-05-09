@@ -29,6 +29,11 @@ export const authSlice = createSlice({
       */
       state[action.payload.name] = action.payload.payload;
     },
+    /**
+     * Permet de changer le token et l'user_id
+     * @param {*} state
+     * @param {*} action
+     */
     handleToken: (state, action) => {
       const { token, user_id } = action.payload;
       state.token = token;

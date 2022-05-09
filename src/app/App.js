@@ -9,7 +9,7 @@ import {
   MuiThemeLight,
   MuiThemeDark,
 } from '../features/Common/MUITheme/muiTheme';
-import { getStorage, removeStorage } from '../utils/helperLocalStorage';
+import { getStorage } from '../utils/helperLocalStorage';
 import { PrivateRoute } from '../features/PrivateRoute/PrivateRoute';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,10 +19,8 @@ const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
   const dispatch = useDispatch();
 
-  //! A ajouter dans un hook custom
   // Recuperation du state token(auth slice)
   const { token: tokenState } = useSelector((state) => state.auth);
-  console.log(`🚀 ~ tokenState`, tokenState);
   /**
    * Get the token from the local storage
    */
@@ -47,7 +45,6 @@ const App = () => {
       dispatch(handleToken({ token, user_id }));
   }, []);
 
-  //! ------------------------------
   // Get the theme based on the prefer color scheme of the user, and get it to the local storage
   const [theme, setTheme] = useLocalStorage(
     'theme',
