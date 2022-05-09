@@ -3,10 +3,12 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 function NewCircle() {
   return (
-    <div className='newcircle'>
+    <a className='newcircle'
+         href='/newcircle'
+    >
         <AddCircleIcon className='newcircle--addCircleIcon'
         color='secondary' />
-    </div>
+    </a>
   );
 }
 

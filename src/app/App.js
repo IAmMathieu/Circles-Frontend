@@ -77,6 +77,14 @@ const App = () => {
               </PrivateRoute>
             }
           />
+          <Route
+            path='/profil'
+            element={
+              <PrivateRoute token={token}>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </ThemeProvider>
       <DarkMode switchTheme={switchTheme} />

@@ -47,19 +47,6 @@ export const Dashboard = () => {
         <Circle />
         <Circle />
         <Circle />
-        <Circle />
-        <Circle />
-        <Circle />
-        <Circle />
-        <Circle />
-        <Circle />
-        <Circle />
-        <Circle />
-        <Circle />
-        <Circle />
-        <Circle />
-        <Circle />
-        <Circle />
       </div>
     </div>
   );
