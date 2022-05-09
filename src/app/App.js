@@ -11,11 +11,9 @@ import {
 } from '../features/Common/MUITheme/muiTheme';
 import { getStorage } from '../utils/helperLocalStorage';
 import { PrivateRoute } from '../features/PrivateRoute/PrivateRoute';
-import { useEffect } from 'react';
-
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-const actualToken = getStorage('token');
+const tokenBegin = getStorage('token');
 const App = () => {
   // Get the theme based on the prefer color scheme of the user, and get it to the local storage
   const [theme, setTheme] = useLocalStorage(
@@ -23,8 +21,7 @@ const App = () => {
     defaultDark ? 'dark' : 'light'
   );
   // Get the token at the first launch, and update if changing it
-  const [token, setToken] = useLocalStorage('token', actualToken);
-
+  const [token, setToken] = useLocalStorage('token', tokenBegin);
   /**
    * Allow to switch a theme
    */
@@ -39,7 +36,6 @@ const App = () => {
       <ThemeProvider theme={muiTheme}>
         <Routes>
           <Route
-            exact
             path='/'
             element={
               token ? <Navigate to='/dashboard' replace /> : <Homepage />

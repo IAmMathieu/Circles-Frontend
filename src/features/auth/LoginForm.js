@@ -11,12 +11,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { handleChange } from '../../features/auth/authSlice';
 import { Loading } from '../Loading/Loading';
+import { getStorage } from '../../utils/helperLocalStorage';
 export const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // Get email and password from the slice state auth
-  const { email, password, firstname, lastname, token, birthdate } =
-    useSelector((state) => state.auth);
+  const { email, password, firstname, lastname, birthdate } = useSelector(
+    (state) => state.auth
+  );
   /**
    * Change the skip state, allow to fetch data from the server
    */
@@ -24,16 +26,19 @@ export const LoginForm = () => {
   const [skipRegister, setSkipRegister] = useState(true);
 
   const [date, setDate] = useState(Date);
-  const { isLoading: loginIsLoading, isError: loginIsError } =
-    useLoginUserQuery(
-      {
-        email,
-        password,
-      },
-      {
-        skip: skipLogin,
-      }
-    );
+  const {
+    isLoading: loginIsLoading,
+    isError: loginIsError,
+    isSuccess: loginSuccess,
+  } = useLoginUserQuery(
+    {
+      email,
+      password,
+    },
+    {
+      skip: skipLogin,
+    }
+  );
   const { isLoading: registerIsLoading, isError: registerIsError } =
     useRegisterUserQuery(
       {
@@ -56,7 +61,7 @@ export const LoginForm = () => {
   };
   return (
     <>
-      {(loginIsLoading || registerIsLoading) && !token && <Loading />}
+      {(loginIsLoading || registerIsLoading) && <Loading />}
       <div className='container' id='container'>
         <div className='form-container sign-up-container'>
           <form
@@ -64,6 +69,7 @@ export const LoginForm = () => {
             className='register-form flex flex-col '
             onSubmit={(event) => {
               event.preventDefault();
+              const token = getStorage('token');
               if (token) {
                 navigate('/dashboard', { replace: true });
               }
@@ -110,7 +116,8 @@ export const LoginForm = () => {
             className='login-form'
             onSubmit={(event) => {
               event.preventDefault();
-              if (token) {
+              const token = getStorage('token');
+              if (loginSuccess && !loginIsLoading) {
                 navigate('/dashboard', { replace: true });
               }
               setSkipLogin(false);

@@ -21,7 +21,6 @@ export const authApi = createApi({
             password: password,
           }),
           header: 'Content-Type: application/x-www-form-urlencoded',
-          // credentials: 'include',
         };
       },
       /**
@@ -29,13 +28,21 @@ export const authApi = createApi({
        * @param {*} response
        * @returns
        */
-      transformResponse: (response) => {
-        const { token } = response;
-        if (token) {
-          setStorage('token', token);
-          history.go('/dashboard');
-        }
-        return response;
+      // transformResponse: (response) => {
+      //   const { token } = response;
+      //   if (token) {
+      //     setStorage('token', token);
+      //     return response;
+      //   }
+      // },
+      async onQueryStarted(body, { distpach, queryFulfilled }) {
+        queryFulfilled
+          .then((result) => {
+            console.log(result);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       },
     }),
     registerUser: builder.query({
@@ -56,7 +63,6 @@ export const authApi = createApi({
             birthdate,
           }),
           header: 'Content-Type: application/x-www-form-urlencoded',
-          // credentials: 'include',
         };
       },
       /**
@@ -68,9 +74,8 @@ export const authApi = createApi({
         const { token } = response;
         if (token) {
           setStorage('token', token);
-          history.go('/dashboard');
+          return response;
         }
-        return response;
       },
     }),
   }),
