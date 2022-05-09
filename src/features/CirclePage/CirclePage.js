@@ -8,14 +8,13 @@ import './CirclePage.scss';
 export const CirclePage = () => {
     return (
         <div className='container__circle-page'>
-            <DetailCircle />
+            <Aside />
             {/* <Chatroom /> */}
             <div className='container__evt'>
                 <Calendar />
                 <Evenement />
             </div>
-            
-            <Aside />
+            <DetailCircle />
         </div>
     )
 }

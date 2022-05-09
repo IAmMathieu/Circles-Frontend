@@ -8,7 +8,7 @@ export const Aside = () => {
             </div>
             
 
-            <hr />
+            <hr className='circle__aside--separation' />
             <div className="circle__aside__list">
                 <div className="circle__aside__list--circle">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Circle-icons-image.svg" alt='logo du cercle1'/>
