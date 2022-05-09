@@ -10,7 +10,6 @@ import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleChange } from '../../features/auth/authSlice';
 import { Loading } from '../Loading/Loading';
-import { getStorage } from '../../utils/helperLocalStorage';
 export const LoginForm = () => {
   const dispatch = useDispatch();
   // Get email and password from the slice state auth
