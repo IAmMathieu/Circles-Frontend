@@ -50,7 +50,6 @@ const App = () => {
     'theme',
     defaultDark ? 'dark' : 'light'
   );
-
   /**
    * Allow to switch a theme
    */
