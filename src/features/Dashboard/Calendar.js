@@ -28,7 +28,7 @@ const events = [
   {
       title: "Anniversaire Tati Daniele",
       start: new Date(2022, 4, 20),
-      end: new Date(2022, 4, 21),
+      end: new Date(2022, 4, 22),
   },
 ];
 
@@ -36,7 +36,7 @@ function Calendar() {
   return (
     <div className='calendar'>
       <Cal localizer={localizer} events={events} 
-      startAccessor="start" endAccessor="end" style={{height: 500, margin: "50px"}} />
+      startAccessor="start" endAccessor="end" style={{height: 500, margin: "20px"}} />
     </div>
   );
 }

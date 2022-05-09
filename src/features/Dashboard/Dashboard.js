@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import Calendar from './Calendar';
 import Circle from './Circle';
-import LatestEvents from './LatestEvents';
+import NextEvents from './NextEvents';
 import LeftPanel from './LeftPanel';
 import NewCircle from './NewCircle';
 
@@ -20,7 +20,7 @@ export const Dashboard = () => {
 
       <LeftPanel />
       <Calendar />
-      <LatestEvents />
+      <NextEvents />
       <button className='scrollButton' onClick={() => {
         document.getElementById('circlebox').scrollLeft += 100;
       }}>Scroll</button>
