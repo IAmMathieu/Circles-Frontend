@@ -1,5 +1,5 @@
 import { Input } from '../Common/Input/Input';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './styles.scss';
 import './../../styles/variables.css';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';

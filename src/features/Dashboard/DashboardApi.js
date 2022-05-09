@@ -1,38 +1,30 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-export const authApi = createApi({
+// const { user_id } = authSlice.getState();
+// const customCall = `https://cercles.herokuapp.com/api/profil/${user_id}/circles`;
+export const dashboardApi = createApi({
   reducerPath: 'dashboardApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://cercles.herokuapp.com/api/' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://cercles.herokuapp.com/api/profil/',
+  }),
   endpoints: (builder) => ({
-    getDashBoard: builder.query({
+    getUserDashBoard: builder.query({
       /**
        * Query for login user. Take the email and password on parameter, and send it to the server.
        * @param {*} param0
        * @returns
        */
-      query: () => {
-        // return {
-        //   url: 'login',
-        //   method: 'POST',
-        //   body: new URLSearchParams({
-        //     email: email,
-        //     password: password,
-        //   }),
-        //   header: 'Content-Type: application/x-www-form-urlencoded',
-        //   // credentials: 'include',
-        // };
-      },
-      /**
-       * Take the response and extract the token. If token, set the token to the local storage.
-       * @param {*} response
-       * @returns
-       */
-      transformResponse: (response) => {
-        const { token } = response;
-        if (token) {
-          //   setStorage('token', token);
-          //   history.go('/dashboard');
-        }
-        return response;
+      query: ({ user_id, token }) => {
+        return {
+          url: `${user_id}/circles`,
+          method: 'GET',
+          // body: new URLSearchParams({
+          //   id: user_id,
+          //   Authorization: token,
+          // }),
+          header: {
+            Authorization: token,
+          },
+        };
       },
     }),
   }),
@@ -40,4 +32,4 @@ export const authApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginUserQuery, useRegisterUserQuery } = authApi;
+export const { useGetUserDashBoardQuery } = dashboardApi;

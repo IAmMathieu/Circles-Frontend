@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, useNavigate } from 'react-router';
+import { Routes, Route, Navigate } from 'react-router';
 import { Homepage } from '../features/Homepage/Homepage';
 import { Dashboard } from '../features/Dashboard/Dashboard';
 import './App.scss';
