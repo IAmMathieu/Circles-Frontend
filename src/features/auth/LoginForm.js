@@ -1,5 +1,5 @@
 import { Input } from '../Common/Input/Input';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './styles.scss';
 import './../../styles/variables.css';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -8,15 +8,14 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useLoginUserQuery, useRegisterUserQuery } from './authApi';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
 import { handleChange } from '../../features/auth/authSlice';
 import { Loading } from '../Loading/Loading';
 export const LoginForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   // Get email and password from the slice state auth
-  const { email, password, firstname, lastname, token, birthdate } =
-    useSelector((state) => state.auth);
+  const { email, password, firstname, lastname, birthdate } = useSelector(
+    (state) => state.auth
+  );
   /**
    * Change the skip state, allow to fetch data from the server
    */
@@ -34,6 +33,7 @@ export const LoginForm = () => {
         skip: skipLogin,
       }
     );
+
   const { isLoading: registerIsLoading, isError: registerIsError } =
     useRegisterUserQuery(
       {
@@ -54,9 +54,10 @@ export const LoginForm = () => {
     const container = document.getElementById('container');
     container.classList.toggle('right-panel-active');
   };
+
   return (
     <>
-      {(loginIsLoading || registerIsLoading) && !token && <Loading />}
+      {(loginIsLoading || registerIsLoading) && <Loading />}
       <div className='container' id='container'>
         <div className='form-container sign-up-container'>
           <form
@@ -64,9 +65,10 @@ export const LoginForm = () => {
             className='register-form flex flex-col '
             onSubmit={(event) => {
               event.preventDefault();
-              if (token) {
-                navigate('/dashboard', { replace: true });
-              }
+              // const token = getStorage('token');
+              // if (token) {
+              //   navigate('/dashboard', { replace: true });
+              // }
               setSkipRegister(false);
             }}
           >
@@ -108,11 +110,8 @@ export const LoginForm = () => {
           <form
             name='login-form'
             className='login-form'
-            onSubmit={(event) => {
+            onSubmit={async (event) => {
               event.preventDefault();
-              if (token) {
-                navigate('/dashboard', { replace: true });
-              }
               setSkipLogin(false);
             }}
           >

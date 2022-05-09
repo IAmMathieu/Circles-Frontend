@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setStorage } from '../../utils/helperLocalStorage';
-import history from '../../utils/history';
+import { handleToken } from './authSlice';
 // Define a service using a base URL and expected endpoints
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -21,21 +21,25 @@ export const authApi = createApi({
             password: password,
           }),
           header: 'Content-Type: application/x-www-form-urlencoded',
-          // credentials: 'include',
         };
       },
       /**
-       * Take the response and extract the token. If token, set the token to the local storage.
-       * @param {*} response
-       * @returns
+       * Se lance lorsque la query est terminée. Elle permet d'ajouter dans le storage le token, et l'user_id(a voir si on ne le coockies pas?)
+       * @param {*} body
+       * @param {*} param1
        */
-      transformResponse: (response) => {
-        const { token } = response;
-        if (token) {
-          setStorage('token', token);
-          history.go('/dashboard');
-        }
-        return response;
+      async onQueryStarted(body, { dispatch, queryFulfilled }) {
+        queryFulfilled
+          .then((result) => {
+            const { token, user_id } = result.data;
+            setStorage('token', token);
+            setStorage('user_id', user_id);
+            // Dispatch le handletoken du slice(permet d'utiliser facilement le token et l'user_id)
+            dispatch(handleToken({ token, user_id }));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       },
     }),
     registerUser: builder.query({
@@ -56,7 +60,6 @@ export const authApi = createApi({
             birthdate,
           }),
           header: 'Content-Type: application/x-www-form-urlencoded',
-          // credentials: 'include',
         };
       },
       /**
@@ -64,13 +67,15 @@ export const authApi = createApi({
        * @param {*} response
        * @returns
        */
-      transformResponse: (response) => {
-        const { token } = response;
-        if (token) {
-          setStorage('token', token);
-          history.go('/dashboard');
-        }
-        return response;
+      async onQueryStarted(body, { distpach, queryFulfilled }) {
+        queryFulfilled
+          .then((result) => {
+            const { token } = result.data;
+            setStorage('token', token);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       },
     }),
   }),

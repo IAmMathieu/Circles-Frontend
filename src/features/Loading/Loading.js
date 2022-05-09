@@ -15,7 +15,7 @@ export const Loading = () => {
         justifyContent: 'center',
       }}
     >
-      <CircularProgress sx={''} size='15rem' />
+      <CircularProgress size='15rem' />
     </Box>
   );
 };

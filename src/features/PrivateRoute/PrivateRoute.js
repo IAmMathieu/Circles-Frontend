@@ -6,8 +6,5 @@ import { Navigate } from 'react-router-dom';
  * @returns
  */
 export const PrivateRoute = ({ token, children }) => {
-  if (!token) {
-    return <Navigate to='/' replace />;
-  }
-  return children;
+  return token ? children : <Navigate to='/' replace />;
 };
