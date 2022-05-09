@@ -5,7 +5,7 @@ import NextEvents from './NextEvents';
 import LeftPanel from './LeftPanel';
 import NewCircle from './NewCircle';
 
-export const Dashboard = () => {
+export const Dashboard = ( { logout }) => {
   const { surname, logged } = useSelector((state) => state.auth);
   const settings = {
     dots: true,
@@ -18,7 +18,7 @@ export const Dashboard = () => {
   return (
     <div className='dashboard-container'>
 
-      <LeftPanel />
+      <LeftPanel logout={logout} />
       <Calendar />
       <NextEvents />
       <button className='scrollButton' onClick={() => {

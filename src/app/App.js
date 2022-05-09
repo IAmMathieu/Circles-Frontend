@@ -49,7 +49,7 @@ const App = () => {
             path='/dashboard'
             element={
               <PrivateRoute token={token}>
-                <Dashboard />
+                <Dashboard logout={setToken} />
               </PrivateRoute>
             }
           />
@@ -64,11 +64,11 @@ const App = () => {
         </Routes>
       </ThemeProvider>
       <DarkMode switchTheme={switchTheme} />
-      <button
+      {/* <button
         onClick={() => setToken(undefined)}
         type='button'
         className='logout w-5 h-5 bg-red-600 fixed bottom-5 left-5'
-      ></button>
+      ></button> */}
     </div>
   );
 };
