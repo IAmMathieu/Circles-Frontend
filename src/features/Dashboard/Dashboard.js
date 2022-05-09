@@ -4,33 +4,53 @@ import Circle from './Circle';
 import NextEvents from './NextEvents';
 import LeftPanel from './LeftPanel';
 import NewCircle from './NewCircle';
+import Carousel from 'react-grid-carousel';
 
-export const Dashboard = ( { logout }) => {
-  const { surname, logged } = useSelector((state) => state.auth);
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3
-  };
-
+export const Dashboard = ({ logout }) => {
   return (
     <div className='dashboard-container'>
-
       <LeftPanel logout={logout} />
       <Calendar />
       <NextEvents />
-      <button className='scrollButton' onClick={() => {
-        document.getElementById('circlebox').scrollLeft += 100;
-      }}>Scroll</button>
-      <div className="circlebox" id='circlebox'>
-        <NewCircle />
-        <Circle />
-        <Circle />
-        <Circle />
-        <Circle />
-        <Circle />
+      <div className='circlebox' id='circlebox'>
+        <Carousel
+          cols={5}
+          showDots
+          responsiveLayout={[
+            { breakpoint: 1800, cols: 4 },
+            { breakpoint: 1450, cols: 3 },
+            { breakpoint: 1100, cols: 2 },
+            { breakpoint: 950, cols: 1 },
+          ]}
+        >
+          <Carousel.Item>
+            <NewCircle />
+          </Carousel.Item>
+          <Carousel.Item>
+            <Circle />
+          </Carousel.Item>
+          <Carousel.Item>
+            <Circle />
+          </Carousel.Item>
+          <Carousel.Item>
+            <Circle />
+          </Carousel.Item>
+          <Carousel.Item>
+            <Circle />
+          </Carousel.Item>
+          <Carousel.Item>
+            <Circle />
+          </Carousel.Item>
+          <Carousel.Item>
+            <Circle />
+          </Carousel.Item>
+          <Carousel.Item>
+            <Circle />
+          </Carousel.Item>
+          <Carousel.Item>
+            <Circle />
+          </Carousel.Item>
+        </Carousel>
       </div>
     </div>
   );
