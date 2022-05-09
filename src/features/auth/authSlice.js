@@ -5,17 +5,11 @@ const initialState = {
   firstname: '',
   lastname: '',
   surname: 'EB',
-  email: 'test@test.com',
-  password: '123',
+  email: 'bouclierman@herocorp.io',
+  password: 'jennifer',
   token: '',
-  logged: false,
+  logged: true,
   error: false,
-  // propriétés test pour le tchat
-  messages:[],
-  newMessage: {
-    surname: '',
-    content: ''
-  },
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 
