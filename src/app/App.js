@@ -9,7 +9,7 @@ import {
   MuiThemeLight,
   MuiThemeDark,
 } from '../features/Common/MUITheme/muiTheme';
-import { getStorage, removeStorage } from '../utils/helperLocalStorage';
+import { getStorage } from '../utils/helperLocalStorage';
 import { PrivateRoute } from '../features/PrivateRoute/PrivateRoute';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
