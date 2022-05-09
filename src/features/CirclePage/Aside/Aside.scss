@@ -1,41 +1,66 @@
 .circle__aside{
-    max-width: 8rem;
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 20px;
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    &--logo{
-        padding: 0.8rem;
+    width: 5rem;
+    margin:auto;
+
+    &--separation{
+        display: none;
     }
-    &--logo img{
-        width: 100%;
-        margin: auto;
+
+    &--logo {
+        padding: 0.8rem 0 0.5rem 0;
     }
 
     &__list{
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        
-        &--circle{
-            width: 70%;
-            margin: 0.5rem;
-
-        }
-        &--circle img{
-            padding: 0.2rem;
-        }
-
-        &--icons{
-            width: 50%;
-        }
-        &--icons img{
-            padding: 0.2rem;
-        }
-        
+        display: none;
     }
 }
 
+
+@media screen and (min-width: 550px) {
+    .circle__aside{
+        width: 8rem;
+        margin: 0;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 20px;
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        
+        &--separation{
+            display:initial;
+        }
+
+        &--logo{
+            padding: 0.8rem;
+        }
+        &--logo img{
+            width: 100%;
+            margin: auto;
+        }
+    
+        &__list{
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            
+            &--circle{
+                width: 70%;
+                margin: 0.5rem;
+    
+            }
+            &--circle img{
+                padding: 0.2rem;
+            }
+    
+            &--icons{
+                width: 50%;
+            }
+            &--icons img{
+                padding: 0.2rem;
+            }
+            
+        }
+    }
+}

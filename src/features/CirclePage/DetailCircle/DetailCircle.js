@@ -11,7 +11,7 @@ export const DetailCircle = () => {
                 </div>
             </div>
 
-            <hr />
+            <hr className='detail-circle--separation' />
 
             <div className='container__detail-admin'>
                 <div className='container__detail-admin--img'>
@@ -24,7 +24,7 @@ export const DetailCircle = () => {
                 
             </div>
 
-            <hr />
+            <hr className='detail-circle--separation' />
             <div className='container__members'>
                 <p className='container__members__text'>Les membres du cercle : </p>
                 <span className='container__members__image'>
