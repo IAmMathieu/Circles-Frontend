@@ -14,6 +14,8 @@ import { PrivateRoute } from '../features/PrivateRoute/PrivateRoute';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleToken } from '../features/auth/authSlice';
+import ProfilePage from '../features/ProfilePage/ProfilePage';
+
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
@@ -81,7 +83,7 @@ const App = () => {
             path='/profil'
             element={
               <PrivateRoute token={token}>
-                <Dashboard />
+                <ProfilePage />
               </PrivateRoute>
             }
           />
