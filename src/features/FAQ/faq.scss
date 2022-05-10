@@ -1,0 +1,30 @@
+.container-faq{
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+
+    &__logo{
+        width: 10rem;
+        margin: auto;
+
+
+
+    }
+
+    &__text{
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 2rem;
+        font-size: 3rem;
+
+    }
+
+    &accordion{
+        position: fixed;
+        top: 50%;
+    }
+
+}
