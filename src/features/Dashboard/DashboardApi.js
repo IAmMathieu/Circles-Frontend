@@ -1,12 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// const { user_id } = authSlice.getState();
-// const customCall = `https://cercles.herokuapp.com/api/profil/${user_id}/circles`;
-export const dashboardApi = createApi({
-  reducerPath: 'dashboardApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'https://cercles.herokuapp.com/api/profil/',
-  }),
+import { emptySplitApi } from '../api/emptySplitApi';
+const extendedApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
+    /* Two types :
+        - Query endpoints : for retrieving data.
+        - Mutation endpoints : for CRUD
+    */
     getUserDashBoard: builder.query({
       /**
        * Query for login user. Take the email and password on parameter, and send it to the server.
@@ -15,7 +13,7 @@ export const dashboardApi = createApi({
        */
       query: ({ user_id, token }) => {
         return {
-          url: `${user_id}/circles`,
+          url: `dashboard/${user_id}`,
           method: 'GET',
           contentType: 'application/json',
           headers: { Authorization: `Bearer ${token}` },
@@ -23,8 +21,7 @@ export const dashboardApi = createApi({
       },
     }),
   }),
+  overrideExisting: false,
 });
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useGetUserDashBoardQuery } = dashboardApi;
+export const { useGetUserDashBoardQuery } = extendedApi;

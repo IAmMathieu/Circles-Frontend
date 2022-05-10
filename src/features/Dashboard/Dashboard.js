@@ -4,7 +4,7 @@ import Circle from './Circle';
 import NextEvents from './NextEvents';
 import LeftPanel from './LeftPanel';
 import NewCircle from './NewCircle';
-import { useGetUserDashBoardQuery } from './DashboardApi';
+import { useGetUserDashBoardQuery } from './DashBoardApi';
 
 export const Dashboard = () => {
   const { surname, logged, token, user_id } = useSelector(

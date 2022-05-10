@@ -28,7 +28,6 @@ export const LoginForm = () => {
     registerUser,
     { isLoading: registerIsLoading, isError: registerIsError },
   ] = useRegisterUserMutation();
-
   /**
    * Add classlist to the container when click
    */
