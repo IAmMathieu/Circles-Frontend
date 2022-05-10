@@ -51,7 +51,7 @@ const extendedApi = emptySplitApi.injectEndpoints({
        */
       query: ({ firstname, lastname, birthdate, email, password }) => {
         return {
-          url: 'login',
+          url: 'register',
           method: 'POST',
           body: new URLSearchParams({
             firstname,

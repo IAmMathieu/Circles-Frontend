@@ -18,7 +18,6 @@ export const Dashboard = () => {
     token,
     user_id,
   });
-  console.log(`üöÄ ~ DashData`, DashData);
 
   const settings = {
     dots: true,
