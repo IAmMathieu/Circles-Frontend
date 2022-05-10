@@ -4,9 +4,9 @@ import userList from '../../data/user.json';
 const initialState = {
   firstname: '',
   lastname: '',
-  surname: 'EB',
-  email: 'bouclierman@herocorp.io',
-  password: 'jennifer',
+  surname: '',
+  email: '',
+  password: '',
   token: '',
   logged: true,
   error: false,
