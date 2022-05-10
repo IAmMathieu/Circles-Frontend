@@ -1,0 +1,19 @@
+.chatForm{
+    display: flex;
+
+    &__input{
+        flex: 1;
+        border: none;
+        padding: calc(var(--gutter) * 1.5);
+        font-size: 1.5rem;
+
+        &::placeholder{
+            color: var(--grey);
+        }
+    }
+
+    &__button{
+        width: 100px;
+        border: none;
+    }
+}
