@@ -3,8 +3,7 @@ import Message from '../Message/Message';
 
 export default function Messages() {
   return (
-    <ul className="">
-        Messages
+    <ul className="messages">
         <Message />
         <Message />
         <Message />

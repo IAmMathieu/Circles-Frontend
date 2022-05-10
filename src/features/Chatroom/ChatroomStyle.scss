@@ -5,7 +5,11 @@
     background-color: var(--light-blue);
     // border: 2px var(--dark-blue) solid;
     // height: 100vh;
-    max-width: 20rem;
+    min-width: 15rem;
+    // max-width: 20rem;
     // margin: auto;
-    filter: drop-shadow(5px 0 5px var(--dark-blue));
+    filter: drop-shadow(0 0 10px var(--dark-blue));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
