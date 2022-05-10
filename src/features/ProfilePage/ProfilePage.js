@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { TextField } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
@@ -6,65 +6,182 @@ import { Input } from '../Common/Input/Input';
 import logo from './../../logo.svg';
 import './style.scss';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import {
+  useGetProfilUserQuery,
+  useUpdateProfilUserMutation,
+  useDeleteProfilUserMutation,
+} from './ProfilApi';
+import { Loading } from '../Loading/Loading';
+import { removeStorage } from '../../utils/helperLocalStorage';
+import { handleToken } from '../auth/authSlice';
+
+//! MUI
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+//!------------
 
 function ProfilePage() {
+  //! MUI
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  //!--------------
+
   const dispatch = useDispatch();
-  const [date, setDate] = useState(Date);
+  const {
+    firstname,
+    lastname,
+    email,
+    password,
+    surname,
+    birthdate,
+    token,
+    user_id,
+  } = useSelector((state) => state.auth);
+  /**
+   * Query profil data when coming to the page
+   */
+  const { data, isLoading } = useGetProfilUserQuery({
+    token,
+    user_id,
+  });
+  const [updateProfilUser, { isLoading: isLoadingUpdate }] =
+    useUpdateProfilUserMutation();
+  const [deleteProfilUser] = useDeleteProfilUserMutation();
 
   const userPicture =
     'https://ca.slack-edge.com/T02MBC4J9K5-U02M8CJUVJR-2df2ffa3c507-512';
-  const username = 'Aleks';
 
-  return (
-    <div>
-      <img src={logo} alt='Logo Circles' className='circle-logo' />
-      <img
-        src={userPicture}
-        alt='User Portrait'
-        className='leftmenu--user-picture'
-      />
-      <form
-        name='register-form'
-        className='register-form flex flex-col '
-        onSubmit={(event) => {
-          event.preventDefault();
-        }}
-      >
-        <Input name='Prénom' input='firstname' type={'text'} />
-        <Input name='Nom' input='lastname' type={'text'} />
-        <Input name='Pseudo' input='surname' type={'text'} />
-        <Input
-          name='E-mail'
-          input='email'
-          type={'email'}
-          // error={loginIsError}
+  if (isLoading) {
+    return <Loading />;
+  } else {
+    return (
+      <div>
+        <img src={logo} alt='Logo Circles' className='circle-logo' />
+        <img
+          src={userPicture}
+          alt='User Portrait'
+          className='leftmenu--user-picture'
         />
-        <Input name='Mot de passe' input='password' type={'password'} />
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DatePicker
-            label='Birth date'
-            name='birthdate'
-            value={date}
-            format='yyyy-mm-dd'
-            onChange={(event) => {
-              // Reformatage de la date pour l'envoie vers la BDD
-              const [date] = event.toISOString().split('T');
-            //   dispatch(
-            //     handleChange({
-            //       name: 'birthdate',
-            //       payload: date,
-            //     })
-            //   );
-            }}
-            renderInput={(params) => <TextField {...params} />}
+        <form
+          name='register-form'
+          className='register-form flex flex-col '
+          onSubmit={(event) => {
+            event.preventDefault();
+          }}
+        >
+          <Input name={data?.firstname} input='firstname' type={'text'} />
+          <Input name={data?.lastname} input='lastname' type={'text'} />
+          <Input name={data?.surname} input='surname' type={'text'} />
+          <Input
+            name={data?.email}
+            input='email'
+            type={'email'}
+            // error={loginIsError}
           />
-        </LocalizationProvider>
-        <button className='button' type={'submit'}>
-          Créer votre compte
-        </button>
-      </form>
-    </div>
-  );
-}
+          <Input name='Mot de passe' input='password' type={'password'} />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              label='Birth date'
+              name='birthdate'
+              value={data?.birthdate}
+              format='yyyy-mm-dd'
+              onChange={(event) => {
+                // Reformatage de la date pour l'envoie vers la BDD
+                // const [date] = event.toISOString().split('T');
+                //   dispatch(
+                //     handleChange({
+                //       name: 'birthdate',
+                //       payload: date,
+                //     })
+                //   );
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+          <div className='button__container flex gap-5'>
+            <Button
+              color='warning'
+              variant='contained'
+              onClick={async (e) => {
+                e.preventDefault();
+                const patchFirstName = firstname ? firstname : data.firstname;
+                const patchLastName = lastname ? lastname : data.lastname;
+                const patchEmail = email ? email : data.email;
+                const patchSurname = surname ? surname : data.surname;
+                const patchBirthdate = birthdate ? birthdate : data.birthdate;
 
+                await updateProfilUser({
+                  token,
+                  user_id,
+                  firstname: patchFirstName,
+                  lastname: patchLastName,
+                  email: patchEmail,
+                  surname: patchSurname,
+                  birthdate: patchBirthdate,
+                });
+              }}
+            >
+              Modifier
+            </Button>
+            <Button color='error' variant='contained' onClick={handleClickOpen}>
+              Supprimer
+            </Button>
+          </div>
+        </form>
+        {/* MUI */}
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby='alert-dialog-title'
+          aria-describedby='alert-dialog-description'
+        >
+          <DialogTitle id='alert-dialog-title'>
+            {'Supprimer votre compte ?'}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id='alert-dialog-description'>
+              Si vous acceptez, l'entièreté de vos données seront effacées.
+              Continuer?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button color='secondary' onClick={handleClose}>
+              Retour
+            </Button>
+            <Button
+              color='error'
+              onClick={async (e) => {
+                e.preventDefault();
+                await deleteProfilUser({
+                  user_id,
+                  token,
+                });
+                dispatch(
+                  handleToken({
+                    token: '',
+                    user_id: '',
+                  })
+                );
+                removeStorage('token');
+                removeStorage('user_id');
+              }}
+              autoFocus
+            >
+              Supprimer
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
+  }
+}
 export default ProfilePage;

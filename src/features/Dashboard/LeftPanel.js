@@ -9,6 +9,7 @@ import Carousel from 'react-grid-carousel';
 import { useDispatch } from 'react-redux';
 import { removeStorage } from '../../utils/helperLocalStorage';
 import { handleToken } from '../auth/authSlice';
+import { Link } from 'react-router-dom';
 
 function LeftPanel({ logout }) {
   const dispatch = useDispatch();
@@ -24,9 +25,10 @@ function LeftPanel({ logout }) {
         alt='User Portrait'
         className='leftmenu--user-picture'
       />
-      <a className='leftmenu--profile-name' href='/profil'>
+      <Link className='leftmenu--profile-name' to='/profil'>
         {username} <BorderColorIcon />
-      </a>
+      </Link>
+
       <hr class='leftmenu--line' />
       <h3>Activité récente</h3>
       <div className='leftmenu--recent-container'>
