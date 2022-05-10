@@ -17,6 +17,7 @@ import { handleToken } from '../features/auth/authSlice';
 import ProfilePage from '../features/ProfilePage/ProfilePage';
 
 import FAQ from '../features/FAQ/Faq';
+import ContactPage from '../features/ContactPage/ContactPage';
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
@@ -89,6 +90,7 @@ const App = () => {
             }
           />
           <Route path='/faq' theme={muiTheme} element={<FAQ />} />
+          <Route path='/contact' theme={muiTheme} element={<ContactPage />} />
         </Routes>
       </ThemeProvider>
       <DarkMode switchTheme={switchTheme} />
