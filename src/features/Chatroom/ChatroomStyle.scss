@@ -1,0 +1,11 @@
+@use '../../styles/variables.css';
+
+.chatroom {
+    font-family: sans-serif;
+    background-color: var(--light-blue);
+    // border: 2px var(--dark-blue) solid;
+    // height: 100vh;
+    max-width: 20rem;
+    // margin: auto;
+    filter: drop-shadow(5px 0 5px var(--dark-blue));
+}
