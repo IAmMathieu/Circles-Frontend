@@ -19,6 +19,7 @@ export const Dashboard = () => {
     token,
     user_id,
   });
+  console.log(`🚀 ~ DashData`, DashData);
 
   /**
    * Allow to filter events
