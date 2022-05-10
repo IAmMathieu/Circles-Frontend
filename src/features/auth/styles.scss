@@ -129,7 +129,7 @@ form {
   left: 50%;
   height: 100%;
   background: #fff;
-  background: linear-gradient(180deg, transparent, #fff, transparent);
+  background: linear-gradient(180deg, transparent, var(--maincolor), transparent);
   background-position: 50%;
   background-repeat: repeat-y;
   background-size: 1px auto;
