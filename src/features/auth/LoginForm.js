@@ -1,14 +1,15 @@
 import { Input } from '../Common/Input/Input';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './styles.scss';
 import './../../styles/variables.css';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { useLoginUserQuery, useRegisterUserQuery } from './authApi';
+import { useLoginUserMutation, useRegisterUserMutation } from './authApi';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleChange } from '../../features/auth/authSlice';
+import { useNavigate } from 'react-router';
+import { handleChange, handleToken } from '../../features/auth/authSlice';
 import { Loading } from '../Loading/Loading';
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -19,34 +20,15 @@ export const LoginForm = () => {
   /**
    * Change the skip state, allow to fetch data from the server
    */
-  const [skipLogin, setSkipLogin] = useState(true);
-  const [skipRegister, setSkipRegister] = useState(true);
-
   const [date, setDate] = useState(Date);
-  const { isLoading: loginIsLoading, isError: loginIsError } =
-    useLoginUserQuery(
-      {
-        email,
-        password,
-      },
-      {
-        skip: skipLogin,
-      }
-    );
 
-  const { isLoading: registerIsLoading, isError: registerIsError } =
-    useRegisterUserQuery(
-      {
-        email,
-        password,
-        firstname,
-        lastname,
-        birthdate,
-      },
-      {
-        skip: skipRegister,
-      }
-    );
+  // First argument, the function we launch, second the result (destructuring here)
+  const [loginUser, { isLoading: loginIsLoading, isError: loginIsError }] =
+    useLoginUserMutation();
+  const [
+    registerUser,
+    { isLoading: registerIsLoading, isError: registerIsError },
+  ] = useRegisterUserMutation();
   /**
    * Add classlist to the container when click
    */
@@ -63,13 +45,16 @@ export const LoginForm = () => {
           <form
             name='register-form'
             className='register-form flex flex-col '
-            onSubmit={(event) => {
+            onSubmit={async (event) => {
               event.preventDefault();
-              // const token = getStorage('token');
-              // if (token) {
-              //   navigate('/dashboard', { replace: true });
-              // }
-              setSkipRegister(false);
+              // Here we launch the RTK querie (mutation) with the arguments
+              await registerUser({
+                firstname,
+                lastname,
+                email,
+                password,
+                birthdate,
+              });
             }}
           >
             <Input name='Prénom' input='firstname' type={'text'} />
@@ -112,7 +97,11 @@ export const LoginForm = () => {
             className='login-form'
             onSubmit={async (event) => {
               event.preventDefault();
-              setSkipLogin(false);
+              // Here we launch the RTK querie (mutation) with the arguments
+              await loginUser({
+                email,
+                password,
+              });
             }}
           >
             <div className='input__container relative flex flex-col'>

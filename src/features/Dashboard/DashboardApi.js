@@ -1,43 +1,27 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-export const authApi = createApi({
-  reducerPath: 'dashboardApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://cercles.herokuapp.com/api/' }),
+import { emptySplitApi } from '../api/emptySplitApi';
+const extendedApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
-    getDashBoard: builder.query({
+    /* Two types :
+        - Query endpoints : for retrieving data.
+        - Mutation endpoints : for CRUD
+    */
+    getUserDashBoard: builder.query({
       /**
        * Query for login user. Take the email and password on parameter, and send it to the server.
        * @param {*} param0
        * @returns
        */
-      query: () => {
-        // return {
-        //   url: 'login',
-        //   method: 'POST',
-        //   body: new URLSearchParams({
-        //     email: email,
-        //     password: password,
-        //   }),
-        //   header: 'Content-Type: application/x-www-form-urlencoded',
-        //   // credentials: 'include',
-        // };
-      },
-      /**
-       * Take the response and extract the token. If token, set the token to the local storage.
-       * @param {*} response
-       * @returns
-       */
-      transformResponse: (response) => {
-        const { token } = response;
-        if (token) {
-          //   setStorage('token', token);
-          //   history.go('/dashboard');
-        }
-        return response;
+      query: ({ user_id, token }) => {
+        return {
+          url: `dashboard/${user_id}`,
+          method: 'GET',
+          contentType: 'application/json',
+          headers: { Authorization: `Bearer ${token}` },
+        };
       },
     }),
   }),
+  overrideExisting: false,
 });
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useLoginUserQuery, useRegisterUserQuery } = authApi;
+export const { useGetUserDashBoardQuery } = extendedApi;
