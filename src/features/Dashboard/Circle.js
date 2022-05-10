@@ -10,9 +10,10 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ChatIcon from '@mui/icons-material/Chat';
 import './style.scss';
 
-function Circle({ title, description }) {
+function Circle({ title, description, color }) {
   return (
     <Card className='circle' id='circle'>
+      <div style={{ backgroundColor: color }} className='h-10'></div>
       <CardHeader title={title} className='circle--header' />
       <CardMedia
         className='circle--img'

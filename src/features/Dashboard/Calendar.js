@@ -2,13 +2,13 @@ import './style.scss';
 import format from 'date-fns/format';
 import getDay from 'date-fns/getDay';
 import parse from 'date-fns/parse';
-import { fr } from "date-fns/locale";
+import { fr } from 'date-fns/locale';
 import startOfWeek from 'date-fns/startOfWeek';
 import { Calendar as Cal, dateFnsLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const locales = {
-  "fr": fr
+  fr: fr,
 };
 
 const localizer = dateFnsLocalizer({
@@ -31,13 +31,12 @@ const events = [
     end: new Date(2022, 4, 22),
   },
 ];
-
 function Calendar() {
   return (
     <div className='calendar'>
-      <h1 className="calendar--title">Calendrier</h1>
+      <h1 className='calendar--title'>Calendrier</h1>
       <Cal
-        culture={"fr"}
+        culture={'fr'}
         localizer={localizer}
         events={events}
         startAccessor='start'
