@@ -6,8 +6,21 @@ import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Carousel from 'react-grid-carousel';
+import { useDispatch } from 'react-redux';
+import useLocalStorage from 'use-local-storage';
+import { getStorage } from '../../utils/helperLocalStorage';
+import { handleToken } from '../auth/authSlice';
 
 function LeftPanel({ logout }) {
+    const dispatch = useDispatch();
+   const [token, setToken] = useLocalStorage(
+    'token',
+    getStorage('token') !== null ? getStorage('token') : undefined
+  );
+    const [user_id, setUser_id] = useLocalStorage(
+    'user_id',
+    getStorage('user_id') !== null ? getStorage('user_id') : undefined
+  );
   const userPicture =
     'https://ca.slack-edge.com/T02MBC4J9K5-U02M8CJUVJR-2df2ffa3c507-512';
   const username = 'Aleks';
@@ -68,14 +81,23 @@ function LeftPanel({ logout }) {
         </Carousel>
       </div>
       <div className='leftmenu--linkscontainer'>
-        <a
+        <button
+          type="button"
           className='leftmenu--links'
-          href='/'
-          onClick={() => logout(undefined)}
+           onClick={() => {
+          dispatch(
+            handleToken({
+              token: '',
+              user_id: '',
+            })
+          );
+          setToken(undefined);
+          setUser_id(undefined);
+        }}
         >
           {' '}
           <LogoutIcon />
-        </a>
+        </button>
         <a className='leftmenu--links' href='mailto:test@aol.com'>
           {' '}
           <AlternateEmailIcon />
