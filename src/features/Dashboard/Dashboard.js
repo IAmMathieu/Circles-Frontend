@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import Calendar from './Calendar';
 import Circle from './Circle';
 import NextEvents from './NextEvents';

@@ -68,14 +68,6 @@ function LeftPanel({ logout }) {
         </Carousel>
       </div>
       <div className='leftmenu--linkscontainer'>
-        <a className='leftmenu--links' href='mailto:test@aol.com'>
-          {' '}
-          <AlternateEmailIcon />
-        </a>
-        <a className='leftmenu--links' href='/faq'>
-          {' '}
-          <HelpOutlineIcon />
-        </a>
         <a
           className='leftmenu--links'
           href='/'
@@ -83,6 +75,14 @@ function LeftPanel({ logout }) {
         >
           {' '}
           <LogoutIcon />
+        </a>
+        <a className='leftmenu--links' href='mailto:test@aol.com'>
+          {' '}
+          <AlternateEmailIcon />
+        </a>
+        <a className='leftmenu--links' href='/faq'>
+          {' '}
+          <HelpOutlineIcon />
         </a>
       </div>
     </div>
