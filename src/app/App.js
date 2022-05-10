@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { handleToken } from '../features/auth/authSlice';
 import ProfilePage from '../features/ProfilePage/ProfilePage';
 
+import FAQ from '../features/FAQ/Faq';
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
@@ -87,6 +88,7 @@ const App = () => {
               </PrivateRoute>
             }
           />
+          <Route path='/faq' theme={muiTheme} element={<FAQ />} />
         </Routes>
       </ThemeProvider>
       <DarkMode switchTheme={switchTheme} />
