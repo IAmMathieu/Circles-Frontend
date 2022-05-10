@@ -8,8 +8,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useLoginUserMutation, useRegisterUserMutation } from './authApi';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
-import { handleChange, handleToken } from '../../features/auth/authSlice';
+import { handleChange } from '../../features/auth/authSlice';
 import { Loading } from '../Loading/Loading';
 export const LoginForm = () => {
   const dispatch = useDispatch();

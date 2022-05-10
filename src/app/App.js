@@ -83,7 +83,7 @@ const App = () => {
           <Route
             path='/profil'
             element={
-              <PrivateRoute token={token}>
+              <PrivateRoute token={tokenState}>
                 <ProfilePage />
               </PrivateRoute>
             }
