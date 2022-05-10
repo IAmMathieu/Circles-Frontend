@@ -19,6 +19,7 @@ export const Dashboard = () => {
     token,
     user_id,
   });
+  console.log(`🚀 ~ DashData`, DashData);
 
   const settings = {
     dots: true,
@@ -32,7 +33,7 @@ export const Dashboard = () => {
     <div className='dashboard-container'>
       <LeftPanel />
       <Calendar />
-      <NextEvents />
+      <NextEvents data={DashData} />
       <div className='circlebox' id='circlebox'>
         <Carousel
           cols={5}
@@ -47,30 +48,21 @@ export const Dashboard = () => {
           <Carousel.Item>
             <NewCircle />
           </Carousel.Item>
-          <Carousel.Item>
-            <Circle />
-          </Carousel.Item>
-          <Carousel.Item>
-            <Circle />
-          </Carousel.Item>
-          <Carousel.Item>
-            <Circle />
-          </Carousel.Item>
-          <Carousel.Item>
-            <Circle />
-          </Carousel.Item>
-          <Carousel.Item>
-            <Circle />
-          </Carousel.Item>
-          <Carousel.Item>
-            <Circle />
-          </Carousel.Item>
-          <Carousel.Item>
-            <Circle />
-          </Carousel.Item>
-          <Carousel.Item>
-            <Circle />
-          </Carousel.Item>
+          {DashData?.map((data) => {
+            /**
+             * Si les data sont null, on returne rien. Si on récupère bien un event data, on map dessus pour afficher les cercles et leurs données
+             */
+            if (data !== null) {
+              const { name, description } = data;
+              return (
+                <Carousel.Item>
+                  <Circle key={data} title={name} description={description} />
+                </Carousel.Item>
+              );
+            } else {
+              return null;
+            }
+          })}
         </Carousel>
       </div>
     </div>
