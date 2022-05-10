@@ -33,7 +33,7 @@ export const Dashboard = () => {
     <div className='dashboard-container'>
       <LeftPanel />
       <Calendar />
-      <NextEvents />
+      <NextEvents data={DashData} />
       <div className='circlebox' id='circlebox'>
         <Carousel
           cols={5}
@@ -56,7 +56,7 @@ export const Dashboard = () => {
               const { name, description } = data;
               return (
                 <Carousel.Item>
-                  <Circle title={name} description={description} />
+                  <Circle key={data} title={name} description={description} />
                 </Carousel.Item>
               );
             } else {
