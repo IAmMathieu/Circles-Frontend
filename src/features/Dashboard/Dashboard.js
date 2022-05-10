@@ -14,15 +14,10 @@ export const Dashboard = () => {
     data: DashData,
     isLoading: loginIsLoading,
     isError: loginIsError,
-  } = useGetUserDashBoardQuery(
-    {
-      token,
-      user_id,
-    },
-    {
-      // skip : true,
-    }
-  );
+  } = useGetUserDashBoardQuery({
+    token,
+    user_id,
+  });
   console.log(`üöÄ ~ DashData`, DashData);
 
   const settings = {

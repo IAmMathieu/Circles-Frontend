@@ -5,7 +5,7 @@ import './../../styles/variables.css';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { useLoginUserQuery, useRegisterUserQuery } from './authApi';
+import { useLoginUserMutation, useRegisterUserQuery } from './authApi';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleChange } from '../../features/auth/authSlice';
@@ -19,20 +19,13 @@ export const LoginForm = () => {
   /**
    * Change the skip state, allow to fetch data from the server
    */
-  const [skipLogin, setSkipLogin] = useState(true);
   const [skipRegister, setSkipRegister] = useState(true);
 
   const [date, setDate] = useState(Date);
-  const { isLoading: loginIsLoading, isError: loginIsError } =
-    useLoginUserQuery(
-      {
-        email,
-        password,
-      },
-      {
-        skip: skipLogin,
-      }
-    );
+
+  // First argument, the function we launch, second the result (destructuring here)
+  const [loginUser, { isLoading: loginIsLoading, isError: loginIsError }] =
+    useLoginUserMutation();
 
   const { isLoading: registerIsLoading, isError: registerIsError } =
     useRegisterUserQuery(
@@ -112,7 +105,11 @@ export const LoginForm = () => {
             className='login-form'
             onSubmit={async (event) => {
               event.preventDefault();
-              setSkipLogin(false);
+              // Here we launch the RTK querie (mutation) with the arguments
+              await loginUser({
+                email,
+                password,
+              });
             }}
           >
             <div className='input__container relative flex flex-col'>

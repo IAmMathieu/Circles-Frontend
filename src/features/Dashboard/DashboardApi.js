@@ -17,13 +17,8 @@ export const dashboardApi = createApi({
         return {
           url: `${user_id}/circles`,
           method: 'GET',
-          // body: new URLSearchParams({
-          //   id: user_id,
-          //   Authorization: token,
-          // }),
-          header: {
-            Authorization: token,
-          },
+          contentType: 'application/json',
+          headers: { Authorization: `Bearer ${token}` },
         };
       },
     }),

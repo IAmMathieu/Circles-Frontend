@@ -6,7 +6,12 @@ export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://cercles.herokuapp.com/api/' }),
   endpoints: (builder) => ({
-    loginUser: builder.query({
+    /* Two types : 
+
+    - Query endpoints : for retrieving data.
+    - Mutation endpoints : for CRUD
+    */
+    loginUser: builder.mutation({
       /**
        * Query for login user. Take the email and password on parameter, and send it to the server.
        * @param {*} param0
@@ -83,4 +88,4 @@ export const authApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLoginUserQuery, useRegisterUserQuery } = authApi;
+export const { useLoginUserMutation, useRegisterUserQuery } = authApi;
