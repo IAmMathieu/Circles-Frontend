@@ -20,6 +20,14 @@ export const Dashboard = () => {
     user_id,
   });
 
+  /**
+   * Allow to filter events
+   */
+  const eventsFilter = async (DashData) => {
+    const data = await DashData;
+    if (data !== null) {
+    }
+  };
   const settings = {
     dots: true,
     infinite: true,
