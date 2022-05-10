@@ -10,7 +10,14 @@ function NextEvents({ data }) {
             return data.events.map((event) => {
               return (
                 <li className='font-light border-solid border-b-2 border-white mb-10 pb-10'>
-                  5 mai - {event.title}
+                  <p
+                    style={{ borderColor: data.color }}
+                    className='border-l-4  pl-2'
+                  >
+                    {data.name}
+                  </p>
+                  {/* <hr style={{ borderColor: data.color }} /> */}
+                  <p>5 mai - {event.title}</p>
                 </li>
               );
             });

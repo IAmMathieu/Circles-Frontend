@@ -21,6 +21,14 @@ export const Dashboard = () => {
   });
   console.log(`🚀 ~ DashData`, DashData);
 
+  /**
+   * Allow to filter events
+   */
+  const eventsFilter = async (DashData) => {
+    const data = await DashData;
+    if (data !== null) {
+    }
+  };
   const settings = {
     dots: true,
     infinite: true,
@@ -32,7 +40,7 @@ export const Dashboard = () => {
   return (
     <div className='dashboard-container'>
       <LeftPanel />
-      <Calendar />
+      <Calendar data={DashData} />
       <NextEvents data={DashData} />
       <div className='circlebox' id='circlebox'>
         <Carousel
@@ -53,10 +61,15 @@ export const Dashboard = () => {
              * Si les data sont null, on returne rien. Si on récupère bien un event data, on map dessus pour afficher les cercles et leurs données
              */
             if (data !== null) {
-              const { name, description } = data;
+              const { name, description, color } = data;
               return (
                 <Carousel.Item>
-                  <Circle key={data} title={name} description={description} />
+                  <Circle
+                    key={data}
+                    title={name}
+                    description={description}
+                    color={color}
+                  />
                 </Carousel.Item>
               );
             } else {
