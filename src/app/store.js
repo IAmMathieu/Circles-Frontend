@@ -1,13 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { emptySplitApi } from '../features/api/emptySplitApi';
-=======
 import { applyMiddleware, compose } from 'redux';
->>>>>>> feat(circle): attempt connect chatroom
-=======
->>>>>>> adjust css
 import authReducer from '../features/auth/authSlice';
+import tchatReducer from '../features/tchat/tchatSlice';
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +10,7 @@ export const store = configureStore({
     // [authApi.reducerPath]: authApi.reducer,
     [emptySplitApi.reducerPath]: emptySplitApi.reducer,
     auth: authReducer,
+    tchat: tchatReducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
