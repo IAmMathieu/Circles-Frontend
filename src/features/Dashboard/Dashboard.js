@@ -5,6 +5,7 @@ import LeftPanel from './LeftPanel';
 import NewCircle from './NewCircle';
 import Carousel from 'react-grid-carousel';
 import { useGetUserDashBoardQuery } from './DashboardApi';
+import { useSelector } from 'react-redux';
 
 export const Dashboard = () => {
   const { surname, logged, token, user_id } = useSelector(
