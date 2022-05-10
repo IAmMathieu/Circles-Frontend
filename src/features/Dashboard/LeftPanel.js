@@ -88,7 +88,7 @@ function LeftPanel({ logout }) {
         >
           <LogoutIcon />
         </button>
-        <a className='leftmenu--links' href='mailto:test@aol.com'>
+        <a className='leftmenu--links' href='/contact'>
           <AlternateEmailIcon />
         </a>
         <a className='leftmenu--links' href='/faq'>
