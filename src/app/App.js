@@ -14,6 +14,8 @@ import { PrivateRoute } from '../features/PrivateRoute/PrivateRoute';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleToken } from '../features/auth/authSlice';
+import ProfilePage from '../features/ProfilePage/ProfilePage';
+
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
@@ -77,10 +79,18 @@ const App = () => {
               </PrivateRoute>
             }
           />
+          <Route
+            path='/profil'
+            element={
+              <PrivateRoute token={token}>
+                <ProfilePage />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </ThemeProvider>
       <DarkMode switchTheme={switchTheme} />
-      <button
+      {/* <button
         onClick={() => {
           dispatch(
             handleToken({
@@ -93,7 +103,7 @@ const App = () => {
         }}
         type='button'
         className='logout w-5 h-5 bg-red-600 fixed bottom-5 left-5'
-      ></button>
+      ></button> */}
     </div>
   );
 };

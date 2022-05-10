@@ -2,8 +2,25 @@ import './style.scss';
 import logo from './../../logo.svg';
 import NewEntry from './NewEntry';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Carousel from 'react-grid-carousel';
+import { useDispatch } from 'react-redux';
+import useLocalStorage from 'use-local-storage';
+import { getStorage } from '../../utils/helperLocalStorage';
+import { handleToken } from '../auth/authSlice';
 
-function LeftPanel() {
+function LeftPanel({ logout }) {
+    const dispatch = useDispatch();
+   const [token, setToken] = useLocalStorage(
+    'token',
+    getStorage('token') !== null ? getStorage('token') : undefined
+  );
+    const [user_id, setUser_id] = useLocalStorage(
+    'user_id',
+    getStorage('user_id') !== null ? getStorage('user_id') : undefined
+  );
   const userPicture =
     'https://ca.slack-edge.com/T02MBC4J9K5-U02M8CJUVJR-2df2ffa3c507-512';
   const username = 'Aleks';
@@ -11,22 +28,84 @@ function LeftPanel() {
   return (
     <div className='leftmenu'>
       <img src={logo} alt='Logo Circles' className='leftmenu--circle-logo' />
-      <img src={userPicture} className='leftmenu--user-picture' />
-      <span className='leftmenu--profile-name'>{username}</span>
-      <BorderColorIcon />
+      <img
+        src={userPicture}
+        alt='User Portrait'
+        className='leftmenu--user-picture'
+      />
+      <a className='leftmenu--profile-name' href='/profil'>
+        {username} <BorderColorIcon />
+      </a>
       <hr class='leftmenu--line' />
       <h3>Activité récente</h3>
       <div className='leftmenu--recent-container'>
-        <NewEntry
-          author='Flo'
-          circle="O'clock"
-          event="Ajout d'un anniversaire"
-        />
-        <NewEntry
-          author='Aleks'
-          circle="O'clock"
-          event="Ajout d'un anniversaire"
-        />
+        <Carousel
+          cols={1}
+          rows={3}
+          gap={10}
+          showDots
+          hideArrow
+          responsiveLayout={[
+            { breakpoint: 1000, cols: 2 },
+            { breakpoint: 750, cols: 1 },
+          ]}
+        >
+          <Carousel.Item>
+            <NewEntry
+              author='Flo'
+              circle="O'clock"
+              event="Ajout d'un anniversaire"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <NewEntry
+              author='Aleks'
+              circle="O'clock"
+              event="Ajout d'un anniversaire"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <NewEntry
+              author='Flo'
+              circle="O'clock"
+              event="Ajout d'un anniversaire"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <NewEntry
+              author='Aleks'
+              circle="O'clock"
+              event="Ajout d'un anniversaire"
+            />
+          </Carousel.Item>
+        </Carousel>
+      </div>
+      <div className='leftmenu--linkscontainer'>
+        <button
+          type="button"
+          className='leftmenu--links'
+           onClick={() => {
+          dispatch(
+            handleToken({
+              token: '',
+              user_id: '',
+            })
+          );
+          setToken(undefined);
+          setUser_id(undefined);
+        }}
+        >
+          {' '}
+          <LogoutIcon />
+        </button>
+        <a className='leftmenu--links' href='mailto:test@aol.com'>
+          {' '}
+          <AlternateEmailIcon />
+        </a>
+        <a className='leftmenu--links' href='/faq'>
+          {' '}
+          <HelpOutlineIcon />
+        </a>
       </div>
     </div>
   );
