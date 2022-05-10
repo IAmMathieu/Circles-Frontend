@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { TextField } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { Input } from '../Common/Input/Input';
-import Button from '@mui/material/Button';
 import logo from './../../logo.svg';
 import './style.scss';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -13,7 +12,30 @@ import {
   useDeleteProfilUserMutation,
 } from './ProfilApi';
 import { Loading } from '../Loading/Loading';
+import { removeStorage } from '../../utils/helperLocalStorage';
+import { handleToken } from '../auth/authSlice';
+
+//! MUI
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+//!------------
+
 function ProfilePage() {
+  //! MUI
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  //!--------------
+
+  const dispatch = useDispatch();
   const {
     firstname,
     lastname,
@@ -110,24 +132,56 @@ function ProfilePage() {
             >
               Modifier
             </Button>
+            <Button color='error' variant='contained' onClick={handleClickOpen}>
+              Supprimer
+            </Button>
+          </div>
+        </form>
+        {/* MUI */}
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby='alert-dialog-title'
+          aria-describedby='alert-dialog-description'
+        >
+          <DialogTitle id='alert-dialog-title'>
+            {'Supprimer votre compte ?'}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id='alert-dialog-description'>
+              Si vous acceptez, l'entièreté de vos données seront effacées.
+              Continuer?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button color='secondary' onClick={handleClose}>
+              Retour
+            </Button>
             <Button
               color='error'
-              variant='contained'
               onClick={async (e) => {
                 e.preventDefault();
                 await deleteProfilUser({
                   user_id,
                   token,
                 });
+                dispatch(
+                  handleToken({
+                    token: '',
+                    user_id: '',
+                  })
+                );
+                removeStorage('token');
+                removeStorage('user_id');
               }}
+              autoFocus
             >
               Supprimer
             </Button>
-          </div>
-        </form>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }
 }
-
 export default ProfilePage;
