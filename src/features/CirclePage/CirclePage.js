@@ -21,17 +21,29 @@ export const CirclePage = () => {
         token,
         user_id,
       });
-      console.log(`🚀 ~ DashData`, DashData);
 
     return (
         <div className='container__circle-page'>
-            <Aside />
+            <div className='container__circle-page__aside'>
+                <Aside />
+            </div>
+    
             <div className='container__evt'>
                 <Calendar />
-                <NextEvents />
+                <NextEvents data={DashData} />
             </div>
             {/* <Chatroom /> */}
             <DetailCircle />
+            <div className='container__circle-page__switch'>
+                <div className='container__circle_page__switch--chat'>
+                    <p>Tchat</p>
+                </div>
+                <div className='container__circle_page__switch--calendar'>
+                    <p>Calendrier</p>
+                </div>
+
+            </div>
         </div>
+        
     )
 }
