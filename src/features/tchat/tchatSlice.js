@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { ADD_MESSAGE } from '../Chatroom/actions/actionIndex';
 import userList from '../../data/user.json';
 
 const initialState = {
@@ -18,6 +19,11 @@ const initialState = {
           author: 'Super Chat',
           content: 'Stp',
         },
+        {
+          id:4,
+          author: 'Toto',
+          content: 'hntouoetrnh',
+        },
         
       ]
 };
@@ -25,9 +31,20 @@ const initialState = {
 export const tchatSlice = createSlice({
     name: 'tchat',
     initialState,
-    reducer: {
-
-    }
-})
-
+    reducers: {
+      addMessage: (state, action) => {
+        switch(action.type){
+          case ADD_MESSAGE: {
+            console.log('case', ADD_MESSAGE);
+            return state;
+          }
+          default:
+            return state;
+        }
+      }
+    },
+    
+},
+window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+export const { addMessage } = tchatSlice.actions;
 export default tchatSlice.reducer;
