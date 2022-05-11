@@ -40,44 +40,45 @@ export const Dashboard = () => {
   return (
     <div className='dashboard-container'>
       <LeftPanel />
-      <Calendar data={DashData} />
-      <NextEvents data={DashData} />
-      <div className='circlebox' id='circlebox'>
-        <Carousel
-          cols={5}
-          showDots
-          responsiveLayout={[
-            { breakpoint: 1800, cols: 4 },
-            { breakpoint: 1450, cols: 3 },
-            { breakpoint: 1100, cols: 2 },
-            { breakpoint: 950, cols: 1 },
-          ]}
-        >
-          <Carousel.Item>
-            <NewCircle />
-          </Carousel.Item>
-          {DashData?.map((data) => {
-            /**
-             * Si les data sont null, on returne rien. Si on récupère bien un event data, on map dessus pour afficher les cercles et leurs données
-             */
-            if (data !== null) {
-              const { name, description, color } = data;
-              return (
-                <Carousel.Item>
-                  <Circle
-                    key={data}
-                    title={name}
-                    description={description}
-                    color={color}
-                  />
-                </Carousel.Item>
-              );
-            } else {
-              return null;
-            }
-          })}
-        </Carousel>
-      </div>
+  {/* A recopier */}
     </div>
   );
 };
+    // <Calendar data={DashData} />
+    //   <NextEvents data={DashData} />
+    //   <div className='circlebox' id='circlebox'>
+    //     <Carousel
+    //       cols={5}
+    //       showDots
+    //       responsiveLayout={[
+    //         { breakpoint: 1800, cols: 4 },
+    //         { breakpoint: 1450, cols: 3 },
+    //         { breakpoint: 1100, cols: 2 },
+    //         { breakpoint: 950, cols: 1 },
+    //       ]}
+    //     >
+    //       <Carousel.Item>
+    //         <NewCircle />
+    //       </Carousel.Item>
+    //       {DashData?.map((data) => {
+    //         /**
+    //          * Si les data sont null, on returne rien. Si on récupère bien un event data, on map dessus pour afficher les cercles et leurs données
+    //          */
+    //         if (data !== null) {
+    //           const { name, description, color } = data;
+    //           return (
+    //             <Carousel.Item>
+    //               <Circle
+    //                 key={data}
+    //                 title={name}
+    //                 description={description}
+    //                 color={color}
+    //               />
+    //             </Carousel.Item>
+    //           );
+    //         } else {
+    //           return null;
+    //         }
+    //       })}
+    //     </Carousel>
+    //   </div>

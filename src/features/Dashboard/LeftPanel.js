@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { removeStorage } from '../../utils/helperLocalStorage';
 import { handleToken } from '../auth/authSlice';
 import { Link } from 'react-router-dom';
-
+import logoLight from "./../../assets/images/fullLogoLight.svg"
 function LeftPanel({ logout }) {
   const dispatch = useDispatch();
   const userPicture =
@@ -18,19 +18,17 @@ function LeftPanel({ logout }) {
   const username = 'Aleks';
 
   return (
-    <div className='leftmenu'>
-      <img src={logo} alt='Logo Circles' className='leftmenu--circle-logo' />
-      <img
-        src={userPicture}
-        alt='User Portrait'
-        className='leftmenu--user-picture'
-      />
+    <div className=' w-full px-8'>
+      <div className="grid grid-cols-7">
+        <img
+          src={userPicture}
+          alt='User Portrait'
+          className='w-14 h-14 rounded-full self-end col-start-1 col-end-3 '
+        />
+        <img src={logoLight} alt='Logo Circles' className='w-[200px] h-[120px] col-start-3 col-end-6' />
+      </div>
+      {/* 
       <Link className='leftmenu--profile-name' to='/profil'>
-        {username} <BorderColorIcon />
-      </Link>
-
-      <hr class='leftmenu--line' />
-      <h3>Activité récente</h3>
       <div className='leftmenu--recent-container'>
         <Carousel
           cols={1}
@@ -73,6 +71,11 @@ function LeftPanel({ logout }) {
           </Carousel.Item>
         </Carousel>
       </div>
+        {username} <BorderColorIcon />
+      </Link>
+
+      <hr class='leftmenu--line' />
+      <h3>Activité récente</h3>
       <div className='leftmenu--linkscontainer'>
         <button
           type='button'
@@ -96,7 +99,7 @@ function LeftPanel({ logout }) {
         <a className='leftmenu--links' href='/faq'>
           <HelpOutlineIcon />
         </a>
-      </div>
+      </div> */}
     </div>
   );
 }
