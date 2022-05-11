@@ -143,7 +143,7 @@ export const LoginForm = () => {
         <div className='overlay-container'>
           <div className='overlay'>
             <div className='overlay-panel overlay-left'>
-              <h1 className='texts'>De retour sur Circle?</h1>
+              <h1 className='texts'>De retour sur Circles?</h1>
               <p className='texts'>Cliquez ci-dessous pour vous connecter</p>
               <button
                 className='ghost button'
@@ -155,7 +155,7 @@ export const LoginForm = () => {
               </button>
             </div>
             <div className='overlay-panel overlay-right'>
-              <h1 className='texts'>Vous ne connaissez pas Circle?</h1>
+              <h1 className='texts'>Vous ne connaissez pas Circles?</h1>
               <p className='texts'>
                 Cliquez ci-dessous pour vous inscrire et découvrir nos outils
               </p>
