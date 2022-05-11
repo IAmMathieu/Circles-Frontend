@@ -1,13 +1,27 @@
+.container__circle-page{
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0.5rem;
 
+    &__aside{
+        order: 1;
+    }
+
+    &__switch{
+        order: -3;
+        border: 3px solid black;
+        display: flex;
+        justify-content: space-evenly;
+        padding: 0.8rem;
+    }
+}
 
 
 
 @media screen and (min-width: 550px) {
     .container__circle-page{
-        display: flex;
         justify-content: space-between;
         height: 100%;
-        padding: 0.5rem;
     }
     
     .container__evt{

@@ -1,4 +1,4 @@
-import { emptySplitApi } from '../api/emptySplitApi';
+import { emptySplitApi } from './emptySplitApi';
 const extendedApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     /* Two types :
