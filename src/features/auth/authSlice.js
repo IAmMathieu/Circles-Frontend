@@ -11,6 +11,7 @@ const initialState = {
   birthdate: '',
   token: '',
   user_id: '',
+  oldPassword: '',
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 // Tranche de state (le "slice)")

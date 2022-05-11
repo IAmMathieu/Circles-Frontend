@@ -4,7 +4,15 @@ import { handleChange } from '../../../features/auth/authSlice';
 import 'animate.css';
 import './Input.scss';
 
-export const Input = ({ name, input, type, error, className }) => {
+export const Input = ({
+  helperText,
+  name,
+  input,
+  type,
+  error,
+  className,
+  required,
+}) => {
   const dispatch = useDispatch();
   return (
     <>
@@ -14,8 +22,9 @@ export const Input = ({ name, input, type, error, className }) => {
         label={name}
         variant='standard'
         name={name}
+        helperText={helperText}
         placeholder={name}
-        required
+        required={required}
         type={type}
         error={error}
         className={className}

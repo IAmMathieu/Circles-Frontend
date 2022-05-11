@@ -36,16 +36,8 @@ function ProfilePage() {
   //!--------------
 
   const dispatch = useDispatch();
-  const {
-    firstname,
-    lastname,
-    email,
-    password,
-    surname,
-    birthdate,
-    token,
-    user_id,
-  } = useSelector((state) => state.auth);
+  const inputData = useSelector((state) => state.auth);
+  const { token, user_id } = inputData;
   /**
    * Query profil data when coming to the page
    */
@@ -71,23 +63,53 @@ function ProfilePage() {
           alt='User Portrait'
           className='leftmenu--user-picture'
         />
+        <h2 className='text-4xl font-bold underline mb-5'>{data?.surname}</h2>
+
+        <h3 className='text-2xl font-bold '> Your informations : </h3>
         <form
           name='register-form'
-          className='register-form flex flex-col '
+          className='register-form flex flex-col gap-2 '
           onSubmit={(event) => {
             event.preventDefault();
           }}
         >
-          <Input name={data?.firstname} input='firstname' type={'text'} />
-          <Input name={data?.lastname} input='lastname' type={'text'} />
-          <Input name={data?.surname} input='surname' type={'text'} />
+          <Input
+            helperText={'Firstname'}
+            name={data?.firstname}
+            input='firstname'
+            type={'text'}
+          />
+          <Input
+            name={data?.lastname}
+            input='lastname'
+            type={'text'}
+            helperText={'Lastname'}
+          />
+          <Input
+            name={data?.surname}
+            input='surname'
+            type={'text'}
+            helperText={'Surname'}
+          />
           <Input
             name={data?.email}
             input='email'
             type={'email'}
+            helperText={'Email'}
+
             // error={loginIsError}
           />
-          <Input name='Mot de passe' input='password' type={'password'} />
+          <Input
+            name='Ancien mot de passe'
+            input='oldPassword'
+            type={'password'}
+          />
+          <Input
+            className={'mb-5'}
+            name='Nouveau mot de passe'
+            input='password'
+            type={'password'}
+          />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               label='Birth date'
@@ -107,26 +129,20 @@ function ProfilePage() {
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
-          <div className='button__container flex gap-5'>
+          <div className='button__container flex gap-5 mt-5'>
             <Button
               color='warning'
               variant='contained'
               onClick={async (e) => {
+                const newObj = { ...inputData };
+                for (const key in newObj) {
+                  if (newObj[key] === '') {
+                    delete newObj[key];
+                  }
+                }
                 e.preventDefault();
-                const patchFirstName = firstname ? firstname : data.firstname;
-                const patchLastName = lastname ? lastname : data.lastname;
-                const patchEmail = email ? email : data.email;
-                const patchSurname = surname ? surname : data.surname;
-                const patchBirthdate = birthdate ? birthdate : data.birthdate;
-
                 await updateProfilUser({
-                  token,
-                  user_id,
-                  firstname: patchFirstName,
-                  lastname: patchLastName,
-                  email: patchEmail,
-                  surname: patchSurname,
-                  birthdate: patchBirthdate,
+                  newObj,
                 });
               }}
             >
@@ -161,9 +177,14 @@ function ProfilePage() {
               color='error'
               onClick={async (e) => {
                 e.preventDefault();
+                const newObj = { ...inputData };
+                for (const key in newObj) {
+                  if (newObj[key] === '') {
+                    delete newObj[key];
+                  }
+                }
                 await deleteProfilUser({
-                  user_id,
-                  token,
+                  newObj,
                 });
                 dispatch(
                   handleToken({
