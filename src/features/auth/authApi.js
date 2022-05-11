@@ -22,6 +22,7 @@ const extendedApi = emptySplitApi.injectEndpoints({
             password: password,
           }),
           header: 'Content-Type: application/x-www-form-urlencoded',
+          invalidatesTags: ['Post'],
         };
       },
       /**

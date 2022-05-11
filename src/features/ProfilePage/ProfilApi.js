@@ -35,6 +35,7 @@ const profilApi = emptySplitApi.injectEndpoints({
         username,
         email,
         bidrthdate,
+        oldpassword,
         img_url,
       }) => {
         return {
@@ -43,12 +44,15 @@ const profilApi = emptySplitApi.injectEndpoints({
           body: new URLSearchParams({
             email,
             password,
+            oldpassword,
             firstname,
             lastname,
             username,
             bidrthdate,
+            img_url,
           }),
           headers: { Authorization: `Bearer ${token}` },
+          invalidatesTags: ['Data'],
         };
       },
     }),

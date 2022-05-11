@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { store } from './app/store';
 import App from './app/App';
+import { StyledEngineProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import './index.scss';
 
 const container = document.getElementById('root');
@@ -12,7 +14,10 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <CssBaseline />
+        <StyledEngineProvider injectFirst>
+          <App />
+        </StyledEngineProvider>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>
