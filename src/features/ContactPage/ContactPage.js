@@ -4,8 +4,8 @@ import UserContact from './Segment';
 import portraitAlex from '../../assets/images/portrait_alex.jpg';
 import portraitElo from '../../assets/images/portrait_elo.jpg';
 import portraitLogan from '../../assets/images/portrait_logan.jpg';
-// import portraitRobin from '../../assets/images/portrait_robin.jpg';
-// import portraitMathieu from '../../assets/images/portrait_mathieu.jpg';
+import portraitRobin from '../../assets/images/portrait_robin.png';
+import portraitMathieu from '../../assets/images/portrait_mathieu.jpg';
 
 function ContactPage() {
   return (
@@ -25,25 +25,25 @@ function ContactPage() {
           name='Elodie BUSTIN'
           desc='Lead Dev Front'
           portrait={portraitElo}
-          email=''
+          email='elodie.bustin@lilo.org'
         />
         <UserContact
           name='Logan WILLAUMEZ'
           desc='Git Master of the entire world'
           portrait={portraitLogan}
-          email=''
+          email='logan.willaumez@gmail.com'
         />
         <UserContact
           name='Robin POPPEL'
           desc='SCRUM Master'
-          portrait={portraitLogan}
-          email=''
+          portrait={portraitRobin}
+          email='poppelrobin@gmail.com'
         />
         <UserContact
           name='Mathieu TOURTE'
           desc='Lead Dev Back'
-          portrait={portraitLogan}
-          email=''
+          portrait={portraitMathieu}
+          email='tourte.m@gmail.com'
         />
       </div>
     </div>
