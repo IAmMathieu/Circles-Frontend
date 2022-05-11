@@ -1,12 +1,12 @@
 :root {
-  --background: #90c1e0;
+  --background: #ffffff;
   --maincolor: #294154;
   --maingradient: #41617a, #41617aff;
   --buttonDark: #f1aa2a;
   --backgroundButton: #ea8122;
 }
 [data-theme='dark'] {
-  --background: #13293d;
+  --background: #1a2028;
   --maincolor: #ffffff;
   --maingradient: #d7efff, #d7efff00;
   --buttonDark: #294154;

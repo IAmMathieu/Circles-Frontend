@@ -18,6 +18,7 @@ import ProfilePage from '../features/ProfilePage/ProfilePage';
 
 import FAQ from '../features/FAQ/Faq';
 import ContactPage from '../features/ContactPage/ContactPage';
+import MiniDrawer from '../features/Dashboard/miniDrawer';
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
@@ -66,6 +67,7 @@ const App = () => {
   return (
     <div className='App' data-theme={theme}>
       <ThemeProvider theme={muiTheme}>
+        {tokenState && <MiniDrawer />}
         <Routes>
           <Route
             path='/'
