@@ -49,8 +49,10 @@ const profilApi = emptySplitApi.injectEndpoints({
             lastname,
             username,
             bidrthdate,
+            img_url,
           }),
           headers: { Authorization: `Bearer ${token}` },
+          invalidatesTags: ['Data'],
         };
       },
     }),

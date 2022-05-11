@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { store } from './app/store';
 import App from './app/App';
 import { StyledEngineProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import './index.scss';
 
 const container = document.getElementById('root');
@@ -13,6 +14,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
+        <CssBaseline />
         <StyledEngineProvider injectFirst>
           <App />
         </StyledEngineProvider>

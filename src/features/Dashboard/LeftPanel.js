@@ -90,12 +90,12 @@ function LeftPanel({ logout }) {
         >
           <LogoutIcon />
         </button>
-        <a className='leftmenu--links' href='/contact'>
+        <Link className='leftmenu--links' to='/contact'>
           <AlternateEmailIcon />
-        </a>
-        <a className='leftmenu--links' href='/faq'>
+        </Link>
+        <Link className='leftmenu--links' to='/faq'>
           <HelpOutlineIcon />
-        </a>
+        </Link>
       </div>
     </div>
   );
