@@ -6,10 +6,11 @@ import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Carousel from 'react-grid-carousel';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeStorage } from '../../utils/helperLocalStorage';
 import { handleToken } from '../auth/authSlice';
 import { Link } from 'react-router-dom';
+import { useGetUserDashBoardQuery } from './DashboardApi';
 
 function LeftPanel({ logout }) {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ function LeftPanel({ logout }) {
         {username} <BorderColorIcon />
       </Link>
 
-      <hr class='leftmenu--line' />
+      <hr className='leftmenu--line' />
       <h3>Activité récente</h3>
       <div className='leftmenu--recent-container'>
         <Carousel

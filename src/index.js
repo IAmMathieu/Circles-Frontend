@@ -14,8 +14,8 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <CssBaseline />
         <StyledEngineProvider injectFirst>
+          <CssBaseline />
           <App />
         </StyledEngineProvider>
       </Provider>

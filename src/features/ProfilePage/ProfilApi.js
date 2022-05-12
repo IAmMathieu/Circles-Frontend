@@ -52,7 +52,6 @@ const profilApi = emptySplitApi.injectEndpoints({
             img_url,
           }),
           headers: { Authorization: `Bearer ${token}` },
-          invalidatesTags: ['Data'],
         };
       },
     }),
