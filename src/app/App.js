@@ -111,21 +111,6 @@ const App = () => {
           <Route path='/contact' theme={muiTheme} element={<ContactPage />} />
         </Routes>
       </ThemeProvider>
-      {/* <DarkMode switchTheme={switchTheme} /> */}
-      {/* <button
-        onClick={() => {
-          dispatch(
-            handleToken({
-              token: '',
-              user_id: '',
-            })
-          );
-          setToken(undefined);
-          setUser_id(undefined);
-        }}
-        type='button'
-        className='logout w-5 h-5 bg-red-600 fixed bottom-5 left-5'
-      ></button> */}
     </div>
   );
 };

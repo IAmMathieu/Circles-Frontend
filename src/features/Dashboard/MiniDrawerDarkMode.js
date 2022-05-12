@@ -4,7 +4,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import ListItemText from '@mui/material/ListItemText';
-import React from 'react';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 function MiniDrawerDarkMode({ open, setTheme, theme }) {
   return (

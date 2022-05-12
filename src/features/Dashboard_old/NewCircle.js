@@ -22,7 +22,7 @@ function NewCircle() {
       >
         Créer un cercle
       </a>
-      <hr class='newcircle--line' />
+      <hr className='newcircle--line' />
       <a className='newcircle--join newcircle--hide' onClick={handleOpenJoin}>
         Joindre un cercle
       </a>

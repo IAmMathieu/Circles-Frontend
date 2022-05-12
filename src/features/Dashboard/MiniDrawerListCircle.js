@@ -24,7 +24,7 @@ function MiniDrawerList({ name, url, open, img, icon, click }) {
   return (
     <ListItem key={name} disablePadding sx={{ display: 'block' }}>
       <NavLink
-        to={url}
+        to='/circle/id'
         className={({ isActive }) => (isActive ? 'nav-active' : 'nav-inactive')}
       >
         <ListItemButton
@@ -50,7 +50,7 @@ function MiniDrawerList({ name, url, open, img, icon, click }) {
               ></img>
             ) : icon ? (
               <i
-                class={`${icon} MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root`}
+                className={`${icon} MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root`}
               ></i>
             ) : (
               ''
@@ -59,13 +59,25 @@ function MiniDrawerList({ name, url, open, img, icon, click }) {
           <ListItemText primary={name} sx={{ opacity: open ? 1 : 0 }} />
           {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
-        <Collapse in={open} timeout='auto' unmountOnExit>
+        <Collapse in={openMenu} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
                 <StarBorder />
               </ListItemIcon>
-              <ListItemText primary='Starred' />
+              <ListItemText primary='Dashboard' />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 4 }}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='Chat' />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 4 }}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary='Calendrier' />
             </ListItemButton>
           </List>
         </Collapse>

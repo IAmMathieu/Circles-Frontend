@@ -115,7 +115,6 @@ export default function MiniDrawer({
     token,
     user_id,
   });
-  console.log(circlesData);
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -161,10 +160,10 @@ export default function MiniDrawer({
         </List>
         <Divider />
         {circlesData?.map((circle) => (
-          <MiniDrawerListCircle
+          <MiniDrawerList
             name={circle.name}
             icon={circle.img_url}
-            url='/circle/id'
+            url={`/circle/${circle.circle_id}`}
             open={open}
           />
         ))}

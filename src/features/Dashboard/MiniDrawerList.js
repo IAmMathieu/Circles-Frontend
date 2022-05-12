@@ -5,7 +5,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import LogoutIcon from '@mui/icons-material/Logout';
 import DeleteIcon from '@mui/icons-material/Delete';
-import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
 
 function MiniDrawerList({ name, url, open, img, icon, click }) {
@@ -42,7 +41,7 @@ function MiniDrawerList({ name, url, open, img, icon, click }) {
               ></img>
             ) : icon ? (
               <i
-                class={`${icon} MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root`}
+                className={`${icon} MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root`}
               ></i>
             ) : (
               ''

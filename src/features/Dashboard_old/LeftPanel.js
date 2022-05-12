@@ -30,7 +30,7 @@ function LeftPanel({ logout }) {
         {username} <BorderColorIcon />
       </Link>
 
-      <hr class='leftmenu--line' />
+      <hr className='leftmenu--line' />
       <h3>Activité récente</h3>
       <div className='leftmenu--recent-container'>
         <Carousel
