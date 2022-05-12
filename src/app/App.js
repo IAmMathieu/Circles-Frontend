@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleToken } from '../features/auth/authSlice';
 import ProfilePage from '../features/ProfilePage/ProfilePage';
+import { CirclePage } from '../features/CirclePage/CirclePage';
 
 import FAQ from '../features/FAQ/Faq';
 import ContactPage from '../features/ContactPage/ContactPage';
@@ -89,6 +90,7 @@ const App = () => {
               </PrivateRoute>
             }
           />
+          <Route path='/circle' theme={muiTheme} element={<CirclePage />} />
           <Route path='/faq' theme={muiTheme} element={<FAQ />} />
           <Route path='/contact' theme={muiTheme} element={<ContactPage />} />
         </Routes>
