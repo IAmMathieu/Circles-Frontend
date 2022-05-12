@@ -7,19 +7,17 @@ import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import LogoutIcon from '@mui/icons-material/Logout';
-import './miniDrawer.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeStorage } from '../../utils/helperLocalStorage';
 import { handleToken } from '../auth/authSlice';
 import { useNavigate } from 'react-router';
-import { NavLink } from 'react-router-dom';
+import { useGetUserDashBoardQuery } from './DashboardApi';
+import MiniDrawerList from './MiniDrawerList';
+import MiniDrawerListCircle from './MiniDrawerListCircle';
+import { Divider } from '@mui/material';
+import './miniDrawer.scss';
+import MiniDrawerDarkMode from './MiniDrawerDarkMode';
+import { useState } from 'react';
 const drawerWidth = 240;
 const userPicture =
   'https://ca.slack-edge.com/T02MBC4J9K5-U02M8CJUVJR-2df2ffa3c507-512';
@@ -88,15 +86,36 @@ const Drawer = styled(MuiDrawer, {
     '& .MuiDrawer-paper': closedMixin(theme),
   }),
 }));
-export default function MiniDrawer() {
+
+export default function MiniDrawer({
+  theme,
+  setTheme,
+  setOpen,
+  open,
+  handleToggleOpen,
+}) {
+  const disconnect = () => {
+    dispatch(
+      handleToken({
+        token: '',
+        user_id: '',
+      })
+    );
+    removeStorage('token');
+    removeStorage('user_id');
+  };
+  const { surname, logged, token, user_id } = useSelector(
+    (state) => state.auth
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-  const handleToggleOpen = () => {
-    setOpen(!open);
-  };
+  // const theme = useTheme();
 
+  const { data: circlesData } = useGetUserDashBoardQuery({
+    token,
+    user_id,
+  });
+  console.log(circlesData);
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -114,180 +133,67 @@ export default function MiniDrawer() {
         <MenuIcon />
       </IconButton> */}
       {/* </AppBar> */}
-      <Drawer className='Drawer__ui--custom' variant='permanent' open={open}>
+      <Drawer
+        className={`Drawer__ui--custom ${open && 'Drawer__ui--open'}`}
+        variant='permanent'
+        open={open}
+      >
         <DrawerHeader>
           <IconButton onClick={handleToggleOpen}>
             {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
-        {/* <Divider /> */}
 
         <List>
-          {[
-            { name: 'Mon compte', icon: '<MailIcon />', url: '/profil' },
-            { name: 'Dashboard', icon: 'dashboard', url: '/dashboard' },
-          ].map((text, index) => (
-            <ListItem
-              className={`${
-                text.icon === 'dashboard' ? '' : 'profil__dashboard--custom'
-              }`}
-              key={text.name}
-              disablePadding
-              sx={{ display: 'block' }}
-            >
-              <NavLink
-                to={text.url}
-                className={({ isActive }) =>
-                  isActive ? 'nav-active' : 'nav-inactive'
-                }
-              >
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    {text.icon === 'dashboard' ? (
-                      <InboxIcon />
-                    ) : (
-                      <img
-                        className='w-10 h-10 rounded-full MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root'
-                        src={userPicture}
-                      ></img>
-                    )}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={text.name}
-                    sx={{ opacity: open ? 1 : 0 }}
-                  />
-                </ListItemButton>
-              </NavLink>
-            </ListItem>
-          ))}
+          <MiniDrawerList
+            name='Mon compte'
+            img={userPicture}
+            url='/profil'
+            open={open}
+          />
+
+          <MiniDrawerList
+            name='Dashboard'
+            icon={'fa-solid fa-table-columns'}
+            url='/dashboard'
+            open={open}
+          />
         </List>
-        {/* <Divider /> */}
+        <Divider />
+        {circlesData?.map((circle) => (
+          <MiniDrawerListCircle
+            name={circle.name}
+            icon={circle.img_url}
+            url='/circle/id'
+            open={open}
+          />
+        ))}
+        <Divider />
         <List>
-          {[
-            { name: 'FAQ', icon: '<MailIcon />', url: '/faq' },
-            { name: 'Contact', icon: 'dashboard', url: '/contact' },
-          ].map((button, index) => (
-            <ListItem
-              key={button.name}
-              disablePadding
-              sx={{ display: 'block' }}
-            >
-              <NavLink
-                to={button.url}
-                className={({ isActive }) =>
-                  isActive ? 'nav-active' : 'nav-inactive'
-                }
-              >
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={button.name}
-                    sx={{ opacity: open ? 1 : 0 }}
-                  />
-                </ListItemButton>
-              </NavLink>
-            </ListItem>
-          ))}
-        </List>
-        <List>
-          <ListItem
-            key='Se déconnecter'
-            disablePadding
-            sx={{ display: 'block' }}
-            onClick={() => {
-              dispatch(
-                handleToken({
-                  token: '',
-                  user_id: '',
-                })
-              );
-              removeStorage('token');
-              removeStorage('user_id');
-            }}
-          >
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-              // onClick={() => {}}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
-                }}
-              >
-                <LogoutIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary='Se déconnecter'
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
+          <MiniDrawerList
+            name='FAQ'
+            icon={'fa-solid fa-circle-question'}
+            url='/faq'
+            open={open}
+          />
+          <MiniDrawerList
+            name='Contact'
+            icon={'fa-solid fa-comments'}
+            url='/contact'
+            open={open}
+          />
+          <Divider />
+          <MiniDrawerDarkMode setTheme={setTheme} theme={theme} open={open} />
+          <Divider />
+          <MiniDrawerList
+            name='Se déconnecter'
+            icon={'fa-solid fa-arrow-right-from-bracket'}
+            url='/'
+            open={open}
+            click={disconnect}
+          />
         </List>
       </Drawer>
-      {/* <Box component='main' sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-          faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-          ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-          elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-          sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-          mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-          risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-          purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-          tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-          morbi tristique senectus et. Adipiscing elit duis tristique
-          sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
-      </Box> */}
     </Box>
   );
 }

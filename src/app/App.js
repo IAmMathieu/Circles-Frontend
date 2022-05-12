@@ -5,17 +5,18 @@ import './App.scss';
 import { DarkMode } from '../features/DarkMode/DarkMode';
 import useLocalStorage from 'use-local-storage';
 import { ThemeProvider } from '@emotion/react';
+
 import {
   MuiThemeLight,
   MuiThemeDark,
 } from '../features/Common/MUITheme/muiTheme';
 import { getStorage } from '../utils/helperLocalStorage';
 import { PrivateRoute } from '../features/PrivateRoute/PrivateRoute';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleToken } from '../features/auth/authSlice';
 import ProfilePage from '../features/ProfilePage/ProfilePage';
-
+import MenuIcon from '@mui/icons-material/Menu';
 import FAQ from '../features/FAQ/Faq';
 import ContactPage from '../features/ContactPage/ContactPage';
 import MiniDrawer from '../features/Dashboard/miniDrawer';
@@ -23,7 +24,10 @@ import MiniDrawer from '../features/Dashboard/miniDrawer';
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
   const dispatch = useDispatch();
-
+  const [open, setOpen] = useState(false);
+  const handleToggleOpen = () => {
+    setOpen(!open);
+  };
   // Recuperation du state token(auth slice)
   const { token: tokenState } = useSelector((state) => state.auth);
   /**
@@ -67,7 +71,19 @@ const App = () => {
   return (
     <div className='App' data-theme={theme}>
       <ThemeProvider theme={muiTheme}>
-        {tokenState && <MiniDrawer />}
+        {tokenState && (
+          <MiniDrawer
+            handleToggleOpen={handleToggleOpen}
+            setTheme={setTheme}
+            theme={theme}
+            setOpen={setOpen}
+            open={open}
+          />
+        )}
+        <MenuIcon
+          className='fixed left-5 top-5'
+          onClick={() => handleToggleOpen()}
+        />
         <Routes>
           <Route
             path='/'
@@ -95,7 +111,7 @@ const App = () => {
           <Route path='/contact' theme={muiTheme} element={<ContactPage />} />
         </Routes>
       </ThemeProvider>
-      <DarkMode switchTheme={switchTheme} />
+      {/* <DarkMode switchTheme={switchTheme} /> */}
       {/* <button
         onClick={() => {
           dispatch(
