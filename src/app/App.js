@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleToken } from '../features/auth/authSlice';
 import ProfilePage from '../features/ProfilePage/ProfilePage';
+import { CirclePage } from '../features/CirclePage/CirclePage';
 
 import FAQ from '../features/FAQ/Faq';
 import ContactPage from '../features/ContactPage/ContactPage';
@@ -93,6 +94,13 @@ const App = () => {
           <Route path='/contact' theme={muiTheme} element={<ContactPage />} />
         </Routes>
       </ThemeProvider>
+      {/* <h1>Coucou</h1> */}
+      <Routes>
+        <Route path='/' element={<Homepage />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/circle' element={<CirclePage />} />
+        {/* <Route path='*' element={<Error404 />} /> */}
+      </Routes>
       <DarkMode switchTheme={switchTheme} />
       {/* <button
         onClick={() => {

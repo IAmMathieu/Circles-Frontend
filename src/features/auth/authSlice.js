@@ -12,6 +12,9 @@ const initialState = {
   token: '',
   user_id: '',
   oldPassword: '',
+  token: '',
+  logged: true,
+  error: false,
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 // Tranche de state (le "slice)")

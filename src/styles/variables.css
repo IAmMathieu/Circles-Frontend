@@ -4,6 +4,14 @@
   --maingradient: #41617a, #41617aff;
   --buttonDark: #f1aa2a;
   --backgroundButton: #ea8122;
+
+  /* POUR CHATROOM */
+  --dark-blue: #14405D;
+  --light-blue: #BDDCF0;
+  --blue: #2e83ba;
+  --gutter: 1rem;
+  --grey: #afafaf;
+  --dark-grey: #333;
 }
 [data-theme='dark'] {
   --background: #13293d;
