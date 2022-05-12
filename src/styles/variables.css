@@ -1,5 +1,6 @@
 :root {
   --background: #ffffff;
+  --subbackground: #ffffff;
   --maincolor: #294154;
   --maingradient: #41617a, #41617aff;
   --buttonDark: #f1aa2a;
@@ -7,6 +8,7 @@
 }
 [data-theme='dark'] {
   --background: #1a2028;
+  --subbackground: #212b36;
   --maincolor: #ffffff;
   --maingradient: #d7efff, #d7efff00;
   --buttonDark: #294154;

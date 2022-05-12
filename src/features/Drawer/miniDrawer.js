@@ -11,13 +11,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeStorage } from '../../utils/helperLocalStorage';
 import { handleToken } from '../auth/authSlice';
 import { useNavigate } from 'react-router';
-import { useGetUserDashBoardQuery } from './DashboardApi';
+import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
 import MiniDrawerList from './MiniDrawerList';
-import MiniDrawerListCircle from './MiniDrawerListCircle';
 import { Divider } from '@mui/material';
 import './miniDrawer.scss';
 import MiniDrawerDarkMode from './MiniDrawerDarkMode';
-import { useState } from 'react';
 const drawerWidth = 240;
 const userPicture =
   'https://ca.slack-edge.com/T02MBC4J9K5-U02M8CJUVJR-2df2ffa3c507-512';
@@ -158,7 +156,6 @@ export default function MiniDrawer({
             open={open}
           />
         </List>
-        <Divider />
         {circlesData?.map((circle) => (
           <MiniDrawerList
             name={circle.name}
@@ -167,7 +164,7 @@ export default function MiniDrawer({
             open={open}
           />
         ))}
-        <Divider />
+        <Divider variant='middle' />
         <List>
           <MiniDrawerList
             name='FAQ'
@@ -181,9 +178,9 @@ export default function MiniDrawer({
             url='/contact'
             open={open}
           />
-          <Divider />
+          <Divider variant='middle' />
           <MiniDrawerDarkMode setTheme={setTheme} theme={theme} open={open} />
-          <Divider />
+          <Divider variant='middle' />
           <MiniDrawerList
             name='Se déconnecter'
             icon={'fa-solid fa-arrow-right-from-bracket'}

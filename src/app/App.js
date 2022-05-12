@@ -19,7 +19,7 @@ import ProfilePage from '../features/ProfilePage/ProfilePage';
 import MenuIcon from '@mui/icons-material/Menu';
 import FAQ from '../features/FAQ/Faq';
 import ContactPage from '../features/ContactPage/ContactPage';
-import MiniDrawer from '../features/Dashboard/miniDrawer';
+import MiniDrawer from '../features/Drawer/miniDrawer';
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
