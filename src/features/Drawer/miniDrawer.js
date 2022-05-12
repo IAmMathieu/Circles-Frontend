@@ -159,7 +159,7 @@ export default function MiniDrawer({
         {circlesData?.map((circle) => (
           <MiniDrawerList
             name={circle.name}
-            icon={circle.img_url}
+            img={circle.img_url}
             url={`/circle/${circle.circle_id}`}
             open={open}
           />

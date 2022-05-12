@@ -24,6 +24,10 @@ import MiniDrawer from '../features/Drawer/miniDrawer';
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
   const dispatch = useDispatch();
+
+  /**
+   * Use for open or close the left menu
+   */
   const [open, setOpen] = useState(false);
   const handleToggleOpen = () => {
     setOpen(!open);

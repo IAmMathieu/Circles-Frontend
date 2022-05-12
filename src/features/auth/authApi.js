@@ -22,7 +22,6 @@ const extendedApi = emptySplitApi.injectEndpoints({
             password: password,
           }),
           header: 'Content-Type: application/x-www-form-urlencoded',
-          invalidatesTags: ['Post'],
         };
       },
       /**
@@ -73,8 +72,9 @@ const extendedApi = emptySplitApi.injectEndpoints({
         queryFulfilled
           .then((result) => {
             const { token, user_id } = result.data;
-            setStorage('token', token);
-            setStorage('user_id', user_id);
+            //! A voir si JSON.stringify est ok
+            setStorage('token', JSON.stringify(token));
+            setStorage('user_id', JSON.stringify(user_id));
             // Dispatch le handletoken du slice(permet d'utiliser facilement le token et l'user_id)
             dispatch(handleToken({ token, user_id }));
           })

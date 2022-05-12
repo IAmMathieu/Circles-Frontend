@@ -72,7 +72,7 @@ export default function CircleCard({
         <Box className='absolute left-1/2 transform -translate-x-1/2 -bottom-5'>
           <Avatar
             src='https://ca.slack-edge.com/T02MBC4J9K5-U02M8CJUVJR-2df2ffa3c507-512'
-            sx={{ bgcolor: red[500] }}
+            sx={{ bgcolor: red[500], width: '50px', height: '50px' }}
             aria-label='recipe'
           ></Avatar>
           <svg
