@@ -19,6 +19,7 @@ const extendedApi = emptySplitApi.injectEndpoints({
           headers: { Authorization: `Bearer ${token}` },
         };
       },
+      tagTypes: ['circle'],
     }),
   }),
   overrideExisting: false,

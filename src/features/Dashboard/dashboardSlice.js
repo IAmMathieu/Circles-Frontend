@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // Initialise the default state.
 const initialState = {
-  name: '',
-  description: '',
-  color: '',
-  img_url: '',
-  code: '',
+  name: null,
+  description: null,
+  color: '#212B36',
+  img_url: null,
+  code: null,
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 // Tranche de state (le "slice)")

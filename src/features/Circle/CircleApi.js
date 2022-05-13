@@ -6,11 +6,6 @@ const circleApi = emptySplitApi.injectEndpoints({
         - Mutation endpoints : for CRUD
     */
     createCircle: builder.mutation({
-      /**
-       * Query for login user. Take the email and password on parameter, and send it to the server.
-       * @param {*} param0
-       * @returns
-       */
       query: ({ token, name, description, color, img_url, user_id }) => {
         return {
           url: `circle`,
@@ -23,7 +18,42 @@ const circleApi = emptySplitApi.injectEndpoints({
             img_url,
             user_id,
           }),
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
+    joinCircle: builder.mutation({
+      query: ({ token, user_id, circle_id }) => {
+        return {
+          url: `circle/${circle_id}`,
+          method: 'POST',
+          contentType: 'application/json',
+          body: new URLSearchParams({
+            user_id,
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
+    deleteCircle: builder.mutation({
+      query: ({ token, user_id, code }) => {
+        return {
+          url: `circle/${user_id}`,
+          method: 'DELETE',
+          contentType: 'application/json',
+          body: new URLSearchParams({
+            code,
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: `Bearer ${token}`,
+          },
         };
       },
     }),
@@ -31,4 +61,8 @@ const circleApi = emptySplitApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useCreateCircleMutation } = circleApi;
+export const {
+  useCreateCircleMutation,
+  useJoinCircleMutation,
+  useDeleteCircleMutation,
+} = circleApi;

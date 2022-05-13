@@ -15,6 +15,13 @@ export default function SimpleBottomNavigation({ handleClickOpen }) {
         borderRadius: '15px',
         overflow: 'hidden',
         height: '70px',
+        '@media (min-width:965px)': {
+          position: 'absolute',
+          top: '4rem',
+          right: '2rem',
+          width: '40%',
+          maxWidth: '500px',
+        },
       }}
     >
       <BottomNavigation className='h-full px-10'>
