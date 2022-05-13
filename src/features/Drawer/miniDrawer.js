@@ -67,6 +67,8 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
+
+
 export default function MiniDrawer({
   theme,
   setTheme,
@@ -84,6 +86,10 @@ export default function MiniDrawer({
     removeStorage('token');
     removeStorage('user_id');
   };
+
+  const closeDrawer = () => {
+    setOpen(false);
+  }
   const { surname, logged, token, user_id } = useSelector(
     (state) => state.auth
   );
@@ -95,6 +101,9 @@ export default function MiniDrawer({
     token,
     user_id,
   });
+
+  
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -116,7 +125,7 @@ export default function MiniDrawer({
             img={userPicture}
             url='/profil'
             open={open}
-            handleToggleOpen={handleToggleOpen}
+            handleToggleOpen={closeDrawer}
           />
 
           <MiniDrawerList
@@ -124,7 +133,7 @@ export default function MiniDrawer({
             icon={'fa-solid fa-table-columns'}
             url='/dashboard'
             open={open}
-            handleToggleOpen={handleToggleOpen}
+            handleToggleOpen={closeDrawer}
           />
         </List>
         {circlesData?.map((circle) => (
@@ -133,7 +142,7 @@ export default function MiniDrawer({
             img={circle.img_url}
             url={`/circle/${circle.circle_id}`}
             open={open}
-            handleToggleOpen={handleToggleOpen}
+            handleToggleOpen={closeDrawer}
           />
         ))}
         <Divider variant='middle' />
@@ -143,14 +152,14 @@ export default function MiniDrawer({
             icon={'fa-solid fa-circle-question'}
             url='/faq'
             open={open}
-            handleToggleOpen={handleToggleOpen}
+            handleToggleOpen={closeDrawer}
           />
           <MiniDrawerList
             name='Contact'
             icon={'fa-solid fa-comments'}
             url='/contact'
             open={open}
-            handleToggleOpen={handleToggleOpen}
+            handleToggleOpen={closeDrawer}
           />
           <Divider variant='middle' />
           <MiniDrawerDarkMode setTheme={setTheme} theme={theme} open={open} />
@@ -160,7 +169,7 @@ export default function MiniDrawer({
             icon={'fa-solid fa-arrow-right-from-bracket'}
             url='/'
             open={open}
-            handleToggleOpen={handleToggleOpen}
+            handleToggleOpen={closeDrawer}
             click={disconnect}
           />
         </List>

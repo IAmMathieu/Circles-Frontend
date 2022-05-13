@@ -16,12 +16,16 @@ import { removeStorage } from '../../utils/helperLocalStorage';
 import { handleToken } from '../auth/authSlice';
 
 //! MUI
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Typography from '@mui/material/Typography';
+
 //!------------
 //! Ajouter le oldpassword pour modifier des données et/ou supprimer
 function ProfilePage() {
@@ -56,111 +60,142 @@ function ProfilePage() {
     return <Loading />;
   } else {
     return (
-      <div className='flex flex-col items-center '>
-        <div className='w-9/12'>
-          <img src={logo} alt='Logo Circles' className='circle-logo' />
-          <img
-            src={userPicture}
-            alt='User Portrait'
-            className='leftmenu--user-picture'
-          />
-          <h2 className='text-4xl font-bold underline mb-5'>{data?.surname}</h2>
+      <Box component="div">
+        <Box component="div">
+              <img src={logo} alt='logo Circles ' className='circle-logo'></img>
+          <Box className='container-page' 
+          sx={{
+            '@media (min-width:965px)': {
+              display:'flex',
+              flexDirection:'row'
+            }
+          }}>
+            <Card 
+            sx={{
+              width: '50%', margin: 'auto',
+              '@media (min-width:965px)': {
+                width:'30%',
+                padding:'2rem'
+              }
+              }}>
+              <Box component="div">
+                <img
+                  src={userPicture}
+                  alt='User Portrait'
+                  className='leftmenu--user-picture'
+                />
+              </Box>
+            </ Card>
+          
+            <Card sx={{margin:'0.8rem auto', 
+            '@media (min-width:965px)': {
+              overflow:'visible', width:'35%'}
+            }}>
+              <Typography component='h2' sx={{fontWeight: 'bold', textDecoration:'underline', fontSize:'2.5rem'}}
+              >{data?.surname}</Typography>
 
-          <h3 className='text-2xl font-bold '> Your informations : </h3>
-          <form
-            name='register-form'
-            className='register-form flex flex-col gap-2 w-full'
-            onSubmit={(event) => {
-              event.preventDefault();
-            }}
-          >
-            <Input
-              className={'w-6/12 max-w-screen-sm'}
-              helperText={'Firstname'}
-              defaultValue={data?.firstname}
-              input='firstname'
-              type={'text'}
-            />
-            <Input
-              className={'w-6/12 max-w-screen-sm'}
-              defaultValue={data?.lastname}
-              input='lastname'
-              type={'text'}
-              helperText={'Lastname'}
-            />
-            <Input
-              className={'w-6/12 max-w-screen-sm'}
-              defaultValue={data?.surname}
-              input='surname'
-              type={'text'}
-              helperText={'Surname'}
-            />
-            <Input
-              className={'w-6/12 max-w-screen-sm'}
-              defaultValue={data?.email}
-              input='email'
-              type={'email'}
-              helperText={'Email'}
-
-              // error={loginIsError}
-            />
-            <Input
-              className={'w-6/12 max-w-screen-sm'}
-              name='Ancien mot de passe'
-              input='oldPassword'
-              type={'password'}
-            />
-            <Input
-              className={'w-6/12 mb-5 max-w-screen-sm'}
-              name='Nouveau mot de passe'
-              input='password'
-              type={'password'}
-            />
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DatePicker
-                label='Birth date'
-                name='birthdate'
-                value={data?.birthdate}
-                format='yyyy-mm-dd'
-                onChange={(event) => {
-                  // Reformatage de la date pour l'envoie vers la BDD
-                  // const [date] = event.toISOString().split('T');
-                  //   dispatch(
-                  //     handleChange({
-                  //       name: 'birthdate',
-                  //       payload: date,
-                  //     })
-                  //   );
+              <Typography component='h3'  sx={{margin:'0.5rem', fontSize:'1.5rem', fontWeight: 'bold'}}> Your informations : </Typography>
+              <Box component='form'
+                name='register-form'
+                onSubmit={(event) => {
+                  event.preventDefault();
                 }}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider>
-            <div className='button__container flex gap-5 mt-5'>
-              <Button
-                color='warning'
-                variant='contained'
-                onClick={async (e) => {
-                  e.preventDefault();
-                  const newObj = await { ...inputData };
-                  for (const key in newObj) {
-                    if (newObj[key] === '') {
-                      delete newObj[key];
-                    }
+                sx={{justifyContent:'start'}}
+              >
+                <Input
+                  helperText={'Firstname'}
+                  defaultValue={data?.firstname}
+                  input='firstname'
+                  type={'text'}
+                />
+                <Input
+                  defaultValue={data?.lastname}
+                  input='lastname'
+                  type={'text'}
+                  helperText={'Lastname'}
+                />
+                <Input
+                  defaultValue={data?.surname}
+                  input='surname'
+                  type={'text'}
+                  helperText={'Surname'}
+                />
+                <Input
+                  defaultValue={data?.email}
+                  input='email'
+                  type={'email'}
+                  helperText={'Email'}
+
+                  // error={loginIsError}
+                />
+                <Input
+                  name='Ancien mot de passe'
+                  input='oldPassword'
+                  type={'password'}
+                />
+                <Input
+                  className={'mb-5 max-w-screen-sm'}
+                  name='Nouveau mot de passe'
+                  input='password'
+                  type={'password'}
+                />
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DatePicker
+                    label='Birth date'
+                    name='birthdate'
+                    value={data?.birthdate}
+                    format='yyyy-mm-dd'
+                    onChange={(event) => {
+                      // Reformatage de la date pour l'envoie vers la BDD
+                      // const [date] = event.toISOString().split('T');
+                      //   dispatch(
+                      //     handleChange({
+                      //       name: 'birthdate',
+                      //       payload: date,
+                      //     })
+                      //   );
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+              
+              </LocalizationProvider>
+              <Box component="div" sx={{margin:'0.8rem'}}>
+                <Button sx={{
+                  ':hover':{
+                    color:'white',
+                    backgroundColor:'#f57803'
                   }
-                  await updateProfilUser(newObj);
                 }}
-              >
-                Modifier
-              </Button>
-              <Button
-                color='error'
-                variant='contained'
-                onClick={handleClickOpen}
-              >
-                Supprimer
-              </Button>
-            </div>
-          </form>
+                  variant='contained'
+                  onClick={async (e) => {
+                    e.preventDefault();
+                    const newObj = await { ...inputData };
+                    for (const key in newObj) {
+                      if (newObj[key] === '') {
+                        delete newObj[key];
+                      }
+                    }
+                    await updateProfilUser(newObj);
+                  }}
+                >
+                  Modifier
+                </Button>
+                <Button
+                  sx={{
+                    ':hover':{
+                      color:'white',
+                      backgroundColor:'#f50303'
+                    }
+                  }}
+                  variant='contained'
+                  onClick={handleClickOpen}
+                >
+                  Supprimer
+                </Button>
+              </Box>
+              </Box>
+            </Card >
+          </Box>
           {/* MUI */}
           <Dialog
             open={open}
@@ -208,8 +243,8 @@ function ProfilePage() {
               </Button>
             </DialogActions>
           </Dialog>
-        </div>
-      </div>
+        </Box>
+      </Box>
     );
   }
 }
