@@ -11,14 +11,7 @@ module.exports = {
       darkybg: 'var(--background)',
       darkysubg: 'var(--subbackground)',
     },
-    extend: {},
   },
-  plugins: [
-    // Allow to select child
-    function ({ addVariant }) {
-      addVariant('directchild', '& > :first-child');
-      addVariant('child', '& > *');
-      addVariant('child-hover', '& > *:hover');
-    },
-  ],
+  extend: {},
+  plugins: [],
 };
