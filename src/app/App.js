@@ -74,7 +74,7 @@ const App = () => {
 
   const muiTheme = theme === 'light' ? MuiThemeLight : MuiThemeDark;
   return (
-    <div className='App' data-theme={theme}>
+    <div className='App relative' data-theme={theme}>
       <ThemeProvider theme={muiTheme}>
         <CssBaseline />
         {tokenState && (

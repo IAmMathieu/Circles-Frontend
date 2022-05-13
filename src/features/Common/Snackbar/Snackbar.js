@@ -15,7 +15,7 @@ export default function CustomizedSnackbars({
 }) {
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
-      return;
+      setOpenSnack(false);
     }
 
     setOpenSnack(false);
@@ -23,7 +23,7 @@ export default function CustomizedSnackbars({
   return (
     <Stack spacing={2} sx={{ width: '100%' }}>
       <Snackbar onClose={handleClose} open={openSnack} autoHideDuration={6000}>
-        <Alert severity='success' sx={{ width: '100%' }}>
+        <Alert onClose={handleClose} severity='success' sx={{ width: '100%' }}>
           {`Votre cercle "${dataCreateCircle?.name}" a bien été créé !`}
         </Alert>
       </Snackbar>
