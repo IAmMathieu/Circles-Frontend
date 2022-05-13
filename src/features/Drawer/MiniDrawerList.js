@@ -3,11 +3,8 @@ import { NavLink } from 'react-router-dom';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import LogoutIcon from '@mui/icons-material/Logout';
-import DeleteIcon from '@mui/icons-material/Delete';
-import SvgIcon from '@mui/material/SvgIcon';
 
-function MiniDrawerList({ name, url, open, img, icon, click }) {
+function MiniDrawerList({ name, url, open, img, icon, click, handleToggleOpen }) {
   const IconCustom = icon;
 
   return (
@@ -23,6 +20,7 @@ function MiniDrawerList({ name, url, open, img, icon, click }) {
             px: 2.5,
           }}
           onClick={() => {
+            handleToggleOpen();
             click && click();
           }}
         >

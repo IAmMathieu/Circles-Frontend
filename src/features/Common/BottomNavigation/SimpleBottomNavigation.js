@@ -6,7 +6,10 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import SearchIcon from '@mui/icons-material/Search';
 import { Typography } from '@mui/material';
 import './SimpleBottomNavigation.scss';
-export default function SimpleBottomNavigation({ handleClickOpen }) {
+export default function SimpleBottomNavigation({
+  handleClickOpenCreate,
+  handleClickOpenJoin,
+}) {
   return (
     <Box
       className='bottomNavigation'
@@ -26,22 +29,28 @@ export default function SimpleBottomNavigation({ handleClickOpen }) {
     >
       <BottomNavigation className='h-full px-10'>
         <div className=' w-full flex justify-between items-center'>
-          <div className='flex flex-col items-center'>
-            <AddCircleIcon
-              onClick={() => {
-                handleClickOpen();
-              }}
-            />
+          <Box
+            className='flex flex-col items-center'
+            onClick={() => {
+              handleClickOpenCreate();
+            }}
+          >
+            <AddCircleIcon />
             <Typography className='text-xs custom-bk:text-2xl' component='h5'>
               Créer
             </Typography>
-          </div>
-          <div className='flex flex-col items-center'>
+          </Box>
+          <Box
+            className='flex flex-col items-center'
+            onClick={() => {
+              handleClickOpenJoin();
+            }}
+          >
             <GroupsIcon />
             <Typography className='text-xs custom-bk:text-2xl' component='h5'>
               Rejoindre
             </Typography>
-          </div>
+          </Box>
           <div className='flex flex-col items-center'>
             <SearchIcon />
             <Typography className='text-xs custom-bk:text-2xl' component='h5'>
@@ -49,10 +58,6 @@ export default function SimpleBottomNavigation({ handleClickOpen }) {
             </Typography>
           </div>
         </div>
-
-        {/* <BottomNavigationAction label='Créer' icon={} />
-        <BottomNavigationAction label='Rejoindre' icon={} />
-        <BottomNavigationAction label='Découvrir' icon={} /> */}
       </BottomNavigation>
     </Box>
   );
