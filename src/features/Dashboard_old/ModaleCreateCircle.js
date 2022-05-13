@@ -7,7 +7,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { makeStyles, styled } from '@mui/material';
-
+import { handleChange } from '../Dashboard/dashboardSlice';
+import { useDispatch } from 'react-redux';
 const MyDialogContent = styled(Dialog)({
   background: '#212B36',
 });
@@ -17,8 +18,8 @@ const MyDialogActions = styled(DialogActions)({
 const MyDialogTitle = styled(DialogContent)({
   background: '#212B36',
 });
-
 export default function ModaleCreateCircle({ open, handleClose }) {
+  const dispatch = useDispatch();
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
@@ -39,6 +40,14 @@ export default function ModaleCreateCircle({ open, handleClose }) {
             fullWidth
             variant='standard'
             sx={{ color: 'red' }}
+            onChange={(event) => {
+              dispatch(
+                handleChange({
+                  name: 'name',
+                  payload: event.target.value,
+                })
+              );
+            }}
           />
           <TextField
             autoFocus
@@ -48,6 +57,14 @@ export default function ModaleCreateCircle({ open, handleClose }) {
             type='text'
             fullWidth
             variant='standard'
+            onChange={(event) => {
+              dispatch(
+                handleChange({
+                  name: 'description',
+                  payload: event.target.value,
+                })
+              );
+            }}
           />
           <TextField
             autoFocus
@@ -57,6 +74,14 @@ export default function ModaleCreateCircle({ open, handleClose }) {
             type='color'
             fullWidth
             variant='standard'
+            onChange={(event) => {
+              dispatch(
+                handleChange({
+                  name: 'color',
+                  payload: event.target.value,
+                })
+              );
+            }}
           />
           <TextField
             autoFocus
@@ -66,6 +91,14 @@ export default function ModaleCreateCircle({ open, handleClose }) {
             type='text'
             fullWidth
             variant='standard'
+            onChange={(event) => {
+              dispatch(
+                handleChange({
+                  name: 'img_url',
+                  payload: event.target.value,
+                })
+              );
+            }}
           />
         </DialogContent>
         <DialogActions>
