@@ -16,7 +16,7 @@ export default function FAQ() {
 
   return (
     <div className="container-faq">
-        <div className='container-faq__logo'>
+        <div className='circle-logo'>
             <img src={Logo} alt='logo Circles'></img>
         </div>
         <p className='container-faq__text'>FAQ</p>
@@ -28,15 +28,13 @@ export default function FAQ() {
             aria-controls="panel1bh-content"
             id="panel1bh-header"
             >
-            <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                General settings
+            <Typography sx={{ width: '50%', flexShrink: 0 }}>
+                Qu'est-ce que Circles ?
             </Typography>
-            <Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography>
             </AccordionSummary>
             <AccordionDetails>
             <Typography>
-                Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-                Aliquam eget maximus est, id dignissim quam.
+            Viens me le dire de profil si t'es un homme !
             </Typography>
             </AccordionDetails>
         </Accordion>
@@ -46,16 +44,11 @@ export default function FAQ() {
             aria-controls="panel2bh-content"
             id="panel2bh-header"
             >
-            <Typography sx={{ width: '33%', flexShrink: 0 }}>Users</Typography>
-            <Typography sx={{ color: 'text.secondary' }}>
-                You are currently not an owner
-            </Typography>
+            <Typography sx={{ width: '50%', flexShrink: 0 }}>C'est bien Circles ?</Typography>
             </AccordionSummary>
             <AccordionDetails>
             <Typography>
-                Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus,
-                varius pulvinar diam eros in elit. Pellentesque convallis laoreet
-                laoreet.
+            Nul ne peut bafouer l'empire romain ! Quand on l'attaque, l'empire contre-attaque !
             </Typography>
             </AccordionDetails>
         </Accordion>
@@ -65,17 +58,15 @@ export default function FAQ() {
             aria-controls="panel3bh-content"
             id="panel3bh-header"
             >
-            <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                Advanced settings
-            </Typography>
-            <Typography sx={{ color: 'text.secondary' }}>
-                Filtering has been entirely disabled for whole web server
+            <Typography sx={{ width: '50%', flexShrink: 0 }}>
+                Oskour, mamie Georgette veut nous rejoindre !
             </Typography>
             </AccordionSummary>
             <AccordionDetails>
             <Typography>
-                Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit
-                amet egestas eros, vitae egestas augue. Duis vel est augue.
+            - Nouvelle technique : on passe pour des cons, les autres se marrent, et on frappe. C’est nouveau. <br/>
+- Et les autres font ça aussi ?<br/>
+- Ah non, ça c’est que nous. Parce qu’il faut être capable de passer pour des cons en un temps record. Ah non, là-dessus on a une avance considérable.
             </Typography>
             </AccordionDetails>
         </Accordion>
@@ -85,12 +76,20 @@ export default function FAQ() {
             aria-controls="panel4bh-content"
             id="panel4bh-header"
             >
-            <Typography sx={{ width: '33%', flexShrink: 0 }}>Personal data</Typography>
+            <Typography sx={{ width: '50%', flexShrink: 0 }}>Bonus</Typography>
             </AccordionSummary>
             <AccordionDetails>
             <Typography>
-                Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit
-                amet egestas eros, vitae egestas augue. Duis vel est augue.
+            Vous savez, moi je ne crois pas qu'il y ait de bonne ou de mauvaise situation. 
+            Moi, si je devais résumer ma vie aujourd'hui avec vous, je dirais que c'est d'abord des rencontres. 
+            Des gens qui m'ont tendu la main, peut-être à un moment où je ne pouvais pas, où j'étais seul chez moi. 
+            Et c'est assez curieux de se dire que les hasards, les rencontres forgent une destinée. 
+            Parce que quand on a le goût de la chose, quand on a le goût de la chose bien faite, le beau geste, 
+            parfois on ne trouve pas l'interlocuteur en face je dirais, le miroir qui vous aide à avancer. 
+            Alors ça n'est pas mon cas, comme je disais là, puisque moi au contraire, j'ai pu : et je dis merci à la vie, 
+            je lui dis merci, je chante la vie, je danse la vie, je ne suis qu'amour. 
+            Et finalement, quand beaucoup de gens aujourd'hui me disent « mais comment fais-tu pour avoir cette humanité ? », 
+            et bien je leur réponds très simplement, je leur dis que c'est ce
             </Typography>
             </AccordionDetails>
         </Accordion>
