@@ -25,4 +25,4 @@ const extendedApi = emptySplitApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useGetUserDashBoardQuery } = extendedApi;
+export const { useGetUserDashBoardQuery, useGetUserQuery } = extendedApi;

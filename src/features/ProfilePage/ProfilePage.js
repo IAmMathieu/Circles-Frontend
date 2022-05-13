@@ -60,112 +60,140 @@ function ProfilePage() {
     return <Loading />;
   } else {
     return (
-      <Box component="div">
-        <Box component="div">
-              <img src={logo} alt='logo Circles ' className='circle-logo'></img>
-          <Box className='container-page' 
+      <Box component='div'>
+        <img src={logo} alt='logo Circles ' className='circle-logo'></img>
+        <Box
+          className='container-page'
           sx={{
             '@media (min-width:965px)': {
-              display:'flex',
-              flexDirection:'row'
-            }
-          }}>
-            <Card 
+              display: 'flex',
+              flexDirection: 'row',
+            },
+          }}
+        >
+          <Card
             sx={{
-              width: '50%', margin: 'auto',
+              borderRadius: '50%',
+              backgroundColor: 'transparent',
+              width: '50%',
+              margin: 'auto',
               '@media (min-width:965px)': {
-                width:'30%',
-                padding:'2rem'
-              }
-              }}>
-              <Box component="div">
-                <img
-                  src={userPicture}
-                  alt='User Portrait'
-                  className='leftmenu--user-picture'
-                />
-              </Box>
-            </ Card>
-          
-            <Card sx={{margin:'0.8rem auto', 
-            '@media (min-width:965px)': {
-              overflow:'visible', width:'35%'}
-            }}>
-              <Typography component='h2' sx={{fontWeight: 'bold', textDecoration:'underline', fontSize:'2.5rem'}}
-              >{data?.surname}</Typography>
+                width: '30%',
+              },
+            }}
+          >
+            <Box component='div'>
+              <img
+                src={userPicture}
+                alt='User Portrait'
+                className='leftmenu--user-picture'
+              />
+            </Box>
+          </Card>
 
-              <Typography component='h3'  sx={{margin:'0.5rem', fontSize:'1.5rem', fontWeight: 'bold'}}> Your informations : </Typography>
-              <Box component='form'
-                name='register-form'
-                onSubmit={(event) => {
-                  event.preventDefault();
-                }}
-                sx={{justifyContent:'start'}}
-              >
-                <Input
-                  helperText={'Firstname'}
-                  defaultValue={data?.firstname}
-                  input='firstname'
-                  type={'text'}
-                />
-                <Input
-                  defaultValue={data?.lastname}
-                  input='lastname'
-                  type={'text'}
-                  helperText={'Lastname'}
-                />
-                <Input
-                  defaultValue={data?.surname}
-                  input='surname'
-                  type={'text'}
-                  helperText={'Surname'}
-                />
-                <Input
-                  defaultValue={data?.email}
-                  input='email'
-                  type={'email'}
-                  helperText={'Email'}
+          <Card
+            className='m-4'
+            sx={{
+              margin: '0.8rem auto',
+              backgroundColor: 'transparent',
+              borderRadius: '20px',
 
-                  // error={loginIsError}
+              '@media (min-width:965px)': {
+                overflow: 'visible',
+                width: '35%',
+              },
+            }}
+          >
+            <Typography
+              component='h2'
+              sx={{
+                fontWeight: 'bold',
+                textDecoration: 'underline',
+                fontSize: '2.5rem',
+              }}
+            >
+              {data?.surname}
+            </Typography>
+
+            <Typography
+              component='h3'
+              sx={{ margin: '0.5rem', fontSize: '1.5rem', fontWeight: 'bold' }}
+            >
+              {' '}
+              Vos informations :{' '}
+            </Typography>
+            <Box
+              component='form'
+              name='register-form'
+              onSubmit={(event) => {
+                event.preventDefault();
+              }}
+              sx={{ justifyContent: 'start' }}
+            >
+              <Input
+                helperText={'Prénom'}
+                defaultValue={data?.firstname}
+                input='firstname'
+                type={'text'}
+              />
+              <Input
+                defaultValue={data?.lastname}
+                input='lastname'
+                type={'text'}
+                helperText={'Nom'}
+              />
+              <Input
+                defaultValue={data?.surname}
+                input='surname'
+                type={'text'}
+                helperText={'Pseudo'}
+              />
+              <Input
+                defaultValue={data?.email}
+                input='email'
+                type={'email'}
+                helperText={'Email'}
+
+                // error={loginIsError}
+              />
+              <Input
+                name='Ancien mot de passe'
+                input='oldPassword'
+                type={'password'}
+              />
+              <Input
+                className={'mb-5 max-w-screen-sm'}
+                name='Nouveau mot de passe'
+                input='password'
+                type={'password'}
+              />
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  label='Date de Naissance'
+                  name='birthdate'
+                  value={data?.birthdate}
+                  format='yyyy-mm-dd'
+                  onChange={(event) => {
+                    // Reformatage de la date pour l'envoie vers la BDD
+                    // const [date] = event.toISOString().split('T');
+                    //   dispatch(
+                    //     handleChange({
+                    //       name: 'birthdate',
+                    //       payload: date,
+                    //     })
+                    //   );
+                  }}
+                  renderInput={(params) => <TextField {...params} />}
                 />
-                <Input
-                  name='Ancien mot de passe'
-                  input='oldPassword'
-                  type={'password'}
-                />
-                <Input
-                  className={'mb-5 max-w-screen-sm'}
-                  name='Nouveau mot de passe'
-                  input='password'
-                  type={'password'}
-                />
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DatePicker
-                    label='Birth date'
-                    name='birthdate'
-                    value={data?.birthdate}
-                    format='yyyy-mm-dd'
-                    onChange={(event) => {
-                      // Reformatage de la date pour l'envoie vers la BDD
-                      // const [date] = event.toISOString().split('T');
-                      //   dispatch(
-                      //     handleChange({
-                      //       name: 'birthdate',
-                      //       payload: date,
-                      //     })
-                      //   );
-                    }}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-              
               </LocalizationProvider>
-              <Box component="div" sx={{margin:'0.8rem'}}>
-                <Button sx={{
-                  ':hover':{
-                    color:'white',
-                    backgroundColor:'#f57803'
-                  }
-                }}
+              <Box component='div' sx={{ margin: '0.8rem' }}>
+                <Button
+                  sx={{
+                    ':hover': {
+                      color: 'white',
+                      backgroundColor: '#f57803',
+                    },
+                  }}
                   variant='contained'
                   onClick={async (e) => {
                     e.preventDefault();
@@ -182,10 +210,10 @@ function ProfilePage() {
                 </Button>
                 <Button
                   sx={{
-                    ':hover':{
-                      color:'white',
-                      backgroundColor:'#f50303'
-                    }
+                    ':hover': {
+                      color: 'white',
+                      backgroundColor: '#f50303',
+                    },
                   }}
                   variant='contained'
                   onClick={handleClickOpen}
@@ -193,57 +221,56 @@ function ProfilePage() {
                   Supprimer
                 </Button>
               </Box>
-              </Box>
-            </Card >
-          </Box>
-          {/* MUI */}
-          <Dialog
-            open={open}
-            onClose={handleClose}
-            aria-labelledby='alert-dialog-title'
-            aria-describedby='alert-dialog-description'
-          >
-            <DialogTitle id='alert-dialog-title'>
-              {'Supprimer votre compte ?'}
-            </DialogTitle>
-            <DialogContent>
-              <DialogContentText id='alert-dialog-description'>
-                Si vous acceptez, l'entièreté de vos données seront effacées.
-                Continuer?
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button color='secondary' onClick={handleClose}>
-                Retour
-              </Button>
-              <Button
-                color='error'
-                onClick={async (e) => {
-                  e.preventDefault();
-                  //! TO refactor
-                  const newObj = { ...inputData };
-                  for (const key in newObj) {
-                    if (newObj[key] === '') {
-                      delete newObj[key];
-                    }
-                  }
-                  await deleteProfilUser(newObj);
-                  dispatch(
-                    handleToken({
-                      token: '',
-                      user_id: '',
-                    })
-                  );
-                  removeStorage('token');
-                  removeStorage('user_id');
-                }}
-                autoFocus
-              >
-                Supprimer
-              </Button>
-            </DialogActions>
-          </Dialog>
+            </Box>
+          </Card>
         </Box>
+        {/* MUI */}
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby='alert-dialog-title'
+          aria-describedby='alert-dialog-description'
+        >
+          <DialogTitle id='alert-dialog-title'>
+            {'Supprimer votre compte ?'}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id='alert-dialog-description'>
+              Si vous acceptez, l'entièreté de vos données seront effacées.
+              Continuer?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button color='secondary' onClick={handleClose}>
+              Retour
+            </Button>
+            <Button
+              color='error'
+              onClick={async (e) => {
+                e.preventDefault();
+                //! TO refactor
+                const newObj = { ...inputData };
+                for (const key in newObj) {
+                  if (newObj[key] === '') {
+                    delete newObj[key];
+                  }
+                }
+                await deleteProfilUser(newObj);
+                dispatch(
+                  handleToken({
+                    token: '',
+                    user_id: '',
+                  })
+                );
+                removeStorage('token');
+                removeStorage('user_id');
+              }}
+              autoFocus
+            >
+              Supprimer
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Box>
     );
   }

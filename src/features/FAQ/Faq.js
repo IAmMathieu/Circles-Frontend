@@ -30,7 +30,7 @@ export default function FAQ() {
             aria-controls='panel1bh-content'
             id='panel1bh-header'
           >
-            <Typography sx={{ width: '50%', flexShrink: 0 }}>
+            <Typography sx={{ width: '100%', flexShrink: 0 }}>
               Qu'est-ce que Circles ?
             </Typography>
           </AccordionSummary>
@@ -49,7 +49,7 @@ export default function FAQ() {
             aria-controls='panel2bh-content'
             id='panel2bh-header'
           >
-            <Typography sx={{ width: '50%', flexShrink: 0 }}>
+            <Typography sx={{ width: '100%', flexShrink: 0 }}>
               C'est bien Circles ?
             </Typography>
           </AccordionSummary>
@@ -69,7 +69,7 @@ export default function FAQ() {
             aria-controls='panel3bh-content'
             id='panel3bh-header'
           >
-            <Typography sx={{ width: '50%', flexShrink: 0 }}>
+            <Typography sx={{ width: '100%', flexShrink: 0 }}>
               Oskour, mamie Georgette veut nous rejoindre !
             </Typography>
           </AccordionSummary>
@@ -92,7 +92,7 @@ export default function FAQ() {
             aria-controls='panel4bh-content'
             id='panel4bh-header'
           >
-            <Typography sx={{ width: '50%', flexShrink: 0 }}>Bonus</Typography>
+            <Typography sx={{ width: '100%', flexShrink: 0 }}>Bonus</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>

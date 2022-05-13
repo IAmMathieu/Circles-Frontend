@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -7,7 +7,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { useDispatch, useSelector } from 'react-redux';
 import { removeStorage } from '../../utils/helperLocalStorage';
 import { handleToken } from '../auth/authSlice';
 import { useNavigate } from 'react-router';
@@ -16,9 +15,10 @@ import MiniDrawerList from './MiniDrawerList';
 import { Divider } from '@mui/material';
 import './miniDrawer.scss';
 import MiniDrawerDarkMode from './MiniDrawerDarkMode';
+import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
+
 const drawerWidth = 240;
-const userPicture =
-  'https://ca.slack-edge.com/T02MBC4J9K5-U02M8CJUVJR-2df2ffa3c507-512';
+
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create('width', {
@@ -67,8 +67,6 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-
-
 export default function MiniDrawer({
   theme,
   setTheme,
@@ -89,8 +87,8 @@ export default function MiniDrawer({
 
   const closeDrawer = () => {
     setOpen(false);
-  }
-  const { surname, logged, token, user_id } = useSelector(
+  };
+  const { surname, logged, token, user_id, portrait_url } = useSelector(
     (state) => state.auth
   );
   const dispatch = useDispatch();
@@ -102,7 +100,7 @@ export default function MiniDrawer({
     user_id,
   });
 
-  
+  const { data: userData } = useGetProfilUserQuery({ token, user_id });
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -111,7 +109,7 @@ export default function MiniDrawer({
         className={`Drawer__ui--custom ${open && 'Drawer__ui--open'}`}
         variant='permanent'
         open={open}
-        onClose={handleToggleOpen}
+        onClose={closeDrawer}
       >
         <DrawerHeader>
           <IconButton onClick={handleToggleOpen}>
@@ -122,7 +120,7 @@ export default function MiniDrawer({
         <List>
           <MiniDrawerList
             name='Mon compte'
-            img={userPicture}
+            img={userData?.img_url}
             url='/profil'
             open={open}
             handleToggleOpen={closeDrawer}
@@ -138,6 +136,7 @@ export default function MiniDrawer({
         </List>
         {circlesData?.map((circle) => (
           <MiniDrawerList
+            key={circle.circle_id}
             name={circle.name}
             img={circle.img_url}
             url={`/circle/${circle.circle_id}`}

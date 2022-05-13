@@ -9,6 +9,7 @@ const initialState = {
   email: '',
   password: '',
   birthdate: '',
+  portrait_url: '',
   token: '',
   user_id: '',
   oldPassword: '',
@@ -41,10 +42,20 @@ export const authSlice = createSlice({
       state.token = token;
       state.user_id = user_id;
     },
+
+    handleUser: (state, action) => {
+      const { birthdate, email, firstname, portrait_url, lastname, surname} = action.payload;
+      state.birthdate = birthdate;
+      state.email = email;
+      state.firstname = firstname;
+      state.portrait_url = portrait_url;
+      state.lastname = lastname;
+      state.surname = surname;
+    }
   },
 });
 
-export const { handleChange, handleToken } = authSlice.actions;
+export const { handleChange, handleToken, handleUser } = authSlice.actions;
 
 // we export the reducer of our slice
 export default authSlice.reducer;

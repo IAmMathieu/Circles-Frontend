@@ -9,10 +9,9 @@ export default function ListOfUsers({ open, onClose, userList }) {
       <Dialog open={open} onClose={onClose}>
         <DialogTitle>Membres du cercle : </DialogTitle>
         <DialogContent>
-          {userList?.map((user) => {
-            return (
-            <Typography>{user.surname}</Typography>
-            ) })}
+          {userList?.map((user) => 
+            <Typography key={user.id}>{user.surname}</Typography>
+          )}
         </DialogContent>
       </Dialog>
     </div>

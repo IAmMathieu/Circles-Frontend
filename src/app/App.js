@@ -21,6 +21,7 @@ import FAQ from '../features/FAQ/Faq';
 import ContactPage from '../features/ContactPage/ContactPage';
 import MiniDrawer from '../features/Drawer/miniDrawer';
 import { CssBaseline } from '@mui/material';
+import Circle from '../features/Circle/Circle';
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
@@ -111,6 +112,14 @@ const App = () => {
               <PrivateRoute token={tokenState}>
                 <ProfilePage />
               </PrivateRoute>
+            }
+          />
+          <Route
+            path='/circle/:id'
+            element={
+              // <PrivateRoute token={tokenState}>
+                <Circle />
+              // </PrivateRoute>
             }
           />
           <Route path='/faq' theme={muiTheme} element={<FAQ />} />
