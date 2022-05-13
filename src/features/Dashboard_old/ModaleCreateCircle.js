@@ -6,13 +6,25 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { makeStyles } from '@mui/material';
+import { makeStyles, styled } from '@mui/material';
+
+const MyDialogContent = styled(Dialog)({
+  background: '#212B36',
+});
+const MyDialogActions = styled(DialogActions)({
+  background: '#212B36',
+});
+const MyDialogTitle = styled(DialogContent)({
+  background: '#212B36',
+});
 
 export default function ModaleCreateCircle({ open, handleClose }) {
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Créez votre propre Cercle ! : </DialogTitle>
+        <DialogTitle sx={{ fontSize: '2rem', fontWeight: '700' }}>
+          Créer votre propre Cercle !
+        </DialogTitle>
         <DialogContent>
           {/* <DialogContentText>
             To subscribe to this website, please enter your email address here.
@@ -27,7 +39,6 @@ export default function ModaleCreateCircle({ open, handleClose }) {
             fullWidth
             variant='standard'
             sx={{ color: 'red' }}
-            InputLabelProps={{ style: { color: 'var(--maincolor-reverse)' } }}
           />
           <TextField
             autoFocus
@@ -37,7 +48,6 @@ export default function ModaleCreateCircle({ open, handleClose }) {
             type='text'
             fullWidth
             variant='standard'
-            InputLabelProps={{ style: { color: 'var(--maincolor-reverse)' } }}
           />
           <TextField
             autoFocus
@@ -47,7 +57,6 @@ export default function ModaleCreateCircle({ open, handleClose }) {
             type='color'
             fullWidth
             variant='standard'
-            InputLabelProps={{ style: { color: 'var(--maincolor-reverse)' } }}
           />
           <TextField
             autoFocus
@@ -57,12 +66,11 @@ export default function ModaleCreateCircle({ open, handleClose }) {
             type='text'
             fullWidth
             variant='standard'
-            InputLabelProps={{ style: { color: 'var(--maincolor-reverse)' } }}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
+          <Button onClick={handleClose}>Retour</Button>
+          <Button onClick={handleClose}>Créer</Button>
         </DialogActions>
       </Dialog>
     </div>

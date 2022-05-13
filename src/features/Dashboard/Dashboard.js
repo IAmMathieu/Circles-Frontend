@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useCreateCircleMutation } from '../Circle/CircleApi';
 import SimpleBottomNavigation from '../Common/BottomNavigation/SimpleBottomNavigation';
 import ModaleInput from '../Common/ModaleInput/ModaleInput';
 import { useGetUserDashBoardQuery } from '../Dashboard_old/DashboardApi';
@@ -20,7 +21,10 @@ export const Dashboard = () => {
     user_id,
   });
   const [openCreate, setOpenCreate] = useState(false);
-
+  const [createCircle, { data: dataCreateCircle }] = useCreateCircleMutation(
+    token,
+    user_id
+  );
   const toggleCreate = () => {
     setOpenCreate(!openCreate);
   };
