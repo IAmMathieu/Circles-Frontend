@@ -57,15 +57,15 @@ export const Dashboard = () => {
   } else {
     return (
       <>
-        <Box className='flex flex-col items-center p-5 h-full custom-bk:pr-[10vh] overflow-hidden'>
+        <Box className=' relative flex flex-col items-center p-5 h-full custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
         <img
-          className='w-24 h-24 custom-bk:w-32 custom-bk:h-32 rounded-full z-10'
+          className=' absolute left-1/2 transform -translate-x-1/2 w-24 h-24 custom-bk:w-52 custom-bk:h-52 rounded-full z-10 top-5 custom-bk:top-14 custom-bk:left-1/4'
           src={userPicture}
           alt=''
         />
         <Box className='card__container bg-darkysubg mb-3 h-full w-full rounded-lg custom-bk:ml-[15vh] p-5 custom-bk:p-10 flex flex-wrap items-start gap-10 justify-center overflow-scroll shadow-2xl darkMode:shadow-none'>
           <Typography
-            className='text-xl font-bold custom-bk:text-2xl block w-full '
+            className='text-xl custom-bk:text-3xl font-bold block w-full mt-5 '
             component='h5'
           >
             Vos Cercles :
