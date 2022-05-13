@@ -4,12 +4,12 @@ export const MuiThemeLight = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#FFFFFF',
+      main: '#294154',
       contrastText: '#294154',
     },
     secondary: {
       main: '#EA8122',
-      dark: '#f1aa2a',
+      // dark: '#f1aa2a',
     },
   },
   typography: {
@@ -34,7 +34,7 @@ export const MuiThemeDark = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#1a2028',
+      main: '#ffffff',
       contrastText: '#ffffff',
     },
     secondary: {
