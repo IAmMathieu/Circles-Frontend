@@ -91,7 +91,11 @@ function LeftPanel({ logout }) {
         >
           <LogoutIcon />
         </button>
+<<<<<<< HEAD:src/features/Dashboard_old/LeftPanel.js
         <Link className='leftmenu--links' to='/contact'>
+=======
+        <a className='leftmenu--links' href='/contact'>
+>>>>>>> feat(contactPage): first version of the contact page:src/features/Dashboard/LeftPanel.js
           <AlternateEmailIcon />
         </Link>
         <Link className='leftmenu--links' to='/faq'>
