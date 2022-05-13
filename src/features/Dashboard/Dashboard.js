@@ -89,7 +89,7 @@ export const Dashboard = () => {
             />)
            })}
         </Box>
-          <SimpleBottomNavigation handleClickOpen={toggleCreate} />
+          <SimpleBottomNavigation handleClickOpenCreate={toggleCreate} handleClickOpenJoin={toggleJoin} />
         </Box>
         <ModaleCreateCircle
           refetch={refetch}

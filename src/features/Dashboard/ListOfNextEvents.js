@@ -11,7 +11,6 @@ export default function ListOfNextEvents({ open, onClose, eventsList }) {
         <DialogContent>
           {eventsList.map((event) => {
             if (event !== null) {
-              console.log(event.title);
               return (
                 <>
                   <Typography>{event.start}</Typography>
