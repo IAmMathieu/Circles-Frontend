@@ -1,5 +1,16 @@
+.container-page-contact{
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .circle-logo {
-    height: 200px;
+    width: 10rem;
+    margin: auto;
+    display: flex;
+    justify-content: flex-start;
     padding: 0;
 }
 

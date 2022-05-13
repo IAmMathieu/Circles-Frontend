@@ -16,9 +16,9 @@ export default function FAQ() {
 
   return (
     <div className="container-faq">
-        <div className='circle-logo'>
-            <img src={Logo} alt='logo Circles'></img>
-        </div>
+
+            <img src={Logo} className='circle-logo' alt='logo Circles'></img>
+
         <p className='container-faq__text'>FAQ</p>
     
         <div className='container-faq__accordion'>
@@ -28,7 +28,7 @@ export default function FAQ() {
             aria-controls="panel1bh-content"
             id="panel1bh-header"
             >
-            <Typography sx={{ width: '50%', flexShrink: 0 }}>
+            <Typography sx={{ width: '80%', flexShrink: 0 }}>
                 Qu'est-ce que Circles ?
             </Typography>
             </AccordionSummary>
@@ -44,7 +44,7 @@ export default function FAQ() {
             aria-controls="panel2bh-content"
             id="panel2bh-header"
             >
-            <Typography sx={{ width: '50%', flexShrink: 0 }}>C'est bien Circles ?</Typography>
+            <Typography sx={{ width: '80%', flexShrink: 0 }}>C'est bien Circles ?</Typography>
             </AccordionSummary>
             <AccordionDetails>
             <Typography>
@@ -58,15 +58,15 @@ export default function FAQ() {
             aria-controls="panel3bh-content"
             id="panel3bh-header"
             >
-            <Typography sx={{ width: '50%', flexShrink: 0 }}>
+            <Typography sx={{ width: '80%', flexShrink: 0 }}>
                 Oskour, mamie Georgette veut nous rejoindre !
             </Typography>
             </AccordionSummary>
             <AccordionDetails>
             <Typography>
-            - Nouvelle technique : on passe pour des cons, les autres se marrent, et on frappe. C’est nouveau. <br/>
+            - Nouvelle technique : on passe pour des cons, les autres se marrent, et on frappe. C'est nouveau. <br/>
 - Et les autres font ça aussi ?<br/>
-- Ah non, ça c’est que nous. Parce qu’il faut être capable de passer pour des cons en un temps record. Ah non, là-dessus on a une avance considérable.
+- Ah non, ça c'est que nous. Parce qu'il faut être capable de passer pour des cons en un temps record. Ah non, là-dessus on a une avance considérable.
             </Typography>
             </AccordionDetails>
         </Accordion>
@@ -76,7 +76,7 @@ export default function FAQ() {
             aria-controls="panel4bh-content"
             id="panel4bh-header"
             >
-            <Typography sx={{ width: '50%', flexShrink: 0 }}>Bonus</Typography>
+            <Typography sx={{ width: '80%', flexShrink: 0 }}>Bonus</Typography>
             </AccordionSummary>
             <AccordionDetails>
             <Typography>
@@ -98,3 +98,4 @@ export default function FAQ() {
     </div>
   );
 }
+

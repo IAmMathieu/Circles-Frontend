@@ -9,10 +9,10 @@ import portraitMathieu from '../../assets/images/portrait_mathieu.jpg';
 
 function ContactPage() {
   return (
-    <div>
-      <a href='/dashboard'>
-        <img src={logo} alt='Logo Circles' className='circle-logo' />
-      </a>
+    <div className='container-page-contact'>
+          <a href='/dashboard'>
+            <img src={logo} alt='Logo Circles' className='circle-logo' />
+          </a>
       <h1 className='title'>Contact</h1>
       <div className='container-contacts'>
         <UserContact
@@ -51,3 +51,4 @@ function ContactPage() {
 }
 
 export default ContactPage;
+
