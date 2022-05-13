@@ -3,16 +3,11 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useCreateCircleMutation } from '../Circle/CircleApi';
 import SimpleBottomNavigation from '../Common/BottomNavigation/SimpleBottomNavigation';
-import ModaleInput from '../Common/ModaleInput/ModaleInput';
 import { useGetUserDashBoardQuery } from '../Dashboard_old/DashboardApi';
 import ModaleCreateCircle from './ModaleCreateCircle';
 import Card from './Card';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
 import CustomizedSnackbars from '../Common/Snackbar/Snackbar';
-
+import DashbordLoader from './DashbordLoader';
 export const Dashboard = () => {
   const { token, user_id } = useSelector((state) => state.auth);
   const { name, description, color, img_url } = useSelector(
@@ -23,7 +18,7 @@ export const Dashboard = () => {
   const {
     refetch,
     data: DashData,
-    isLoading: loginIsLoading,
+    isLoading: dashboardIsLoading,
     isError: loginIsError,
   } = useGetUserDashBoardQuery({
     token,
@@ -39,7 +34,6 @@ export const Dashboard = () => {
       isSuccess: createCircleSuccess,
     },
   ] = useCreateCircleMutation();
-  console.log('data cercle', dataCreateCircle);
   const toggleCreate = () => {
     setOpenCreate(!openCreate);
   };
@@ -58,95 +52,98 @@ export const Dashboard = () => {
     nb_online: 3,
     nb_events: 8,
   };
-
-  return (
-    <>
-      <div className=' relative flex flex-col items-center p-5 h-full custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
-        <img
-          className=' absolute left-1/2 transform -translate-x-1/2 w-24 h-24 custom-bk:w-52 custom-bk:h-52 rounded-full z-10 top-5 custom-bk:top-14 custom-bk:left-1/4'
-          src={userPicture}
-          alt=''
-        />
-        <div className='card__container bg-darkysubg mb-3 h-full w-full rounded-lg custom-bk:ml-[15vh] p-5 custom-bk:p-10 flex flex-wrap items-start gap-10 justify-center overflow-scroll shadow-2xl darkMode:shadow-none'>
-          <Typography
-            className=' text-xl custom-bk:text-3xl font-bold block w-full mt-5 '
-            component='h5'
-          >
-            Vos Cercles :
-          </Typography>
-          <Card
-            name={testcard.name}
-            desc={testcard.desc}
-            id={testcard.id}
-            img_url={testcard.img_url}
-            nb_number={testcard.nb_number}
-            nb_online={testcard.nb_online}
-            nb_events={testcard.nb_events}
+  if (dashboardIsLoading) {
+    return <DashbordLoader />;
+  } else {
+    return (
+      <>
+        <div className=' relative flex flex-col items-center p-5 h-full custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
+          <img
+            className=' absolute left-1/2 transform -translate-x-1/2 w-24 h-24 custom-bk:w-52 custom-bk:h-52 rounded-full z-10 top-5 custom-bk:top-14 custom-bk:left-1/4'
+            src={userPicture}
+            alt=''
           />
-          <Card
-            name={testcard.name}
-            desc={testcard.desc}
-            id={testcard.id}
-            img_url={testcard.img_url}
-            nb_number={testcard.nb_number}
-            nb_online={0}
-            nb_events={testcard.nb_events}
-          />
-          <Card
-            name={testcard.name}
-            desc={testcard.desc}
-            id={testcard.id}
-            img_url={testcard.img_url}
-            nb_number={testcard.nb_number}
-            nb_online={testcard.nb_online}
-            nb_events={testcard.nb_events}
-          />
-          <Card
-            name={testcard.name}
-            desc={testcard.desc}
-            id={testcard.id}
-            img_url={testcard.img_url}
-            nb_number={testcard.nb_number}
-            nb_online={testcard.nb_online}
-            nb_events={testcard.nb_events}
-          />
-          <Card
-            name={testcard.name}
-            desc={testcard.desc}
-            id={testcard.id}
-            img_url={testcard.img_url}
-            nb_number={testcard.nb_number}
-            nb_online={testcard.nb_online}
-            nb_events={testcard.nb_events}
-          />
-          <Card
-            name={testcard.name}
-            desc={testcard.desc}
-            id={testcard.id}
-            img_url={testcard.img_url}
-            nb_number={testcard.nb_number}
-            nb_online={testcard.nb_online}
-            nb_events={testcard.nb_events}
-          />
+          <div className='card__container bg-darkysubg mb-3 h-full w-full rounded-lg custom-bk:ml-[15vh] p-5 custom-bk:p-10 flex flex-wrap items-start gap-10 justify-center overflow-scroll shadow-2xl darkMode:shadow-none'>
+            <Typography
+              className=' text-xl custom-bk:text-3xl font-bold block w-full mt-5 '
+              component='h5'
+            >
+              Vos Cercles :
+            </Typography>
+            <Card
+              name={testcard.name}
+              desc={testcard.desc}
+              id={testcard.id}
+              img_url={testcard.img_url}
+              nb_number={testcard.nb_number}
+              nb_online={testcard.nb_online}
+              nb_events={testcard.nb_events}
+            />
+            <Card
+              name={testcard.name}
+              desc={testcard.desc}
+              id={testcard.id}
+              img_url={testcard.img_url}
+              nb_number={testcard.nb_number}
+              nb_online={0}
+              nb_events={testcard.nb_events}
+            />
+            <Card
+              name={testcard.name}
+              desc={testcard.desc}
+              id={testcard.id}
+              img_url={testcard.img_url}
+              nb_number={testcard.nb_number}
+              nb_online={testcard.nb_online}
+              nb_events={testcard.nb_events}
+            />
+            <Card
+              name={testcard.name}
+              desc={testcard.desc}
+              id={testcard.id}
+              img_url={testcard.img_url}
+              nb_number={testcard.nb_number}
+              nb_online={testcard.nb_online}
+              nb_events={testcard.nb_events}
+            />
+            <Card
+              name={testcard.name}
+              desc={testcard.desc}
+              id={testcard.id}
+              img_url={testcard.img_url}
+              nb_number={testcard.nb_number}
+              nb_online={testcard.nb_online}
+              nb_events={testcard.nb_events}
+            />
+            <Card
+              name={testcard.name}
+              desc={testcard.desc}
+              id={testcard.id}
+              img_url={testcard.img_url}
+              nb_number={testcard.nb_number}
+              nb_online={testcard.nb_online}
+              nb_events={testcard.nb_events}
+            />
+          </div>
+          <SimpleBottomNavigation handleClickOpen={toggleCreate} />
         </div>
-        <SimpleBottomNavigation handleClickOpen={toggleCreate} />
-      </div>
-      <ModaleCreateCircle
-        refetch={refetch}
-        createCircle={createCircle}
-        createCircleSuccess={createCircleSuccess}
-        open={openCreate}
-        toggleCreate={toggleCreate}
-        createCircleError={createCircleError}
-      />
-      <CustomizedSnackbars
-        dataCreateCircle={dataCreateCircle}
-        openSnack={openSnack}
-        setOpenSnack={setOpenSnack}
-        severity='success'
-        isSuccess={createCircleSuccess}
-        message={''}
-      />
-    </>
-  );
+        <ModaleCreateCircle
+          refetch={refetch}
+          createCircle={createCircle}
+          createCircleSuccess={createCircleSuccess}
+          open={openCreate}
+          toggleCreate={toggleCreate}
+          createCircleError={createCircleError}
+        />
+        <CustomizedSnackbars
+          dataCreateCircle={dataCreateCircle}
+          openSnack={openSnack}
+          setOpenSnack={setOpenSnack}
+          severity='success'
+          isSuccess={createCircleSuccess}
+          message={''}
+        />
+      </>
+    );
+  }
 };
