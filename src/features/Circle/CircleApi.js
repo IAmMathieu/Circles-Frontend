@@ -5,6 +5,21 @@ const circleApi = emptySplitApi.injectEndpoints({
         - Query endpoints : for retrieving data.
         - Mutation endpoints : for CRUD
     */
+    getCircle: builder.query({
+        /**
+         * Query for login user. Take the email and password on parameter, and send it to the server.
+         * @param {*} param0
+         * @returns
+         */
+      query: ({ circle_id, token }) => {
+        return {
+          url: `circle/${circle_id}`,
+          method: 'GET',
+          contentType: 'application/json',
+          headers: { Authorization: `Bearer ${token}` },
+        };
+      },
+      }),
     createCircle: builder.mutation({
       query: ({ token, name, description, color, img_url, user_id }) => {
         return {
@@ -65,4 +80,5 @@ export const {
   useCreateCircleMutation,
   useJoinCircleMutation,
   useDeleteCircleMutation,
+  useGetCircleQuery,
 } = circleApi;

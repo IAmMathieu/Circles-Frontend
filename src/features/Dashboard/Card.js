@@ -13,8 +13,11 @@ import { CardActionArea, Divider, Tooltip } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import EventIcon from '@mui/icons-material/Event';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import ListOfUsers from './ListOfUsers';
 import ListOfNextEvents from './ListOfNextEvents';
+import { useDispatch } from 'react-redux';
+import { changeCircle } from "./../Circle/CircleSlice";
 
 export default function CircleCard({
   name,
@@ -29,6 +32,10 @@ export default function CircleCard({
   usersList,
   eventsList,
 }) {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [openMembers, setOpenMembers] = useState(false);
 
   const toggleMembers = () => {
@@ -39,12 +46,19 @@ export default function CircleCard({
   const toggleEvents = () => {
     setOpenEvents(!openEvents);
   };
+
+  const redirect = (event) => {
+    event.preventDefault();
+    navigate('/circle/' + circle_id);
+    dispatch(changeCircle({circle_id}))
+  };
+
   return (
     <Card
       className='overflow-hidden rounded-xl relative min-w-full min-w-[300px] w-[300px] max-w-[300px]'
       sx={{ maxWidth: 345 }}
     >
-      <CardActionArea href={'/circle/' + circle_id}>
+      <CardActionArea onClick={redirect} href={'/circle/' + circle_id}>
         <Box className='relative'>
           <CardMedia
             className='h-24 custom-bk:h-[194px] '

@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // Initialise the default state.
 const initialState = {
-  menu: 'calendar',
+    circle_id: '',
+    menu: 'calendar',
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 // Tranche de state (le "slice)")
@@ -22,10 +23,16 @@ export const CircleSlice = createSlice({
       */
       state.menu = action.payload;
     },
+    changeCircle: (state, action) => {
+        /* state[nomDuChamp] --> En fonction ce sera email ou password(si on est sur l'input email, ce sera email) et on modifie la valeur basé sur le payload envoyé.
+        Ici ce sera donc state[email] = action.payload.payload qui est égal à la valeur renseigné par l'utilisateur
+        */
+        state.circle_id = action.payload.circle_id;
+      },
   },
 });
 
-export const { changeMenu } = CircleSlice.actions;
+export const { changeMenu, changeCircle } = CircleSlice.actions;
 
 // we export the reducer of our slice
 export default CircleSlice.reducer;
