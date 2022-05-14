@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import CircleBottomNavigation from "./CircleBottomNavigation";
 import CircleCalendar from "./CircleCalendar";
@@ -6,12 +7,12 @@ import { handleChange } from "./CircleSlice";
 
 export default function Circle() {
 
-    const menu = useSelector((state) => state.circle)
+    const {menu} = useSelector((state) => state.circle)
 
   return (
-    <div>
+    <Box className="relative flex flex-col items-center p-5 h-full custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden h-screen">
     {menu === 'calendar' ? <CircleCalendar /> : <CircleChat /> }
         <CircleBottomNavigation />
-    </div>
+    </Box>
   );
 }

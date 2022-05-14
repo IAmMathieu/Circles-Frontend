@@ -84,7 +84,7 @@ function ProfilePage() {
           >
             <Box component='div'>
               <img
-                src={userPicture}
+                src={data?.img_url}
                 alt='User Portrait'
                 className='leftmenu--user-picture'
               />

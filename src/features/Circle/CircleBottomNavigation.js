@@ -17,6 +17,8 @@ export default function CircleBottomNavigation() {
       sx={{
         width: '100%',
         borderRadius: '15px',
+        bottom: 0,
+        position: 'absolute',
         overflow: 'hidden',
         height: '70px',
         '@media (min-width:965px)': {
