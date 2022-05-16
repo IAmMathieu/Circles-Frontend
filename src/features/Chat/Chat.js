@@ -21,11 +21,64 @@ import Picker from 'emoji-picker-react';
 import { CoPresentTwoTone } from '@mui/icons-material';
 // const socket = io.connect('http://localhost:5555');
 
+<<<<<<< HEAD
 export const Chat = ({ CircleIsSuccess, circleData, profilData, user_id }) => {
   const client = useRef();
   /**
    * Styled custom badge
    */
+=======
+//! A voir pour le mettre autre pars pour pas appeller lors du dashboard
+const socket = io.connect('http://localhost:5555');
+export const Chat = () => {
+  const { token, user_id } = useSelector((state) => state.auth);
+  const { circle_id } = useParams();
+  const [firstLoad, setFirstLoad] = useState(false);
+  const sendMessage = () => {
+    socket.emit('chatMessage', messageControl);
+  };
+  const [firstClick, setFirstClick] = useState(false);
+  const dispatch = useDispatch();
+
+  const { data } = useGetProfilUserQuery({ token, user_id });
+  const [chosenEmoji, setChosenEmoji] = useState(null);
+  const onEmojiClick = (event, emojiObject) => {
+    setChosenEmoji(emojiObject);
+  };
+  const { data: circleData, isSuccess } = useGetCircleInfoQuery({
+    circle_id,
+    token,
+  });
+  const [messageControl, setMessageControl] = useState('');
+  const [message, setMessage] = useState([]);
+
+  useEffect(() => {
+    socket.emit('joinRoom', {
+      surname: data?.surname,
+      user_id,
+      room: circleData?.unique_code,
+    });
+  }, []);
+  useEffect(() => {
+    if (firstLoad) {
+      socket.on('message', (data) => {
+        const messageReceived = data.message;
+        const newMessage = {
+          content: messageReceived,
+          surname: 'surname',
+        };
+        setMessage([...message, newMessage]);
+      });
+    }
+  }, [socket]);
+  useEffect(() => {
+    if (isSuccess) {
+      setFirstLoad(true);
+      setMessage(circleData.messages);
+    }
+  }, [isSuccess]);
+  console.log('message', message && message);
+>>>>>>> ea029b7 ([FEAT](chat): chat before merge develop)
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
       backgroundColor: '#44b700',
