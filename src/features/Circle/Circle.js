@@ -10,7 +10,8 @@ export default function Circle() {
     const {menu} = useSelector((state) => state.circle)
 
   return (
-    <Box className="relative flex flex-col items-center p-5 h-full custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden h-screen">
+    <Box className=' relative flex flex-col items-center p-5 h-screen custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
+                    
         <CircleHeader />
     {menu === 'calendar' ? <CircleCalendar /> : <CircleChat /> }
         <CircleBottomNavigation />
