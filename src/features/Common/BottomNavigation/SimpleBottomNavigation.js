@@ -29,7 +29,7 @@ export default function SimpleBottomNavigation({
       <BottomNavigation className='h-full px-10'>
         <div className=' w-full flex justify-between items-center'>
           <Box
-            className='flex flex-col items-center'
+            className='flex flex-col items-center hover:cursor-pointer'
             onClick={() => {
               handleClickOpenCreate();
             }}
@@ -41,7 +41,7 @@ export default function SimpleBottomNavigation({
             </Typography>
           </Box>
           <Box
-            className='flex flex-col items-center'
+            className='flex flex-col items-center hover:cursor-pointer'
             onClick={() => {
               handleClickOpenJoin();
             }}
@@ -51,7 +51,7 @@ export default function SimpleBottomNavigation({
               Rejoindre
             </Typography>
           </Box>
-          <div className='flex flex-col items-center'>
+          <div className='flex flex-col items-center hover:cursor-pointer'>
             <SearchIcon />
             <Typography className='text-xs custom-bk:text-lg' component='h5'>
               Découvrir

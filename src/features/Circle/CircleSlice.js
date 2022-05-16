@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 // Initialise the default state.
 const initialState = {
     circle_id: '',
+    circle_code: '',
     menu: 'calendar',
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
@@ -28,6 +29,7 @@ export const CircleSlice = createSlice({
         Ici ce sera donc state[email] = action.payload.payload qui est égal à la valeur renseigné par l'utilisateur
         */
         state.circle_id = action.payload.circle_id;
+        state.circle_code = action.payload.circle_code;
       },
   },
 });
