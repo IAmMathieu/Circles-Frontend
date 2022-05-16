@@ -24,11 +24,18 @@ export default function Circle() {
   /**
    * Make the query when we are into the circle
    */
-  const { data: circleData, isSuccess: CircleIsSuccess } = useGetCircleQuery({
+  const {
+    refetch,
+    data: circleData,
+    isSuccess: CircleIsSuccess,
+  } = useGetCircleQuery({
     token,
     circle_id,
   });
-
+  // useEffect(() => {
+  //   console.log('change');
+  //   refetch();
+  // }, [circle_id]);
   /**
    * Make the query for get the profil user information
    */
