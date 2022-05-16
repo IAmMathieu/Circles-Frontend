@@ -62,7 +62,11 @@ export const Chat = () => {
           content: messageReceived,
           surname: 'surname',
         };
+<<<<<<< HEAD
         setMessage(...message, newMessage);
+=======
+        setMessage([...message, newMessage]);
+>>>>>>> 6b6af59 ([FEAT](chat): before testing with other solution)
       });
     }
   }, [socket]);

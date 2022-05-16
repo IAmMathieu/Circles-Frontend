@@ -1172,11 +1172,6 @@
   dependencies:
     "@date-io/core" "^2.13.2"
 
-"@emoji-mart/data@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@emoji-mart/data/-/data-1.0.1.tgz#76ca80a7b6d02706ec329116d6e4518bb3453ad2"
-  integrity sha512-5X6DbIdyFvSFMfGdPkPd/yxQmtfMptZg5UUSL+afb39SdbPvobJY7VhzGM0IekxjszW3ygxZ2X5mVhy5AqF5vQ==
-
 "@emotion/babel-plugin@^11.7.1":
   version "11.9.2"
   resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.9.2.tgz#723b6d394c89fb2ef782229d92ba95a740576e95"
@@ -1593,22 +1588,10 @@
   dependencies:
     "@babel/runtime" "^7.4.4"
 
-<<<<<<< HEAD
 "@mui/core@5.0.0-alpha.46":
   version "5.0.0-alpha.46"
   resolved "https://registry.yarnpkg.com/@mui/core/-/core-5.0.0-alpha.46.tgz#f4c0e5b2ad346e31e74bb96b684f6734b55cc9e6"
   integrity sha512-LZa0s450YSHv58xlMRIWszE0zsqqTyxgP+l70gUyPvYwCfQErkxsvRjEInKI5GCrYDcr3N+jlKJ5MSRZDvtvig==
-=======
-"@mui-treasury/layout@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@mui-treasury/layout/-/layout-5.0.0.tgz#9658f87f174925db37aa15657275a33b1d1fae0a"
-  integrity sha512-MbGTKomwAG3cjuK36O1/W+/jiJ5v4BYBvhPA4hTAshZnFcraE3f490+1ayC4QTq6CkDDKpvKQYLeuAj9uSrI4w==
-
-"@mui/base@5.0.0-alpha.79":
-  version "5.0.0-alpha.79"
-  resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-alpha.79.tgz#1994a6382a162b52ec93b66f3c74d193820d2365"
-  integrity sha512-/lZLF027BkiEjM8MIYoeS/FEhTKf+41ePU9SOijMGrCin1Y0Igucw+IHa1fF8HXD7wDbFKqHuso3J1jMG8wyNw==
->>>>>>> 4ee156e ([FEAT](chat): begin chat)
   dependencies:
     "@babel/runtime" "^7.14.8"
     "@emotion/is-prop-valid" "^1.1.0"
@@ -4094,11 +4077,6 @@ emittery@^0.8.1:
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/emittery/-/emittery-0.8.1.tgz#bb23cc86d03b30aa75a7f734819dee2e1ba70860"
   integrity sha512-uDfvUjVrfGJJhymx/kz6prltenw1u7WrCg1oa94zYY8xxVpLLUu045LAT0dhDZdXG58/EpPL/5kA180fQ/qudg==
-
-emoji-picker-react@^3.5.1:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/emoji-picker-react/-/emoji-picker-react-3.5.1.tgz#dbb4cda675a58dc86624d2fc488f75c2f4fc377d"
-  integrity sha512-cuSthFAvUO8Q1N7KJPEgZ7N0JNIWPKgN5GUmKe71UlSD4qFYI/p05RT9nohlWOq6YSFhEy2mI/60zBZiaku4mg==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
