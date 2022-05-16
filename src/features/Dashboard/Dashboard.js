@@ -3,20 +3,21 @@ import { Box, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { useCreateCircleMutation } from '../Circle/CircleApi';
 import SimpleBottomNavigation from '../Common/BottomNavigation/SimpleBottomNavigation';
-import { useGetUserDashBoardQuery } from '../Dashboard_old/DashboardApi';
+import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
 import ModaleCreateCircle from './ModaleCreateCircle';
 import Card from './Card';
 import CustomizedSnackbars from '../Common/Snackbar/Snackbar';
 import DashbordLoader from './DashbordLoader';
 import ModaleJoinCircle from './ModaleJoinCircle';
+import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
 
 export const Dashboard = () => {
-  const { token, user_id } = useSelector((state) => state.auth);
+  const { token, user_id, portrait_url } = useSelector((state) => state.auth);
   const { name, description, color, img_url } = useSelector(
     (state) => state.dashboard
   );
-  const userPicture =
-    'https://ca.slack-edge.com/T02MBC4J9K5-U02M8CJUVJR-2df2ffa3c507-512';
+  
+
   const {
     refetch,
     data: DashData,
@@ -29,6 +30,8 @@ export const Dashboard = () => {
   const [openCreate, setOpenCreate] = useState(false);
   const [openJoin, setOpenJoin] = useState(false);
 
+  const { data: userData} = useGetProfilUserQuery({token, user_id});
+  
 
   const [
     createCircle,
@@ -57,20 +60,19 @@ export const Dashboard = () => {
   } else {
     return (
       <>
-        <Box className=' relative flex flex-col items-center p-5 h-full custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
+        <Box className=' relative flex flex-col items-center p-5 h-screen custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
         <img
           className=' absolute left-1/2 transform -translate-x-1/2 w-24 h-24 custom-bk:w-52 custom-bk:h-52 rounded-full z-10 top-5 custom-bk:top-14 custom-bk:left-1/4'
-          src={userPicture}
+          src={userData?.img_url}
           alt=''
         />
-        <Box className='card__container bg-darkysubg mb-3 h-full w-full rounded-lg custom-bk:ml-[15vh] p-5 custom-bk:p-10 flex flex-wrap items-start gap-10 justify-center overflow-scroll shadow-2xl darkMode:shadow-none'>
+        <Box className='card__container bg-darkysubg mb-3 h-full w-full items-center justify-center rounded-lg custom-bk:ml-[15vh] p-5 custom-bk:p-10 flex flex-wrap  gap-10  overflow-y-scroll shadow-2xl darkMode:shadow-none max-w-[2000px]'>
           <Typography
             className='text-xl custom-bk:text-3xl font-bold block w-full mt-5 '
             component='h5'
           >
             Vos Cercles :
           </Typography>
-
           {DashData?.map((card) => {
             return(
               <Card

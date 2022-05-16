@@ -4,17 +4,21 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import GroupsIcon from '@mui/icons-material/Groups';
 import SearchIcon from '@mui/icons-material/Search';
 import { Typography } from '@mui/material';
-import './SimpleBottomNavigation.scss';
-export default function SimpleBottomNavigation({
-  handleClickOpenCreate,
-  handleClickOpenJoin,
-}) {
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { changeMenu } from './CircleSlice';
+
+export default function CircleBottomNavigation() {
+  const dispatch = useDispatch();
+
   return (
     <Box
       className='bottomNavigation'
       sx={{
         width: '100%',
         borderRadius: '15px',
+        bottom: 0,
+        position: 'absolute',
         overflow: 'hidden',
         height: '70px',
         '@media (min-width:965px)': {
@@ -30,36 +34,22 @@ export default function SimpleBottomNavigation({
         <div className=' w-full flex justify-between items-center'>
           <Box
             className='flex flex-col items-center'
-            onClick={() => {
-              handleClickOpenCreate();
-            }}
+            onClick={() => dispatch(changeMenu('calendar'))}
           >
             <AddCircleIcon />
-<<<<<<< HEAD
-            <Typography className='text-xs custom-bk:text-2xl' component='h5'>
-=======
             <Typography className='text-xs custom-bk:text-lg' component='h5'>
->>>>>>> feature/dynamicCards
-              Créer
+              Calendrier
             </Typography>
           </Box>
           <Box
             className='flex flex-col items-center'
-            onClick={() => {
-              handleClickOpenJoin();
-            }}
+            onClick={() => dispatch(changeMenu('chat'))}
           >
             <GroupsIcon />
             <Typography className='text-xs custom-bk:text-lg' component='h5'>
-              Rejoindre
+              Chat
             </Typography>
           </Box>
-          <div className='flex flex-col items-center'>
-            <SearchIcon />
-            <Typography className='text-xs custom-bk:text-lg' component='h5'>
-              Découvrir
-            </Typography>
-          </div>
         </div>
       </BottomNavigation>
     </Box>

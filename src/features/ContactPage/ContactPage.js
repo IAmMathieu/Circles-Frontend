@@ -50,5 +50,9 @@ function ContactPage() {
   );
 }
 
+<<<<<<< HEAD
 export default ContactPage;
 
+=======
+export default ContactPage;
+>>>>>>> feature/dynamicCards
