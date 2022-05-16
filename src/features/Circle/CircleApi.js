@@ -41,13 +41,13 @@ const circleApi = emptySplitApi.injectEndpoints({
       },
     }),
     joinCircle: builder.mutation({
-      query: ({ token, user_id, circle_id }) => {
+      query: ({ token, user_id, circle_code }) => {
         return {
-          url: `circle/${circle_id}`,
+          url: `circle/new/${user_id}`,
           method: 'POST',
           contentType: 'application/json',
           body: new URLSearchParams({
-            user_id,
+            circle_code,
           }),
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',

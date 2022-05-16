@@ -15,23 +15,6 @@ export default function FAQ() {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="container-faq">
-
-            <img src={Logo} className='circle-logo' alt='logo Circles'></img>
-
-        <p className='container-faq__text'>FAQ</p>
-    
-        <div className='container-faq__accordion'>
-        <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-            <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1bh-content"
-            id="panel1bh-header"
-            >
-            <Typography sx={{ width: '80%', flexShrink: 0 }}>
-                Qu'est-ce que Circles ?
-=======
     <div className='container-faq'>
       <img src={Logo} alt='logo Circles' className='circle-logo'></img>
 
@@ -49,7 +32,6 @@ export default function FAQ() {
           >
             <Typography sx={{ width: '100%', flexShrink: 0 }}>
               Qu'est-ce que Circles ?
->>>>>>> feature/dynamicCards
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
@@ -64,14 +46,6 @@ export default function FAQ() {
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-<<<<<<< HEAD
-            aria-controls="panel2bh-content"
-            id="panel2bh-header"
-            >
-            <Typography sx={{ width: '80%', flexShrink: 0 }}>C'est bien Circles ?</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-=======
             aria-controls='panel2bh-content'
             id='panel2bh-header'
           >
@@ -80,7 +54,6 @@ export default function FAQ() {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
->>>>>>> feature/dynamicCards
             <Typography>
               Nul ne peut bafouer l'empire romain ! Quand on l'attaque, l'empire
               contre-attaque !
@@ -93,34 +66,20 @@ export default function FAQ() {
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-<<<<<<< HEAD
-            aria-controls="panel3bh-content"
-            id="panel3bh-header"
-            >
-            <Typography sx={{ width: '80%', flexShrink: 0 }}>
-                Oskour, mamie Georgette veut nous rejoindre !
-=======
             aria-controls='panel3bh-content'
             id='panel3bh-header'
           >
             <Typography sx={{ width: '100%', flexShrink: 0 }}>
               Oskour, mamie Georgette veut nous rejoindre !
->>>>>>> feature/dynamicCards
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-<<<<<<< HEAD
-            - Nouvelle technique : on passe pour des cons, les autres se marrent, et on frappe. C'est nouveau. <br/>
-- Et les autres font ça aussi ?<br/>
-- Ah non, ça c'est que nous. Parce qu'il faut être capable de passer pour des cons en un temps record. Ah non, là-dessus on a une avance considérable.
-=======
               - Nouvelle technique : on passe pour des cons, les autres se
               marrent, et on frappe. C’est nouveau. <br />
               - Et les autres font ça aussi ?<br />- Ah non, ça c’est que nous.
               Parce qu’il faut être capable de passer pour des cons en un temps
               record. Ah non, là-dessus on a une avance considérable.
->>>>>>> feature/dynamicCards
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -130,21 +89,12 @@ export default function FAQ() {
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-<<<<<<< HEAD
-            aria-controls="panel4bh-content"
-            id="panel4bh-header"
-            >
-            <Typography sx={{ width: '80%', flexShrink: 0 }}>Bonus</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-=======
             aria-controls='panel4bh-content'
             id='panel4bh-header'
           >
             <Typography sx={{ width: '100%', flexShrink: 0 }}>Bonus</Typography>
           </AccordionSummary>
           <AccordionDetails>
->>>>>>> feature/dynamicCards
             <Typography>
               Vous savez, moi je ne crois pas qu'il y ait de bonne ou de
               mauvaise situation. Moi, si je devais résumer ma vie aujourd'hui

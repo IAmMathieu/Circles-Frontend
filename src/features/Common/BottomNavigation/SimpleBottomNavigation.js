@@ -35,11 +35,8 @@ export default function SimpleBottomNavigation({
             }}
           >
             <AddCircleIcon />
-<<<<<<< HEAD
-            <Typography className='text-xs custom-bk:text-2xl' component='h5'>
-=======
+            {/* <Typography className='text-xs custom-bk:text-2xl' component='h5'> */}
             <Typography className='text-xs custom-bk:text-lg' component='h5'>
->>>>>>> feature/dynamicCards
               Créer
             </Typography>
           </Box>

@@ -10,7 +10,7 @@ export default function CircleHeader() {
   
   return <Box className='flex w-screen'>
     <Box className='w-screen h-1/5 bg-contain'>
-        <img className='bg-contain' src={circleData.img_url} alt={circleData.name} />
+        {/* <img className='bg-contain' src={circleData.img_url} alt={circleData.name} /> */}
     </Box>
   </Box>;
 }
