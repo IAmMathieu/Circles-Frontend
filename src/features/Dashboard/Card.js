@@ -55,7 +55,7 @@ export default function CircleCard({
 
   return (
     <Card
-      className='overflow-hidden rounded-xl relative min-w-full min-w-[300px] w-[300px] max-w-[300px]'
+      className='overflow-hidden rounded-xl relative min-w-full min-w-[300px] w-[300px] max-w-[300px] max-h-[360px]'
       sx={{ maxWidth: 345 }}
       
     >
@@ -92,10 +92,10 @@ export default function CircleCard({
         </Box>
         <CardContent className='z-10 pt-8 flex flex-col gap-2 bg-darkybg'>
           <Typography className='text-lg custom-bk:text-2xl' component='h5'>
-            {name}
+            {truncateString(name, 27)}
           </Typography>
-          <Typography variant='body2' color='text.secondary'>
-            {truncateString(desc, 50)}
+          <Typography variant='body2' color='text.secondary grow'>
+            {truncateString(desc, 45)}
           </Typography>
         </CardContent>
       </CardActionArea>

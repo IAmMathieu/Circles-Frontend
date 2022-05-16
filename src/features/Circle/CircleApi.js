@@ -47,7 +47,7 @@ const circleApi = emptySplitApi.injectEndpoints({
           method: 'POST',
           contentType: 'application/json',
           body: new URLSearchParams({
-            circle_code,
+            unique_code: circle_code,
           }),
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
