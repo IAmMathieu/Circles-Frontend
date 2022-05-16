@@ -30,8 +30,8 @@
 //   background-color: rgba(255, 255, 255, 0.5) !important;
 // }
 .nav-active {
-  color: red;
+  color: var(--backgroundButton);
   svg {
-    color: red;
+    color: var(--backgroundButton);
   }
 }

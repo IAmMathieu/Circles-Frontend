@@ -2,10 +2,8 @@ import { Routes, Route, Navigate } from 'react-router';
 import { Homepage } from '../features/Homepage/Homepage';
 import { Dashboard } from '../features/Dashboard/Dashboard';
 import './App.scss';
-import { DarkMode } from '../features/DarkMode/DarkMode';
 import useLocalStorage from 'use-local-storage';
 import { ThemeProvider } from '@emotion/react';
-
 import {
   MuiThemeLight,
   MuiThemeDark,
@@ -16,7 +14,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleToken } from '../features/auth/authSlice';
 import ProfilePage from '../features/ProfilePage/ProfilePage';
-import MenuIcon from '@mui/icons-material/Menu';
 import FAQ from '../features/FAQ/Faq';
 import ContactPage from '../features/ContactPage/ContactPage';
 import MiniDrawer from '../features/Drawer/miniDrawer';
@@ -69,7 +66,7 @@ const App = () => {
    * Allow to switch a theme
    */
   const switchTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
+    const newTheme = theme === 'light' ? 'light' : 'dark';
     setTheme(newTheme);
   };
 
@@ -87,10 +84,6 @@ const App = () => {
             open={open}
           />
         )}
-        <MenuIcon
-          className='fixed left-5 top-5'
-          onClick={() => handleToggleOpen()}
-        />
         <Routes>
           <Route
             path='/'
@@ -118,7 +111,7 @@ const App = () => {
             path='/circle/:id'
             element={
               // <PrivateRoute token={tokenState}>
-                <Circle />
+              <Circle />
               // </PrivateRoute>
             }
           />

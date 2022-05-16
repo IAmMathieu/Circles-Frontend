@@ -60,7 +60,7 @@ export const Dashboard = () => {
   } else {
     return (
       <>
-        <Box className=' relative flex flex-col items-center p-5 h-full custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
+        <Box className=' relative flex flex-col items-center p-5 h-screen custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
         <img
           className=' absolute left-1/2 transform -translate-x-1/2 w-24 h-24 custom-bk:w-52 custom-bk:h-52 rounded-full z-10 top-5 custom-bk:top-14 custom-bk:left-1/4'
           src={userData?.img_url}

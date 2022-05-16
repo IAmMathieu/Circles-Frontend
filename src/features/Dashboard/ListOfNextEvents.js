@@ -15,7 +15,6 @@ export default function ListOfNextEvents({ open, onClose, eventsList }) {
                 <Box key={Date.now()}>
                   <Typography>{event.start}</Typography>
                   <Typography>{event.title}</Typography>
-                  <Typography>{event.description}</Typography>
                 </Box>
               );
             }
