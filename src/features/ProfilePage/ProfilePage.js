@@ -53,15 +53,12 @@ function ProfilePage() {
     useUpdateProfilUserMutation();
   const [deleteProfilUser] = useDeleteProfilUserMutation();
 
-  const userPicture =
-    'https://ca.slack-edge.com/T02MBC4J9K5-U02M8CJUVJR-2df2ffa3c507-512';
-
   if (isLoading) {
     return <Loading />;
   } else {
     return (
       <Box component='div'>
-        <img src={logo} alt='logo Circles ' className='circle-logo'></img>
+        <img src={logo} alt='logo Circles ' className='m-auto'></img>
         <Box
           className='container-page'
           sx={{
@@ -74,7 +71,6 @@ function ProfilePage() {
           <Card
             sx={{
               borderRadius: '50%',
-              backgroundColor: 'transparent',
               width: '50%',
               margin: 'auto',
               '@media (min-width:965px)': {
@@ -86,7 +82,7 @@ function ProfilePage() {
               <img
                 src={data?.img_url}
                 alt='User Portrait'
-                className='leftmenu--user-picture'
+                className='p-1.5 rounded-full m-auto w-full'
               />
             </Box>
           </Card>

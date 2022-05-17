@@ -68,7 +68,7 @@ export default function CircleCard({
             alt={name}
           />
           <Box className='absolute left-1/2 transform -translate-x-1/2 -bottom-5'>
-            <Tooltip title={'Administrateur du cercle : ' + admin_surname} placement='top'>
+            <Tooltip title={<Typography fontSize='1rem'>{'Administrateur du cercle : ' + admin_surname}</Typography>} placement='top'>
               <Avatar
                 src={admin_picture}
                 sx={{ bgcolor: red[500], width: '50px', height: '50px' }}
@@ -100,13 +100,13 @@ export default function CircleCard({
         </CardContent>
       </CardActionArea>
       <CardActions disableSpacing className='bg-darkybg flex justify-between'>
-        <Tooltip title='Membres du cercle'>
+        <Tooltip title={<Typography fontSize='1rem'>Membres du cercle</Typography>}>
           <IconButton className='text-lg' onClick={toggleMembers}>
             <PersonIcon className=' text-lg mr-2' /> {nb_number}
           </IconButton>
         </Tooltip>
         <Divider orientation='vertical' variant='middle' flexItem />
-        <Tooltip title='Membres connectés du cercle'>
+        <Tooltip title={<Typography fontSize='1rem'>Membres connectés du cercle</Typography>}>
           <IconButton className='text-lg'>
             <Brightness1Icon
               className=' text-lg mr-2'
@@ -116,7 +116,7 @@ export default function CircleCard({
           </IconButton>
         </Tooltip>
         <Divider orientation='vertical' variant='middle' flexItem />
-        <Tooltip title='Prochains événements'>
+        <Tooltip title={<Typography fontSize='1rem'>Prochains événements</Typography>}>
           <IconButton className='text-lg' onClick={toggleEvents}>
             <EventIcon className=' text-lg mr-2' />
             {nb_events}

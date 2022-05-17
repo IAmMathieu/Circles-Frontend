@@ -1,5 +1,6 @@
 import { Avatar, Grid, ListItem, ListItemText } from '@mui/material';
 import { Box } from '@mui/system';
+import { dateFormat } from '../../../utils/dateFormat';
 
 export default function OtherAnswer({ surname, time, text, img_url }) {
   return (
@@ -11,7 +12,7 @@ export default function OtherAnswer({ surname, time, text, img_url }) {
               <ListItemText align='right' primary={text}></ListItemText>
             </Grid>
             <Grid item xs={12}>
-              <ListItemText align='right'>{time}</ListItemText>
+              <ListItemText disableTypography align='right' sx={{fontSize:'.60rem'}}>{dateFormat(time)}</ListItemText>
             </Grid>
           </Box>
           <Avatar

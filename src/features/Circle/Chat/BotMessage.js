@@ -1,5 +1,6 @@
 import { Avatar, Grid, ListItem, ListItemText } from '@mui/material';
 import { Box } from '@mui/system';
+import { dateFormat } from '../../../utils/dateFormat';
 
 export default function BotMessage({ text, time }) {
   return (
@@ -10,7 +11,7 @@ export default function BotMessage({ text, time }) {
             <ListItemText primary={text}></ListItemText>
           </Grid>
           <Grid item xs={12}>
-            <ListItemText>{time}</ListItemText>
+            <ListItemText className='text-xs'>{dateFormat(time)}</ListItemText>
           </Grid>
         </Grid>
       </ListItem>
