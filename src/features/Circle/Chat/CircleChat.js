@@ -263,16 +263,12 @@ const Chat = ({
                   // Champ contrôlé
                   setMessagesWrite(event.target.value);
                 }}
-<<<<<<< HEAD
                 onKeyPress={(e) => {
                   if (e.key === 'Enter') {
                     client.current.emit('chatMessage', messagesWrite);
                     setMessagesWrite('');
                   }
                 }}
-=======
-                onKeyPress={handleEnterPress}
->>>>>>> feature/bugFixesChat
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position='end'>
