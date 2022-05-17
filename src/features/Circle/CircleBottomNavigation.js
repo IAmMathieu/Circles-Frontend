@@ -2,10 +2,8 @@ import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import GroupsIcon from '@mui/icons-material/Groups';
-import SearchIcon from '@mui/icons-material/Search';
 import { Typography } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { changeMenu } from './CircleSlice';
 
 export default function CircleBottomNavigation() {

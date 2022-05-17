@@ -1,7 +1,6 @@
 import {
   Avatar,
   Divider,
-  Fab,
   Grid,
   IconButton,
   InputAdornment,
@@ -9,20 +8,17 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Paper,
   TextField,
-  Typography,
 } from '@mui/material';
 import io from 'socket.io-client';
 import SendIcon from '@mui/icons-material/Send';
 import { Box } from '@mui/system';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import UserAnswer from './UserAnswer';
 import OtherAnswer from './OtherAnswer';
 import BotMessage from './BotMessage';
-import { Loading } from '../../Loading/Loading';
 import './style.scss';
 
 const Chat = ({
@@ -42,10 +38,19 @@ const Chat = ({
   // Les messages sur lesquels on map, on alloue les donnée des messages en premier state
   const [messageToMap, setMessageToMap] = useState(circleData?.messages);
 
+  const handleEnterPress = e => {
+    console.log(e);
+    if (e.key === "Enter") {
+      client.current.emit('chatMessage', messagesWrite);
+      setMessagesWrite('');;
+    }
+  };
+
   // Get messages from de BDD
   useEffect(() => {
     if (circleData && !allowMessage) {
       const messages = circleData.messages;
+      console.log(messages);
       setMessageToMap(messages);
       setAllowMessage(true);
     }
@@ -62,6 +67,7 @@ const Chat = ({
         room: circleData?.unique_code,
       });
       socket.on('message', (data) => {
+        console.log(data)
         setIoData(data);
       });
       client.current = socket;
@@ -209,7 +215,7 @@ const Chat = ({
                     />
                   );
                 }
-              } else if (message.surname === 'Jarvis') {
+              } else if (message.user_id === 'Jarvis') {
                 {
                   /* Pour le bot */
                   return (
@@ -257,6 +263,7 @@ const Chat = ({
                   // Champ contrôlé
                   setMessagesWrite(event.target.value);
                 }}
+                onKeyPress={handleEnterPress}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position='end'>

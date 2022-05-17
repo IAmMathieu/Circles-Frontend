@@ -38,7 +38,6 @@ export default function Circle() {
    */
   const { data: profilData } = useGetProfilUserQuery({ token, user_id });
   //* Socket part
-  console.log(circleData)
   /**
    * On détecte et relance le socket join une fois que le circle success a bien été fais.
    */
@@ -46,7 +45,7 @@ export default function Circle() {
   //* ------------
   return (
     <Box className=' relative flex flex-col items-center p-5 h-screen custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
-      <CircleHeader />
+      <CircleHeader circleData={circleData} />
       {menu === 'calendar' ? (
         <CircleCalendar />
       ) : (
@@ -60,12 +59,6 @@ export default function Circle() {
         />
       )}
       <CircleBottomNavigation />
-      {/* <Chat
-        circleData={circleData}
-        profilData={profilData}
-        CircleIsSuccess={CircleIsSuccess}
-        user_id={user_id}
-      /> */}
     </Box>
   );
 }

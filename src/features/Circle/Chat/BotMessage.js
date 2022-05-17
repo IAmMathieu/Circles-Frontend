@@ -1,6 +1,4 @@
-import { Avatar, Grid, ListItem, ListItemText } from '@mui/material';
-import { Box } from '@mui/system';
-import { dateFormat } from '../../../utils/dateFormat';
+import { ListItemText } from '@mui/material';
 
 export default function BotMessage({ text, time }) {
   return (
