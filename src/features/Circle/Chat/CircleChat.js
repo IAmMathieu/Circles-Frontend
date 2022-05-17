@@ -38,14 +38,6 @@ const Chat = ({
   // Les messages sur lesquels on map, on alloue les donnée des messages en premier state
   const [messageToMap, setMessageToMap] = useState(circleData?.messages);
 
-  const handleEnterPress = e => {
-    console.log(e);
-    if (e.key === "Enter") {
-      client.current.emit('chatMessage', messagesWrite);
-      setMessagesWrite('');;
-    }
-  };
-
   // Get messages from de BDD
   useEffect(() => {
     if (circleData && !allowMessage) {
@@ -67,7 +59,7 @@ const Chat = ({
         room: circleData?.unique_code,
       });
       socket.on('message', (data) => {
-        console.log(data)
+        console.log(data);
         setIoData(data);
       });
       client.current = socket;
@@ -104,7 +96,7 @@ const Chat = ({
     <Box
       className=' bg-darkysubg mb-3  w-full rounded-lg custom-bk:ml-[15vh] p-5 custom-bk:p-10 flex column shadow-2xl darkMode:shadow-none max-w-[2000px] sm:h-[60vh] lg:h-[83vh]'
       sx={{
-        height: { xs: '85%', lg: '83vh' },
+        height: { xs: '90%', lg: '90vh' },
       }}
     >
       <Grid container className='w-full flex row'>
@@ -254,7 +246,7 @@ const Chat = ({
           <Grid container className='absolute w-full bottom-0'>
             <Grid item xs={11}>
               <TextField
-              color='primary'
+                color='primary'
                 className='ml-4 '
                 label='Message...'
                 fullWidth
@@ -263,7 +255,12 @@ const Chat = ({
                   // Champ contrôlé
                   setMessagesWrite(event.target.value);
                 }}
-                onKeyPress={handleEnterPress}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    client.current.emit('chatMessage', messagesWrite);
+                    setMessagesWrite('');
+                  }
+                }}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position='end'>
