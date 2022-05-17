@@ -1,4 +1,4 @@
-import { emptySplitApi } from '../api/emptySplitApi';
+import { emptySplitApi } from '../../api/emptySplitApi';
 const calendarApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     createEvent: builder.mutation({

@@ -19,7 +19,10 @@ import {
   useCreateEventMutation,
   useDeleteEventMutation,
   useUpdateEventMutation,
-} from '../Calendar/CalendarApi';
+} from '../Circle/Calendar/CalendarApi';
+import ModalEvent from '../Circle/Calendar/ModalEvent';
+import { Button } from '@mui/material';
+import { useSelector } from 'react-redux';
 // import CustomToolbar from './CustomToolBar';
 // FIN CALENDRIER
 
@@ -52,7 +55,6 @@ const localizer = dateFnsLocalizer({
 //     end: new Date(2022, 4, 21),
 //   },
 // ];
-
 export const CirclePage = ({
   CircleIsSuccess,
   circleIsLoading,
@@ -63,6 +65,9 @@ export const CirclePage = ({
   circleRefetch,
 }) => {
   const [events, setEvents] = useState([]);
+  const calendarControlled = useSelector((state) => state.calendar);
+  const { token } = useSelector((state) => state.auth);
+
   useEffect(() => {
     circleData && setEvents(circleData.events);
   }, [circleData]);
@@ -252,11 +257,16 @@ export const CirclePage = ({
     }),
     []
   );
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const [createEvent] = useCreateEventMutation();
   const [updateEvent] = useUpdateEventMutation();
   const [deleteEvent] = useDeleteEventMutation();
   return (
-    <div className='container-circle'>
+    <div className='container-circle w-full'>
       <Box
         className='container-circle__box'
         sx={{
@@ -304,11 +314,26 @@ export const CirclePage = ({
       </Box>
       <Box style={{ marginTop: '5rem' }}>
         <Box sx={{ '& > :not(style)': { m: 1 } }}>
-          <Fab aria-label='add' variant='extended'>
+          <Button
+            aria-label='add'
+            variant='extended'
+            onClick={() => {
+              handleOpen();
+            }}
+          >
             <AddIcon />
             Ajouter un évènement
-          </Fab>
+          </Button>
         </Box>
+        <ModalEvent
+          open={open}
+          token={token}
+          onClose={handleClose}
+          createEvent={createEvent}
+          calendarControlled={calendarControlled}
+          circle_id={circle_id}
+          user_id={user_id}
+        />
         <Calendar
           localizer={localizer}
           events={events}

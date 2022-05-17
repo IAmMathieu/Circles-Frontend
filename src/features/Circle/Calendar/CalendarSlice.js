@@ -7,7 +7,7 @@ const initialState = {
   end: null,
   description: null,
   color: '#212B36',
-  allday: true,
+  allday: false,
   img_url: null,
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
