@@ -11,14 +11,14 @@ import './index.scss';
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <StyledEngineProvider injectFirst>
-          <CssBaseline />
-          <App />
-        </StyledEngineProvider>
-      </Provider>
-    </BrowserRouter>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <BrowserRouter>
+    <Provider store={store}>
+      <StyledEngineProvider injectFirst>
+        <CssBaseline />
+        <App />
+      </StyledEngineProvider>
+    </Provider>
+  </BrowserRouter>
+  // </React.StrictMode>
 );

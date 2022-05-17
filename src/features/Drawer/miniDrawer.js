@@ -106,10 +106,14 @@ export default function MiniDrawer({
   return (
     <Box className='test' sx={{ display: 'flex' }}>
       <CssBaseline />
-      <IconButton className='z-10' sx={{ position: 'fixed', left: '1rem', top:'1rem'}} onClick={handleToggleOpen} >
-          <MenuIcon  />
-        </IconButton>
-      
+      <IconButton
+        className='z-10'
+        sx={{ position: 'fixed', left: '1rem', top: '1rem' }}
+        onClick={handleToggleOpen}
+      >
+        <MenuIcon />
+      </IconButton>
+
       <Drawer
         className={`Drawer__ui--custom ${open && 'Drawer__ui--open'}`}
         variant='permanent'
@@ -117,7 +121,6 @@ export default function MiniDrawer({
         onClose={closeDrawer}
       >
         <DrawerHeader>
-          
           <IconButton onClick={handleToggleOpen}>
             {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>

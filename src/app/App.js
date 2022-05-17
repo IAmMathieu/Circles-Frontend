@@ -108,11 +108,11 @@ const App = () => {
             }
           />
           <Route
-            path='/circle/:id'
+            path='/circle/:circle_id'
             element={
-              // <PrivateRoute token={tokenState}>
-              <Circle />
-              // </PrivateRoute>
+              <PrivateRoute token={tokenState}>
+                <Circle />
+              </PrivateRoute>
             }
           />
           <Route path='/faq' theme={muiTheme} element={<FAQ />} />
