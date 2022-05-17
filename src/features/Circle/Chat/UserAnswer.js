@@ -5,8 +5,8 @@ import { dateFormat } from '../../../utils/dateFormat';
 export default function UserAnswer({ surname, time, text, img_url }) {
   return (
     <div>
-      <ListItem key='1'>
-        <Grid container className='flex column gap-4 justify-end'>
+      <ListItem key='1' className='p-1 pr-0'>
+        <Grid container className='flex flex-nowrap column gap-4 justify-end items-center'>
           <Box>
             <Grid item xs={12}>
               <ListItemText align='right' primary={text}></ListItemText>
@@ -23,7 +23,7 @@ export default function UserAnswer({ surname, time, text, img_url }) {
           </Box>
           <Avatar
             alt={surname}
-            src='https://material-ui.com/static/images/avatar/3.jpg'
+            src={img_url}
           />
         </Grid>
       </ListItem>

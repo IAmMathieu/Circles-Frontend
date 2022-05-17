@@ -9,6 +9,7 @@ module.exports = {
       'small': '600px'
     },
     colors: {
+      maincolor: 'var(--background)',
       darkybg: 'var(--background)',
       darkysubg: 'var(--subbackground)',
       buttonbg: 'var(--backgroundButton)',

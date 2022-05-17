@@ -23,7 +23,7 @@ export default function OtherAnswer({ surname, time, text, img_url }) {
           </Box>
           <Avatar
             alt={surname}
-            src='https://material-ui.com/static/images/avatar/3.jpg'
+            src={img_url}
             className='order-1'
           />
         </Grid>

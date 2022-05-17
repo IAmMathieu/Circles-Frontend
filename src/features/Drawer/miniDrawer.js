@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { styled } from '@mui/material/styles';
+import { styled, makeStyles } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -115,7 +115,7 @@ export default function MiniDrawer({
       </IconButton>
 
       <Drawer
-        className={`Drawer__ui--custom ${open && 'Drawer__ui--open'}`}
+        className={`Drawer__ui--custom ${open && 'Drawer__ui--open'} bg-buttonbg`}
         variant='permanent'
         open={open}
         onClose={closeDrawer}

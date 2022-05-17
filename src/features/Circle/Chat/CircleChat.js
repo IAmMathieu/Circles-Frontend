@@ -23,6 +23,7 @@ import UserAnswer from './UserAnswer';
 import OtherAnswer from './OtherAnswer';
 import BotMessage from './BotMessage';
 import { Loading } from '../../Loading/Loading';
+import './style.scss';
 
 const Chat = ({
   CircleIsSuccess,
@@ -204,7 +205,7 @@ const Chat = ({
                       surname={message.surname}
                       time={message.time}
                       text={message.text}
-                      img_url=''
+                      img_url={message.img_url}
                     />
                   );
                 }
@@ -236,7 +237,7 @@ const Chat = ({
                       surname={message.surname}
                       time={message.time}
                       text={message.text}
-                      img_url=''
+                      img_url={message.img_url}
                     />
                   );
                 }
@@ -247,9 +248,9 @@ const Chat = ({
           <Grid container className='absolute w-full bottom-0'>
             <Grid item xs={11}>
               <TextField
-                className='ml-4'
-                id='outlined-basic-email'
-                label='Type Something'
+              color='primary'
+                className='ml-4 '
+                label='Message...'
                 fullWidth
                 value={messagesWrite}
                 onChange={(event) => {

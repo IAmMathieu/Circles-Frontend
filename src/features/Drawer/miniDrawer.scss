@@ -1,13 +1,12 @@
 .Drawer__ui {
   &--custom {
     & > * {
-      background-color: none;
+      background-color: transparent;
     }
     //! Don't work on dark mode
     & > :first-child {
       // transition: all 300ms ease-in-out;
       background-color: var(--background);
-      backdrop-filter: blur(8px);
       -webkit-backdrop-filter: (8px);
       // opacity: 0;
       transform: translateX(-65px);
