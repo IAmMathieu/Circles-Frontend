@@ -16,13 +16,17 @@ import {
 import io from 'socket.io-client';
 import SendIcon from '@mui/icons-material/Send';
 import { Box } from '@mui/system';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import UserAnswer from './UserAnswer';
 import OtherAnswer from './OtherAnswer';
 import BotMessage from './BotMessage';
+import { Loading } from '../../Loading/Loading';
 
 const Chat = ({
   CircleIsSuccess,
+  circleIsLoading,
   circleData,
   profilData,
   user_id,
@@ -138,13 +142,48 @@ const Chat = ({
           >
             {/* Demander a Mathieu de mettre l'user_id pour filtrer les messages
              reçus et envoyés + l'img url + si le bot, on reçois une réponse du bot (id unique pour le bot? )  */}
-            {messageToMap !== null &&
-              messageToMap?.map((message, i) => {
-                // Si on envoie
-                if (message.surname === profilData.surname) {
-                  {
-                    /* Si c'est nous */
-                  }
+
+            {messageToMap?.map((message, i) => {
+              // Si on envoie
+              if (circleIsLoading) {
+                return [1, 2, 3, 4, 5, 6].map((number) => (
+                  <Stack
+                    spacing={1}
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      marginLeft: '1rem',
+                    }}
+                  >
+                    <Skeleton
+                      variant='circular'
+                      width={40}
+                      height={40}
+                      sx={{ alignSelf: 'flex-start' }}
+                    />
+                    <Skeleton
+                      variant='text'
+                      width={150}
+                      sx={{
+                        marginLeft: '1rem',
+                      }}
+                    />
+                    <Skeleton
+                      variant='circular'
+                      width={40}
+                      height={40}
+                      sx={{ alignSelf: 'flex-end' }}
+                    />
+                    <Skeleton
+                      variant='text'
+                      width={150}
+                      sx={{ alignSelf: 'flex-end', marginLeft: '1rem' }}
+                    />
+                  </Stack>
+                ));
+              } else if (message.surname === profilData.surname) {
+                {
+                  /* Si c'est nous */
                   return (
                     <UserAnswer
                       key={message + i}
@@ -154,32 +193,33 @@ const Chat = ({
                       img_url=''
                     />
                   );
-                } else if (message.surname === 'Aleks') {
-                  {
-                    /* Pour le bot */
-                    return (
-                      <BotMessage
-                        key={message + i}
-                        text={message.text}
-                        time={message.time}
-                      />
-                    );
-                  }
-                } else {
-                  {
-                    /*  Si autre personne */
-                    return (
-                      <OtherAnswer
-                        key={message + i}
-                        surname={message.surname}
-                        time={message.time}
-                        text={message.text}
-                        img_url=''
-                      />
-                    );
-                  }
                 }
-              })}
+              } else if (message.surname === 'Aleks') {
+                {
+                  /* Pour le bot */
+                  return (
+                    <BotMessage
+                      key={message + i}
+                      text={message.text}
+                      time={message.time}
+                    />
+                  );
+                }
+              } else {
+                {
+                  /*  Si autre personne */
+                  return (
+                    <OtherAnswer
+                      key={message + i}
+                      surname={message.surname}
+                      time={message.time}
+                      text={message.text}
+                      img_url=''
+                    />
+                  );
+                }
+              }
+            })}
           </List>
           <Divider />
           <Grid container className='absolute w-full bottom-0'>
