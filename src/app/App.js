@@ -21,11 +21,11 @@ import ContactPage from '../features/ContactPage/ContactPage';
 import MiniDrawer from '../features/Drawer/miniDrawer';
 import { CssBaseline } from '@mui/material';
 import Circle from '../features/Circle/Circle';
+import { textFieldColor } from '../features/Common/MUITheme/muiTheme';
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
   const dispatch = useDispatch();
-
   /**
    * Use for open or close the left menu
    */

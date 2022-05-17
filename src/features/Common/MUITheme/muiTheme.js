@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import { createTheme } from '@mui/material/styles';
 
 export const MuiThemeLight = createTheme({

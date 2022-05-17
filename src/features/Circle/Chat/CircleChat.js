@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import io from 'socket.io-client';
 import SendIcon from '@mui/icons-material/Send';
-import { Box } from '@mui/system';
+import { Box, styled } from '@mui/system';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 import { useEffect, useRef, useState } from 'react';
@@ -38,11 +38,11 @@ const Chat = ({
   // Les messages sur lesquels on map, on alloue les donnée des messages en premier state
   const [messageToMap, setMessageToMap] = useState(circleData?.messages);
 
-  const handleEnterPress = e => {
+  const handleEnterPress = (e) => {
     console.log(e);
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       client.current.emit('chatMessage', messagesWrite);
-      setMessagesWrite('');;
+      setMessagesWrite('');
     }
   };
 
@@ -67,7 +67,7 @@ const Chat = ({
         room: circleData?.unique_code,
       });
       socket.on('message', (data) => {
-        console.log(data)
+        console.log(data);
         setIoData(data);
       });
       client.current = socket;
@@ -77,29 +77,19 @@ const Chat = ({
 
   useEffect(() => {
     // if (messageToMap) {
-    if (messageToMap) {
-      setMessageToMap([...messageToMap, ioData]);
-    } else {
-      setMessageToMap([ioData && ioData]);
-    }
+      if (messageToMap) {
+        setMessageToMap([...messageToMap, ioData]);
+      } else {
+        setMessageToMap([ioData && ioData]);
+      }
+      // chat.current.scroll(0, chat.current.scrollHeight);
+      chat.current.scrollIntoView({ behavior: 'smooth' });
     // } else {
     // setMessageToMap([ioData && ioData]);
     // }
   }, [ioData]);
 
-  // Automatique scroll
-  useEffect(() => {
-    // lorsqu'on exécute le callback d'un useEffect
-    // le composant React est commit dans le DOM
-    // on a donc accès à "document"
-    // document.getElementById();
 
-    // 1e solution
-    // messagesRef.current.scroll(0, messagesRef.current.scrollHeight);
-
-    // 2e solution
-    chat.current.scrollIntoView({ behavior: 'smooth' });
-  }, [ioData]);
   return (
     <Box
       className=' bg-darkysubg mb-3  w-full rounded-lg custom-bk:ml-[15vh] p-5 custom-bk:p-10 flex column shadow-2xl darkMode:shadow-none max-w-[2000px] sm:h-[60vh] lg:h-[83vh]'
@@ -223,7 +213,7 @@ const Chat = ({
                     <Box
                       sx={{
                         width: '100%',
-                        backgroundColor: '#4A4D51',
+                        // backgroundColor: '#4A4D51',
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
@@ -250,6 +240,7 @@ const Chat = ({
                 }
               }
             })}
+            <div ref={chat} />
           </List>
           <Divider />
           <Grid container className='absolute w-full bottom-0'>
@@ -259,6 +250,9 @@ const Chat = ({
                 className='ml-4 '
                 label='Message...'
                 fullWidth
+                multiline
+                maxRows={2}
+                size='small'
                 value={messagesWrite}
                 onChange={(event) => {
                   // Champ contrôlé

@@ -31,7 +31,7 @@ export default function ListOfUsers({ open, onClose, userList }) {
               textDecoration: 'underline',
             }}
           >
-            Membres du cercle :{' '}
+            Membres du cercle :
           </Typography>
           {userList?.map((user) => {
             return <Typography key={Date.now()}>{user.surname}</Typography>;
