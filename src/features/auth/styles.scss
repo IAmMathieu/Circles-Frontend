@@ -9,7 +9,18 @@
   margin: 0;
   font-size: 2em;
 }
-
+.login-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .container {
+    height: 100vh;
+    @media only screen and (min-width: 1000px) {
+      height: fit-content;
+    }
+  }
+}
 form {
   // background-color: #41617a;
   display: flex;
@@ -24,7 +35,12 @@ form {
 .button:active {
   transform: scale(0.95);
 }
-
+.register-form {
+  // margin-top: 5rem;
+  @media only screen and (min-width: 1000px) {
+    margin-top: 0;
+  }
+}
 .button:focus {
   outline: none;
 }
@@ -33,7 +49,12 @@ form {
   background-color: transparent;
   border-color: #ffffff;
 }
-
+.button--signup,
+.button--signin {
+  @media only screen and (min-width: 1000px) {
+    display: none;
+  }
+}
 .forgot_password {
   margin-top: 2em;
 }
@@ -74,8 +95,11 @@ form {
 
 .sign-in-container {
   left: 0;
-  width: 50%;
+  width: 100%;
   z-index: 2;
+  @media only screen and (min-width: 1000px) {
+    width: 50%;
+  }
 }
 
 .container.right-panel-active .sign-in-container {
@@ -84,17 +108,24 @@ form {
 }
 
 .sign-up-container {
-  left: 0;
-  width: 50%;
-  opacity: 0;
-  z-index: 1;
+  transform: translateX(100vw);
+  @media only screen and (min-width: 1000px) {
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    z-index: 1;
+    width: 50%;
+  }
 }
 
 .container.right-panel-active .sign-up-container {
-  transform: translateX(100%);
-  opacity: 1;
-  z-index: 5;
-  animation: show 0.6s forwards;
+  transform: translateX(0);
+  @media only screen and (min-width: 1000px) {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: show 0.6s forwards;
+  }
 }
 
 @keyframes show {
@@ -112,27 +143,40 @@ form {
 }
 
 .overlay-container {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 50%;
-  height: 100%;
-  overflow: hidden;
-  transition: transform 0.6s ease-in-out;
-  z-index: 100;
+  display: none;
+  @media only screen and (min-width: 1000px) {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+  }
 }
 
 .middleLine {
-  width: 1px;
-  z-index: 1;
-  position: absolute;
-  left: 50%;
-  height: 100%;
-  background: #fff;
-  background: linear-gradient(180deg, transparent, var(--maincolor), transparent);
-  background-position: 50%;
-  background-repeat: repeat-y;
-  background-size: 1px auto;
+  display: none;
+  @media only screen and (min-width: 1000px) {
+    display: block;
+    width: 1px;
+    z-index: 1;
+    position: absolute;
+    left: 50%;
+    height: 100%;
+    background: #fff;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      var(--maincolor),
+      transparent
+    );
+    background-position: 50%;
+    background-repeat: repeat-y;
+    background-size: 1px auto;
+  }
 }
 
 .container.right-panel-active .overlay-container {
@@ -157,18 +201,22 @@ form {
 }
 
 .overlay-panel {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0 40px;
-  text-align: center;
-  top: 0;
-  height: 100%;
-  width: 50%;
-  transform: translateX(0);
-  transition: transform 0.6s ease-in-out;
+  display: none;
+  @media only screen and (min-width: 1000px) {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+    width: 50%;
+  }
 }
 
 .overlay-left {
@@ -188,10 +236,33 @@ form {
   transform: translateX(20%);
 }
 
+//! Circle logo a voir
 .circle-logo {
-  width: 250px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 3em;
-  padding-bottom: 3em;
+  width: 30vh;
+  max-width: 500px;
+  margin-top: 2rem;
+  // position: fixed;
+  @media only screen and (min-width: 1000px) {
+    top: 5rem;
+    width: 30vw;
+  }
+}
+
+.mobile-title {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  font-weight: 700;
+  font-size: calc(1vw + 1vh + 3vmin);
+  &--login {
+    // top: 23vh;
+    top: 5vh;
+  }
+  &--signup {
+    // top: 23vh;
+    top: 2vh;
+  }
+  @media only screen and (min-width: 1000px) {
+    display: none;
+  }
 }
