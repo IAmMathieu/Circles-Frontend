@@ -150,6 +150,7 @@ const Chat = ({
             className='overflow-scroll '
             sx={{
               '&::-webkit-scrollbar': { display: 'none' },
+              'scrollbar-width': 'none',
               height: { xs: '85%', lg: '90%' },
             }}
           >
