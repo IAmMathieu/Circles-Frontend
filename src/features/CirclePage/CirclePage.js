@@ -15,6 +15,11 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import {
+  useCreateEventMutation,
+  useDeleteEventMutation,
+  useUpdateEventMutation,
+} from '../Calendar/CalendarApi';
 // import CustomToolbar from './CustomToolBar';
 // FIN CALENDRIER
 
@@ -55,6 +60,7 @@ export const CirclePage = ({
   profilData,
   user_id,
   circle_id,
+  circleRefetch,
 }) => {
   const [events, setEvents] = useState([]);
   useEffect(() => {
@@ -246,7 +252,9 @@ export const CirclePage = ({
     }),
     []
   );
-
+  const [createEvent] = useCreateEventMutation();
+  const [updateEvent] = useUpdateEventMutation();
+  const [deleteEvent] = useDeleteEventMutation();
   return (
     <div className='container-circle'>
       <Box

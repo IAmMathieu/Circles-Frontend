@@ -23,6 +23,8 @@ export default function Circle() {
    * Make the query when we are into the circle
    */
   const {
+    refetch,
+    circleRefetch,
     data: circleData,
     isSuccess: CircleIsSuccess,
     isLoading: circleIsLoading,
@@ -46,6 +48,7 @@ export default function Circle() {
       <CircleHeader circleData={circleData} />
       {menu === 'calendar' ? (
         <CirclePage
+          circleRefetch={circleRefetch}
           circleData={circleData}
           profilData={profilData}
           CircleIsSuccess={CircleIsSuccess}
