@@ -1,4 +1,4 @@
-import { Avatar, Grid, ListItem, ListItemText } from '@mui/material';
+import { Avatar, Grid, ListItem, ListItemText, Tooltip, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { dateFormat } from '../../../utils/dateFormat';
 
@@ -21,11 +21,9 @@ export default function OtherAnswer({ surname, time, text, img_url }) {
               </ListItemText>
             </Grid>
           </Box>
-          <Avatar
-            alt={surname}
-            src={img_url}
-            className='order-1'
-          />
+          <Tooltip title={<Typography fontSize='1rem'>{surname}</Typography>}>
+            <Avatar alt={surname} src={img_url} className='order-1' />
+          </Tooltip>
         </Grid>
       </ListItem>
     </div>

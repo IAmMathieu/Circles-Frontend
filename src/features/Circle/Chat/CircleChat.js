@@ -209,7 +209,7 @@ const Chat = ({
                     />
                   );
                 }
-              } else if (message.surname === 'Aleks') {
+              } else if (message.surname === 'Jarvis') {
                 {
                   /* Pour le bot */
                   return (

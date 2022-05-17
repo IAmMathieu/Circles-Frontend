@@ -38,7 +38,7 @@ export default function Circle() {
    */
   const { data: profilData } = useGetProfilUserQuery({ token, user_id });
   //* Socket part
-
+  console.log(circleData)
   /**
    * On détecte et relance le socket join une fois que le circle success a bien été fais.
    */
