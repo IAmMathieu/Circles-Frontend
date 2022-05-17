@@ -2,17 +2,17 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // Initialise the default state.
 const initialState = {
-  id: '',
-  firstname: '',
-  lastname: '',
-  surname: '',
-  email: '',
-  password: '',
-  birthdate: '',
-  portrait_url: '',
-  token: '',
-  user_id: '',
-  oldPassword: '',
+  id: null,
+  firstname: null,
+  lastname: null,
+  surname: null,
+  email: null,
+  password: null,
+  birthdate: null,
+  portrait_url: null,
+  token: null,
+  user_id: null,
+  oldPassword: null,
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 // Tranche de state (le "slice)")
@@ -44,14 +44,15 @@ export const authSlice = createSlice({
     },
 
     handleUser: (state, action) => {
-      const { birthdate, email, firstname, portrait_url, lastname, surname} = action.payload;
+      const { birthdate, email, firstname, portrait_url, lastname, surname } =
+        action.payload;
       state.birthdate = birthdate;
       state.email = email;
       state.firstname = firstname;
       state.portrait_url = portrait_url;
       state.lastname = lastname;
       state.surname = surname;
-    }
+    },
   },
 });
 

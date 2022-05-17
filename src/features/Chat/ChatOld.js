@@ -1,15 +1,16 @@
+import { Suspense, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import io from 'socket.io-client';
 import {
   Box,
   Card,
+  Typography,
   CardMedia,
   Divider,
   styled,
   TextField,
 } from '@mui/material';
-import { Suspense, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import io from 'socket.io-client';
 import SendIcon from '@mui/icons-material/Send';
+import { Loading } from '../Loading/Loading';
 import SearchIcon from '@mui/icons-material/Search';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
@@ -17,62 +18,14 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import Picker from 'emoji-picker-react';
-import { Loading } from '../Loading/Loading';
-import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
-import { width } from '@mui/system';
-import { useGetUserDashBoardQuery } from '../Dashboard_old/DashboardApi';
-import { useGetCircleInfoQuery } from '../Circle/CircleApi';
-import { useParams } from 'react-router';
+import { CoPresentTwoTone } from '@mui/icons-material';
+// const socket = io.connect('http://localhost:5555');
 
-//! A voir pour le mettre autre pars pour pas appeller lors du dashboard
-const socket = io.connect('http://localhost:5555');
-export const Chat = () => {
-  const { token, user_id } = useSelector((state) => state.auth);
-  const { circle_id } = useParams();
-  const [firstLoad, setFirstLoad] = useState(false);
-  const sendMessage = () => {
-    socket.emit('chatMessage', messageControl);
-  };
-  const [firstClick, setFirstClick] = useState(false);
-  const dispatch = useDispatch();
-  const { data } = useGetProfilUserQuery({ token, user_id });
-  const [chosenEmoji, setChosenEmoji] = useState(null);
-  const onEmojiClick = (event, emojiObject) => {
-    setChosenEmoji(emojiObject);
-  };
-  const { data: circleData, isSuccess } = useGetCircleInfoQuery({
-    circle_id,
-    token,
-  });
-  const [messageControl, setMessageControl] = useState('');
-  const [message, setMessage] = useState([]);
-
-  useEffect(() => {
-    socket.emit('joinRoom', {
-      surname: data?.surname,
-      user_id,
-      room: circleData?.unique_code,
-    });
-  }, []);
-  useEffect(() => {
-    if (firstLoad) {
-      socket.on('message', (data) => {
-        const messageReceived = data.message;
-        const newMessage = {
-          content: messageReceived,
-          surname: 'surname',
-        };
-        setMessage(...message, newMessage);
-      });
-    }
-  }, [socket]);
-  useEffect(() => {
-    if (isSuccess) {
-      setFirstLoad(true);
-      setMessage(circleData.messages);
-    }
-  }, [isSuccess]);
-  console.log('message', message && message);
+export const Chat = ({ CircleIsSuccess, circleData, profilData, user_id }) => {
+  const client = useRef();
+  /**
+   * Styled custom badge
+   */
   const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
       backgroundColor: '#44b700',
@@ -90,17 +43,60 @@ export const Chat = () => {
         content: '""',
       },
     },
-    // '@keyframes ripple': {
-    //   '0%': {
-    //     transform: 'scale(.8)',
-    //     opacity: 1,
-    //   },
-    //   '100%': {
-    //     transform: 'scale(2.4)',
-    //     opacity: 0,
-    //   },
-    // },
   }));
+  const [ioData, setIoData] = useState('');
+  // Champ contrôlé pour récupérer les messages
+  const [messagesWrite, setMessagesWrite] = useState('');
+  // Les messages sur lesquels on map
+  const [messageToMap, setMessageToMap] = useState([]);
+
+  /**
+   * Use for join the socket.io room
+   */
+  useEffect(() => {
+    const socket = io.connect('http://localhost:5555');
+    socket.emit('joinRoom', {
+      surname: profilData?.surname,
+      user_id,
+      room: circleData?.unique_code,
+    });
+    socket.on('message', (data) => {
+      setIoData(data);
+    });
+    client.current = socket;
+    if (messageToMap !== null) setMessageToMap(circleData?.messages);
+  }, [CircleIsSuccess]);
+
+  useEffect(() => {
+    if (CircleIsSuccess) {
+      if (messageToMap) {
+        setMessageToMap([...messageToMap, ioData && ioData]);
+      } else {
+        setMessageToMap([ioData && ioData]);
+      }
+    }
+  }, [ioData]);
+  /**
+   * Allow to send message. We emit it with the input control
+   */
+  //   const sendMessage = () => {
+  //     // Emit un message lorsque l'on appelle la fonction
+  //     socket.emit('chatMessage', messagesWrite);
+  //   };
+
+  /**
+   * Get the data of socket.io, and allow it to messages
+   */
+  //   useEffect(() => {
+  //     // if (click) {
+  //     //   socket.emit('chatMessage', messagesWrite);
+  //     socket.on('message', (data) => {
+  //       setMessageToMap([...messageToMap, data]);
+  //       //   setMessageToMap([...messageToMap, data]);
+  //     });
+  //     console.log('deuxiemme');
+  //   }, []);
+
   return (
     <Card
       sx={{
@@ -121,7 +117,7 @@ export const Chat = () => {
           }}
           variant='dot'
         >
-          <Avatar alt='Remy Sharp' src={data?.img_url} />
+          <Avatar alt='Remy Sharp' src={profilData?.img_url} />
         </StyledBadge>
       </Box>
       <Divider orientation='vertical' />
@@ -170,10 +166,28 @@ export const Chat = () => {
           </Box>
         </Box>
         <Divider />
-        <Box sx={{ height: '90%' }}>
-          {message?.map(({ message }) => {
-            return <p>{message}</p>;
-          })}
+        <Box
+          className='message-container'
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '90%',
+            overflowY: 'scroll',
+          }}
+        >
+          {messageToMap !== null &&
+            messageToMap?.map((message, i) => {
+              return (
+                <Box key={message + i}>
+                  <Typography component='h5' variant='h5'>
+                    {message.surname}
+                  </Typography>
+                  <Typography component='h6' variant='h6'>
+                    {message.text}
+                  </Typography>
+                </Box>
+              );
+            })}
         </Box>
         <Divider />
         <Box sx={{ height: '5%', display: 'flex', alignItems: 'center' }}>
@@ -181,25 +195,12 @@ export const Chat = () => {
             sx={{ display: 'relative' }}
             type='button'
             aria-label='emoji'
-          >
-            <EmojiEmotionsIcon />
-            <Suspense fallback={<Loading />}>
-              <Picker
-                pickerStyle={{
-                  position: 'absolute',
-                  bottom: '30px',
-                  left: '20px',
-                  transformOrigin: 'bottom left',
-                  boxShadow: 'none',
-                  display: 'none',
-                }}
-                onEmojiClick={onEmojiClick}
-              />
-            </Suspense>
-          </IconButton>
+          ></IconButton>
           <TextField
+            value={messagesWrite}
             onChange={(event) => {
-              setMessageControl(event.target.value);
+              // Champ contrôlé
+              setMessagesWrite(event.target.value);
             }}
             sx={{
               width: '80%',
@@ -224,8 +225,7 @@ export const Chat = () => {
           >
             <SendIcon
               onClick={() => {
-                sendMessage(messageControl);
-                setMessageControl('');
+                client.current.emit('chatMessage', messagesWrite);
               }}
             />
           </Box>

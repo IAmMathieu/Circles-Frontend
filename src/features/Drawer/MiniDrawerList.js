@@ -19,7 +19,10 @@ function MiniDrawerList({
 
   return (
     <ListItem key={name} disablePadding sx={{ display: 'block' }}>
-      <Tooltip title={<Typography fontSize='1rem'>{name}</Typography> } placement='right'>
+      <Tooltip
+        title={<Typography fontSize='1rem'>{name}</Typography>}
+        placement='right'
+      >
         <NavLink
           to={url}
           className={({ isActive }) =>

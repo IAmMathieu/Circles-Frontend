@@ -24,7 +24,11 @@ export default function Circle() {
   /**
    * Make the query when we are into the circle
    */
-  const { data: circleData, isSuccess: CircleIsSuccess } = useGetCircleQuery({
+  const {
+    data: circleData,
+    isSuccess: CircleIsSuccess,
+    isLoading: circleIsLoading,
+  } = useGetCircleQuery({
     token,
     circle_id,
   });
@@ -52,6 +56,7 @@ export default function Circle() {
           CircleIsSuccess={CircleIsSuccess}
           user_id={user_id}
           circle_id={circle_id}
+          circleIsLoading={circleIsLoading}
         />
       )}
       <CircleBottomNavigation />

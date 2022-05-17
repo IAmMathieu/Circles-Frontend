@@ -11,8 +11,14 @@ export default function UserAnswer({ surname, time, text, img_url }) {
             <Grid item xs={12}>
               <ListItemText align='right' primary={text}></ListItemText>
             </Grid>
-            <Grid item xs={12} >
-              <ListItemText disableTypography align='right' sx={{fontSize:'.60rem'}}>{dateFormat(time)}</ListItemText>
+            <Grid item xs={12}>
+              <ListItemText
+                disableTypography
+                align='right'
+                sx={{ fontSize: '.60rem' }}
+              >
+                {dateFormat(time)}
+              </ListItemText>
             </Grid>
           </Box>
           <Avatar

@@ -12,7 +12,13 @@ export default function OtherAnswer({ surname, time, text, img_url }) {
               <ListItemText align='right' primary={text}></ListItemText>
             </Grid>
             <Grid item xs={12}>
-              <ListItemText disableTypography align='right' sx={{fontSize:'.60rem'}}>{dateFormat(time)}</ListItemText>
+              <ListItemText
+                disableTypography
+                align='right'
+                sx={{ fontSize: '.60rem' }}
+              >
+                {dateFormat(time)}
+              </ListItemText>
             </Grid>
           </Box>
           <Avatar
