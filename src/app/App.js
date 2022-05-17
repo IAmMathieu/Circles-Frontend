@@ -5,6 +5,7 @@ import './App.scss';
 import { DarkMode } from '../features/DarkMode/DarkMode';
 import useLocalStorage from 'use-local-storage';
 import { ThemeProvider } from '@emotion/react';
+import { CirclePage } from './../features/CirclePage/CirclePage'
 
 import {
   MuiThemeLight,
@@ -111,6 +112,12 @@ const App = () => {
               <PrivateRoute token={tokenState}>
                 <ProfilePage />
               </PrivateRoute>
+            }
+          />
+          <Route
+            path='/circle'
+            element={
+                <CirclePage />
             }
           />
           <Route path='/faq' theme={muiTheme} element={<FAQ />} />
