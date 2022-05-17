@@ -9,7 +9,12 @@
   margin: 0;
   font-size: 2em;
 }
-
+.login-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 form {
   // background-color: #41617a;
   display: flex;
@@ -129,7 +134,12 @@ form {
   left: 50%;
   height: 100%;
   background: #fff;
-  background: linear-gradient(180deg, transparent, var(--maincolor), transparent);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--maincolor),
+    transparent
+  );
   background-position: 50%;
   background-repeat: repeat-y;
   background-size: 1px auto;
@@ -188,10 +198,10 @@ form {
   transform: translateX(20%);
 }
 
+//! Circle logo a voir
 .circle-logo {
-  width: 250px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 3em;
-  padding-bottom: 3em;
+  width: 30vw;
+  max-width: 500px;
+  position: fixed;
+  top: 5rem;
 }
