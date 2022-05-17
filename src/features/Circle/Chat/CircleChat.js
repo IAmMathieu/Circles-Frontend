@@ -80,14 +80,27 @@ const Chat = ({
     // }
   }, [ioData]);
 
+  // Automatique scroll
+  useEffect(() => {
+    // lorsqu'on exécute le callback d'un useEffect
+    // le composant React est commit dans le DOM
+    // on a donc accès à "document"
+    // document.getElementById();
+
+    // 1e solution
+    // messagesRef.current.scroll(0, messagesRef.current.scrollHeight);
+
+    // 2e solution
+    chat.current.scrollIntoView({ behavior: 'smooth' });
+  }, [ioData]);
   return (
     <Box
       className=' bg-darkysubg mb-3  w-full rounded-lg custom-bk:ml-[15vh] p-5 custom-bk:p-10 flex column shadow-2xl darkMode:shadow-none max-w-[2000px] sm:h-[60vh] lg:h-[83vh]'
       sx={{
-        height: { xs: '70vh', lg: '83vh' },
+        height: { xs: '85%', lg: '83vh' },
       }}
     >
-      <Grid container className='w-full  flex row'>
+      <Grid container className='w-full flex row'>
         <Grid
           item
           xs={0}
@@ -134,10 +147,11 @@ const Chat = ({
           className='w-full relative right-0 h-[100%] '
         >
           <List
+            ref={chat}
             className='overflow-scroll '
             sx={{
               '&::-webkit-scrollbar': { display: 'none' },
-              height: { xs: '80%', lg: '90%' },
+              height: { xs: '85%', lg: '90%' },
             }}
           >
             {/* Demander a Mathieu de mettre l'user_id pour filtrer les messages
@@ -198,11 +212,19 @@ const Chat = ({
                 {
                   /* Pour le bot */
                   return (
-                    <BotMessage
-                      key={message + i}
-                      text={message.text}
-                      time={message.time}
-                    />
+                    <Box
+                      sx={{
+                        width: '100%',
+                        backgroundColor: '#4A4D51',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        margin: '0 1rem 1rem 1rem',
+                        borderRadius: '5px',
+                      }}
+                    >
+                      <BotMessage key={message + i} text={message.text} />
+                    </Box>
                   );
                 }
               } else {
