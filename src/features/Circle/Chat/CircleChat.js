@@ -67,6 +67,7 @@ const Chat = ({
         room: circleData?.unique_code,
       });
       socket.on('message', (data) => {
+        console.log(data)
         setIoData(data);
       });
       client.current = socket;
