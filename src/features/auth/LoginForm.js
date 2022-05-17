@@ -33,6 +33,7 @@ export const LoginForm = () => {
   /**
    * Add classlist to the container when click
    */
+
   const handleSwitch = () => {
     const container = document.getElementById('container');
     container.classList.toggle('right-panel-active');
@@ -43,6 +44,7 @@ export const LoginForm = () => {
       {(loginIsLoading || registerIsLoading) && <Loading />}
       <div className='container' id='container'>
         <div className='form-container sign-up-container'>
+          <h4 className='mobile-title mobile-title--signup'>S'enregistrer</h4>
           <form
             name='register-form'
             className='register-form flex flex-col '
@@ -90,9 +92,19 @@ export const LoginForm = () => {
             <button className='button' type={'submit'}>
               Créer votre compte
             </button>
+            <button
+              className='ghost button button--signin'
+              id='signIn'
+              variant='contained'
+              onClick={handleSwitch}
+              type='button'
+            >
+              Se connecter
+            </button>
           </form>
         </div>
         <div className='form-container sign-in-container'>
+          <h4 className='mobile-title mobile-title--login'>Se connecter</h4>
           <form
             name='login-form'
             className='login-form'
@@ -137,6 +149,15 @@ export const LoginForm = () => {
             <button className='button' type={'submit'} variant='contained'>
               Se connecter
             </button>
+            <button
+              className='ghost button button--signup z-50'
+              id='signUp'
+              type='button'
+              variant='contained'
+              onClick={handleSwitch}
+            >
+              S'inscrire
+            </button>
           </form>
         </div>
         <div className='middleLine'></div>
@@ -146,8 +167,9 @@ export const LoginForm = () => {
               <h1 className='texts'>De retour sur Circles?</h1>
               <p className='texts'>Cliquez ci-dessous pour vous connecter</p>
               <button
-                className='ghost button'
+                className='ghost button z-50'
                 id='signIn'
+                type='button'
                 variant='contained'
                 onClick={handleSwitch}
               >
