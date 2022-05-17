@@ -3,13 +3,11 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useGetCircleQuery } from './CircleApi';
 import CircleBottomNavigation from './CircleBottomNavigation';
-import CircleCalendar from './CircleCalendar';
+import CircleCalendar from './Calendar/CircleCalendar';
 import CircleChat from './Chat/CircleChat';
 import CircleHeader from './CircleHeader';
-
 import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
-import { Chat } from '../Chat/Chat';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Circle() {
   // Get id of the route

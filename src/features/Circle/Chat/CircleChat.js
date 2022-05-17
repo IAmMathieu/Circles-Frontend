@@ -38,6 +38,14 @@ const Chat = ({
   // Les messages sur lesquels on map, on alloue les donnée des messages en premier state
   const [messageToMap, setMessageToMap] = useState(circleData?.messages);
 
+  const handleEnterPress = e => {
+    console.log(e);
+    if (e.key === "Enter") {
+      client.current.emit('chatMessage', messagesWrite);
+      setMessagesWrite('');;
+    }
+  };
+
   // Get messages from de BDD
   useEffect(() => {
     if (circleData && !allowMessage) {
@@ -59,7 +67,6 @@ const Chat = ({
         room: circleData?.unique_code,
       });
       socket.on('message', (data) => {
-        console.log(data);
         setIoData(data);
       });
       client.current = socket;
@@ -256,12 +263,16 @@ const Chat = ({
                   // Champ contrôlé
                   setMessagesWrite(event.target.value);
                 }}
+<<<<<<< HEAD
                 onKeyPress={(e) => {
                   if (e.key === 'Enter') {
                     client.current.emit('chatMessage', messagesWrite);
                     setMessagesWrite('');
                   }
                 }}
+=======
+                onKeyPress={handleEnterPress}
+>>>>>>> feature/bugFixesChat
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position='end'>
