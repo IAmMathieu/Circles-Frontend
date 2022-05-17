@@ -54,7 +54,7 @@ const Chat = ({
    */
   useEffect(() => {
     if (circleData && allowMessage) {
-      const socket = io.connect('http://localhost:5555');
+      const socket = io.connect('https://cercles.herokuapp.com');
       socket.emit('joinRoom', {
         surname: profilData?.surname,
         user_id,

@@ -19,11 +19,10 @@ function MiniDrawerList({
 
   return (
     <ListItem key={name} disablePadding sx={{ display: 'block' }}>
-<<<<<<< HEAD
-      <Tooltip title={<Typography fontSize='1rem'>{name}</Typography> } placement='right'>
-=======
-      <Tooltip title={name} placement='right'>
->>>>>>> 88031b9 ([FIX](chat): allow to fetch data when changing circle or refresh page)
+      <Tooltip
+        title={<Typography fontSize='1rem'>{name}</Typography>}
+        placement='right'
+      >
         <NavLink
           to={url}
           className={({ isActive }) =>
