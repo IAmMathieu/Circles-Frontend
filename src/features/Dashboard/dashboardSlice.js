@@ -24,7 +24,6 @@ export const dashboardSlice = createSlice({
       /* state[nomDuChamp] --> En fonction ce sera email ou password(si on est sur l'input email, ce sera email) et on modifie la valeur basé sur le payload envoyé.
       Ici ce sera donc state[email] = action.payload.payload qui est égal à la valeur renseigné par l'utilisateur
       */
-    //  console.log(action.payload)
       state[action.payload.name] = action.payload.payload;
     },
   },

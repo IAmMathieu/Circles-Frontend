@@ -1,5 +1,5 @@
 import { setStorage } from '../../utils/helperLocalStorage';
-import { handleToken } from '../auth/authSlice';
+import { handleChange, handleToken } from '../auth/authSlice';
 import { emptySplitApi } from '../api/emptySplitApi';
 const extendedApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -38,9 +38,7 @@ const extendedApi = emptySplitApi.injectEndpoints({
             // Dispatch le handletoken du slice(permet d'utiliser facilement le token et l'user_id)
             dispatch(handleToken({ token, user_id }));
           })
-          .catch((error) => {
-            console.log(error);
-          });
+          .catch(({ error }) => {});
       },
     }),
     registerUser: builder.mutation({
@@ -79,12 +77,33 @@ const extendedApi = emptySplitApi.injectEndpoints({
             dispatch(handleToken({ token, user_id }));
           })
           .catch((error) => {
-            console.log(error);
+            handleChange({
+              name: 'error',
+              payload: error,
+            });
           });
+      },
+    }),
+    activateEmail: builder.query({
+      /**
+       * Query for login user. Take the email and password on parameter, and send it to the server.
+       * @param {*} param0
+       * @returns
+       */
+      query: ({ code_activate }) => {
+        return {
+          url: `activate/${code_activate}`,
+          method: 'POST',
+          header: 'Content-Type: application/x-www-form-urlencoded',
+        };
       },
     }),
   }),
   overrideExisting: false,
 });
 
-export const { useLoginUserMutation, useRegisterUserMutation } = extendedApi;
+export const {
+  useLoginUserMutation,
+  useRegisterUserMutation,
+  useActivateEmailQuery,
+} = extendedApi;

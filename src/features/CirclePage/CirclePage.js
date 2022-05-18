@@ -233,7 +233,6 @@ export const CirclePage = ({
       },
     });
   // Fait planter la vue ?
-  console.log(`üöÄ ~ circleIsLoading`, circleIsLoading);
 
   const { components } = useMemo(
     () => ({

@@ -39,7 +39,6 @@ const Chat = ({
   const [messageToMap, setMessageToMap] = useState(circleData?.messages);
 
   const handleEnterPress = (e) => {
-    // console.log(e);
     if (e.key === 'Enter') {
       client.current.emit('chatMessage', messagesWrite);
       setMessagesWrite('');
@@ -50,7 +49,6 @@ const Chat = ({
   useEffect(() => {
     if (circleData && !allowMessage) {
       const messages = circleData.messages;
-      // console.log(messages);
       setMessageToMap(messages);
       setAllowMessage(true);
     }
@@ -67,7 +65,6 @@ const Chat = ({
         room: circleData?.unique_code,
       });
       socket.on('message', (data) => {
-        // console.log(data);
         setIoData(data);
       });
       client.current = socket;

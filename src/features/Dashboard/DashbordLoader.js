@@ -27,7 +27,7 @@ DashbordLoader.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-export default function LinearWithValueLabel() {
+export default function LinearWithValueLabel({ text, time }) {
   const [progress, setProgress] = React.useState(10);
 
   React.useEffect(() => {
@@ -35,7 +35,7 @@ export default function LinearWithValueLabel() {
       setProgress((prevProgress) =>
         prevProgress >= 100 ? 10 : prevProgress + 10
       );
-    }, 800);
+    }, time * 100);
     return () => {
       clearInterval(timer);
     };
@@ -51,7 +51,7 @@ export default function LinearWithValueLabel() {
         transform: 'translate(-50%, -50%)',
       }}
     >
-      <Typography>Your dashboard is loading, please wait.</Typography>
+      <Typography>{text}</Typography>
       <DashbordLoader value={progress} />
     </Box>
   );

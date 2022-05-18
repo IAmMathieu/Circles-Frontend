@@ -25,7 +25,6 @@ export default function ListOfNextEvents({ open, onClose, eventsList }) {
   const newArray = arrayToSort?.sort((a, b) =>
     moment(a?.start, 'DD-MM-YYYY').diff(moment(b?.start, 'DD-MM-YYYY'))
   );
-  // console.log(`🚀 ~ sortEvenList`, sortEvenList);
   return (
     <div>
       <Modal open={open} onClose={onClose}>

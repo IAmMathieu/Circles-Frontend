@@ -94,7 +94,6 @@ export const Chat = ({ CircleIsSuccess, circleData, profilData, user_id }) => {
   //       setMessageToMap([...messageToMap, data]);
   //       //   setMessageToMap([...messageToMap, data]);
   //     });
-  //     console.log('deuxiemme');
   //   }, []);
 
   return (

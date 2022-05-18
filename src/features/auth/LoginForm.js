@@ -1,5 +1,5 @@
 import { Input } from '../Common/Input/Input';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './styles.scss';
 import './../../styles/variables.css';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { handleChange } from '../../features/auth/authSlice';
 import { Loading } from '../Loading/Loading';
 import { useNavigate } from 'react-router';
+import { Typography } from '@mui/material';
+import SnackBarAuth from './SnackBarAuth';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -19,16 +21,28 @@ export const LoginForm = () => {
     (state) => state.auth
   );
   const navigate = useNavigate();
+
+  const [openSnacke, setOpenSnacke] = useState(false);
+
+  const toggleSnacke = () => {
+    setOpenSnacke(!openSnacke);
+  };
   /**
    * Change the skip state, allow to fetch data from the server
    */
   const [date, setDate] = useState(Date);
   // First argument, the function we launch, second the result (destructuring here)
-  const [loginUser, { isLoading: loginIsLoading, isError: loginIsError }] =
-    useLoginUserMutation();
+  const [
+    loginUser,
+    { isLoading: loginIsLoading, isError: loginIsError, error: loginError },
+  ] = useLoginUserMutation();
   const [
     registerUser,
-    { isLoading: registerIsLoading, isError: registerIsError },
+    {
+      isLoading: registerIsLoading,
+      isError: registerIsError,
+      isSuccess: registerIsSuccess,
+    },
   ] = useRegisterUserMutation();
   /**
    * Add classlist to the container when click
@@ -38,10 +52,10 @@ export const LoginForm = () => {
     const container = document.getElementById('container');
     container.classList.toggle('right-panel-active');
   };
-
+  console.log(loginError);
   return (
     <>
-      {(loginIsLoading || registerIsLoading) && <Loading />}
+      {loginIsLoading && <Loading />}
       <div className='container' id='container'>
         <div className='form-container sign-up-container'>
           <h4 className='mobile-title mobile-title--signup'>S'enregistrer</h4>
@@ -58,6 +72,7 @@ export const LoginForm = () => {
                 password,
                 birthdate,
               });
+              toggleSnacke();
             }}
           >
             <Input name='Prénom' input='firstname' type={'text'} />
@@ -71,11 +86,10 @@ export const LoginForm = () => {
             />
             <Input name='Mot de passe' input='password' type={'password'} />
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-              //! Voir pour la date
               <DatePicker
                 label='Birth date'
                 name='birthdate'
-                value={date}
+                value={birthdate}
                 format='yyyy-mm-dd'
                 onChange={(event) => {
                   // Reformatage de la date pour l'envoie vers la BDD
@@ -116,7 +130,6 @@ export const LoginForm = () => {
                 email,
                 password,
               });
-              navigate('/dashboard', { replace: true });
             }}
           >
             <div className='input__container relative flex flex-col'>
@@ -137,8 +150,21 @@ export const LoginForm = () => {
               />
 
               {loginIsError ? (
-                <p className='text-red-500 absolute bottom-[-30px] whitespace-nowrap left-1/2 transform -translate-x-1/2 font-bold'>
-                  E-mail ou mot de passe incorrect
+                <p
+                  style={{
+                    color: 'red',
+                    position: 'absolute',
+                    bottom: '-30px',
+                    whiteSpace: 'nowrap',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    fontWeight: '700',
+                  }}
+                >
+                  {loginError.data === 'Email does not exist  ' ||
+                  'password is incorrect'
+                    ? 'E-mail ou mot de passe incorrect'
+                    : 'Votre e-mail doit être validé, veuillez le valider.'}
                 </p>
               ) : (
                 ''
@@ -195,6 +221,11 @@ export const LoginForm = () => {
           </div>
         </div>
       </div>
+      <SnackBarAuth
+        openSnacke={openSnacke}
+        setOpenSnacke={setOpenSnacke}
+        toggleSnacke={toggleSnacke}
+      />
     </>
   );
 };

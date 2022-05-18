@@ -66,7 +66,12 @@ export const Dashboard = () => {
   }, [createCircleSuccess]);
 
   if (dashboardIsLoading) {
-    return <DashbordLoader />;
+    return (
+      <DashbordLoader
+        time={8}
+        text={'Your dashboard is loading, please wait.'}
+      />
+    );
   } else {
     return (
       <>

@@ -14,6 +14,7 @@ const initialState = {
   token: getStorage('token'),
   user_id: null,
   oldPassword: null,
+  error: null,
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 // Tranche de state (le "slice)")
@@ -28,6 +29,7 @@ export const authSlice = createSlice({
      * @param {*} action
      */
     handleChange: (state, action) => {
+      console.log(`🚀 ~ action`, action);
       /* state[nomDuChamp] --> En fonction ce sera email ou password(si on est sur l'input email, ce sera email) et on modifie la valeur basé sur le payload envoyé.
       Ici ce sera donc state[email] = action.payload.payload qui est égal à la valeur renseigné par l'utilisateur
       */
