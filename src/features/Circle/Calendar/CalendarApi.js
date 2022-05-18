@@ -1,4 +1,4 @@
-import { emptySplitApi } from '../api/emptySplitApi';
+import { emptySplitApi } from '../../api/emptySplitApi';
 const calendarApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     createEvent: builder.mutation({
@@ -54,8 +54,8 @@ const calendarApi = emptySplitApi.injectEndpoints({
         event_id,
       }) => {
         return {
-          url: `circle/${circle_id}/event/${event_id}`,
-          method: 'POST',
+          url: `circle/event/${event_id}`,
+          method: 'PATCH',
           contentType: 'application/json',
           body: new URLSearchParams({
             // titre event
@@ -81,10 +81,10 @@ const calendarApi = emptySplitApi.injectEndpoints({
       },
     }),
     deleteEvent: builder.mutation({
-      query: ({ circle_id, token, user_id, event_id }) => {
+      query: ({ token, user_id, event_id }) => {
         return {
-          url: `circle/${circle_id}/event/${event_id}`,
-          method: 'POST',
+          url: `circle/event/${event_id}`,
+          method: 'DELETE',
           contentType: 'application/json',
           body: new URLSearchParams({
             user_id,

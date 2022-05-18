@@ -1,14 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+import moment from 'moment-timezone';
 // Initialise the default state.
 const initialState = {
   title: null,
-  start: null,
+  start: moment().format('YYYY-MM-DD'),
   end: null,
   description: null,
   color: '#212B36',
-  allday: true,
-  img_url: null,
+  allday: false,
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 // Tranche de state (le "slice)")

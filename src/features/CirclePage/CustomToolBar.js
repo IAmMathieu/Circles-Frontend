@@ -1,26 +1,26 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import clsx from 'clsx'
+import React from 'react';
+import PropTypes from 'prop-types';
+import clsx from 'clsx';
 import { Navigate as navigate } from '../../../node_modules';
 
 function ViewNamesGroup({ views: viewNames, view, messages, onView }) {
   return viewNames.map((name) => (
     <button
-      type="button"
+      type='button'
       key={name}
       className={clsx({ 'rbc-active': view === name })}
       onClick={() => onView(name)}
     >
       {messages[name]}
     </button>
-  ))
+  ));
 }
 ViewNamesGroup.propTypes = {
   messages: PropTypes.object,
   onView: PropTypes.func,
   view: PropTypes.string,
   views: PropTypes.array,
-}
+};
 
 export default function CustomToolbar({
   // date, // available, but not used here
@@ -32,8 +32,8 @@ export default function CustomToolbar({
   views,
 }) {
   return (
-    <div className="rbc-toolbar">
-      <span className="rbc-btn-group">
+    <div className='rbc-toolbar'>
+      <span className='rbc-btn-group'>
         <ViewNamesGroup
           view={view}
           views={views}
@@ -42,33 +42,33 @@ export default function CustomToolbar({
         />
       </span>
 
-      <span className="rbc-toolbar-label">{label}</span>
+      <span className='rbc-toolbar-label'>{label}</span>
 
-      <span className="rbc-btn-group">
+      <span className='rbc-btn-group'>
         <button
-          type="button"
+          type='button'
           onClick={() => onNavigate(navigate.PREVIOUS)}
           aria-label={messages.previous}
         >
-          <i className="fa fa-fw fa-chevron-left"></i>
+          <i className='fa fa-fw fa-chevron-left'></i>
         </button>
         <button
-          type="button"
+          type='button'
           onClick={() => onNavigate(navigate.TODAY)}
           aria-label={messages.today}
         >
-          <i className="fa fa-fw fa-circle"></i>
+          <i className='fa fa-fw fa-circle'></i>
         </button>
         <button
-          type="button"
+          type='button'
           onClick={() => onNavigate(navigate.NEXT)}
           aria-label={messages.next}
         >
-          <i className="fa fa-fw fa-chevron-right"></i>
+          <i className='fa fa-fw fa-chevron-right'></i>
         </button>
       </span>
     </div>
-  )
+  );
 }
 CustomToolbar.propTypes = {
   date: PropTypes.instanceOf(Date),
@@ -79,4 +79,4 @@ CustomToolbar.propTypes = {
   onView: PropTypes.func,
   view: PropTypes.string,
   views: PropTypes.array,
-}
+};

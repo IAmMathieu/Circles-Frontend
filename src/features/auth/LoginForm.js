@@ -71,6 +71,7 @@ export const LoginForm = () => {
             />
             <Input name='Mot de passe' input='password' type={'password'} />
             <LocalizationProvider dateAdapter={AdapterDateFns}>
+              //! Voir pour la date
               <DatePicker
                 label='Birth date'
                 name='birthdate'

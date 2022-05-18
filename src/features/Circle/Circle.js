@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useGetCircleQuery } from './CircleApi';
 import CircleBottomNavigation from './CircleBottomNavigation';
-import CircleCalendar from './Calendar/CircleCalendar';
+import { CirclePage } from '../CirclePage/CirclePage';
 import CircleChat from './Chat/CircleChat';
 import CircleHeader from './CircleHeader';
 import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
@@ -23,6 +23,7 @@ export default function Circle() {
    * Make the query when we are into the circle
    */
   const {
+    refetch: circleRefetch,
     data: circleData,
     isSuccess: CircleIsSuccess,
     isLoading: circleIsLoading,
@@ -45,7 +46,15 @@ export default function Circle() {
     <Box className=' relative flex flex-col items-center p-5 h-screen custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
       <CircleHeader circleData={circleData} />
       {menu === 'calendar' ? (
-        <CircleCalendar />
+        <CirclePage
+          circleRefetch={circleRefetch}
+          circleData={circleData}
+          profilData={profilData}
+          CircleIsSuccess={CircleIsSuccess}
+          user_id={user_id}
+          circle_id={circle_id}
+          circleIsLoading={circleIsLoading}
+        />
       ) : (
         <CircleChat
           circleData={circleData}
