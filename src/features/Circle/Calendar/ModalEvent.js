@@ -106,7 +106,7 @@ export default function ModalEvent({
                   circle_id,
                   user_id,
                   token,
-                  eventId,
+                  event_id: eventId,
                 });
               }
 
@@ -285,7 +285,9 @@ export default function ModalEvent({
             />
             <DialogActions>
               <Button onClick={onClose}>Retour</Button>
-              <Button type='submit'>Créer</Button>
+              <Button type='submit'>
+                {eventName === 'create' ? 'Créer' : 'Mise à jour'}
+              </Button>
             </DialogActions>
           </Box>
         </Modal>
@@ -316,7 +318,6 @@ export default function ModalEvent({
                 circle_id,
                 token,
                 user_id,
-                event_id: eventId,
               });
               onClose();
               closeValid();

@@ -54,8 +54,8 @@ const calendarApi = emptySplitApi.injectEndpoints({
         event_id,
       }) => {
         return {
-          url: `circle/${circle_id}/event/${event_id}`,
-          method: 'POST',
+          url: `circle/event/${event_id}`,
+          method: 'PATCH',
           contentType: 'application/json',
           body: new URLSearchParams({
             // titre event
