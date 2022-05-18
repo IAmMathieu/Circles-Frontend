@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     screens: {
       'custom-bk': '965px',
-      'small': '600px'
+      'small': '610px'
     },
     colors: {
       maincolor: 'var(--background)',
