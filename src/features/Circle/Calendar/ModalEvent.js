@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import moment from 'moment-timezone';
@@ -9,6 +10,7 @@ import {
   DialogActions,
   FormControlLabel,
   FormGroup,
+  IconButton,
   Stack,
   Switch,
   TextField,
@@ -19,7 +21,10 @@ import {
   DesktopDateTimePicker,
   LocalizationProvider,
 } from '@mui/x-date-pickers';
-
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import { MobileDateTimePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { handleChange } from './CalendarSlice';
@@ -30,10 +35,9 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '80vh',
+  width: '50vh',
   backgroundColor: '#1A2027',
-  // backgroundColor: 'var(--maincolor)',
-  // color: 'var(--backgroundbutton)',
+  // bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
   borderRadius: '20px',
@@ -52,154 +56,202 @@ export default function ModalEvent({
   eventId,
   eventName,
   updateEvent,
+  deleteEvent,
 }) {
   const dispatch = useDispatch();
   const { circle_id } = useParams();
+  const [valid, setValid] = useState(false);
+
+  const openValid = () => {
+    setValid(true);
+  };
+  const closeValid = () => {
+    setValid(false);
+  };
   const [startDate, setStartDate] = useState(
     new Date('2018-01-01 00:00:00.000Z')
   );
   const [endDate, setEndDate] = useState(new Date('2018-01-01 00:00:00.000Z'));
 
   return (
-    <Box>
-      <Modal
-        open={open}
-        onClose={onClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'
-      >
-        <Box
-          sx={style}
-          component='form'
-          onSubmit={async (e) => {
-            e.preventDefault();
-            // const newObj = await { ...calendarControlled };
-            // for (const key in newObj) {
-            //   if (newObj[key] === '' || null) {
-            //     delete newObj[key];
-            //   }
-            // }
-            if (eventName === 'create') {
-              await createEvent({
-                ...calendarControlled,
-                circle_id,
-                user_id,
-                token,
-              });
-            } else {
-              await updateEvent({
-                ...calendarControlled,
-                circle_id,
-                user_id,
-                token,
-                eventId,
-              });
-            }
-
-            onClose();
-            circleRefetch();
-          }}
+    <>
+      <Box>
+        <Modal
+          open={open}
+          onClose={onClose}
+          aria-labelledby='modal-modal-title'
+          aria-describedby='modal-modal-description'
         >
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
-            {eventName === 'create'
-              ? 'Ajouter un événement'
-              : 'Modifier un évènement'}
-          </Typography>
-          <TextField
-            autoFocus
-            required
-            margin='dense'
-            id='title'
-            label='Titre'
-            type='text'
-            value={eventName === 'create' ? '' : calendarControlled.title}
-            fullWidth
-            variant='standard'
-            sx={{ color: 'red' }}
-            onChange={(event) => {
-              dispatch(
-                handleChange({
-                  name: 'title',
-                  payload: event.target.value,
-                })
-              );
+          <Box
+            sx={style}
+            component='form'
+            onSubmit={async (e) => {
+              e.preventDefault();
+              // const newObj = await { ...calendarControlled };
+              // for (const key in newObj) {
+              //   if (newObj[key] === '' || null) {
+              //     delete newObj[key];
+              //   }
+              // }
+              if (eventName === 'create') {
+                await createEvent({
+                  ...calendarControlled,
+                  circle_id,
+                  user_id,
+                  token,
+                });
+              } else {
+                await updateEvent({
+                  ...calendarControlled,
+                  circle_id,
+                  user_id,
+                  token,
+                  eventId,
+                });
+              }
+
+              onClose();
+              circleRefetch();
             }}
-          />
-          <TextField
-            autoFocus
-            required
-            margin='dense'
-            id='description'
-            label='Description'
-            multiline
-            rows={4}
-            value={eventName === 'create' ? '' : calendarControlled.description}
-            type='text'
-            fullWidth
-            variant='standard'
-            sx={{ color: 'red' }}
-            onChange={(event) => {
-              dispatch(
-                handleChange({
-                  name: 'description',
-                  payload: event.target.value,
-                })
-              );
-            }}
-          />
-          <FormGroup>
-            <FormControlLabel
-              control={<Switch />}
-              label='Toute la journée'
+          >
+            <Typography id='modal-modal-title' variant='h6' component='h2'>
+              {eventName === 'create'
+                ? 'Ajouter un événement'
+                : 'Modifier un évènement'}
+            </Typography>
+            <TextField
+              autoFocus
+              required
+              margin='dense'
+              id='title'
+              label='Titre'
+              type='text'
+              value={eventName === 'create' ? '' : calendarControlled.title}
+              fullWidth
+              variant='standard'
+              sx={{ color: 'red' }}
               onChange={(event) => {
                 dispatch(
                   handleChange({
-                    name: 'allday',
-                    payload: event.target.checked,
+                    name: 'title',
+                    payload: event.target.value,
                   })
                 );
               }}
             />
-          </FormGroup>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <Stack spacing={3}>
-              {calendarControlled?.allday === false ? (
+            {eventName === 'create' ? (
+              ''
+            ) : (
+              <DeleteIcon
+                onClick={() => setValid(true)}
+                color='error'
+                sx={{ position: 'absolute', top: '2rem', right: '2rem' }}
+              />
+            )}
+
+            <TextField
+              autoFocus
+              required
+              margin='dense'
+              id='description'
+              label='Description'
+              multiline
+              rows={4}
+              value={
+                eventName === 'create' ? '' : calendarControlled.description
+              }
+              type='text'
+              fullWidth
+              variant='standard'
+              sx={{ color: 'red' }}
+              onChange={(event) => {
+                dispatch(
+                  handleChange({
+                    name: 'description',
+                    payload: event.target.value,
+                  })
+                );
+              }}
+            />
+            <FormGroup>
+              <FormControlLabel
+                control={<Switch />}
+                label='Toute la journée'
+                onChange={(event) => {
+                  dispatch(
+                    handleChange({
+                      name: 'allday',
+                      payload: event.target.checked,
+                    })
+                  );
+                }}
+              />
+            </FormGroup>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <Stack spacing={3}>
+                {calendarControlled?.allday === false ? (
+                  <DateTimePicker
+                    mask='mm'
+                    value={calendarControlled.start}
+                    label='Start event : '
+                    onChange={(event) => {
+                      const [date] = event.toISOString().split('GMT');
+                      const formatDate = moment(date)
+                        .tz('Europe/Paris')
+                        .format('YYYY-MM-DD HH:mm:ss');
+                      dispatch(
+                        handleChange({
+                          name: 'start',
+                          payload: formatDate,
+                        })
+                      );
+                    }}
+                    renderInput={(props) => <TextField {...props} />}
+                  />
+                ) : (
+                  <DatePicker
+                    // mask='mm'
+                    value={calendarControlled.start}
+                    format='yyyy-mm-dd'
+                    mask='____/__/__'
+                    label='Start event : '
+                    onChange={(event) => {
+                      const [date] = event.toISOString().split('GTM');
+                      const formatDate = moment(date)
+                        .tz('Europe/Paris')
+                        .format('YYYY-MM-DD');
+                      dispatch(
+                        handleChange({
+                          name: 'start',
+                          payload: formatDate,
+                        })
+                      );
+                      dispatch(
+                        handleChange({
+                          name: 'end',
+                          payload: formatDate,
+                        })
+                      );
+                    }}
+                    renderInput={(props) => <TextField {...props} />}
+                  />
+                )}
+
                 <DateTimePicker
                   mask='mm'
-                  value={calendarControlled.start}
-                  label='Start event : '
+                  disabled={calendarControlled?.allday === true ? true : false}
+                  label='End event : '
+                  required
+                  value={
+                    eventName === 'create'
+                      ? calendarControlled.start
+                      : calendarControlled.end
+                  }
                   onChange={(event) => {
                     const [date] = event.toISOString().split('GMT');
                     const formatDate = moment(date)
                       .tz('Europe/Paris')
                       .format('YYYY-MM-DD HH:mm:ss');
-                    dispatch(
-                      handleChange({
-                        name: 'start',
-                        payload: formatDate,
-                      })
-                    );
-                  }}
-                  renderInput={(props) => <TextField {...props} />}
-                />
-              ) : (
-                <DatePicker
-                  // mask='mm'
-                  value={calendarControlled.start}
-                  format='yyyy-mm-dd'
-                  mask='____/__/__'
-                  label='Start event : '
-                  onChange={(event) => {
-                    const [date] = event.toISOString().split('GTM');
-                    const formatDate = moment(date)
-                      .tz('Europe/Paris')
-                      .format('YYYY-MM-DD');
-                    dispatch(
-                      handleChange({
-                        name: 'start',
-                        payload: formatDate,
-                      })
-                    );
                     dispatch(
                       handleChange({
                         name: 'end',
@@ -209,60 +261,73 @@ export default function ModalEvent({
                   }}
                   renderInput={(props) => <TextField {...props} />}
                 />
-              )}
-
-              <DateTimePicker
-                mask='mm'
-                disabled={calendarControlled?.allday === true ? true : false}
-                label='End event : '
-                required
-                value={
-                  eventName === 'create'
-                    ? calendarControlled.start
-                    : calendarControlled.end
-                }
-                onChange={(event) => {
-                  const [date] = event.toISOString().split('GMT');
-                  const formatDate = moment(date)
-                    .tz('Europe/Paris')
-                    .format('YYYY-MM-DD HH:mm:ss');
-                  dispatch(
-                    handleChange({
-                      name: 'end',
-                      payload: formatDate,
-                    })
-                  );
-                }}
-                renderInput={(props) => <TextField {...props} />}
-              />
-            </Stack>
-          </LocalizationProvider>
-          <TextField
-            autoFocus
-            required
-            margin='dense'
-            id='name'
-            label='Couleur de votre cercle'
-            type='color'
-            value={eventName === 'create' ? '' : calendarControlled.color}
-            defaultValue='#212B36'
-            fullWidth
-            variant='standard'
-            onChange={(event) => {
-              dispatch(
-                handleChange({
-                  name: 'color',
-                  payload: event.target.value,
-                })
-              );
+              </Stack>
+            </LocalizationProvider>
+            <TextField
+              autoFocus
+              required
+              margin='dense'
+              id='name'
+              label='Couleur de votre cercle'
+              type='color'
+              value={eventName === 'create' ? '' : calendarControlled.color}
+              defaultValue='#212B36'
+              fullWidth
+              variant='standard'
+              onChange={(event) => {
+                dispatch(
+                  handleChange({
+                    name: 'color',
+                    payload: event.target.value,
+                  })
+                );
+              }}
+            />
+            <DialogActions>
+              <Button onClick={onClose}>Retour</Button>
+              <Button type='submit'>Créer</Button>
+            </DialogActions>
+          </Box>
+        </Modal>
+      </Box>
+      <Dialog
+        open={valid}
+        onClose={closeValid}
+        aria-labelledby='alert-dialog-title'
+        aria-describedby='alert-dialog-description'
+      >
+        <DialogTitle id='alert-dialog-title'>
+          Supprimer cet évènement ?
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id='alert-dialog-description'>
+            L'entièreté de l'évènement sera supprimé.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button color='secondary' onClick={closeValid}>
+            Retour
+          </Button>
+          <Button
+            color='error'
+            onClick={async (e) => {
+              e.preventDefault();
+              await deleteEvent({
+                circle_id,
+                token,
+                user_id,
+                event_id: eventId,
+              });
+              onClose();
+              closeValid();
+              circleRefetch();
             }}
-          />
-          <DialogActions>
-            <Button onClick={onClose}>Retour</Button>
-            <Button type='submit'>Créer</Button>
-          </DialogActions>
-        </Box>
-      </Modal>
-    </Box>
+            autoFocus
+          >
+            Supprimer
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 }
