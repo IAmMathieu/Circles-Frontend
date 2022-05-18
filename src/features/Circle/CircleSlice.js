@@ -4,6 +4,10 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     circle_id: '',
     circle_code: '',
+    name: '',
+    description: '',
+    img_url: '',
+    color: '',
     menu: 'calendar',
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
@@ -30,6 +34,10 @@ export const CircleSlice = createSlice({
         */
         state.circle_id = action.payload.circle_id;
         state.circle_code = action.payload.circle_code;
+        state.name = action.payload.name;
+        state.description = action.payload.desc;
+        state.img_url = action.payload.img_url;
+        state.color = action.payload.color;
       },
   },
 });

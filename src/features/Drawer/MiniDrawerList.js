@@ -4,31 +4,43 @@ import { NavLink } from 'react-router-dom';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Typography } from '@mui/material';
+import { Avatar, Typography } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { changeCircle } from '../Circle/CircleSlice';
 
 function MiniDrawerList({
   name,
-  url,
+  desc,
+  circle_id,
   open,
-  img,
+  img_url,
   icon,
   click,
   handleToggleOpen,
 }) {
-  const IconCustom = icon;
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const redirect = (event) => {
+    event.preventDefault();
+    navigate('/circle/' + circle_id);
+    dispatch(changeCircle({ circle_id, name, desc, img_url }));
+  };
 
   return (
-    <ListItem key={name} disablePadding sx={{ display: 'block' }}>
+    <ListItem key={name} disablePadding sx={{ display: 'block' }} onClick={redirect} >
       <Tooltip
         title={<Typography fontSize='1rem'>{name}</Typography>}
         placement='right'
       >
-        <NavLink
+        {/* <NavLink
           to={url}
+          
           className={({ isActive }) =>
             isActive ? 'nav-active' : 'nav-inactive'
           }
-        >
+        > */}
           <ListItemButton
             sx={{
               minHeight: 48,
@@ -47,12 +59,12 @@ function MiniDrawerList({
                 justifyContent: 'center',
               }}
             >
-              {img ? (
-                <img
+              {img_url ? (
+                <Avatar
                   alt={name}
                   className='w-10 h-10 rounded-full MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root'
-                  src={img}
-                ></img>
+                  src={img_url}
+                />
               ) : icon ? (
                 <i
                   className={`${icon} MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root`}
@@ -63,7 +75,7 @@ function MiniDrawerList({
             </ListItemIcon>
             <ListItemText primary={name} sx={{ opacity: open ? 1 : 0 }} />
           </ListItemButton>
-        </NavLink>
+        {/* </NavLink> */}
       </Tooltip>
     </ListItem>
   );

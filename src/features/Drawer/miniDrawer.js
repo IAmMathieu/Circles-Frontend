@@ -149,8 +149,9 @@ export default function MiniDrawer({
           <MiniDrawerList
             key={circle.circle_id}
             name={circle.name}
-            img={circle.img_url}
-            url={`/circle/${circle.circle_id}`}
+            desc={circle.description}
+            img_url={circle.img_url}
+            circle_id={circle.circle_id}
             open={open}
             handleToggleOpen={closeDrawer}
           />

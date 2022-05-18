@@ -7,7 +7,7 @@ import { CirclePage } from '../CirclePage/CirclePage';
 import CircleChat from './Chat/CircleChat';
 import CircleHeader from './CircleHeader';
 import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Circle() {
   // Get id of the route
@@ -17,7 +17,7 @@ export default function Circle() {
   const { user_id, token } = useSelector((state) => state.auth);
   const [dataCircle, setDataCircle] = useState();
   // Get the menu from the state circle
-  const { menu } = useSelector((state) => state.circle);
+  const { menu, name, description, img_url } = useSelector((state) => state.circle);
 
   /**
    * Make the query when we are into the circle
@@ -42,6 +42,12 @@ export default function Circle() {
    */
 
   //* ------------
+
+  /**
+   * Change the name of page with Circle's title
+   */
+  useEffect(() => {document.title = `Circle - ${name}`}, []);
+
   return (
     <Box className=' relative flex flex-col items-center p-5 h-screen custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
       <CircleHeader circleData={circleData} />

@@ -49,7 +49,7 @@ export default function CircleCard({
   const redirect = (event) => {
     event.preventDefault();
     navigate('/circle/' + circle_id);
-    dispatch(changeCircle({ circle_id }));
+    dispatch(changeCircle({ circle_id, name, desc, img_url }));
   };
 
   return (
