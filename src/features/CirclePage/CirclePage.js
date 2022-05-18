@@ -182,12 +182,6 @@ export const CirclePage = () => {
     []
   );
 
-  const popup = useCallback(
-    (events, date) => window.alert('test'),
-    []
-  )
-  // A modifier avec la modale !
-
     return(
         <div className='container-circle'>
             <Box className='container-circle__box'
@@ -239,7 +233,7 @@ export const CirclePage = () => {
                 style={{ height:'35rem', width: '90%', margin:'auto'}}
                 culture={'fr'}
                 components={components}
-                popup={popup}
+                popup
                 views={['month']}
                  // A retirer si on veut avoir la vue agenda
                 //"Vue agenda" peut poser problème en mobile
