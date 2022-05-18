@@ -22,7 +22,6 @@ ViewNamesGroup.propTypes = {
   views: PropTypes.array,
 }
 
-
 export default function CustomToolbar({
   // date, // available, but not used here
   label,

@@ -113,7 +113,7 @@ const App = () => {
             path='/circle/:circle_id'
             element={
               <PrivateRoute token={tokenState}>
-                <Circle />
+                <CirclePage />
               </PrivateRoute>
             }
           />
