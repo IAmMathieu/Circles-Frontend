@@ -77,19 +77,21 @@ const Chat = ({
 
   useEffect(() => {
     // if (messageToMap) {
-      if (messageToMap) {
-        setMessageToMap([...messageToMap, ioData]);
-      } else {
-        setMessageToMap([ioData && ioData]);
-      }
-      // chat.current.scroll(0, chat.current.scrollHeight);
-      chat.current.scrollIntoView({ behavior: 'smooth' });
+    if (messageToMap) {
+      setMessageToMap([...messageToMap, ioData]);
+    } else {
+      setMessageToMap([ioData && ioData]);
+    }
+    // chat.current.scroll(0, chat.current.getBoundingClientRect().height);
+    // chat.current.scrollIntoView({ behavior: 'smooth' });
     // } else {
     // setMessageToMap([ioData && ioData]);
     // }
   }, [ioData]);
 
-
+  useEffect(() => {
+    chat.current.scrollIntoView();
+  }, [messageToMap]);
   return (
     <Box
       className=' bg-darkysubg mb-3  w-full rounded-lg custom-bk:ml-[15vh] p-5 custom-bk:p-10 flex column shadow-2xl darkMode:shadow-none max-w-[2000px] sm:h-[60vh] lg:h-[83vh]'
@@ -144,11 +146,10 @@ const Chat = ({
           className='w-full relative right-0 h-[100%] '
         >
           <List
-            ref={chat}
             className='overflow-scroll '
             sx={{
               '&::-webkit-scrollbar': { display: 'none' },
-              'scrollbarWidth': 'none',
+              scrollbarWidth: 'none',
               height: { xs: '85%', lg: '90%' },
             }}
           >
@@ -240,7 +241,7 @@ const Chat = ({
                 }
               }
             })}
-            <div ref={chat} />
+            <div ref={chat}></div>
           </List>
           <Divider />
           <Grid container className='absolute w-full bottom-0'>
@@ -250,7 +251,6 @@ const Chat = ({
                 className='ml-4 '
                 label='Message...'
                 fullWidth
-                
                 maxRows={2}
                 size='small'
                 value={messagesWrite}
