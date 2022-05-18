@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleChange } from '../../features/auth/authSlice';
 import { Loading } from '../Loading/Loading';
+import { useNavigate } from 'react-router';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -17,12 +18,11 @@ export const LoginForm = () => {
   const { email, password, firstname, lastname, birthdate } = useSelector(
     (state) => state.auth
   );
-
+  const navigate = useNavigate();
   /**
    * Change the skip state, allow to fetch data from the server
    */
   const [date, setDate] = useState(Date);
-
   // First argument, the function we launch, second the result (destructuring here)
   const [loginUser, { isLoading: loginIsLoading, isError: loginIsError }] =
     useLoginUserMutation();
@@ -116,6 +116,7 @@ export const LoginForm = () => {
                 email,
                 password,
               });
+              navigate('/dashboard', { replace: true });
             }}
           >
             <div className='input__container relative flex flex-col'>

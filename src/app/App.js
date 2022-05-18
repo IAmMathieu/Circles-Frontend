@@ -4,7 +4,7 @@ import { Dashboard } from '../features/Dashboard/Dashboard';
 import './App.scss';
 import useLocalStorage from 'use-local-storage';
 import { ThemeProvider } from '@emotion/react';
-import { CirclePage } from './../features/CirclePage/CirclePage'
+import { CirclePage } from './../features/CirclePage/CirclePage';
 
 import {
   MuiThemeLight,

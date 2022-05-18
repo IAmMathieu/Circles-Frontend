@@ -115,7 +115,9 @@ export default function MiniDrawer({
       </IconButton>
 
       <Drawer
-        className={`Drawer__ui--custom ${open && 'Drawer__ui--open'} bg-buttonbg`}
+        className={`Drawer__ui--custom ${
+          open && 'Drawer__ui--open'
+        } bg-buttonbg`}
         variant='permanent'
         open={open}
         onClose={closeDrawer}

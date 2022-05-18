@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getStorage } from '../../utils/helperLocalStorage';
 
 // Initialise the default state.
 const initialState = {
@@ -10,7 +11,7 @@ const initialState = {
   password: null,
   birthdate: null,
   portrait_url: null,
-  token: null,
+  token: getStorage('token'),
   user_id: null,
   oldPassword: null,
 };
