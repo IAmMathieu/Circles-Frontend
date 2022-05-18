@@ -23,8 +23,7 @@ export default function Circle() {
    * Make the query when we are into the circle
    */
   const {
-    refetch,
-    circleRefetch,
+    refetch: circleRefetch,
     data: circleData,
     isSuccess: CircleIsSuccess,
     isLoading: circleIsLoading,

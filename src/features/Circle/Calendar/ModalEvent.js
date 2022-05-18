@@ -31,8 +31,9 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '80vh',
-  bgcolor: 'background.paper',
-  color: 'var(--backgroundbutton)',
+  backgroundColor: '#1A2027',
+  // backgroundColor: 'var(--maincolor)',
+  // color: 'var(--backgroundbutton)',
   border: '2px solid #000',
   boxShadow: 24,
   borderRadius: '20px',
@@ -48,6 +49,9 @@ export default function ModalEvent({
   user_id,
   token,
   circleRefetch,
+  eventId,
+  eventName,
+  updateEvent,
 }) {
   const dispatch = useDispatch();
   const { circle_id } = useParams();
@@ -69,23 +73,37 @@ export default function ModalEvent({
           component='form'
           onSubmit={async (e) => {
             e.preventDefault();
-            const newObj = await { ...calendarControlled };
-            for (const key in newObj) {
-              if (newObj[key] === '' || null) {
-                delete newObj[key];
-              }
+            // const newObj = await { ...calendarControlled };
+            // for (const key in newObj) {
+            //   if (newObj[key] === '' || null) {
+            //     delete newObj[key];
+            //   }
+            // }
+            if (eventName === 'create') {
+              await createEvent({
+                ...calendarControlled,
+                circle_id,
+                user_id,
+                token,
+              });
+            } else {
+              await updateEvent({
+                ...calendarControlled,
+                circle_id,
+                user_id,
+                token,
+                eventId,
+              });
             }
-            await createEvent({
-              ...newObj,
-              circle_id,
-              user_id,
-              token,
-            });
-            await circleRefetch();
+
+            onClose();
+            circleRefetch();
           }}
         >
           <Typography id='modal-modal-title' variant='h6' component='h2'>
-            Ajouter un événement
+            {eventName === 'create'
+              ? 'Ajouter un événement'
+              : 'Modifier un évènement'}
           </Typography>
           <TextField
             autoFocus
@@ -94,6 +112,7 @@ export default function ModalEvent({
             id='title'
             label='Titre'
             type='text'
+            value={eventName === 'create' ? '' : calendarControlled.title}
             fullWidth
             variant='standard'
             sx={{ color: 'red' }}
@@ -114,6 +133,7 @@ export default function ModalEvent({
             label='Description'
             multiline
             rows={4}
+            value={eventName === 'create' ? '' : calendarControlled.description}
             type='text'
             fullWidth
             variant='standard'
@@ -146,16 +166,17 @@ export default function ModalEvent({
               {calendarControlled?.allday === false ? (
                 <DateTimePicker
                   mask='mm'
-                  value={new Date()}
+                  value={calendarControlled.start}
                   label='Start event : '
                   onChange={(event) => {
-                    const date = moment(event)
+                    const [date] = event.toISOString().split('GMT');
+                    const formatDate = moment(date)
                       .tz('Europe/Paris')
-                      .format('YYYY-MM-DDTHH:mm:ss');
+                      .format('YYYY-MM-DD HH:mm:ss');
                     dispatch(
                       handleChange({
                         name: 'start',
-                        payload: date,
+                        payload: formatDate,
                       })
                     );
                   }}
@@ -164,15 +185,25 @@ export default function ModalEvent({
               ) : (
                 <DatePicker
                   // mask='mm'
-                  value={new Date()}
+                  value={calendarControlled.start}
                   format='yyyy-mm-dd'
                   mask='____/__/__'
                   label='Start event : '
                   onChange={(event) => {
+                    const [date] = event.toISOString().split('GTM');
+                    const formatDate = moment(date)
+                      .tz('Europe/Paris')
+                      .format('YYYY-MM-DD');
                     dispatch(
                       handleChange({
                         name: 'start',
-                        payload: event,
+                        payload: formatDate,
+                      })
+                    );
+                    dispatch(
+                      handleChange({
+                        name: 'end',
+                        payload: formatDate,
                       })
                     );
                   }}
@@ -184,15 +215,21 @@ export default function ModalEvent({
                 mask='mm'
                 disabled={calendarControlled?.allday === true ? true : false}
                 label='End event : '
-                value={new Date()}
+                required
+                value={
+                  eventName === 'create'
+                    ? calendarControlled.start
+                    : calendarControlled.end
+                }
                 onChange={(event) => {
-                  const date = moment(event)
+                  const [date] = event.toISOString().split('GMT');
+                  const formatDate = moment(date)
                     .tz('Europe/Paris')
                     .format('YYYY-MM-DD HH:mm:ss');
                   dispatch(
                     handleChange({
                       name: 'end',
-                      payload: date,
+                      payload: formatDate,
                     })
                   );
                 }}
@@ -207,6 +244,7 @@ export default function ModalEvent({
             id='name'
             label='Couleur de votre cercle'
             type='color'
+            value={eventName === 'create' ? '' : calendarControlled.color}
             defaultValue='#212B36'
             fullWidth
             variant='standard'

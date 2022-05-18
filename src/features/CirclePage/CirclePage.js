@@ -22,7 +22,8 @@ import {
 } from '../Circle/Calendar/CalendarApi';
 import ModalEvent from '../Circle/Calendar/ModalEvent';
 import { Button } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleChange } from '../Circle/Calendar/CalendarSlice';
 // import CustomToolbar from './CustomToolBar';
 // FIN CALENDRIER
 
@@ -64,10 +65,12 @@ export const CirclePage = ({
   circle_id,
   circleRefetch,
 }) => {
+  const dispatch = useDispatch();
   const [events, setEvents] = useState([]);
   const calendarControlled = useSelector((state) => state.calendar);
   const { token } = useSelector((state) => state.auth);
-
+  const [eventId, setEventId] = useState(null);
+  const [eventName, setEventName] = useState(null);
   useEffect(() => {
     circleData && setEvents(circleData.events);
   }, [circleData]);
@@ -318,6 +321,7 @@ export const CirclePage = ({
             aria-label='add'
             variant='extended'
             onClick={() => {
+              setEventName('create');
               handleOpen();
             }}
           >
@@ -326,6 +330,9 @@ export const CirclePage = ({
           </Button>
         </Box>
         <ModalEvent
+          updateEvent={updateEvent}
+          deleteEvent={deleteEvent}
+          eventName={eventName}
           open={open}
           token={token}
           onClose={handleClose}
@@ -334,12 +341,26 @@ export const CirclePage = ({
           circle_id={circle_id}
           user_id={user_id}
           circleRefetch={circleRefetch}
+          eventId={eventId}
         />
         <Calendar
           localizer={localizer}
           events={events}
           startAccessor='start'
           endAccessor='end'
+          onSelectEvent={(e) => {
+            setEventName('update');
+            setEventId(e.id);
+            handleOpen();
+            for (const key in e) {
+              dispatch(
+                handleChange({
+                  name: key,
+                  payload: e[key],
+                })
+              );
+            }
+          }}
           style={{ height: '30rem', width: '90%', margin: 'auto' }}
           culture={'fr'}
           components={components}

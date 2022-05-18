@@ -3,7 +3,7 @@ import moment from 'moment-timezone';
 // Initialise the default state.
 const initialState = {
   title: null,
-  start: '022-05-26T20:58:02',
+  start: moment().format('YYYY-MM-DD'),
   end: null,
   description: null,
   color: '#212B36',
