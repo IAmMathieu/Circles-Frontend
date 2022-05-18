@@ -16,7 +16,7 @@
   align-items: center;
   .container {
     height: 100vh;
-    @media only screen and (min-width: 1000px) {
+    @media only screen and (min-width: 700px) {
       height: fit-content;
     }
   }
@@ -37,7 +37,7 @@ form {
 }
 .register-form {
   // margin-top: 5rem;
-  @media only screen and (min-width: 1000px) {
+  @media only screen and (min-width: 700px) {
     margin-top: 0;
   }
 }
@@ -51,7 +51,7 @@ form {
 }
 .button--signup,
 .button--signin {
-  @media only screen and (min-width: 1000px) {
+  @media only screen and (min-width: 700px) {
     display: none;
   }
 }
@@ -97,7 +97,7 @@ form {
   left: 0;
   width: 100%;
   z-index: 2;
-  @media only screen and (min-width: 1000px) {
+  @media only screen and (min-width: 700px) {
     width: 50%;
   }
 }
@@ -109,7 +109,7 @@ form {
 
 .sign-up-container {
   transform: translateX(100vw);
-  @media only screen and (min-width: 1000px) {
+  @media only screen and (min-width: 700px) {
     left: 0;
     width: 100%;
     opacity: 0;
@@ -120,7 +120,7 @@ form {
 
 .container.right-panel-active .sign-up-container {
   transform: translateX(0);
-  @media only screen and (min-width: 1000px) {
+  @media only screen and (min-width: 700px) {
     transform: translateX(100%);
     opacity: 1;
     z-index: 5;
@@ -144,7 +144,7 @@ form {
 
 .overlay-container {
   display: none;
-  @media only screen and (min-width: 1000px) {
+  @media only screen and (min-width: 700px) {
     display: block;
     position: absolute;
     top: 0;
@@ -159,7 +159,7 @@ form {
 
 .middleLine {
   display: none;
-  @media only screen and (min-width: 1000px) {
+  @media only screen and (min-width: 700px) {
     display: block;
     width: 1px;
     z-index: 1;
@@ -202,7 +202,7 @@ form {
 
 .overlay-panel {
   display: none;
-  @media only screen and (min-width: 1000px) {
+  @media only screen and (min-width: 700px) {
     position: absolute;
     display: flex;
     align-items: center;
@@ -242,7 +242,7 @@ form {
   max-width: 500px;
   margin-top: 2rem;
   // position: fixed;
-  @media only screen and (min-width: 1000px) {
+  @media only screen and (min-width: 700px) {
     top: 5rem;
     width: 30vw;
   }
@@ -262,7 +262,7 @@ form {
     // top: 23vh;
     top: 2vh;
   }
-  @media only screen and (min-width: 1000px) {
+  @media only screen and (min-width: 700px) {
     display: none;
   }
 }

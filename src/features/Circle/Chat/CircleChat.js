@@ -39,7 +39,7 @@ const Chat = ({
   const [messageToMap, setMessageToMap] = useState(circleData?.messages);
 
   const handleEnterPress = (e) => {
-    console.log(e);
+    // console.log(e);
     if (e.key === 'Enter') {
       client.current.emit('chatMessage', messagesWrite);
       setMessagesWrite('');
@@ -50,7 +50,7 @@ const Chat = ({
   useEffect(() => {
     if (circleData && !allowMessage) {
       const messages = circleData.messages;
-      console.log(messages);
+      // console.log(messages);
       setMessageToMap(messages);
       setAllowMessage(true);
     }
@@ -67,7 +67,7 @@ const Chat = ({
         room: circleData?.unique_code,
       });
       socket.on('message', (data) => {
-        console.log(data);
+        // console.log(data);
         setIoData(data);
       });
       client.current = socket;
@@ -148,7 +148,7 @@ const Chat = ({
             className='overflow-scroll '
             sx={{
               '&::-webkit-scrollbar': { display: 'none' },
-              'scrollbar-width': 'none',
+              'scrollbarWidth': 'none',
               height: { xs: '85%', lg: '90%' },
             }}
           >
@@ -250,7 +250,7 @@ const Chat = ({
                 className='ml-4 '
                 label='Message...'
                 fullWidth
-                multiline
+                
                 maxRows={2}
                 size='small'
                 value={messagesWrite}
@@ -259,7 +259,7 @@ const Chat = ({
                   setMessagesWrite(event.target.value);
                 }}
                 onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
+                  if (e.key === 'Enter' && messagesWrite.length > 0) {
                     client.current.emit('chatMessage', messagesWrite);
                     setMessagesWrite('');
                   }

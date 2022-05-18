@@ -38,3 +38,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.MuiOutlinedInput-input {
+  color: var(--maincolor);
+}
+.MuiInput-input {
+  color: var(--maincolor);
+}
+
+.MuiTypography-root {
+  color: var(--maincolor);
+}
