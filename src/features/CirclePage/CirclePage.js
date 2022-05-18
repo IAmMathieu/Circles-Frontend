@@ -15,6 +15,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import moment from 'moment-timezone';
 import {
   useCreateEventMutation,
   useDeleteEventMutation,
@@ -26,7 +27,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { handleChange } from '../Circle/Calendar/CalendarSlice';
 // import CustomToolbar from './CustomToolBar';
 // FIN CALENDRIER
-
+const initialState = {
+  title: null,
+  start: moment().format('YYYY-MM-DD'),
+  end: null,
+  description: null,
+  color: '#212B36',
+  allday: false,
+};
 const locales = {
   fr: fr,
 };
@@ -323,6 +331,14 @@ export const CirclePage = ({
             onClick={() => {
               setEventName('create');
               handleOpen();
+              for (const key in initialState) {
+                dispatch(
+                  handleChange({
+                    name: key,
+                    payload: initialState[key],
+                  })
+                );
+              }
             }}
           >
             <AddIcon />

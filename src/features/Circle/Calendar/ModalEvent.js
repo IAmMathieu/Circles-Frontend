@@ -126,7 +126,7 @@ export default function ModalEvent({
               id='title'
               label='Titre'
               type='text'
-              value={eventName === 'create' ? '' : calendarControlled.title}
+              value={calendarControlled.title}
               fullWidth
               variant='standard'
               sx={{ color: 'red' }}
@@ -157,9 +157,7 @@ export default function ModalEvent({
               label='Description'
               multiline
               rows={4}
-              value={
-                eventName === 'create' ? '' : calendarControlled.description
-              }
+              value={calendarControlled.description}
               type='text'
               fullWidth
               variant='standard'
@@ -178,6 +176,10 @@ export default function ModalEvent({
                 control={<Switch />}
                 label='Toute la journée'
                 onChange={(event) => {
+                  // const [date] = event.toISOString().split('GMT');
+                  // const formatDate = moment(date)
+                  //   .tz('Europe/Paris')
+                  //   .format('YYYY-MM-DD HH:mm:ss');
                   dispatch(
                     handleChange({
                       name: 'allday',
@@ -242,11 +244,7 @@ export default function ModalEvent({
                   disabled={calendarControlled?.allday === true ? true : false}
                   label='End event : '
                   required
-                  value={
-                    eventName === 'create'
-                      ? calendarControlled.start
-                      : calendarControlled.end
-                  }
+                  value={calendarControlled.end}
                   onChange={(event) => {
                     const [date] = event.toISOString().split('GMT');
                     const formatDate = moment(date)
@@ -270,7 +268,6 @@ export default function ModalEvent({
               id='name'
               label='Couleur de votre cercle'
               type='color'
-              value={eventName === 'create' ? '' : calendarControlled.color}
               defaultValue='#212B36'
               fullWidth
               variant='standard'
@@ -318,10 +315,11 @@ export default function ModalEvent({
                 circle_id,
                 token,
                 user_id,
+                event_id: eventId,
               });
+              circleRefetch();
               onClose();
               closeValid();
-              circleRefetch();
             }}
             autoFocus
           >
