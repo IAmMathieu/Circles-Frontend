@@ -92,9 +92,10 @@ const Chat = ({
 
   return (
     <Box
-      className=' bg-darkysubg mb-3  w-full rounded-lg custom-bk:ml-[15vh] p-5 custom-bk:p-10 flex column shadow-2xl darkMode:shadow-none max-w-[2000px] sm:h-[60vh] lg:h-[83vh]'
+      className=' bg-darkysubg mb-3  w-full rounded-lg md:ml-[15vh] p-5 md:p-10 flex column shadow-2xl darkMode:shadow-none max-w-[2000px] align-end'
       sx={{
-        height: { xs: '90%', lg: '90vh' },
+        bottom:'25rem',
+        height: { xs: '80vh', lg: '80vh' },
       }}
     >
       <Grid container className='w-full flex row'>

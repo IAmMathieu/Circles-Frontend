@@ -19,7 +19,7 @@ export default function CircleBottomNavigation() {
         position: 'absolute',
         overflow: 'hidden',
         height: '70px',
-        '@media (min-width:965px)': {
+        '@media (min-width:900px)': {
           position: 'absolute',
           top: '5rem',
           right: '2rem',
@@ -35,7 +35,7 @@ export default function CircleBottomNavigation() {
             onClick={() => dispatch(changeMenu('calendar'))}
           >
             <AddCircleIcon />
-            <Typography className='text-xs custom-bk:text-lg' component='h5'>
+            <Typography className='text-xs md:text-lg' component='h5'>
               Calendrier
             </Typography>
           </Box>
@@ -44,7 +44,7 @@ export default function CircleBottomNavigation() {
             onClick={() => dispatch(changeMenu('chat'))}
           >
             <GroupsIcon />
-            <Typography className='text-xs custom-bk:text-lg' component='h5'>
+            <Typography className='text-xs md:text-lg' component='h5'>
               Chat
             </Typography>
           </Box>

@@ -32,6 +32,7 @@ export default function Circle() {
     circle_id,
   });
 
+  const { name, description, img_url, unique_code } = circleData;
   /**
    * Make the query for get the profil user information
    */
@@ -43,8 +44,13 @@ export default function Circle() {
 
   //* ------------
   return (
-    <Box className=' relative flex flex-col items-center p-5 h-screen custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
-      <CircleHeader circleData={circleData} />
+    <Box className=' relative flex flex-col items-center p-5 h-screen md:pr-[10vh] pt-20 md:pt-40 overflow-hidden'>
+      <CircleHeader
+        name={name}
+        description={description}
+        img_url={img_url}
+        unique_code={unique_code}
+      />
       {menu === 'calendar' ? (
         <CirclePage
           circleRefetch={circleRefetch}

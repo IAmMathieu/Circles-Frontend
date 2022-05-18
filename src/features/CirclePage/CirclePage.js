@@ -278,51 +278,7 @@ export const CirclePage = ({
   const [deleteEvent] = useDeleteEventMutation();
   return (
     <div className='container-circle w-full'>
-      <Box
-        className='container-circle__box'
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          '& > :not(style)': {
-            width: '100%',
-            height: '8rem',
-          },
-          color: 'rgba(255,255,255,0.5)',
-          backgroundImage:
-            "url('https://cdn.pixabay.com/photo/2022/05/08/20/21/flowers-7182930_960_720.jpg')",
-          backgroundSize: '100%',
-          backgroundRepeat: 'no-repeat',
-          margin: '1rem',
-          borderRadius: '15px',
-        }}
-      >
-        <div className='container-avatar'>
-          <Avatar
-            alt='Remy Sharp'
-            src='https://cdn.pixabay.com/photo/2022/05/08/20/21/flowers-7182930_960_720.jpg'
-            sx={{
-              width: '7rem',
-              height: '7rem',
-              position: 'relative',
-              top: 'calc((7rem + 2rem)/2)',
-              margin: 'auto',
-              border: '1px solid white',
-            }}
-          />
-
-          <Typography
-            variant='body2'
-            color='text.secondary'
-            sx={{
-              transform: 'translateY(calc((7rem + 2rem)/2))',
-              fontWeight: 'bold',
-              fontSize: '1.2rem',
-            }}
-          >
-            Le gras c'est la vie
-          </Typography>
-        </div>
-      </Box>
+      
       <Box style={{ marginTop: '5rem' }}>
         <Box sx={{ '& > :not(style)': { m: 1 } }}>
           <Button
