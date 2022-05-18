@@ -16,8 +16,8 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   height: '30%',
-  bgcolor: 'var(--background)',
-  color: 'var(--backgroundbutton)',
+  bgcolor: 'var(--maincolor-reverse)',
+  color: 'var(--background)',
   border: '2px solid #000',
   boxShadow: 24,
   borderRadius: '20px',
@@ -61,7 +61,7 @@ export default function ModaleJoinCircle({
               textDecoration: 'underline',
             }}
           >
-            Rejoignez un cercle :{' '}
+            Rejoignez un cercle :
           </Typography>
           <TextField
             autoFocus
@@ -72,7 +72,7 @@ export default function ModaleJoinCircle({
             type='text'
             fullWidth
             variant='standard'
-            InputLabelProps={{ style: { color: 'var(--maincolor-reverse)' } }}
+            InputLabelProps={{ style: { color: 'var(--background)' } }}
             onChange={(event) => {
               dispatch(
                 handleChange({
