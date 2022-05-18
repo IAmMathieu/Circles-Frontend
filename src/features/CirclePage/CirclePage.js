@@ -333,6 +333,7 @@ export const CirclePage = ({
           calendarControlled={calendarControlled}
           circle_id={circle_id}
           user_id={user_id}
+          circleRefetch={circleRefetch}
         />
         <Calendar
           localizer={localizer}

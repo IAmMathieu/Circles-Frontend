@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
+import moment from 'moment-timezone';
 import {
   Button,
   DialogActions,
@@ -46,13 +47,14 @@ export default function ModalEvent({
   calendarControlled,
   user_id,
   token,
+  circleRefetch,
 }) {
   const dispatch = useDispatch();
   const { circle_id } = useParams();
   const [startDate, setStartDate] = useState(
-    new Date('2018-01-01T00:00:00.000Z')
+    new Date('2018-01-01 00:00:00.000Z')
   );
-  const [endDate, setEndDate] = useState(new Date('2018-01-01T00:00:00.000Z'));
+  const [endDate, setEndDate] = useState(new Date('2018-01-01 00:00:00.000Z'));
 
   return (
     <Box>
@@ -67,13 +69,19 @@ export default function ModalEvent({
           component='form'
           onSubmit={async (e) => {
             e.preventDefault();
-
+            const newObj = await { ...calendarControlled };
+            for (const key in newObj) {
+              if (newObj[key] === '' || null) {
+                delete newObj[key];
+              }
+            }
             await createEvent({
-              ...calendarControlled,
+              ...newObj,
               circle_id,
               user_id,
               token,
             });
+            await circleRefetch();
           }}
         >
           <Typography id='modal-modal-title' variant='h6' component='h2'>
@@ -141,10 +149,13 @@ export default function ModalEvent({
                   value={new Date()}
                   label='Start event : '
                   onChange={(event) => {
+                    const date = moment(event)
+                      .tz('Europe/Paris')
+                      .format('YYYY-MM-DDTHH:mm:ss');
                     dispatch(
                       handleChange({
                         name: 'start',
-                        payload: event,
+                        payload: date,
                       })
                     );
                   }}
@@ -152,8 +163,10 @@ export default function ModalEvent({
                 />
               ) : (
                 <DatePicker
-                  mask='mm'
+                  // mask='mm'
                   value={new Date()}
+                  format='yyyy-mm-dd'
+                  mask='____/__/__'
                   label='Start event : '
                   onChange={(event) => {
                     dispatch(
@@ -173,10 +186,13 @@ export default function ModalEvent({
                 label='End event : '
                 value={new Date()}
                 onChange={(event) => {
+                  const date = moment(event)
+                    .tz('Europe/Paris')
+                    .format('YYYY-MM-DD HH:mm:ss');
                   dispatch(
                     handleChange({
                       name: 'end',
-                      payload: event,
+                      payload: date,
                     })
                   );
                 }}
