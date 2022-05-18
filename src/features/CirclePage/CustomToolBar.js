@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
-import { Navigate as navigate } from '../../../node_modules';
+import { Navigate as navigate } from 'react-big-calendar';
 
 function ViewNamesGroup({ views: viewNames, view, messages, onView }) {
   return viewNames.map((name) => (
@@ -22,6 +22,7 @@ ViewNamesGroup.propTypes = {
   views: PropTypes.array,
 }
 
+
 export default function CustomToolbar({
   // date, // available, but not used here
   label,
@@ -33,36 +34,37 @@ export default function CustomToolbar({
 }) {
   return (
     <div className="rbc-toolbar">
-      <span className="rbc-btn-group">
-        <ViewNamesGroup
-          view={view}
-          views={views}
-          messages={messages}
-          onView={onView}
-        />
-      </span>
 
-      <span className="rbc-toolbar-label">{label}</span>
-
-      <span className="rbc-btn-group">
+      <span className="rbc-btn-group" style={{
+        display:'flex',
+        justifyContent:'space-around',
+        width:'100%'
+      }}>
         <button
           type="button"
           onClick={() => onNavigate(navigate.PREVIOUS)}
           aria-label={messages.previous}
+          style={{
+            borderRadius:'50%',
+            boxShadow: '0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%)'
+          }}
         >
           <i className="fa fa-fw fa-chevron-left"></i>
         </button>
-        <button
-          type="button"
-          onClick={() => onNavigate(navigate.TODAY)}
-          aria-label={messages.today}
-        >
-          <i className="fa fa-fw fa-circle"></i>
-        </button>
+
+        <span className="rbc-toolbar-label" style={{
+          fontSize:'1.8rem',
+          fontWeight:'bold'
+        }}>{label}</span>
+        
         <button
           type="button"
           onClick={() => onNavigate(navigate.NEXT)}
           aria-label={messages.next}
+          style={{
+            borderRadius:'50%',
+            boxShadow: '0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%)'
+          }}
         >
           <i className="fa fa-fw fa-chevron-right"></i>
         </button>
