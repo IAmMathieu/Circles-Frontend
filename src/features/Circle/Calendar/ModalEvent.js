@@ -29,6 +29,7 @@ import { MobileDateTimePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { handleChange } from './CalendarSlice';
 import { useParams } from 'react-router';
+import { useGetUserDashBoardQuery } from '../../Dashboard/DashboardApi';
 
 const style = {
   position: 'absolute',
@@ -72,7 +73,10 @@ export default function ModalEvent({
     new Date('2018-01-01 00:00:00.000Z')
   );
   const [endDate, setEndDate] = useState(new Date('2018-01-01 00:00:00.000Z'));
-
+  const { refetch: dashDataRefretch } = useGetUserDashBoardQuery({
+    token,
+    user_id,
+  });
   return (
     <>
       <Box>
@@ -109,9 +113,9 @@ export default function ModalEvent({
                   event_id: eventId,
                 });
               }
-
-              onClose();
               circleRefetch();
+              dashDataRefretch();
+              onClose();
             }}
           >
             <Typography id='modal-modal-title' variant='h6' component='h2'>

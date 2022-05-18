@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useCreateCircleMutation, useJoinCircleMutation } from '../Circle/CircleApi';
+import {
+  useCreateCircleMutation,
+  useJoinCircleMutation,
+} from '../Circle/CircleApi';
 import SimpleBottomNavigation from '../Common/BottomNavigation/SimpleBottomNavigation';
 import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
 import ModaleCreateCircle from './ModaleCreateCircle';
@@ -18,7 +21,7 @@ export const Dashboard = () => {
   );
 
   const {
-    refetch,
+    refetch: dashDataRefretch,
     data: DashData,
     isLoading: dashboardIsLoading,
     isError: loginIsError,
@@ -105,7 +108,7 @@ export const Dashboard = () => {
           />
         </Box>
         <ModaleCreateCircle
-          refetch={refetch}
+          refetch={dashDataRefretch}
           createCircle={createCircle}
           createCircleSuccess={createCircleSuccess}
           open={openCreate}
@@ -113,7 +116,7 @@ export const Dashboard = () => {
           createCircleError={createCircleError}
         />
         <ModaleJoinCircle
-          refetch={refetch}
+          refetch={dashDataRefretch}
           joinCircle={joinCircle}
           joinCircleSuccess={joinCircleSuccess}
           open={openJoin}

@@ -13,11 +13,11 @@ import { CardActionArea, Divider, Tooltip } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import EventIcon from '@mui/icons-material/Event';
 import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import ListOfUsers from './ListOfUsers';
 import ListOfNextEvents from './ListOfNextEvents';
 import { useDispatch } from 'react-redux';
-import { changeCircle } from "./../Circle/CircleSlice";
+import { changeCircle } from './../Circle/CircleSlice';
 
 export default function CircleCard({
   name,
@@ -32,7 +32,6 @@ export default function CircleCard({
   usersList,
   eventsList,
 }) {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -50,14 +49,13 @@ export default function CircleCard({
   const redirect = (event) => {
     event.preventDefault();
     navigate('/circle/' + circle_id);
-    dispatch(changeCircle({circle_id}))
+    dispatch(changeCircle({ circle_id }));
   };
 
   return (
     <Card
       className='overflow-hidden rounded-xl relative min-w-full min-w-[300px] w-[300px] max-w-[300px] max-h-[360px]'
       sx={{ maxWidth: 345 }}
-      
     >
       <CardActionArea onClick={redirect} href={'/circle/' + circle_id}>
         <Box className='relative'>
@@ -68,7 +66,14 @@ export default function CircleCard({
             alt={name}
           />
           <Box className='absolute left-1/2 transform -translate-x-1/2 -bottom-5'>
-            <Tooltip title={<Typography fontSize='1rem'>{'Administrateur du cercle : ' + admin_surname}</Typography>} placement='top'>
+            <Tooltip
+              title={
+                <Typography fontSize='1rem'>
+                  {'Administrateur du cercle : ' + admin_surname}
+                </Typography>
+              }
+              placement='top'
+            >
               <Avatar
                 src={admin_picture}
                 sx={{ bgcolor: red[500], width: '50px', height: '50px' }}
@@ -100,13 +105,19 @@ export default function CircleCard({
         </CardContent>
       </CardActionArea>
       <CardActions disableSpacing className='bg-darkybg flex justify-between'>
-        <Tooltip title={<Typography fontSize='1rem'>Membres du cercle</Typography>}>
+        <Tooltip
+          title={<Typography fontSize='1rem'>Membres du cercle</Typography>}
+        >
           <IconButton className='text-lg' onClick={toggleMembers}>
             <PersonIcon className=' text-lg mr-2' /> {nb_number}
           </IconButton>
         </Tooltip>
         <Divider orientation='vertical' variant='middle' flexItem />
-        <Tooltip title={<Typography fontSize='1rem'>Membres connectés du cercle</Typography>}>
+        <Tooltip
+          title={
+            <Typography fontSize='1rem'>Membres connectés du cercle</Typography>
+          }
+        >
           <IconButton className='text-lg'>
             <Brightness1Icon
               className=' text-lg mr-2'
@@ -116,7 +127,9 @@ export default function CircleCard({
           </IconButton>
         </Tooltip>
         <Divider orientation='vertical' variant='middle' flexItem />
-        <Tooltip title={<Typography fontSize='1rem'>Prochains événements</Typography>}>
+        <Tooltip
+          title={<Typography fontSize='1rem'>Prochains événements</Typography>}
+        >
           <IconButton className='text-lg' onClick={toggleEvents}>
             <EventIcon className=' text-lg mr-2' />
             {nb_events}
