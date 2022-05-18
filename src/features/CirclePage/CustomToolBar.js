@@ -32,7 +32,10 @@ export default function CustomToolbar({
   views,
 }) {
   return (
-    <div className="rbc-toolbar">
+    <div className="rbc-toolbar"
+    style={{padding:'1rem',
+    
+}}>
 
       <span className="rbc-btn-group" style={{
         display:'flex',
@@ -44,8 +47,7 @@ export default function CustomToolbar({
           onClick={() => onNavigate(navigate.PREVIOUS)}
           aria-label={messages.previous}
           style={{
-            borderRadius:'50%',
-            boxShadow: '0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%)'
+            border:'none'
           }}
         >
           <i className="fa fa-fw fa-chevron-left"></i>
@@ -61,8 +63,7 @@ export default function CustomToolbar({
           onClick={() => onNavigate(navigate.NEXT)}
           aria-label={messages.next}
           style={{
-            borderRadius:'50%',
-            boxShadow: '0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 6px 10px 0px rgb(0 0 0 / 14%), 0px 1px 18px 0px rgb(0 0 0 / 12%)'
+            border:'none',
           }}
         >
           <i className="fa fa-fw fa-chevron-right"></i>

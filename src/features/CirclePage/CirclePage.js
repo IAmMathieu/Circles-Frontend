@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { useMemo, useCallback } from 'react';
+import { useMemo } from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types'
 //CALENDRIER
-import { Calendar, dateFnsLocalizer, buildMessage } from 'react-big-calendar';
+import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
-import {fr} from 'date-fns/locale';
+import { fr } from 'date-fns/locale';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
@@ -18,7 +19,7 @@ import CustomToolbar from './CustomToolBar';
 
 
 const locales = {
-    'fr': fr,
+  'fr': fr,
   }
   
   const localizer = dateFnsLocalizer({
@@ -68,31 +69,13 @@ export const CirclePage = () => {
   // Event Wrapper = comme son nom l'indique, 
   // concerne le contenant de l'event rajouté
 
-  const MyDateCellWrapper = ({ children }) =>
-  React.cloneElement(React.Children.only(children), {
-    style: {
-      borderRadius:'50%'
-    },
-  });
+  // const MyDateCellWrapper = ({ children }) =>
+  // React.cloneElement(React.Children.only(children), {
+  //   style: {
+  //     border
+  //   },
+  // });
     // Date Cell Wrapper = case du calendrier en vue mensuelle
-
-  const MyTimeSlotWrapper = ({ children }) =>
-  React.cloneElement(React.Children.only(children), {
-    style: {
-      backgroundColor: 'red',
-      color:'green'
-    },
-  }); 
-  //Touche les cases horaires de la vue week/day
-
-  const MyTimeGutterWrapper = ({ children }) =>
-  React.cloneElement(React.Children.only(children), {
-    style: {
-      backgroundColor: 'lightblue',
-      color:'green'
-    },
-  }); 
-  // Fait planter la vue ?
 
   const MyResourceHeader = ({ children }) =>
   React.cloneElement(React.Children.only(children), {
@@ -102,33 +85,6 @@ export const CirclePage = () => {
     },
   }); 
   //Inconnu au bataillon
-
-  const MyAgendaEvent = ({ children }) =>
-  React.cloneElement(React.Children.only(children), {
-    style: {
-      backgroundColor: 'yellow',
-      color:'green'
-    },
-  }); 
-  // Fait planter la vue ?
-
-  const MyAgendaTime = ({ children }) =>
-  React.cloneElement(React.Children.only(children), {
-    style: {
-      backgroundColor: 'yellow',
-      color:'green'
-    },
-  }); 
-  // Fait planter la vue ?
-
-  const MyAgendaDate = ({ children }) =>
-  React.cloneElement(React.Children.only(children), {
-    style: {
-      backgroundColor: 'lightblue',
-      color:'green'
-    },
-  }); 
-  // Fait planter la vue ?
 
   const MyMonthHeader = ({ children }) =>
   React.cloneElement(React.Children.only(children), {
@@ -157,13 +113,27 @@ export const CirclePage = () => {
   });
   // Fait planter la vue ?
 
-  const { components } = useMemo(
+  const MyOtherNestedComponent = () => <div>NESTED COMPONENT</div>
+
+  const MyCustomHeader = ({label}) => {
+    <div>
+      CUSTOM HEADER :
+      <div>{label}</div>
+      <MyOtherNestedComponent />
+    </div>
+  }
+
+  MyCustomHeader.propTypes = {
+    label: PropTypes.string.isRequired,
+  }
+  
+
+  const { components, formats } = useMemo(
     () => ({
       components: {
         // event: MyEvent, // Fait planter la vue ?
         eventWrapper: MyEventWrapper,
-        dateCellWrapper: MyDateCellWrapper,
-        timeSlotWrapper: MyTimeSlotWrapper,
+        // dateCellWrapper: MyDateCellWrapper,
         // timeGutterHeader: MyTimeGutterWrapper, // Fait planter la vue ?
         resourceHeader: MyResourceHeader, //Inconnu au bataillon ?
         toolbar: CustomToolbar,
@@ -173,11 +143,16 @@ export const CirclePage = () => {
           // date: MyAgendaDate, // Fait planter la vue ?
         // },
         month: {
-        //   header: MyMonthHeader, // Fait planter la vue ?
+          header: ({date, localizer}) => localizer.format(date,'eee'), // Fait planter la vue ?
         //   dateHeader: MyMonthDateHeader, // Fait planter la vue ?
         //   event: MyMonthEvent, // Fait planter la vue ?
         }
       },
+      // formats: {
+      //   weekdayFormat:(date, culture, localizer) =>{
+      //     localizer.format(date, 'wo', culture)
+      //   },
+      // }
     }),
     []
   );
@@ -230,10 +205,16 @@ export const CirclePage = () => {
                 events={events}
                 startAccessor="start"
                 endAccessor="end"
-                style={{ height:'35rem', width: '90%', margin:'auto'}}
+                style={{ 
+                  height:'35rem', 
+                  width: '90%', 
+                  margin:'auto',
+                  boxShadow: '0px 3px 5px -1px rgb(0 0 0 / 20%))',
+                }}
                 culture={'fr'}
                 components={components}
                 popup
+                // formats={formats}
                 views={['month']}
                  // A retirer si on veut avoir la vue agenda
                 //"Vue agenda" peut poser problème en mobile
@@ -244,3 +225,4 @@ export const CirclePage = () => {
         </div>
     )
 }
+
