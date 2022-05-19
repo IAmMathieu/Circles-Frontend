@@ -163,10 +163,13 @@ export const LoginForm = () => {
                     fontWeight: '700',
                   }}
                 >
-                  {loginError.data === 'Email does not exist  ' ||
-                  'password is incorrect'
+                  {loginError.data === 'Email does not exist'
+                    ? "Le compte n'existe pas"
+                    : loginError.data === 'Email does not exist'
                     ? 'E-mail ou mot de passe incorrect'
-                    : 'Votre e-mail doit être validé, veuillez le valider.'}
+                    : loginError.data === 'Email not validated'
+                    ? 'Votre e-mail doit être validé.'
+                    : 'Une erreur est survenue'}
                 </p>
               ) : (
                 ''

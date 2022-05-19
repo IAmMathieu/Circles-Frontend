@@ -100,9 +100,10 @@ export default function Circle() {
   }, [CircleIsSuccess]);
 
   return (
-    <Box className=' relative flex flex-col items-center p-5 h-screen custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
+    // <Box className=' relative flex flex-col items-center p-5 h-screen custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
+    <Box className=' relative flex flex-col items-center pt-5 pl-0 custom-bk:pl-20 h-screen custom-bk:pr-[5vh]  overflow-hidden'>
       <CircleHeader circleData={circleData} />
-      <Button onClick={toggleModify}>TestUpdate</Button>
+      {/* <Button onClick={toggleModify}>TestUpdate</Button> */}
 
       <ModalModifyCircle
         refetch={circleRefetch}

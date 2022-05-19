@@ -13,6 +13,7 @@ export default function CircleBottomNavigation() {
     <Box
       className='bottomNavigation'
       sx={{
+        display: { sx: 'inherit', lg: 'none' },
         width: '100%',
         borderRadius: '15px',
         bottom: 0,
