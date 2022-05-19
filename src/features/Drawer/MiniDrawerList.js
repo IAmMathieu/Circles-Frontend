@@ -13,23 +13,32 @@ function MiniDrawerList({
   name,
   desc,
   circle_id,
+  url,
   open,
   img_url,
   icon,
   click,
   handleToggleOpen,
 }) {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const redirect = (event) => {
     event.preventDefault();
-    navigate('/circle/' + circle_id);
-    dispatch(changeCircle({ circle_id, name, desc, img_url }));
+    if (url) {
+      navigate(url);
+    } else {
+      navigate('/circle/' + circle_id);
+      dispatch(changeCircle({ circle_id, name, desc, img_url }));
+    }
   };
 
   return (
-    <ListItem key={name} disablePadding sx={{ display: 'block' }} onClick={redirect} >
+    <ListItem
+      key={name}
+      disablePadding
+      sx={{ display: 'block' }}
+      onClick={redirect}
+    >
       <Tooltip
         title={<Typography fontSize='1rem'>{name}</Typography>}
         placement='right'
@@ -41,40 +50,40 @@ function MiniDrawerList({
             isActive ? 'nav-active' : 'nav-inactive'
           }
         > */}
-          <ListItemButton
+        <ListItemButton
+          sx={{
+            minHeight: 48,
+            justifyContent: open ? 'initial' : 'center',
+            px: 2.5,
+          }}
+          onClick={() => {
+            handleToggleOpen();
+            click && click();
+          }}
+        >
+          <ListItemIcon
             sx={{
-              minHeight: 48,
-              justifyContent: open ? 'initial' : 'center',
-              px: 2.5,
-            }}
-            onClick={() => {
-              handleToggleOpen();
-              click && click();
+              minWidth: 0,
+              mr: open ? 3 : 'auto',
+              justifyContent: 'center',
             }}
           >
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center',
-              }}
-            >
-              {img_url ? (
-                <Avatar
-                  alt={name}
-                  className='w-10 h-10 rounded-full MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root'
-                  src={img_url}
-                />
-              ) : icon ? (
-                <i
-                  className={`${icon} MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root`}
-                ></i>
-              ) : (
-                ''
-              )}
-            </ListItemIcon>
-            <ListItemText primary={name} sx={{ opacity: open ? 1 : 0 }} />
-          </ListItemButton>
+            {img_url ? (
+              <Avatar
+                alt={name}
+                className='w-10 h-10 rounded-full MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root'
+                src={img_url}
+              />
+            ) : icon ? (
+              <i
+                className={`${icon} MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root`}
+              ></i>
+            ) : (
+              ''
+            )}
+          </ListItemIcon>
+          <ListItemText primary={name} sx={{ opacity: open ? 1 : 0 }} />
+        </ListItemButton>
         {/* </NavLink> */}
       </Tooltip>
     </ListItem>

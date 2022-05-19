@@ -131,7 +131,7 @@ export default function MiniDrawer({
         <List>
           <MiniDrawerList
             name='Mon compte'
-            img={userData?.img_url}
+            img_url={userData?.img_url}
             url='/profil'
             open={open}
             handleToggleOpen={closeDrawer}

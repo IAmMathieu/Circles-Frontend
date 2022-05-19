@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
-import {
-  useCreateCircleMutation,
-  useJoinCircleMutation,
-} from '../Circle/CircleApi';
+import { useCreateCircleMutation, useJoinCircleMutation } from '../Circle/CircleApi';
 import SimpleBottomNavigation from '../Common/BottomNavigation/SimpleBottomNavigation';
 import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
 import ModaleCreateCircle from './ModaleCreateCircle';
@@ -21,7 +18,7 @@ export const Dashboard = () => {
   );
 
   const {
-    refetch: dashDataRefretch,
+    refetch,
     data: DashData,
     isLoading: dashboardIsLoading,
     isError: loginIsError,
@@ -66,12 +63,7 @@ export const Dashboard = () => {
   }, [createCircleSuccess]);
 
   if (dashboardIsLoading) {
-    return (
-      <DashbordLoader
-        time={8}
-        text={'Your dashboard is loading, please wait.'}
-      />
-    );
+    return <DashbordLoader />;
   } else {
     return (
       <>
@@ -113,7 +105,7 @@ export const Dashboard = () => {
           />
         </Box>
         <ModaleCreateCircle
-          refetch={dashDataRefretch}
+          refetch={refetch}
           createCircle={createCircle}
           createCircleSuccess={createCircleSuccess}
           open={openCreate}
@@ -121,7 +113,7 @@ export const Dashboard = () => {
           createCircleError={createCircleError}
         />
         <ModaleJoinCircle
-          refetch={dashDataRefretch}
+          refetch={refetch}
           joinCircle={joinCircle}
           joinCircleSuccess={joinCircleSuccess}
           open={openJoin}
