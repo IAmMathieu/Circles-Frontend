@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import moment from 'moment-timezone';
 import {
   Button,
@@ -73,15 +73,20 @@ export default function ModalEvent({
     new Date('2018-01-01 00:00:00.000Z')
   );
   const [endDate, setEndDate] = useState(new Date('2018-01-01 00:00:00.000Z'));
+
+  const [skip, setSkip] = useState(true);
   const { refetch: dashDataRefretch } = useGetUserDashBoardQuery(
     {
       token,
       user_id,
     },
     {
-      skip: true,
+      skip: skip,
     }
   );
+  useEffect(() => {
+    if (token !== null && user_id !== null) setSkip(false);
+  }, [token]);
   return (
     <>
       <Box>
