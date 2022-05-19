@@ -12,12 +12,22 @@ import { handleToken } from '../auth/authSlice';
 import { useNavigate } from 'react-router';
 import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
 import MiniDrawerList from './MiniDrawerList';
-import { Divider } from '@mui/material';
+import logo from './../../logo.svg';
+import {
+  Avatar,
+  Collapse,
+  Divider,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from '@mui/material';
 import './miniDrawer.scss';
 import MiniDrawerDarkMode from './MiniDrawerDarkMode';
 import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useEffect, useState } from 'react';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
 const drawerWidth = 240;
 
@@ -88,6 +98,11 @@ export default function MiniDrawer({
   };
 
   const [skip, setSkip] = useState(true);
+  const [openCircleSubMenu, setOpenCircleSubMenu] = useState(false);
+  const handleClickOnCircleSubMenu = () => {
+    setOpenCircleSubMenu(!openCircleSubMenu);
+  };
+
   const closeDrawer = () => {
     setOpen(false);
   };
@@ -161,19 +176,31 @@ export default function MiniDrawer({
             handleToggleOpen={closeDrawer}
           />
         </List>
-        {circlesData?.map((circle) => (
-          <MiniDrawerList
-            key={circle.circle_id}
-            name={circle.name}
-            desc={circle.description}
-            img_url={circle.img_url}
-            circle_id={circle.circle_id}
-            open={open}
-            handleToggleOpen={closeDrawer}
-          />
-        ))}
         <Divider variant='middle' />
         <List>
+          <ListItemButton onClick={handleClickOnCircleSubMenu}>
+            <ListItemIcon>
+              <Avatar src={logo} />
+            </ListItemIcon>
+            <ListItemText primary='Mes cercles' />
+            {openCircleSubMenu ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={openCircleSubMenu} timeout='auto'>
+            {circlesData?.map((circle) => (
+              <MiniDrawerList
+                key={circle.circle_id}
+                name={circle.name}
+                desc={circle.description}
+                img_url={circle.img_url}
+                circle_id={circle.circle_id}
+                open={open}
+                handleToggleOpen={closeDrawer}
+              />
+            ))}
+          </Collapse>
+        </List>
+        <Divider variant='middle' />
+        <List className='mt-auto'>
           <MiniDrawerList
             name='FAQ'
             icon={'fa-solid fa-circle-question'}
@@ -199,6 +226,14 @@ export default function MiniDrawer({
             handleToggleOpen={closeDrawer}
             click={disconnect}
           />
+          <ListItemButton disabled>
+            <ListItemIcon />
+            <ListItemText
+              disableTypography
+              primary='©Circle - 2022'
+              sx={{ fontSize: '12px' }}
+            />
+          </ListItemButton>
         </List>
       </Drawer>
     </Box>
