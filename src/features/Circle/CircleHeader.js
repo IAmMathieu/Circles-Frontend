@@ -2,7 +2,7 @@ import { Box, Container, Paper, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
 import { handleChange } from './CircleSlice';
-export default function CircleHeader({ circleData }) {
+export default function CircleHeader({ circleData, toggleModify }) {
   const { token } = useSelector((state) => state.auth);
   const { circle_id, menu } = useSelector((state) => state.circle);
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ export default function CircleHeader({ circleData }) {
           }}
         >
           <Typography variant='h4'>{circleData?.name}</Typography>
-          <EditIcon />
+          <EditIcon onClick={toggleModify} />
         </Box>
         <Box
           sx={{

@@ -193,13 +193,6 @@ export default function MiniDrawer({
         </List>
         <Divider variant='middle' />
         <List className='mt-auto'>
-        <MiniDrawerList
-            name='Mon compte'
-            img_url={userData?.img_url}
-            url='/profil'
-            open={open}
-            handleToggleOpen={closeDrawer}
-          />
           <MiniDrawerList
             name='FAQ'
             icon={'fa-solid fa-circle-question'}
@@ -211,6 +204,13 @@ export default function MiniDrawer({
             name='Contact'
             icon={'fa-solid fa-comments'}
             url='/contact'
+            open={open}
+            handleToggleOpen={closeDrawer}
+          />
+          <MiniDrawerList
+            name='Mon compte'
+            img_url={userData?.img_url}
+            url='/profil'
             open={open}
             handleToggleOpen={closeDrawer}
           />
