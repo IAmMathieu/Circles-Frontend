@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, cloneElement, Children } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
@@ -11,10 +11,7 @@ import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import { fr } from 'date-fns/locale';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import Skeleton from '@mui/material/Skeleton';
-import Stack from '@mui/material/Stack';
 import moment from 'moment-timezone';
 import {
   useCreateEventMutation,
@@ -23,7 +20,6 @@ import {
 } from '../Circle/Calendar/CalendarApi';
 import ModalEvent from '../Circle/Calendar/ModalEvent';
 import { Button } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
 import { handleChange } from '../Circle/Calendar/CalendarSlice';
 // import CustomToolbar from './CustomToolBar';
 // FIN CALENDRIER
@@ -84,7 +80,7 @@ export const CirclePage = ({
   }, [circleData]);
 
   const MyEventWrapper = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       style: {
         backgroundColor: 'red',
       },
@@ -93,7 +89,7 @@ export const CirclePage = ({
   // concerne le contenant de l'event rajouté
 
   const MyEventContainerWrapper = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       style: {
         backgroundColor: 'coral',
         color: 'green',
@@ -103,7 +99,7 @@ export const CirclePage = ({
   // inutile pour la vue mensuelle
 
   const MyDateCellWrapper = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       style: {
         backgroundColor: 'lightblue',
         color: 'red',
@@ -112,7 +108,7 @@ export const CirclePage = ({
   // Date Cell Wrapper = case du calendrier en vue mensuelle
 
   const MyTimeSlotWrapper = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       style: {
         backgroundColor: 'red',
         color: 'green',
@@ -121,7 +117,7 @@ export const CirclePage = ({
   //Touche les cases horaires de la vue week/day
 
   const MyTimeGutterWrapper = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       style: {
         backgroundColor: 'lightblue',
         color: 'green',
@@ -130,7 +126,7 @@ export const CirclePage = ({
   // Fait planter la vue ?
 
   const MyResourceHeader = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       style: {
         backgroundColor: 'yellow',
         color: 'green',
@@ -139,13 +135,13 @@ export const CirclePage = ({
   //Inconnu au bataillon
 
   const MyToolbar = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       toolbar: false,
     });
   // Fait planter la vue ?
 
   const MyAgendaEvent = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       style: {
         backgroundColor: 'yellow',
         color: 'green',
@@ -154,7 +150,7 @@ export const CirclePage = ({
   // Fait planter la vue ?
 
   const MyAgendaTime = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       style: {
         backgroundColor: 'yellow',
         color: 'green',
@@ -163,7 +159,7 @@ export const CirclePage = ({
   // Fait planter la vue ?
 
   const MyAgendaDate = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       style: {
         backgroundColor: 'lightblue',
         color: 'green',
@@ -172,7 +168,7 @@ export const CirclePage = ({
   // Fait planter la vue ?
 
   const MyDayHeader = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       style: {
         backgroundColor: 'yellow',
         color: 'green',
@@ -181,7 +177,7 @@ export const CirclePage = ({
   // Fait planter la vue ?
 
   const MyDayEvent = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       style: {
         backgroundColor: 'yellow',
         color: 'green',
@@ -190,7 +186,7 @@ export const CirclePage = ({
   // Inconnu au bataillon ?
 
   const MyWeekHeader = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       style: {
         backgroundColor: 'yellow',
         color: 'green',
@@ -199,7 +195,7 @@ export const CirclePage = ({
   // Fait planter la vue ?
 
   const MyWeekEvent = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       style: {
         backgroundColor: 'yellow',
         color: 'green',
@@ -208,7 +204,7 @@ export const CirclePage = ({
   // Fait planter la vue ?
 
   const MyMonthHeader = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       style: {
         backgroundColor: 'yellow',
         color: 'green',
@@ -217,7 +213,7 @@ export const CirclePage = ({
   // Fait planter la vue ?
 
   const MyMonthDateHeader = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       style: {
         backgroundColor: 'lightblue',
         color: 'green',
@@ -226,7 +222,7 @@ export const CirclePage = ({
   // Fait planter la vue ?
 
   const MyMonthEvent = ({ children }) =>
-    React.cloneElement(React.Children.only(children), {
+    cloneElement(Children.only(children), {
       style: {
         backgroundColor: 'lightblue',
         color: 'green',

@@ -39,10 +39,16 @@ export const CircleSlice = createSlice({
         state.img_url = action.payload.img_url;
         state.color = action.payload.color;
       },
+      handleChange: (state, action) => {
+        /* state[nomDuChamp] --> En fonction ce sera email ou password(si on est sur l'input email, ce sera email) et on modifie la valeur basé sur le payload envoyé.
+        Ici ce sera donc state[email] = action.payload.payload qui est égal à la valeur renseigné par l'utilisateur
+        */
+        state[action.payload.name] = action.payload.payload;
+      },
   },
 });
 
-export const { changeMenu, changeCircle } = CircleSlice.actions;
+export const { changeMenu, changeCircle, handleChange } = CircleSlice.actions;
 
 // we export the reducer of our slice
 export default CircleSlice.reducer;

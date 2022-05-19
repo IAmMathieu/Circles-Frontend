@@ -40,6 +40,26 @@ const circleApi = emptySplitApi.injectEndpoints({
         };
       },
     }),
+    modifyCircle: builder.mutation({
+      query: ({ token, name, description, color, img_url, user_id, circle_id }) => {
+        return {
+          url: `circle/${circle_id}`,
+          method: 'PATCH',
+          contentType: 'application/json',
+          body: new URLSearchParams({
+            name,
+            description,
+            color,
+            img_url,
+            user_id,
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
     joinCircle: builder.mutation({
       query: ({ token, user_id, circle_code }) => {
         return {
@@ -57,13 +77,13 @@ const circleApi = emptySplitApi.injectEndpoints({
       },
     }),
     deleteCircle: builder.mutation({
-      query: ({ token, user_id, code }) => {
+      query: ({ token, user_id, circle_id }) => {
         return {
-          url: `circle/${user_id}`,
+          url: `circle/${circle_id}`,
           method: 'DELETE',
           contentType: 'application/json',
           body: new URLSearchParams({
-            code,
+            user_id,
           }),
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -81,4 +101,5 @@ export const {
   useCreateCircleMutation,
   useJoinCircleMutation,
   useDeleteCircleMutation,
+  useModifyCircleMutation,
 } = circleApi;
