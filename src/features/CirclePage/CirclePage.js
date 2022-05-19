@@ -350,7 +350,7 @@ export const CirclePage = () => {
   const [deleteEvent] = useDeleteEventMutation();
   return (
     <div className='container-circle w-full'>
-      <Box
+      {/* <Box
         className='container-circle__box'
         sx={{
           display: 'flex',
@@ -394,7 +394,7 @@ export const CirclePage = () => {
             Le gras c'est la vie
           </Typography>
         </div>
-      </Box>
+      </Box> */}
       <Box style={{ marginTop: '5rem' }}>
         <Box sx={{ '& > :not(style)': { m: 1 } }}>
           <Button

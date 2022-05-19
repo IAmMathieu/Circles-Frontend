@@ -100,7 +100,8 @@ export default function Circle() {
   }, [CircleIsSuccess]);
 
   return (
-    <Box className=' relative flex flex-col items-center p-5 h-screen custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
+    // <Box className=' relative flex flex-col items-center p-5 h-screen custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
+    <Box className=' relative flex flex-col items-center p-5 h-screen custom-bk:pr-[10vh]  overflow-hidden'>
       <CircleHeader circleData={circleData} />
       <Button onClick={toggleModify}>TestUpdate</Button>
 
