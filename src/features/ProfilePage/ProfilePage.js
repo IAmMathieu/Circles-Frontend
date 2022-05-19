@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { Input } from '../Common/Input/Input';
@@ -53,12 +53,14 @@ function ProfilePage() {
     useUpdateProfilUserMutation();
   const [deleteProfilUser] = useDeleteProfilUserMutation();
 
+  useEffect(() => {document.title = `Circle - Profil`}, []);
+
   if (isLoading) {
     return <Loading />;
   } else {
     return (
       <Box component='div'>
-        <img src={logo} alt='logo Circles ' className='m-auto'></img>
+        <img src={logo} alt='logo Circles ' className='m-auto w-40'></img>
         <Box
           className='container-page'
           sx={{
