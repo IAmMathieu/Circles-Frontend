@@ -29,6 +29,7 @@ export default function CircleHeader({ circleData }) {
         }}
       />
       <Paper
+        style={{ backgroundColor: 'var(--background)' }}
         sx={{
           height: '80px',
           borderRadius: '0 0 10px 10px ',
@@ -51,7 +52,6 @@ export default function CircleHeader({ circleData }) {
           <Typography variant='h4'>{circleData?.name}</Typography>
           <EditIcon />
         </Box>
-
         <Box
           sx={{
             display: { xs: 'none', lg: 'flex' },
