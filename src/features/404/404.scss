@@ -25,7 +25,6 @@
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  // box-shadow: 10px 26px 24px -8px rgba(0,0,0,0.19);
 }
 .message-box h1 {
   font-size: 60px;
@@ -36,7 +35,8 @@
   margin-top: 40px;
 }
 .buttons-con .action-link-wrap a {
-  background: #68c950;
+  background: #EA8122;
+  box-shadow: 10px 26px 24px -8px rgba(0,0,0,0.19);
   padding: 8px 25px;
   border-radius: 4px;
   color: #FFF;
