@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { Navigate as navigate } from '../../../node_modules';
+import React from 'react'
+import PropTypes from 'prop-types'
+import clsx from 'clsx'
+import { Navigate as navigate } from 'react-big-calendar';
 
 function ViewNamesGroup({ views: viewNames, view, messages, onView }) {
   return viewNames.map((name) => (
@@ -22,6 +22,7 @@ ViewNamesGroup.propTypes = {
   views: PropTypes.array,
 };
 
+
 export default function CustomToolbar({
   // date, // available, but not used here
   label,
@@ -32,39 +33,47 @@ export default function CustomToolbar({
   views,
 }) {
   return (
-    <div className='rbc-toolbar'>
-      <span className='rbc-btn-group'>
-        <ViewNamesGroup
-          view={view}
-          views={views}
-          messages={messages}
-          onView={onView}
-        />
-      </span>
+    <div className="rbc-toolbar"
+    style={{padding:'1rem',
+    
+}}>
 
-      <span className='rbc-toolbar-label'>{label}</span>
-
-      <span className='rbc-btn-group'>
+      <span className="rbc-btn-group" style={{
+        display:'flex',
+        justifyContent:'space-around',
+        width:'100%'
+      }}>
         <button
           type='button'
           onClick={() => onNavigate(navigate.PREVIOUS)}
           aria-label={messages.previous}
+          style={{
+            border:'none'
+          }}
         >
-          <i className='fa fa-fw fa-chevron-left'></i>
+          <i className="fa fa-fw fa-chevron-left"
+          style={{
+            fontSize:'2rem'
+          }}></i>
         </button>
-        <button
-          type='button'
-          onClick={() => onNavigate(navigate.TODAY)}
-          aria-label={messages.today}
-        >
-          <i className='fa fa-fw fa-circle'></i>
-        </button>
+
+        <span className="rbc-toolbar-label" style={{
+          fontSize:'1.8rem',
+          fontWeight:'bold'
+        }}>{label}</span>
+        
         <button
           type='button'
           onClick={() => onNavigate(navigate.NEXT)}
           aria-label={messages.next}
+          style={{
+            border:'none',
+          }}
         >
-          <i className='fa fa-fw fa-chevron-right'></i>
+          <i className="fa fa-fw fa-chevron-right"
+          style={{
+            fontSize:'2rem'
+          }}></i>
         </button>
       </span>
     </div>
