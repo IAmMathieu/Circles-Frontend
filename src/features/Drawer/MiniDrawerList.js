@@ -71,7 +71,7 @@ function MiniDrawerList({
             {img_url ? (
               <Avatar
                 alt={name}
-                className='w-10 h-10 rounded-full MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root'
+                className='w-6 h-6 rounded-full MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root'
                 src={img_url}
               />
             ) : icon ? (
