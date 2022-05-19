@@ -48,6 +48,9 @@ export const LoginForm = () => {
    * Add classlist to the container when click
    */
 
+  useEffect(() => {
+    registerIsSuccess && toggleSnacke();
+  }, [registerIsSuccess]);
   const handleSwitch = () => {
     const container = document.getElementById('container');
     container.classList.toggle('right-panel-active');
@@ -72,7 +75,6 @@ export const LoginForm = () => {
                 password,
                 birthdate,
               });
-              toggleSnacke();
             }}
           >
             <Input name='Prénom' input='firstname' type={'text'} />
