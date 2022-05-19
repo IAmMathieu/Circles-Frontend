@@ -69,12 +69,12 @@ export const CirclePage = () => {
   // Event Wrapper = comme son nom l'indique, 
   // concerne le contenant de l'event rajouté
 
-  // const MyDateCellWrapper = ({ children }) =>
-  // React.cloneElement(React.Children.only(children), {
-  //   style: {
-  //     border
-  //   },
-  // });
+  const MyDateCellWrapper = ({ children }) =>
+  React.cloneElement(React.Children.only(children), {
+    style: {
+      backgroundColor:'lightblue'
+    },
+  });
     // Date Cell Wrapper = case du calendrier en vue mensuelle
 
   const MyResourceHeader = ({ children }) =>
@@ -132,7 +132,7 @@ export const CirclePage = () => {
     () => ({
       components: {
         // event: MyEvent, // Fait planter la vue ?
-        eventWrapper: MyEventWrapper,
+        // eventWrapper: MyEventWrapper,
         // dateCellWrapper: MyDateCellWrapper,
         // timeGutterHeader: MyTimeGutterWrapper, // Fait planter la vue ?
         resourceHeader: MyResourceHeader, //Inconnu au bataillon ?
@@ -209,7 +209,7 @@ export const CirclePage = () => {
                   height:'35rem', 
                   width: '90%', 
                   margin:'auto',
-                  boxShadow: '0px 3px 5px -1px rgb(0 0 0 / 20%))',
+                  boxShadow: '10px 10px 18px 0px rgba(0,0,0,0.2)',
                 }}
                 culture={'fr'}
                 components={components}

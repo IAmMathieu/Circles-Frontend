@@ -50,7 +50,10 @@ export default function CustomToolbar({
             border:'none'
           }}
         >
-          <i className="fa fa-fw fa-chevron-left"></i>
+          <i className="fa fa-fw fa-chevron-left"
+          style={{
+            fontSize:'2rem'
+          }}></i>
         </button>
 
         <span className="rbc-toolbar-label" style={{
@@ -66,7 +69,10 @@ export default function CustomToolbar({
             border:'none',
           }}
         >
-          <i className="fa fa-fw fa-chevron-right"></i>
+          <i className="fa fa-fw fa-chevron-right"
+          style={{
+            fontSize:'2rem'
+          }}></i>
         </button>
       </span>
     </div>
