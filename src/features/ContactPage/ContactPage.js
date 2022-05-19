@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './style.scss';
 import logo from './../../logo.svg';
 import UserContact from './Segment';
@@ -7,7 +8,9 @@ import portraitLogan from '../../assets/images/portrait_logan.jpg';
 import portraitRobin from '../../assets/images/portrait_robin.png';
 import portraitMathieu from '../../assets/images/portrait_mathieu.jpg';
 
+
 function ContactPage() {
+  useEffect(() => {document.title = `Circle - Contact`}, []);
   return (
     <div className='container-page-contact'>
           <a href='/dashboard'>

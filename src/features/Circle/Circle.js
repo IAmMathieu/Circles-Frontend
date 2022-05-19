@@ -46,7 +46,7 @@ export default function Circle() {
   /**
    * Change the name of page with Circle's title
    */
-  useEffect(() => {document.title = `Circle - ${name}`}, []);
+  useEffect(() => {document.title = `Circle - ${name}`}, [name]);
 
   return (
     <Box className=' relative flex flex-col items-center p-5 h-screen custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>

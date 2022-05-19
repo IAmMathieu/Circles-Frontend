@@ -58,6 +58,8 @@ export const Dashboard = () => {
 
   const [openSnack, setOpenSnack] = useState(false);
 
+  useEffect(() => {document.title = `Circle - Dashboard`}, []);
+
   useEffect(() => {
     createCircleSuccess && setOpenSnack(true);
   }, [createCircleSuccess]);
