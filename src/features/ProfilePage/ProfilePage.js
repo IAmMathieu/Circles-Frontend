@@ -64,7 +64,7 @@ function ProfilePage() {
         <Box
           className='container-page'
           sx={{
-            '@media (min-width:965px)': {
+            '@media (min-width:768px)': {
               display: 'flex',
               flexDirection: 'row',
             },
@@ -73,11 +73,11 @@ function ProfilePage() {
           <Card
             sx={{
               borderRadius: '50%',
-              width: '50%',
+              width: '25%',
               margin: 'auto',
-              '@media (min-width:965px)': {
-                width: '30%',
-              },
+              // '@media (min-width:965px)': {
+              //   width: '30%',
+              // },
             }}
           >
             <Box component='div'>
@@ -95,8 +95,9 @@ function ProfilePage() {
               margin: '0.8rem auto',
               backgroundColor: 'transparent',
               borderRadius: '20px',
+              overflowY: 'auto',
 
-              '@media (min-width:965px)': {
+              '@media (min-width:768px)': {
                 overflow: 'visible',
                 width: '35%',
               },
