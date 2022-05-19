@@ -17,6 +17,7 @@ import './miniDrawer.scss';
 import MiniDrawerDarkMode from './MiniDrawerDarkMode';
 import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useEffect, useState } from 'react';
 
 const drawerWidth = 240;
 
@@ -86,6 +87,7 @@ export default function MiniDrawer({
     removeStorage('user_id');
   };
 
+  const [skip, setSkip] = useState(true);
   const closeDrawer = () => {
     setOpen(false);
   };
@@ -96,13 +98,27 @@ export default function MiniDrawer({
   const navigate = useNavigate();
   // const theme = useTheme();
 
-  const { data: circlesData } = useGetUserDashBoardQuery({
-    token,
-    user_id,
-  });
+  const { data: circlesData } = useGetUserDashBoardQuery(
+    {
+      token,
+      user_id,
+    },
+    {
+      skip: skip,
+    }
+  );
 
-  const { data: userData } = useGetProfilUserQuery({ token, user_id });
-
+  const { data: userData } = useGetProfilUserQuery(
+    { token, user_id },
+    {
+      skip: skip,
+    }
+  );
+  useEffect(() => {
+    if (token !== null && user_id !== null) {
+      setSkip(false);
+    }
+  }, [token, user_id]);
   return (
     <Box className='test' sx={{ display: 'flex' }}>
       <CssBaseline />

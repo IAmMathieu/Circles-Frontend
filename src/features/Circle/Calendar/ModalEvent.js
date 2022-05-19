@@ -73,10 +73,15 @@ export default function ModalEvent({
     new Date('2018-01-01 00:00:00.000Z')
   );
   const [endDate, setEndDate] = useState(new Date('2018-01-01 00:00:00.000Z'));
-  const { refetch: dashDataRefretch } = useGetUserDashBoardQuery({
-    token,
-    user_id,
-  });
+  const { refetch: dashDataRefretch } = useGetUserDashBoardQuery(
+    {
+      token,
+      user_id,
+    },
+    {
+      skip: true,
+    }
+  );
   return (
     <>
       <Box>

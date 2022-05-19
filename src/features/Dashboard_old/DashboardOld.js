@@ -15,10 +15,15 @@ export const Dashboard = () => {
     data: DashData,
     isLoading: loginIsLoading,
     isError: loginIsError,
-  } = useGetUserDashBoardQuery({
-    token,
-    user_id,
-  });
+  } = useGetUserDashBoardQuery(
+    {
+      token,
+      user_id,
+    },
+    {
+      skip: true,
+    }
+  );
 
   /**
    * Allow to filter events

@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
-import { useCreateCircleMutation, useJoinCircleMutation } from '../Circle/CircleApi';
+import {
+  useCreateCircleMutation,
+  useJoinCircleMutation,
+} from '../Circle/CircleApi';
 import SimpleBottomNavigation from '../Common/BottomNavigation/SimpleBottomNavigation';
 import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
 import ModaleCreateCircle from './ModaleCreateCircle';
@@ -10,13 +13,14 @@ import CustomizedSnackbars from '../Common/Snackbar/Snackbar';
 import DashbordLoader from './DashbordLoader';
 import ModaleJoinCircle from './ModaleJoinCircle';
 import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
-
+import { useLocalstorageState } from 'rooks';
 export const Dashboard = () => {
-  const { token, user_id, portrait_url } = useSelector((state) => state.auth);
+  // const { token, user_id, portrait_url } = useSelector((state) => state.auth);
   const { name, description, color, img_url } = useSelector(
     (state) => state.dashboard
   );
-
+  const [token, setToken] = useLocalstorageState('token', 0);
+  const [user_id, setUserId] = useLocalstorageState('user_id', 0);
   const {
     refetch,
     data: DashData,
@@ -58,7 +62,9 @@ export const Dashboard = () => {
 
   const [openSnack, setOpenSnack] = useState(false);
 
-  useEffect(() => {document.title = `Circle - Dashboard`}, []);
+  useEffect(() => {
+    document.title = `Circle - Dashboard`;
+  }, []);
 
   useEffect(() => {
     createCircleSuccess && setOpenSnack(true);

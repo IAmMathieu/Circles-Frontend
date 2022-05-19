@@ -17,8 +17,16 @@ export default function Circle() {
   const { user_id, token } = useSelector((state) => state.auth);
   const [dataCircle, setDataCircle] = useState();
   // Get the menu from the state circle
-  const { menu, name, description, img_url } = useSelector((state) => state.circle);
+  const { menu, name, description, img_url } = useSelector(
+    (state) => state.circle
+  );
+  const [skip, setSkip] = useState(true);
 
+  useEffect(() => {
+    if (token !== null && user_id !== null) {
+      setSkip(false);
+    }
+  }, [token]);
   /**
    * Make the query when we are into the circle
    */
@@ -27,15 +35,25 @@ export default function Circle() {
     data: circleData,
     isSuccess: CircleIsSuccess,
     isLoading: circleIsLoading,
-  } = useGetCircleQuery({
-    token,
-    circle_id,
-  });
+  } = useGetCircleQuery(
+    {
+      token,
+      circle_id,
+    },
+    {
+      skip: skip,
+    }
+  );
 
   /**
    * Make the query for get the profil user information
    */
-  const { data: profilData } = useGetProfilUserQuery({ token, user_id });
+  const { data: profilData } = useGetProfilUserQuery(
+    { token, user_id },
+    {
+      skip: skip,
+    }
+  );
   //* Socket part
   /**
    * On détecte et relance le socket join une fois que le circle success a bien été fais.
@@ -46,7 +64,9 @@ export default function Circle() {
   /**
    * Change the name of page with Circle's title
    */
-  useEffect(() => {document.title = `Circle - ${name}`}, [name]);
+  useEffect(() => {
+    document.title = `Circle - ${name}`;
+  }, [name]);
 
   return (
     <Box className=' relative flex flex-col items-center p-5 h-screen custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
