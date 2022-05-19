@@ -1,7 +1,11 @@
 import { Box, Button } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { useDeleteCircleMutation, useGetCircleQuery, useModifyCircleMutation } from './CircleApi';
+import {
+  useDeleteCircleMutation,
+  useGetCircleQuery,
+  useModifyCircleMutation,
+} from './CircleApi';
 import CircleBottomNavigation from './CircleBottomNavigation';
 import { CirclePage } from '../CirclePage/CirclePage';
 import CircleChat from './Chat/CircleChat';
@@ -9,16 +13,18 @@ import CircleHeader from './CircleHeader';
 import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
 import { useEffect, useState } from 'react';
 import ModalModifyCircle from './ModalModifyCircle';
+import { changeCircle } from './CircleSlice';
 
 export default function Circle() {
   // Get id of the route
 
+  const dispatch = useDispatch();
   const { circle_id } = useParams();
   // Get the token and user_id from the state auth
   const { user_id, token } = useSelector((state) => state.auth);
   const [dataCircle, setDataCircle] = useState();
   // Get the menu from the state circle
-  const { menu, name, description, img_url } = useSelector(
+  const { menu, name, description, color, img_url } = useSelector(
     (state) => state.circle
   );
   const [skip, setSkip] = useState(true);
@@ -89,8 +95,9 @@ export default function Circle() {
    * Change the name of page with Circle's title
    */
   useEffect(() => {
-    document.title = `Circle - ${name}`;
-  }, [name]);
+    if (circleData?.name) document.title = `Circle - ${circleData?.name}`;
+    dispatch(changeCircle({ circle_id, name, desc: description, img_url }));
+  }, [CircleIsSuccess]);
 
   return (
     <Box className=' relative flex flex-col items-center p-5 h-screen custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
@@ -98,15 +105,15 @@ export default function Circle() {
       <Button onClick={toggleModify}>TestUpdate</Button>
 
       <ModalModifyCircle
-          refetch={circleRefetch}
-          dataModifyCircle={dataModifyCircle}
-          modifyCircle={modifyCircle}
-          modifyCircleSuccess={modifyCircleSuccess}
-          open={openModify}
-          toggleModify={toggleModify}
-          modifyCircleError={modifyCircleError}
-          deleteCircle={deleteCircle}
-        />
+        refetch={circleRefetch}
+        dataModifyCircle={circleData}
+        modifyCircle={modifyCircle}
+        modifyCircleSuccess={modifyCircleSuccess}
+        open={openModify}
+        toggleModify={toggleModify}
+        modifyCircleError={modifyCircleError}
+        deleteCircle={deleteCircle}
+      />
       {menu === 'calendar' ? (
         <CirclePage
           circleRefetch={circleRefetch}

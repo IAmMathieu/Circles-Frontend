@@ -1,13 +1,11 @@
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import { Box, Modal, styled, Typography } from '@mui/material';
+import { Box, Modal, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleChange } from './CircleSlice';
-
+import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
+import { useLocalstorageState } from 'rooks';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -26,18 +24,28 @@ const style = {
 export default function ModaleModifyCircle({
   open,
   toggleModify,
+  circleData,
   modifyCircle,
   refetch,
   modifyCircleError,
   modifyCircleSuccess,
   deleteCircle
 }) {
+  
+  const [token, setToken] = useLocalstorageState('token', 0);
+  const [user_id, setUserId] = useLocalstorageState('user_id', 0);
   const dispatch = useDispatch();
   const { circle_id, name, description, color, img_url } = useSelector(
     (state) => state.circle
   );
-  const { token, user_id } = useSelector((state) => state.auth);
-  return (
+
+ const { refetch: dashDataRefretch } = useGetUserDashBoardQuery(
+     {
+       token,
+       user_id,
+     }
+   );
+ return (
     <div>
       <Modal open={open} onClose={toggleModify}>
         <Box
@@ -55,7 +63,7 @@ export default function ModaleModifyCircle({
               color,
               img_url,
             });
-            refetch();
+            dashDataRefretch();
             toggleModify();
           }}
         >
