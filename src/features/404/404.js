@@ -14,23 +14,23 @@ export const ErrorPage = () => {
             version="1.1" 
             xmlns="http://www.w3.org/2000/svg" 
             xmlnsXlink="http://www.w3.org/1999/xlink" 
-            xmlnsSketch="http://www.bohemiancoding.com/sketch/ns"
+            xmlnssketch="http://www.bohemiancoding.com/sketch/ns"
             >
                 <g 
                 id="Page-1" 
                 stroke="none" 
-                stroke-width="1" 
+                strokeWidth="1" 
                 fill="none" 
-                fill-rule="evenodd" 
-                sketchType="MSPage">
+                fillRule="evenodd" 
+                sketchtype="MSPage">
                     <circle 
                         cx="290" 
-                        cy="400" 
+                        cy="430" 
                         r="250" 
                         stroke="#EA8122" //orange
                         id="Polygon-1" 
                         strokeWidth="6" 
-                        sketchType="MSShapeGroup"></circle>
+                        sketchtype="MSShapeGroup"></circle>
                     <circle 
                         cx="650" 
                         cy="350" 
@@ -38,7 +38,7 @@ export const ErrorPage = () => {
                         id="Polygon-2" 
                         stroke="#EF4A5B" //cercle rouge
                         strokeWidth="6" 
-                        sketchType="MSShapeGroup"></circle>
+                        sketchtype="MSShapeGroup"></circle>
                     <circle 
                         cx="336" 
                         cy="816" 
@@ -46,7 +46,7 @@ export const ErrorPage = () => {
                         id="Polygon-4" 
                         stroke="#90C1E0" //bleu
                         strokeWidth="6" 
-                        sketchType="MSShapeGroup"></circle>
+                        sketchtype="MSShapeGroup"></circle>
                     <circle 
                         cx="350" 
                         cy="200" 
@@ -54,7 +54,7 @@ export const ErrorPage = () => {
                         id="Polygon-3" 
                         stroke="#795D9C" //violet
                         strokeWidth="6" 
-                        sketchType="MSShapeGroup"></circle>
+                        sketchtype="MSShapeGroup"></circle>
 
                     <circle 
                         cx="194" 
@@ -63,7 +63,7 @@ export const ErrorPage = () => {
                         id="Polygon-5" 
                         stroke="#36B455" //vert
                         strokeWidth="6" 
-                        sketchType="MSShapeGroup"></circle>
+                        sketchtype="MSShapeGroup"></circle>
                     <circle 
                         cx="550" 
                         cy="711" 
@@ -71,16 +71,16 @@ export const ErrorPage = () => {
                         id="Polygon-6" 
                         stroke="#FF00FF" //FOF, FOF everywhere
                         strokeWidth="6" 
-                        sketchType="MSShapeGroup"></circle>
+                        sketchtype="MSShapeGroup"></circle>
 
                 </g>
             </svg>
-            <div class="message-box">
+            <div className="message-box">
                     <h1>404</h1>
                     <p>Page not found</p>
-                    <div class="buttons-con">
-                        <div class="action-link-wrap">
-                            <a href="" class="link-button">Go to Home Page</a>
+                    <div className="buttons-con">
+                        <div className="action-link-wrap">
+                            <a href="" className="link-button">Go to Home Page</a>
                         </div>
                     </div>
                 </div>
