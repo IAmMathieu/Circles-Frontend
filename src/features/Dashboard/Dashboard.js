@@ -81,31 +81,33 @@ export const Dashboard = () => {
             src={userData?.img_url}
             alt=''
           />
-          <Box className='card__container bg-darkysubg mb-3 h-full w-full items-center justify-center rounded-lg custom-bk:ml-[15vh] p-5 custom-bk:p-10 flex flex-wrap  gap-10  overflow-y-scroll shadow-2xl darkMode:shadow-none max-w-[2000px]'>
+          <Box className='card__container bg-darkysubg mb-3 h-[90%] w-full rounded-lg custom-bk:ml-[15vh] p-5 custom-bk:p-10 shadow-2xl darkMode:shadow-none max-w-[2000px]'>
             <Typography
-              className='text-xl custom-bk:text-3xl font-bold block w-full mt-5 '
+              className='text-xl custom-bk:text-3xl font-bold block w-full h-max mt-5 mb-8'
               component='h5'
             >
-              Vos Cercles :
+              Mes Cercles :
             </Typography>
-            {DashData?.map((card) => {
-              return (
-                <Card
-                  key={card.circle_id}
-                  name={card.name}
-                  desc={card.description}
-                  circle_id={card.circle_id}
-                  img_url={card.img_url}
-                  nb_number={card.users_count}
-                  nb_online={card.nb_online}
-                  nb_events={card.futur_events}
-                  admin_picture={card.admin[0].img_url}
-                  admin_surname={card.admin[0].surname}
-                  usersList={card.users}
-                  eventsList={card.events}
-                />
-              );
-            })}
+            <Box className='flex flex-wrap gap-10 h-[85%] overflow-y-auto items-start justify-center'>
+              {DashData?.map((card) => {
+                return (
+                  <Card
+                    key={card.circle_id}
+                    name={card.name}
+                    desc={card.description}
+                    circle_id={card.circle_id}
+                    img_url={card.img_url}
+                    nb_number={card.users_count}
+                    nb_online={card.nb_online}
+                    nb_events={card.futur_events}
+                    admin_picture={card.admin[0].img_url}
+                    admin_surname={card.admin[0].surname}
+                    usersList={card.users}
+                    eventsList={card.events}
+                  />
+                );
+              })}
+            </Box>
           </Box>
           <SimpleBottomNavigation
             handleClickOpenCreate={toggleCreate}

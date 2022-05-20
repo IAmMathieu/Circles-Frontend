@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { handleChange } from './CircleSlice';
 import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
 import { useLocalstorageState } from 'rooks';
+import { useNavigate } from 'react-router';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -35,6 +36,7 @@ export default function ModaleModifyCircle({
   const [token, setToken] = useLocalstorageState('token', 0);
   const [user_id, setUserId] = useLocalstorageState('user_id', 0);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { circle_id, name, description, color, img_url } = useSelector(
     (state) => state.circle
   );
@@ -156,6 +158,7 @@ export default function ModaleModifyCircle({
             });
             refetch();
             toggleModify();
+            navigate('/dashboard');
           }}>Supprimer le cercle</Button>
             <Button type='submit'>Modifier</Button>
           </DialogActions>
