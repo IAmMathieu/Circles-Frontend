@@ -138,8 +138,8 @@ export default function MiniDrawer({
     <Box className='test' sx={{ display: 'flex' }}>
       <CssBaseline />
       <IconButton
-        className='z-10'
-        sx={{ position: 'fixed', left: '1rem', top: '1rem' }}
+        className='z-10 drop-shadow-md'
+        sx={{ position: 'fixed', left: '1rem', top: '1rem', boxShadow: 3 }}
         onClick={handleToggleOpen}
       >
         <MenuIcon />

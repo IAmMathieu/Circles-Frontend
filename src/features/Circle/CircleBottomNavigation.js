@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import GroupsIcon from '@mui/icons-material/Groups';
-import { Typography } from '@mui/material';
+import { BottomNavigationAction, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { changeMenu } from './CircleSlice';
 
@@ -29,27 +29,14 @@ export default function CircleBottomNavigation() {
         },
       }}
     >
-      <BottomNavigation className='h-full px-10'>
-        <div className=' w-full flex justify-between items-center'>
-          <Box
-            className='flex flex-col items-center'
-            onClick={() => dispatch(changeMenu('calendar'))}
-          >
-            <AddCircleIcon />
-            <Typography className='text-xs custom-bk:text-lg' component='h5'>
-              Calendrier
-            </Typography>
-          </Box>
-          <Box
-            className='flex flex-col items-center'
-            onClick={() => dispatch(changeMenu('chat'))}
-          >
-            <GroupsIcon />
-            <Typography className='text-xs custom-bk:text-lg' component='h5'>
-              Chat
-            </Typography>
-          </Box>
-        </div>
+      <BottomNavigation className='h-full px-10' showLabels>
+        <BottomNavigationAction
+          label='Calendrier'
+          icon={<AddCircleIcon />}
+          onClick={() => dispatch(changeMenu('calendar'))}
+        />
+        <BottomNavigationAction label='Chat' icon={<GroupsIcon />} onClick={() => dispatch(changeMenu('chat'))} />
+
       </BottomNavigation>
     </Box>
   );
