@@ -20,7 +20,7 @@ export default function CircleBottomNavigation() {
         position: 'absolute',
         overflow: 'hidden',
         height: '70px',
-        '@media (min-width:965px)': {
+        '@media (min-width:1199px)': {
           position: 'absolute',
           top: '5rem',
           right: '2rem',
