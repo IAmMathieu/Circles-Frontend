@@ -46,10 +46,11 @@ export default function CircleHeader({ circleData }) {
             transform: 'translate(-50%,-50%)',
             gap: {xs:'0.5rem',lg:'1rem'},
             alignItems: 'center',
+            display:'flex',
           }}
         >
           <Typography sx={{fontSize: 'calc(1vw + 1vh + 1vmin)'}}>{circleData?.name}</Typography>
-          {/* <EditIcon sx={{fontSize: 'calc(1vw + 1vh + 1vmin)'}}/> */}
+          <EditIcon sx={{fontSize: 'calc(1vw + 1vh + -)'}}/>
         </Box>
         <Box
           sx={{

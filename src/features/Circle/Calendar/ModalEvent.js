@@ -44,7 +44,7 @@ const style = {
   borderRadius: '20px',
   p: 4,
   height: '60vh',
-  padding: '10rem',
+  padding: '2rem',
 };
 export default function ModalEvent({
   open,
@@ -207,7 +207,6 @@ export default function ModalEvent({
               <Stack spacing={3}>
                 {calendarControlled?.allday === false ? (
                   <DateTimePicker
-                    mask='mm'
                     value={calendarControlled.start}
                     label='Start event : '
                     onChange={(event) => {
@@ -229,7 +228,6 @@ export default function ModalEvent({
                     // mask='mm'
                     value={calendarControlled.start}
                     format='yyyy-mm-dd'
-                    mask='____/__/__'
                     label='Start event : '
                     onChange={(event) => {
                       const [date] = event.toISOString().split('GTM');
@@ -254,7 +252,6 @@ export default function ModalEvent({
                 )}
 
                 <DateTimePicker
-                  mask='mm'
                   disabled={calendarControlled?.allday === true ? true : false}
                   label='End event : '
                   required

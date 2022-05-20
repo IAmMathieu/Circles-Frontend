@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import moment from 'moment-timezone';
 // Initialise the default state.
 const initialState = {
-  title: null,
+  title: '',
   start: moment().format('YYYY-MM-DD'),
-  end: null,
-  description: null,
+  end: '',
+  description: '',
   color: '#212B36',
   allday: false,
 };
