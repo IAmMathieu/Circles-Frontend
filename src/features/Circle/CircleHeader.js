@@ -14,7 +14,7 @@ export default function CircleHeader({ circleData }) {
         height: '20%',
         width: '100% ',
         padding: '1rem',
-        paddingTop: { xs: '5vh', lg: '1rem' },
+        paddingTop: { xs: '0vh', lg: '1rem' },
       }}
     >
       <Box
@@ -23,7 +23,7 @@ export default function CircleHeader({ circleData }) {
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          height: '100%',
+          height: {xs : '15vh',lg:'20vh'},
           borderRadius: '10px 10px 0 0 ',
           width: '100%',
         }}
@@ -31,26 +31,25 @@ export default function CircleHeader({ circleData }) {
       <Paper
         style={{ backgroundColor: 'var(--background)' }}
         sx={{
-          height: '80px',
+          height:{xs: '5vh',lg:'80px'},
           borderRadius: '0 0 10px 10px ',
-          transform: 'translateX(-5px)',
+          // transform: 'translateX(-5px)',
           width: '100%',
           position: 'relative',
         }}
       >
         <Box
           sx={{
-            display: { xs: 'none', lg: 'flex' },
             position: 'absolute',
             top: '50%',
-            left: '20%',
-            transform: 'translateY(-50%)',
-            gap: '1rem',
+            left: {xs:'50%',lg:'20%'},
+            transform: 'translate(-50%,-50%)',
+            gap: {xs:'0.5rem',lg:'1rem'},
             alignItems: 'center',
           }}
         >
-          <Typography variant='h4'>{circleData?.name}</Typography>
-          <EditIcon />
+          <Typography sx={{fontSize: 'calc(1vw + 1vh + 1vmin)'}}>{circleData?.name}</Typography>
+          {/* <EditIcon sx={{fontSize: 'calc(1vw + 1vh + 1vmin)'}}/> */}
         </Box>
         <Box
           sx={{
