@@ -91,13 +91,13 @@ const Chat = ({
   }, [messageToMap]);
   return (
     <Box
-      className=' bg-darkysubg mb-3  w-full rounded-lg custom-bk:ml-[15vh] p-5 custom-bk:p-10 flex column shadow-2xl darkMode:shadow-none max-w-[2000px] sm:h-[60vh] lg:h-[83vh]'
+      className='mb-3 w-[95vw] custom-bk:w-full rounded-lg p-5 custom-bk:p-10 flex column shadow-2xl darkMode:shadow-none max-w-[2000px] '
       sx={{
-        height: { xs: '70vh', lg: '90vh' },
+        height: { xs: '65vh', md: '75vh', lg: '90vh' },
       }}
     >
       <Grid container className='w-full flex row'>
-        {/* <Grid
+        <Grid
           item
           xs={0}
           sm={3}
@@ -134,7 +134,7 @@ const Chat = ({
               <ListItemText primary='Cindy Baker'>Cindy Baker</ListItemText>
             </ListItem>
           </List>
-        </Grid> */}
+        </Grid>
         <Grid
           item
           xs={12}

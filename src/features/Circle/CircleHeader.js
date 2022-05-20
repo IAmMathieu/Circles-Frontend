@@ -13,8 +13,9 @@ export default function CircleHeader({ circleData, toggleModify }) {
       sx={{
         height: '20%',
         width: '100% ',
-        padding: '1rem',
+        padding: { xs: '1rem', lg: '1rem' },
         paddingTop: { xs: '0vh', lg: '1rem' },
+        marginBottom: { md: '3vh', lg: '10vh' },
       }}
     >
       <Box
