@@ -2,9 +2,8 @@ import { useMemo, useState, useEffect, cloneElement, Children } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import PropTypes from 'prop-types';
+import Fab from '@mui/material/Fab';
+
 //CALENDRIER
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import format from 'date-fns/format';
@@ -21,7 +20,6 @@ import {
   useUpdateEventMutation,
 } from '../Circle/Calendar/CalendarApi';
 import ModalEvent from '../Circle/Calendar/ModalEvent';
-import { Button } from '@mui/material';
 import { handleChange } from '../Circle/Calendar/CalendarSlice';
 import CustomToolbar from './CustomToolBar';
 // FIN CALENDRIER
@@ -45,23 +43,6 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-// const events = [
-//   {
-//     title: 'Strip Tease Aleks',
-//     start: new Date(2022, 4, 7),
-//     end: new Date(2022, 4, 7),
-//   },
-//   {
-//     title: 'Anniversaire Tati Daniele',
-//     start: new Date(2022, 4, 20),
-//     end: new Date(2022, 4, 22),
-//   },
-//   {
-//     title: 'Anniversaire Tonton Gudule',
-//     start: new Date(2022, 4, 20),
-//     end: new Date(2022, 4, 21),
-//   },
-// ];
 export const CirclePage = ({
   CircleIsSuccess,
   circleIsLoading,
@@ -81,37 +62,12 @@ export const CirclePage = ({
     circleData && setEvents(circleData.events);
   }, [circleData]);
 
-  const MyDayEvent = ({ children }) =>
-    cloneElement(Children.only(children), {
-      style: {
-        backgroundColor: 'yellow',
-        color: 'green',
-      },
-    });
-  // Inconnu au bataillon ?
 
-  const MyOtherNestedComponent = () => <div>NESTED COMPONENT</div>;
-
-  const MyCustomHeader = ({ label }) => {
-    <div>
-      CUSTOM HEADER :<div>{label}</div>
-      <MyOtherNestedComponent />
-    </div>;
-  };
-
-  MyCustomHeader.propTypes = {
-    label: PropTypes.string.isRequired,
-  };
-
-  const { components, formats } = useMemo(
+  const { components } = useMemo(
     () => ({
       components: {
         toolbar: CustomToolbar,
 
-        day: {
-          event: MyDayEvent,
-        },
-        week: {},
         month: {
           header: ({ date, localizer }) => localizer.format(date, 'eee'),
         },
@@ -128,26 +84,10 @@ export const CirclePage = ({
   const [updateEvent] = useUpdateEventMutation();
   const [deleteEvent] = useDeleteEventMutation();
   return (
-    <div className='container-circle w-full'>
-      <Box
-        className='container-circle__box'
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          '& > :not(style)': {
-            width: '100%',
-            height: '8rem',
-          },
-          color: 'rgba(255,255,255,0.5)',
-          backgroundSize: '100%',
-          backgroundRepeat: 'no-repeat',
-          margin: '1rem',
-          borderRadius: '15px',
-        }}
-      ></Box>
-      <Box style={{ marginTop: '5rem' }}>
-        <Box sx={{ '& > :not(style)': { m: 1 } }}>
-          <Button
+    <div className='container-circle w-full '>
+      <Box className='test1' style={{ marginTop: '1rem' }}>
+        <Box className='test2' sx={{ '& > :not(style)': { m: 1 }, marginTop:{xs:'1rem', lg:'8rem'}}}>
+          <Fab 
             aria-label='add'
             variant='extended'
             onClick={() => {
@@ -165,7 +105,7 @@ export const CirclePage = ({
           >
             <AddIcon />
             Ajouter un évènement
-          </Button>
+          </Fab>
         </Box>
         <ModalEvent
           updateEvent={updateEvent}
@@ -200,14 +140,15 @@ export const CirclePage = ({
               );
             }
           }}
-          style={{ height: '30rem', width: '90%', margin: 'auto' }}
+          style={{ 
+            height:'50vh', 
+            width: '90%', 
+            margin:'auto',
+            boxShadow: '10px 10px 18px 0px rgba(0,0,0,0.2)',
+          }}
           culture={'fr'}
           components={components}
           views={['month']}
-          // A retirer si on veut avoir la vue agenda
-          //"Vue agenda" peut poser problème en mobile
-          // /!\ view = affiche le mois, la semaine ou le jour en défaut
-          // /!\ views={['month]} render uniquement le mois
         />
       </Box>
     </div>
