@@ -42,9 +42,9 @@ export default function CircleHeader({ circleData, toggleModify }) {
           sx={{
             position: 'absolute',
             top: '50%',
-            left: { xs: '50%', lg: '20%' },
+            left: { xs: '50%', md: '20%' },
             transform: 'translate(-50%,-50%)',
-            gap: { xs: '0.5rem', lg: '1rem' },
+            gap: { xs: '0.5rem', md: '1rem' },
             alignItems: 'center',
             display: 'flex',
           }}
@@ -52,11 +52,16 @@ export default function CircleHeader({ circleData, toggleModify }) {
           <Typography sx={{ fontSize: 'calc(1vw + 1vh + 1vmin)' }}>
             {circleData?.name}
           </Typography>
-          <EditIcon sx={{ fontSize: 'calc(1vw + 1vh + -)' }} />
+          <EditIcon
+            sx={{ fontSize: 'calc(1vw + 1vh + -)' }}
+            onClick={() => {
+              toggleModify();
+            }}
+          />
         </Box>
         <Box
           sx={{
-            display: { xs: 'none', lg: 'flex' },
+            display: { xs: 'none', md: 'flex' },
             position: 'absolute',
             top: '50%',
             transform: 'translateY(-50%)',
