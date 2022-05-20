@@ -98,6 +98,7 @@ export const Chat = ({ CircleIsSuccess, circleData, profilData, user_id }) => {
 
   return (
     <Card
+      className='prout'
       sx={{
         margin: '0 auto',
         width: '50%',
