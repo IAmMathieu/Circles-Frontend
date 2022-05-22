@@ -123,7 +123,7 @@ const App = () => {
           />
           <Route path='/faq' theme={muiTheme} element={<FAQ />} />
           <Route path='/contact' theme={muiTheme} element={<ContactPage />} />
-          <Route path='/404' theme={muiTheme} element={<ErrorPage />} />
+          <Route path='*' theme={muiTheme} element={<ErrorPage />} />
         </Routes>
       </ThemeProvider>
     </div>
