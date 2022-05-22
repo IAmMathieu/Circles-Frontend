@@ -147,22 +147,22 @@ function ProfilePage() {
                 helperText={'Prénom'}
                 input='firstname'
                 type={'text'}
-                value={data?.firstname}
+                defaultValue={data?.firstname}
               />
               <Input
-                value={data?.lastname}
+                defaultValue={data?.lastname}
                 input='lastname'
                 type={'text'}
                 helperText={'Nom'}
               />
               <Input
-                value={data?.surname}
+                defaultValue={data?.surname}
                 input='surname'
                 type={'text'}
                 helperText={'Pseudo'}
               />
               <Input
-                value={data?.email}
+                defaultValue={data?.email}
                 input='email'
                 type={'email'}
                 helperText={'Email'}

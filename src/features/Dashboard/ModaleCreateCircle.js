@@ -14,7 +14,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '90vw',
-  maxWidth: '1000px',
+  maxWidth: '800px',
   height: '50%',
   // bgcolor: 'background.paper',
   backgroundColor: 'var(--subbackground)',

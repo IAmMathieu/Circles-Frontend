@@ -7,6 +7,7 @@ import portraitElo from '../../assets/images/portrait_elo.jpg';
 import portraitLogan from '../../assets/images/portrait_logan.jpg';
 import portraitRobin from '../../assets/images/portrait_robin.png';
 import portraitMathieu from '../../assets/images/portrait_mathieu.jpg';
+import { Link } from 'react-router-dom';
 
 function ContactPage() {
   useEffect(() => {
@@ -14,12 +15,17 @@ function ContactPage() {
   }, []);
   return (
     <div className='container-page-contact overflow-scroll h-[100vh] scrollbar-hide'>
-      <a href='/dashboard'>
-        <img src={logo} alt='Logo Circles' className='circle-logo' />
-      </a>
+      <Link to='/dashboard'>
+        <img
+          src={logo}
+          alt='Logo Circles'
+          className='circle-logo cursor-pointer'
+        />
+      </Link>
       <h1 className='title'>Contact</h1>
       <div className='container-contacts h-full scrollbar-hide'>
         <UserContact
+          sx={{ cursor: 'pointer' }}
           name='Alexandre CREVEL'
           desc='Product Owner'
           portrait={portraitAlex}

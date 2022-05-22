@@ -19,6 +19,7 @@ export const LoginForm = () => {
   // Get email and password from the slice state auth
   const { email, password, firstname, lastname, birthdate, surname } =
     useSelector((state) => state.auth);
+  console.log(`🚀 ~ email`, email);
   const navigate = useNavigate();
 
   const [openSnacke, setOpenSnacke] = useState(false);
