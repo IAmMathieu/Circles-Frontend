@@ -61,19 +61,21 @@ function ProfilePage() {
     return <Loading />;
   } else {
     return (
-      <Box component='div' sx={{ height: '100%' }}>
+      <Box component='div' sx={{ height: '100%', padding: '1rem' }}>
         <img src={logo} alt='logo Circles ' className='m-auto w-40'></img>
         <Box
           className='container-page'
           sx={{
             height: '75vh',
-            overflow: 'scroll',
+            overflowY: 'scroll',
+            maxWidth: '100%',
             '&::-webkit-scrollbar': {
               display: 'none',
             },
-            '@media (min-width:1200px)': {
+            '@media (min-width:1000px)': {
               height: '100%',
               display: 'flex',
+              alignItems: 'center',
               flexDirection: 'row',
             },
           }}
@@ -98,16 +100,17 @@ function ProfilePage() {
           </Card>
 
           <Card
-            className='m-4'
             sx={{
-              margin: '0.8rem auto',
+              // margin: '0.8rem auto',
               backgroundColor: 'transparent',
               borderRadius: '20px',
-              overflowY: 'auto',
-
-              '@media (min-width:768px)': {
-                overflow: 'visible',
-                width: '35%',
+              height: 'fit-content',
+              margin: '0 auto',
+              marginBottom: '1rem',
+              '@media (min-width:1000px)': {
+                width: '50vw',
+                maxWidth: '800px',
+                height: 'fit-content',
               },
             }}
           >
