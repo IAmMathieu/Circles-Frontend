@@ -49,11 +49,14 @@ function ProfilePage() {
     token,
     user_id,
   });
-  const [updateProfilUser, { isLoading: isLoadingUpdate }] =
+  const [updateProfilUser, { isLoading: isLoadingUpdate, error }] =
     useUpdateProfilUserMutation();
   const [deleteProfilUser] = useDeleteProfilUserMutation();
+  console.log(`🚀 ~ error`, error);
 
-  useEffect(() => {document.title = `Circle - Profil`}, []);
+  useEffect(() => {
+    document.title = `Circle - Profil`;
+  }, []);
 
   if (isLoading) {
     return <Loading />;
@@ -196,13 +199,14 @@ function ProfilePage() {
                   variant='contained'
                   onClick={async (e) => {
                     e.preventDefault();
-                    const newObj = await { ...inputData };
-                    for (const key in newObj) {
-                      if (newObj[key] === '') {
-                        delete newObj[key];
-                      }
-                    }
-                    await updateProfilUser(newObj);
+                    // const newObj = await { ...inputData };
+                    // for (const key in newObj) {
+                    //   if (newObj[key] === '') {
+                    //     delete newObj[key];
+                    //   }
+                    // }
+                    console.log(`🚀 ~ inputData`, inputData);
+                    await updateProfilUser(inputData);
                   }}
                 >
                   Modifier

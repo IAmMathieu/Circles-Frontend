@@ -14,7 +14,7 @@ import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
 import { useEffect, useState } from 'react';
 import ModalModifyCircle from './ModalModifyCircle';
 import { changeCircle } from './CircleSlice';
-
+import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
 export default function Circle() {
   // Get id of the route
 
@@ -51,7 +51,15 @@ export default function Circle() {
       skip: skip,
     }
   );
-
+  const {
+    refetch,
+    data: DashData,
+    isLoading: dashboardIsLoading,
+    isError: loginIsError,
+  } = useGetUserDashBoardQuery({
+    token,
+    user_id,
+  });
   /**
    * Modal to modify circle
    */

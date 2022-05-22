@@ -13,13 +13,12 @@ import { Loading } from '../Loading/Loading';
 import { useNavigate } from 'react-router';
 import { Typography } from '@mui/material';
 import SnackBarAuth from './SnackBarAuth';
-
+import moment from 'moment-timezone';
 export const LoginForm = () => {
   const dispatch = useDispatch();
   // Get email and password from the slice state auth
-  const { email, password, firstname, lastname, birthdate } = useSelector(
-    (state) => state.auth
-  );
+  const { email, password, firstname, lastname, birthdate, surname } =
+    useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const [openSnacke, setOpenSnacke] = useState(false);
@@ -42,8 +41,10 @@ export const LoginForm = () => {
       isLoading: registerIsLoading,
       isError: registerIsError,
       isSuccess: registerIsSuccess,
+      error,
     },
   ] = useRegisterUserMutation();
+  console.log(`🚀 ~ error`, error);
   /**
    * Add classlist to the container when click
    */
@@ -55,7 +56,6 @@ export const LoginForm = () => {
     const container = document.getElementById('container');
     container.classList.toggle('right-panel-active');
   };
-  console.log(loginError);
   return (
     <>
       {loginIsLoading && <Loading />}
@@ -74,6 +74,7 @@ export const LoginForm = () => {
                 email,
                 password,
                 birthdate,
+                surname,
               });
             }}
           >
@@ -83,7 +84,8 @@ export const LoginForm = () => {
             <Input
               name='E-mail'
               input='email'
-              type={'email'}
+              type='email'
+              required={true}
               // error={loginIsError}
             />
             <Input name='Mot de passe' input='password' type={'password'} />
@@ -96,10 +98,13 @@ export const LoginForm = () => {
                 onChange={(event) => {
                   // Reformatage de la date pour l'envoie vers la BDD
                   const [date] = event.toISOString().split('T');
+                  const formatDate = moment(date)
+                    .tz('Europe/Paris')
+                    .format('YYYY-MM-DD');
                   dispatch(
                     handleChange({
                       name: 'birthdate',
-                      payload: date,
+                      payload: formatDate,
                     })
                   );
                 }}

@@ -1,20 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
+import moment from 'moment';
 import { getStorage } from '../../utils/helperLocalStorage';
 
 // Initialise the default state.
 const initialState = {
-  id: null,
-  firstname: null,
-  lastname: null,
-  surname: null,
-  email: null,
-  password: null,
-  birthdate: null,
-  portrait_url: null,
+  id: '',
+  firstname: '',
+  lastname: '',
+  surname: '',
+  email: '',
+  password: '',
+  birthdate: moment().format('YYYY-MM-DD'),
+  portrait_url: '',
   token: getStorage('token'),
-  user_id: null,
-  oldPassword: null,
-  error: null,
+  user_id: '',
+  oldPassword: '',
+  error: '',
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 // Tranche de state (le "slice)")

@@ -30,24 +30,25 @@ export default function ModaleModifyCircle({
   refetch,
   modifyCircleError,
   modifyCircleSuccess,
-  deleteCircle
+  deleteCircle,
 }) {
-  
   const [token, setToken] = useLocalstorageState('token', 0);
   const [user_id, setUserId] = useLocalstorageState('user_id', 0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { refetch: refetchDash } = useGetUserDashBoardQuery({
+    token,
+    user_id,
+  });
   const { circle_id, name, description, color, img_url } = useSelector(
     (state) => state.circle
   );
 
- const { refetch: dashDataRefretch } = useGetUserDashBoardQuery(
-     {
-       token,
-       user_id,
-     }
-   );
- return (
+  const { refetch: dashDataRefretch } = useGetUserDashBoardQuery({
+    token,
+    user_id,
+  });
+  return (
     <div>
       <Modal open={open} onClose={toggleModify}>
         <Box
@@ -149,17 +150,22 @@ export default function ModaleModifyCircle({
             }}
           />
           <DialogActions>
-            <Button onClick={async (event) => {
-            event.preventDefault();
-            await deleteCircle({
-              circle_id,
-              token,
-              user_id,
-            });
-            refetch();
-            toggleModify();
-            navigate('/dashboard');
-          }}>Supprimer le cercle</Button>
+            <Button
+              onClick={async (event) => {
+                event.preventDefault();
+                await deleteCircle({
+                  circle_id,
+                  token,
+                  user_id,
+                });
+                refetchDash();
+                refetch();
+                toggleModify();
+                navigate('/dashboard');
+              }}
+            >
+              Supprimer le cercle
+            </Button>
             <Button type='submit'>Modifier</Button>
           </DialogActions>
         </Box>

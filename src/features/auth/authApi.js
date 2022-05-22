@@ -47,13 +47,14 @@ const extendedApi = emptySplitApi.injectEndpoints({
        * @param {*} param0
        * @returns
        */
-      query: ({ firstname, lastname, birthdate, email, password }) => {
+      query: ({ firstname, lastname, birthdate, email, password, surname }) => {
         return {
           url: 'register',
           method: 'POST',
           body: new URLSearchParams({
             firstname,
             lastname,
+            surname,
             email,
             password,
             birthdate,
