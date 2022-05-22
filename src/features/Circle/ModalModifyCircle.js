@@ -1,13 +1,14 @@
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import DialogActions from '@mui/material/DialogActions';
-import { Box, Modal, Typography } from '@mui/material';
+import { Box, IconButton, Modal, Tooltip, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleChange } from './CircleSlice';
 import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
 import { useLocalstorageState } from 'rooks';
 import { useNavigate } from 'react-router';
 import { snackbarHandle } from '../SnackbarGlobal/eventSlice';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -34,6 +35,7 @@ export default function ModaleModifyCircle({
   modifyCircleSuccess,
   deleteCircle,
   circleRefetch,
+  dataModifyCircle,
 }) {
   const [token, setToken] = useLocalstorageState('token', 0);
   const [user_id, setUserId] = useLocalstorageState('user_id', 0);
@@ -229,6 +231,31 @@ export default function ModaleModifyCircle({
               Supprimer
             </Button>
           </DialogActions>
+          <Tooltip title='Code secret du cercle'>
+            <IconButton
+              sx={{
+                position: 'absolute',
+                top: '1rem',
+                right: '1rem',
+                cursor: 'pointer',
+              }}
+              onClick={() => {
+                navigator.clipboard.writeText(dataModifyCircle?.unique_code);
+                dispatch(
+                  snackbarHandle({
+                    name: 'snackbarhandle',
+                    data: {
+                      open: true,
+                      success: true,
+                      message: 'Code de cercle copié!',
+                    },
+                  })
+                );
+              }}
+            >
+              <ContentCopyIcon />
+            </IconButton>
+          </Tooltip>
         </Box>
       </Modal>
     </div>
