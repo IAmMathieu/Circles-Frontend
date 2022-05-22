@@ -229,7 +229,7 @@ function ProfilePage() {
                       backgroundColor: '#f50303',
                     },
                     '&.MuiButton-root': {
-                      backgroundColor: 'red',
+                      backgroundColor: '#EE9F28',
                     },
                   }}
                   variant='contained'

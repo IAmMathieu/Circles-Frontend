@@ -14,7 +14,7 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: '90vw',
   maxWidth: '800px',
-  height: '50%',
+  height: 'fit-content',
   backgroundColor: 'var(--subbackground)',
   color: 'var(--backgroundbutton)',
   border: '2px solid #000',
@@ -71,7 +71,7 @@ export default function ModaleModifyCircle({
           }}
         >
           <Typography sx={{ fontSize: '2rem', fontWeight: '700' }}>
-            Modifier ou supprimer le cercle
+            Modifier
           </Typography>
           <TextField
             autoFocus
@@ -151,6 +151,21 @@ export default function ModaleModifyCircle({
           />
           <DialogActions>
             <Button
+              sx={{
+                '&.MuiButton-root': {
+                  backgroundColor: '#EE9F28',
+                },
+              }}
+              type='submit'
+            >
+              Modifier
+            </Button>
+            <Button
+              sx={{
+                '&.MuiButton-root': {
+                  backgroundColor: 'red',
+                },
+              }}
               onClick={async (event) => {
                 event.preventDefault();
                 await deleteCircle({
@@ -164,9 +179,8 @@ export default function ModaleModifyCircle({
                 navigate('/dashboard');
               }}
             >
-              Supprimer le cercle
+              Supprimer
             </Button>
-            <Button type='submit'>Modifier</Button>
           </DialogActions>
         </Box>
       </Modal>

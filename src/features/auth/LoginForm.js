@@ -34,8 +34,14 @@ export const LoginForm = () => {
   // First argument, the function we launch, second the result (destructuring here)
   const [
     loginUser,
-    { isLoading: loginIsLoading, isError: loginIsError, error: loginError },
+    {
+      error: errorLogin,
+      isLoading: loginIsLoading,
+      isError: loginIsError,
+      error: loginError,
+    },
   ] = useLoginUserMutation();
+  console.log(`🚀 ~ errorLogin`, errorLogin);
   const [
     registerUser,
     {
@@ -80,6 +86,7 @@ export const LoginForm = () => {
             <Input
               name='Prénom'
               input='firstname'
+              required={true}
               value={firstname}
               type={'text'}
             />
@@ -87,6 +94,7 @@ export const LoginForm = () => {
             <Input
               name='Pseudo'
               input='surname'
+              required={true}
               value={surname}
               type={'text'}
             />
@@ -97,12 +105,18 @@ export const LoginForm = () => {
               required={true}
               // error={loginIsError}
             />
-            <Input name='Mot de passe' input='password' type={'password'} />
+            <Input
+              name='Mot de passe'
+              input='password'
+              required={true}
+              type={'password'}
+            />
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
                 label='Birth date'
                 name='birthdate'
                 value={birthdate}
+                required={true}
                 format='yyyy-mm-dd'
                 onChange={(event) => {
                   // Reformatage de la date pour l'envoie vers la BDD
@@ -153,6 +167,7 @@ export const LoginForm = () => {
                 className='input'
                 color='primary'
                 name='Adresse mail'
+                required={true}
                 value={email}
                 input='email'
                 type='email'
@@ -161,6 +176,7 @@ export const LoginForm = () => {
               <Input
                 className='input'
                 name='Mot de passe'
+                required={true}
                 value={password}
                 input='password'
                 type='password'
@@ -179,7 +195,9 @@ export const LoginForm = () => {
                     fontWeight: '700',
                   }}
                 >
-                  {loginError.data === 'Email does not exist'
+                  {loginError.data === 'Password is incorrect'
+                    ? 'Password incorect'
+                    : 'Email does not exist'
                     ? "Le compte n'existe pas"
                     : loginError.data === 'Email does not exist'
                     ? 'E-mail ou mot de passe incorrect'
