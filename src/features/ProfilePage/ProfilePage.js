@@ -52,7 +52,6 @@ function ProfilePage() {
   const [updateProfilUser, { isLoading: isLoadingUpdate, error }] =
     useUpdateProfilUserMutation();
   const [deleteProfilUser] = useDeleteProfilUserMutation();
-  console.log(`🚀 ~ error`, error);
 
   useEffect(() => {
     document.title = `Circle - Profil`;
@@ -67,6 +66,7 @@ function ProfilePage() {
         <Box
           className='container-page'
           sx={{
+            height: '100%',
             '@media (min-width:768px)': {
               display: 'flex',
               flexDirection: 'row',

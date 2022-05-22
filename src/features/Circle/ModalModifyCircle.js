@@ -31,15 +31,13 @@ export default function ModaleModifyCircle({
   modifyCircleError,
   modifyCircleSuccess,
   deleteCircle,
+  circleRefetch,
 }) {
   const [token, setToken] = useLocalstorageState('token', 0);
   const [user_id, setUserId] = useLocalstorageState('user_id', 0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { refetch: refetchDash } = useGetUserDashBoardQuery({
-    token,
-    user_id,
-  });
+
   const { circle_id, name, description, color, img_url } = useSelector(
     (state) => state.circle
   );
@@ -66,8 +64,8 @@ export default function ModaleModifyCircle({
               color,
               img_url,
             });
+            circleRefetch();
             dashDataRefretch();
-            toggleModify();
           }}
         >
           <Typography sx={{ fontSize: '2rem', fontWeight: '700' }}>
@@ -158,7 +156,7 @@ export default function ModaleModifyCircle({
                   token,
                   user_id,
                 });
-                refetchDash();
+                dashDataRefretch();
                 refetch();
                 toggleModify();
                 navigate('/dashboard');

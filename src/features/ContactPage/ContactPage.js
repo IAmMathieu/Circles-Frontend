@@ -8,16 +8,17 @@ import portraitLogan from '../../assets/images/portrait_logan.jpg';
 import portraitRobin from '../../assets/images/portrait_robin.png';
 import portraitMathieu from '../../assets/images/portrait_mathieu.jpg';
 
-
 function ContactPage() {
-  useEffect(() => {document.title = `Circle - Contact`}, []);
+  useEffect(() => {
+    document.title = `Circle - Contact`;
+  }, []);
   return (
     <div className='container-page-contact'>
-          <a href='/dashboard'>
-            <img src={logo} alt='Logo Circles' className='circle-logo' />
-          </a>
+      <a href='/dashboard'>
+        <img src={logo} alt='Logo Circles' className='circle-logo' />
+      </a>
       <h1 className='title'>Contact</h1>
-      <div className='container-contacts'>
+      <div className='container-contacts h-full'>
         <UserContact
           name='Alexandre CREVEL'
           desc='Product Owner'

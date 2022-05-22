@@ -122,6 +122,7 @@ export default function Circle() {
         toggleModify={toggleModify}
         modifyCircleError={modifyCircleError}
         deleteCircle={deleteCircle}
+        circleRefetch={circleRefetch}
       />
       {menu === 'calendar' ? (
         <CirclePage
