@@ -36,14 +36,15 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '50vh',
-  backgroundColor: '#1A2027',
-  // bgcolor: 'background.paper',
+  width: '90vw',
+  maxWidth: '800px',
+  backgroundColor: 'var(--subbackground)',
+  color: 'var(--backgroundbutton)',
   border: '2px solid #000',
   boxShadow: 24,
   borderRadius: '20px',
   p: 4,
-  height: '60vh',
+  height: 'fit-content',
   padding: '2rem',
 };
 export default function ModalEvent({
@@ -128,7 +129,14 @@ export default function ModalEvent({
               onClose();
             }}
           >
-            <Typography id='modal-modal-title' variant='h6' component='h2'>
+            <Typography
+              id='modal-modal-title'
+              variant='h6'
+              component='h2'
+              // sx={{
+              //   color: 'red',
+              // }}
+            >
               {eventName === 'create'
                 ? 'Ajouter un événement'
                 : 'Modifier un évènement'}

@@ -12,9 +12,10 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
-  height: '50%',
-  bgcolor: 'background.paper',
+  width: '90vw',
+  maxWidth: '800px',
+  height: 'fit-content',
+  backgroundColor: 'var(--subbackground)',
   color: 'var(--backgroundbutton)',
   border: '2px solid #000',
   boxShadow: 24,
@@ -30,24 +31,23 @@ export default function ModaleModifyCircle({
   refetch,
   modifyCircleError,
   modifyCircleSuccess,
-  deleteCircle
+  deleteCircle,
+  circleRefetch,
 }) {
-  
   const [token, setToken] = useLocalstorageState('token', 0);
   const [user_id, setUserId] = useLocalstorageState('user_id', 0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const { circle_id, name, description, color, img_url } = useSelector(
     (state) => state.circle
   );
 
- const { refetch: dashDataRefretch } = useGetUserDashBoardQuery(
-     {
-       token,
-       user_id,
-     }
-   );
- return (
+  const { refetch: dashDataRefretch } = useGetUserDashBoardQuery({
+    token,
+    user_id,
+  });
+  return (
     <div>
       <Modal open={open} onClose={toggleModify}>
         <Box
@@ -65,12 +65,13 @@ export default function ModaleModifyCircle({
               color,
               img_url,
             });
+            circleRefetch();
             dashDataRefretch();
             toggleModify();
           }}
         >
           <Typography sx={{ fontSize: '2rem', fontWeight: '700' }}>
-            Modifier ou supprimer le cercle
+            Modifier
           </Typography>
           <TextField
             autoFocus
@@ -149,18 +150,37 @@ export default function ModaleModifyCircle({
             }}
           />
           <DialogActions>
-            <Button onClick={async (event) => {
-            event.preventDefault();
-            await deleteCircle({
-              circle_id,
-              token,
-              user_id,
-            });
-            refetch();
-            toggleModify();
-            navigate('/dashboard');
-          }}>Supprimer le cercle</Button>
-            <Button type='submit'>Modifier</Button>
+            <Button
+              sx={{
+                '&.MuiButton-root': {
+                  backgroundColor: '#EE9F28',
+                },
+              }}
+              type='submit'
+            >
+              Modifier
+            </Button>
+            <Button
+              sx={{
+                '&.MuiButton-root': {
+                  backgroundColor: 'red',
+                },
+              }}
+              onClick={async (event) => {
+                event.preventDefault();
+                await deleteCircle({
+                  circle_id,
+                  token,
+                  user_id,
+                });
+                dashDataRefretch();
+                refetch();
+                toggleModify();
+                navigate('/dashboard');
+              }}
+            >
+              Supprimer
+            </Button>
           </DialogActions>
         </Box>
       </Modal>

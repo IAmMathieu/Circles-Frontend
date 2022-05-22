@@ -25,6 +25,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Typography from '@mui/material/Typography';
+import { useLocalstorageState } from 'rooks';
 
 //!------------
 //! Ajouter le oldpassword pour modifier des données et/ou supprimer
@@ -41,7 +42,9 @@ function ProfilePage() {
 
   const dispatch = useDispatch();
   const inputData = useSelector((state) => state.auth);
-  const { token, user_id } = inputData;
+  // const { token, user_id } = inputData;
+  const [token, setToken] = useLocalstorageState('token', 0);
+  const [user_id, setUserId] = useLocalstorageState('user_id', 0);
   /**
    * Query profil data when coming to the page
    */
@@ -49,23 +52,33 @@ function ProfilePage() {
     token,
     user_id,
   });
-  const [updateProfilUser, { isLoading: isLoadingUpdate }] =
+  const [updateProfilUser, { isLoading: isLoadingUpdate, error }] =
     useUpdateProfilUserMutation();
   const [deleteProfilUser] = useDeleteProfilUserMutation();
 
-  useEffect(() => {document.title = `Circle - Profil`}, []);
+  useEffect(() => {
+    document.title = `Circle - Profil`;
+  }, []);
 
   if (isLoading) {
     return <Loading />;
   } else {
     return (
-      <Box component='div'>
+      <Box component='div' sx={{ height: '100%', padding: '1rem' }}>
         <img src={logo} alt='logo Circles ' className='m-auto w-40'></img>
         <Box
           className='container-page'
           sx={{
-            '@media (min-width:768px)': {
+            height: '75vh',
+            overflowY: 'scroll',
+            maxWidth: '100%',
+            '&::-webkit-scrollbar': {
+              display: 'none',
+            },
+            '@media (min-width:1000px)': {
+              height: '100%',
               display: 'flex',
+              alignItems: 'center',
               flexDirection: 'row',
             },
           }}
@@ -90,16 +103,17 @@ function ProfilePage() {
           </Card>
 
           <Card
-            className='m-4'
             sx={{
-              margin: '0.8rem auto',
+              // margin: '0.8rem auto',
               backgroundColor: 'transparent',
               borderRadius: '20px',
-              overflowY: 'auto',
-
-              '@media (min-width:768px)': {
-                overflow: 'visible',
-                width: '35%',
+              height: 'fit-content',
+              margin: '0 auto',
+              marginBottom: '1rem',
+              '@media (min-width:1000px)': {
+                width: '50vw',
+                maxWidth: '800px',
+                height: 'fit-content',
               },
             }}
           >
@@ -131,9 +145,9 @@ function ProfilePage() {
             >
               <Input
                 helperText={'Prénom'}
-                defaultValue={data?.firstname}
                 input='firstname'
                 type={'text'}
+                defaultValue={data?.firstname}
               />
               <Input
                 defaultValue={data?.lastname}
@@ -157,13 +171,13 @@ function ProfilePage() {
               />
               <Input
                 name='Ancien mot de passe'
-                input='oldPassword'
+                input='password'
                 type={'password'}
               />
               <Input
                 className={'mb-5 max-w-screen-sm'}
                 name='Nouveau mot de passe'
-                input='password'
+                input='newpassword'
                 type={'password'}
               />
               <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -185,24 +199,25 @@ function ProfilePage() {
                   renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
-              <Box component='div' sx={{ margin: '0.8rem' }}>
+              <Box
+                component='div'
+                sx={{ margin: '0.8rem', display: 'flex', gap: '1rem' }}
+              >
                 <Button
                   sx={{
+                    backgroundColor: 'red',
                     ':hover': {
                       color: 'white',
                       backgroundColor: '#f57803',
+                    },
+                    '&.MuiButton-root': {
+                      backgroundColor: '#EE9F28',
                     },
                   }}
                   variant='contained'
                   onClick={async (e) => {
                     e.preventDefault();
-                    const newObj = await { ...inputData };
-                    for (const key in newObj) {
-                      if (newObj[key] === '') {
-                        delete newObj[key];
-                      }
-                    }
-                    await updateProfilUser(newObj);
+                    await updateProfilUser(inputData);
                   }}
                 >
                   Modifier
@@ -212,6 +227,9 @@ function ProfilePage() {
                     ':hover': {
                       color: 'white',
                       backgroundColor: '#f50303',
+                    },
+                    '&.MuiButton-root': {
+                      backgroundColor: '#EE9F28',
                     },
                   }}
                   variant='contained'

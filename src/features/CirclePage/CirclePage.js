@@ -22,6 +22,7 @@ import {
 import ModalEvent from '../Circle/Calendar/ModalEvent';
 import { handleChange } from '../Circle/Calendar/CalendarSlice';
 import CustomToolbar from './CustomToolBar';
+import { Button } from '@mui/material';
 // FIN CALENDRIER
 const initialState = {
   title: null,
@@ -62,7 +63,6 @@ export const CirclePage = ({
     circleData && setEvents(circleData.events);
   }, [circleData]);
 
-
   const { components } = useMemo(
     () => ({
       components: {
@@ -81,13 +81,25 @@ export const CirclePage = ({
   const handleClose = () => setOpen(false);
 
   const [createEvent] = useCreateEventMutation();
-  const [updateEvent] = useUpdateEventMutation();
+  const [updateEvent, { error }] = useUpdateEventMutation();
   const [deleteEvent] = useDeleteEventMutation();
   return (
     <div className='container-circle w-full '>
       <Box className='test1' style={{ marginTop: '1rem' }}>
-        <Box className='test2' sx={{ '& > :not(style)': { m: 1 }, marginTop:{xs:'1rem', lg:'8rem'}}}>
-          <Fab 
+        <Box
+          className='test2'
+          sx={{
+            '& > :not(style)': { m: 1 },
+            marginTop: { xs: '1rem', lg: '8rem' },
+          }}
+        >
+          <Fab
+            sx={{
+              color: 'var(--maincolor)',
+              '&.MuiButtonBase-root': {
+                backgroundColor: 'var(--subbackground)',
+              },
+            }}
             aria-label='add'
             variant='extended'
             onClick={() => {
@@ -140,10 +152,10 @@ export const CirclePage = ({
               );
             }
           }}
-          style={{ 
-            height:'50vh', 
-            width: '90%', 
-            margin:'auto',
+          style={{
+            height: '50vh',
+            width: '90%',
+            margin: 'auto',
             boxShadow: '10px 10px 18px 0px rgba(0,0,0,0.2)',
           }}
           culture={'fr'}

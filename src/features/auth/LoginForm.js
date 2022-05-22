@@ -8,18 +8,18 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useLoginUserMutation, useRegisterUserMutation } from './authApi';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleChange } from '../../features/auth/authSlice';
+import { clearList, handleChange } from '../../features/auth/authSlice';
 import { Loading } from '../Loading/Loading';
 import { useNavigate } from 'react-router';
 import { Typography } from '@mui/material';
 import SnackBarAuth from './SnackBarAuth';
-
+import moment from 'moment-timezone';
 export const LoginForm = () => {
   const dispatch = useDispatch();
   // Get email and password from the slice state auth
-  const { email, password, firstname, lastname, birthdate } = useSelector(
-    (state) => state.auth
-  );
+  const { email, password, firstname, lastname, birthdate, surname } =
+    useSelector((state) => state.auth);
+  console.log(`🚀 ~ email`, email);
   const navigate = useNavigate();
 
   const [openSnacke, setOpenSnacke] = useState(false);
@@ -34,28 +34,31 @@ export const LoginForm = () => {
   // First argument, the function we launch, second the result (destructuring here)
   const [
     loginUser,
-    { isLoading: loginIsLoading, isError: loginIsError, error: loginError },
+    {
+      error: errorLogin,
+      isLoading: loginIsLoading,
+      isError: loginIsError,
+      error: loginError,
+    },
   ] = useLoginUserMutation();
+  console.log(`🚀 ~ errorLogin`, errorLogin);
   const [
     registerUser,
     {
       isLoading: registerIsLoading,
       isError: registerIsError,
       isSuccess: registerIsSuccess,
+      error,
     },
   ] = useRegisterUserMutation();
   /**
    * Add classlist to the container when click
    */
 
-  useEffect(() => {
-    registerIsSuccess && toggleSnacke();
-  }, [registerIsSuccess]);
   const handleSwitch = () => {
     const container = document.getElementById('container');
     container.classList.toggle('right-panel-active');
   };
-  console.log(loginError);
   return (
     <>
       {loginIsLoading && <Loading />}
@@ -74,32 +77,57 @@ export const LoginForm = () => {
                 email,
                 password,
                 birthdate,
+                surname,
               });
+              clearList();
+              toggleSnacke();
             }}
           >
-            <Input name='Prénom' input='firstname' type={'text'} />
-            <Input name='Nom' input='lastname' type={'text'} />
-            <Input name='Pseudo' input='surname' type={'text'} />
+            <Input
+              name='Prénom'
+              input='firstname'
+              required={true}
+              value={firstname}
+              type={'text'}
+            />
+            <Input name='Nom' input='lastname' value={lastname} type={'text'} />
+            <Input
+              name='Pseudo'
+              input='surname'
+              required={true}
+              value={surname}
+              type={'text'}
+            />
             <Input
               name='E-mail'
               input='email'
-              type={'email'}
+              type='email'
+              required={true}
               // error={loginIsError}
             />
-            <Input name='Mot de passe' input='password' type={'password'} />
+            <Input
+              name='Mot de passe'
+              input='password'
+              required={true}
+              type={'password'}
+            />
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
                 label='Birth date'
                 name='birthdate'
                 value={birthdate}
+                required={true}
                 format='yyyy-mm-dd'
                 onChange={(event) => {
                   // Reformatage de la date pour l'envoie vers la BDD
                   const [date] = event.toISOString().split('T');
+                  const formatDate = moment(date)
+                    .tz('Europe/Paris')
+                    .format('YYYY-MM-DD');
                   dispatch(
                     handleChange({
                       name: 'birthdate',
-                      payload: date,
+                      payload: formatDate,
                     })
                   );
                 }}
@@ -139,6 +167,8 @@ export const LoginForm = () => {
                 className='input'
                 color='primary'
                 name='Adresse mail'
+                required={true}
+                value={email}
                 input='email'
                 type='email'
                 error={loginIsError}
@@ -146,6 +176,8 @@ export const LoginForm = () => {
               <Input
                 className='input'
                 name='Mot de passe'
+                required={true}
+                value={password}
                 input='password'
                 type='password'
                 error={loginIsError}
@@ -163,7 +195,9 @@ export const LoginForm = () => {
                     fontWeight: '700',
                   }}
                 >
-                  {loginError.data === 'Email does not exist'
+                  {loginError.data === 'Password is incorrect'
+                    ? 'Password incorect'
+                    : 'Email does not exist'
                     ? "Le compte n'existe pas"
                     : loginError.data === 'Email does not exist'
                     ? 'E-mail ou mot de passe incorrect'

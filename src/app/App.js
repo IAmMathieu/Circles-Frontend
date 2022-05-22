@@ -75,8 +75,9 @@ const App = () => {
   };
 
   const muiTheme = theme === 'light' ? MuiThemeLight : MuiThemeDark;
+  document.body.dataset.theme = theme;
   return (
-    <div className='App relative' data-theme={theme}>
+    <div className='App relative'>
       <ThemeProvider theme={muiTheme}>
         <CssBaseline />
         {tokenState && (

@@ -41,7 +41,15 @@ const circleApi = emptySplitApi.injectEndpoints({
       },
     }),
     modifyCircle: builder.mutation({
-      query: ({ token, name, description, color, img_url, user_id, circle_id }) => {
+      query: ({
+        token,
+        name,
+        description,
+        color,
+        img_url,
+        user_id,
+        circle_id,
+      }) => {
         return {
           url: `circle/${circle_id}`,
           method: 'PATCH',
