@@ -33,6 +33,7 @@
     "socket.io-client": "^4.5.0",
     "source-map-loader": "^3.0.1",
     "stylis": "^4.1.1",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "use-local-storage": "^2.3.6",
     "web-vitals": "^2.1.4"
   },

@@ -61,13 +61,18 @@ function ProfilePage() {
     return <Loading />;
   } else {
     return (
-      <Box component='div'>
+      <Box component='div' sx={{ height: '100%' }}>
         <img src={logo} alt='logo Circles ' className='m-auto w-40'></img>
         <Box
           className='container-page'
           sx={{
-            height: '100%',
-            '@media (min-width:768px)': {
+            height: '75vh',
+            overflow: 'scroll',
+            '&::-webkit-scrollbar': {
+              display: 'none',
+            },
+            '@media (min-width:1200px)': {
+              height: '100%',
               display: 'flex',
               flexDirection: 'row',
             },

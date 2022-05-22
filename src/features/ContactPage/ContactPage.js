@@ -13,12 +13,12 @@ function ContactPage() {
     document.title = `Circle - Contact`;
   }, []);
   return (
-    <div className='container-page-contact'>
+    <div className='container-page-contact overflow-scroll h-[100vh] scrollbar-hide'>
       <a href='/dashboard'>
         <img src={logo} alt='Logo Circles' className='circle-logo' />
       </a>
       <h1 className='title'>Contact</h1>
-      <div className='container-contacts h-full'>
+      <div className='container-contacts h-full scrollbar-hide'>
         <UserContact
           name='Alexandre CREVEL'
           desc='Product Owner'
