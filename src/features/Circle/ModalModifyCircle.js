@@ -66,6 +66,7 @@ export default function ModaleModifyCircle({
             });
             circleRefetch();
             dashDataRefretch();
+            toggleModify();
           }}
         >
           <Typography sx={{ fontSize: '2rem', fontWeight: '700' }}>
