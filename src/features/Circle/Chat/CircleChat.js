@@ -97,7 +97,7 @@ const Chat = ({
       }}
     >
       <Grid container className='w-full flex row'>
-        {/* <Grid
+        <Grid
           item
           xs={0}
           sm={3}
@@ -113,7 +113,7 @@ const Chat = ({
                 />
               </ListItemIcon>
               <ListItemText primary='Remy Sharp'>Remy Sharp</ListItemText>
-              <ListItemText secondary='online' align='right'></ListItemText>
+              {/* <ListItemText secondary='online' align='right'></ListItemText> */}
             </ListItem>
             <ListItem button key='Alice'>
               <ListItemIcon>
@@ -134,7 +134,7 @@ const Chat = ({
               <ListItemText primary='Cindy Baker'>Cindy Baker</ListItemText>
             </ListItem>
           </List>
-        </Grid> */}
+        </Grid>
         <Grid
           item
           xs={12}

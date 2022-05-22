@@ -30,6 +30,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { handleChange } from './CalendarSlice';
 import { useParams } from 'react-router';
 import { useGetUserDashBoardQuery } from '../../Dashboard/DashboardApi';
+import { snackbarHandle } from '../../SnackbarGlobal/eventSlice';
 
 const style = {
   position: 'absolute',
@@ -109,20 +110,66 @@ export default function ModalEvent({
               //   }
               // }
               if (eventName === 'create') {
-                await createEvent({
-                  ...calendarControlled,
-                  circle_id,
-                  user_id,
-                  token,
-                });
+                try {
+                  await createEvent({
+                    ...calendarControlled,
+                    circle_id,
+                    user_id,
+                    token,
+                  });
+                  dispatch(
+                    snackbarHandle({
+                      name: 'snackbarhandle',
+                      data: {
+                        open: true,
+                        success: true,
+                        message: 'Votre évènement est créé!',
+                      },
+                    })
+                  );
+                } catch (error) {
+                  dispatch(
+                    snackbarHandle({
+                      name: 'snackbarhandle',
+                      data: {
+                        open: true,
+                        success: false,
+                        message: 'Une erreur est survenue',
+                      },
+                    })
+                  );
+                }
               } else {
-                await updateEvent({
-                  ...calendarControlled,
-                  circle_id,
-                  user_id,
-                  token,
-                  event_id: eventId,
-                });
+                try {
+                  await updateEvent({
+                    ...calendarControlled,
+                    circle_id,
+                    user_id,
+                    token,
+                    event_id: eventId,
+                  });
+                  dispatch(
+                    snackbarHandle({
+                      name: 'snackbarhandle',
+                      data: {
+                        open: true,
+                        success: true,
+                        message: 'Votre évènement est modifié!',
+                      },
+                    })
+                  );
+                } catch (error) {
+                  dispatch(
+                    snackbarHandle({
+                      name: 'snackbarhandle',
+                      data: {
+                        open: true,
+                        success: false,
+                        message: 'Une erreur est survenue',
+                      },
+                    })
+                  );
+                }
               }
               circleRefetch();
               dashDataRefretch();
@@ -330,12 +377,35 @@ export default function ModalEvent({
             color='error'
             onClick={async (e) => {
               e.preventDefault();
-              await deleteEvent({
-                circle_id,
-                token,
-                user_id,
-                event_id: eventId,
-              });
+              try {
+                await deleteEvent({
+                  circle_id,
+                  token,
+                  user_id,
+                  event_id: eventId,
+                });
+                dispatch(
+                  snackbarHandle({
+                    name: 'snackbarhandle',
+                    data: {
+                      open: true,
+                      success: true,
+                      message: 'Votre évènement a bien été supprimé!',
+                    },
+                  })
+                );
+              } catch (error) {
+                dispatch(
+                  snackbarHandle({
+                    name: 'snackbarhandle',
+                    data: {
+                      open: true,
+                      success: false,
+                      message: 'Une erreure est survenue',
+                    },
+                  })
+                );
+              }
               circleRefetch();
               onClose();
               closeValid();

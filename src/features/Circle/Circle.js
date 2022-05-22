@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import ModalModifyCircle from './ModalModifyCircle';
 import { changeCircle } from './CircleSlice';
 import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
+import { snackbarHandle } from '../SnackbarGlobal/eventSlice';
 export default function Circle() {
   // Get id of the route
 
@@ -81,8 +82,10 @@ export default function Circle() {
       data: dataDeleteCircle,
       isError: deleteCircleError,
       isSuccess: deleteCircleSuccess,
+      isLoading,
     },
   ] = useDeleteCircleMutation();
+
   /**
    * Make the query for get the profil user information
    */

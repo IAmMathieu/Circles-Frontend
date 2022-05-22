@@ -85,7 +85,14 @@ export const CirclePage = ({
   const [deleteEvent] = useDeleteEventMutation();
   return (
     <div className='container-circle w-full '>
-      <Box className='test1' style={{ marginTop: '1rem' }}>
+      <Box
+        className='test1'
+        style={{
+          marginTop: '1rem',
+          maxWidth: '1300px',
+          margin: '0 auto',
+        }}
+      >
         <Box
           className='test2'
           sx={{

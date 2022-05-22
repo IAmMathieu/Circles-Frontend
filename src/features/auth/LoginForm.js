@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router';
 import { Typography } from '@mui/material';
 import SnackBarAuth from './SnackBarAuth';
 import moment from 'moment-timezone';
+import { snackbarHandle } from '../SnackbarGlobal/eventSlice';
 export const LoginForm = () => {
   const dispatch = useDispatch();
   // Get email and password from the slice state auth
@@ -42,6 +43,7 @@ export const LoginForm = () => {
     },
   ] = useLoginUserMutation();
   console.log(`🚀 ~ errorLogin`, errorLogin);
+
   const [
     registerUser,
     {
@@ -71,16 +73,38 @@ export const LoginForm = () => {
             onSubmit={async (event) => {
               event.preventDefault();
               // Here we launch the RTK querie (mutation) with the arguments
-              await registerUser({
-                firstname,
-                lastname,
-                email,
-                password,
-                birthdate,
-                surname,
-              });
-              clearList();
-              toggleSnacke();
+              try {
+                await registerUser({
+                  firstname,
+                  lastname,
+                  email,
+                  password,
+                  birthdate,
+                  surname,
+                });
+                dispatch(clearList());
+                dispatch(
+                  snackbarHandle({
+                    name: 'snackbarhandle',
+                    data: {
+                      open: true,
+                      success: true,
+                      message: 'Veuillez confirmer votre e-mail !',
+                    },
+                  })
+                );
+              } catch (error) {
+                dispatch(
+                  snackbarHandle({
+                    name: 'snackbarhandle',
+                    data: {
+                      open: true,
+                      success: false,
+                      message: 'Une erreur est survenue.',
+                    },
+                  })
+                );
+              }
             }}
           >
             <Input
@@ -102,12 +126,14 @@ export const LoginForm = () => {
               name='E-mail'
               input='email'
               type='email'
+              value={email}
               required={true}
               // error={loginIsError}
             />
             <Input
               name='Mot de passe'
               input='password'
+              value={password}
               required={true}
               type={'password'}
             />
@@ -115,7 +141,9 @@ export const LoginForm = () => {
               <DatePicker
                 label='Birth date'
                 name='birthdate'
-                value={birthdate}
+                value={
+                  birthdate === '' ? moment().format('YYYY-MM-DD') : birthdate
+                }
                 required={true}
                 format='yyyy-mm-dd'
                 onChange={(event) => {
@@ -160,6 +188,7 @@ export const LoginForm = () => {
                 email,
                 password,
               });
+              dispatch(clearList());
             }}
           >
             <div className='input__container relative flex flex-col'>
