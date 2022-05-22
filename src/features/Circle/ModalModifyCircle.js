@@ -7,6 +7,7 @@ import { handleChange } from './CircleSlice';
 import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
 import { useLocalstorageState } from 'rooks';
 import { useNavigate } from 'react-router';
+import { snackbarHandle } from '../SnackbarGlobal/eventSlice';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -56,15 +57,38 @@ export default function ModaleModifyCircle({
           autoComplete='off'
           onSubmit={async (event) => {
             event.preventDefault();
-            await modifyCircle({
-              circle_id,
-              token,
-              user_id,
-              name,
-              description,
-              color,
-              img_url,
-            });
+            try {
+              await modifyCircle({
+                circle_id,
+                token,
+                user_id,
+                name,
+                description,
+                color,
+                img_url,
+              });
+              dispatch(
+                snackbarHandle({
+                  name: 'snackbarhandle',
+                  data: {
+                    open: true,
+                    success: true,
+                    message: 'Votre cercle a bien été modifié.',
+                  },
+                })
+              );
+            } catch (error) {
+              dispatch(
+                snackbarHandle({
+                  name: 'snackbarhandle',
+                  data: {
+                    open: true,
+                    success: false,
+                    message: 'Une erreur est survenue.',
+                  },
+                })
+              );
+            }
             circleRefetch();
             dashDataRefretch();
             toggleModify();
@@ -168,11 +192,34 @@ export default function ModaleModifyCircle({
               }}
               onClick={async (event) => {
                 event.preventDefault();
-                await deleteCircle({
-                  circle_id,
-                  token,
-                  user_id,
-                });
+                try {
+                  await deleteCircle({
+                    circle_id,
+                    token,
+                    user_id,
+                  });
+                  dispatch(
+                    snackbarHandle({
+                      name: 'snackbarhandle',
+                      data: {
+                        open: true,
+                        success: true,
+                        message: 'Votre cercle a bien été supprimé ! ',
+                      },
+                    })
+                  );
+                } catch (error) {
+                  dispatch(
+                    snackbarHandle({
+                      name: 'snackbarhandle',
+                      data: {
+                        open: true,
+                        success: false,
+                        message: 'Une erreur est survenue.',
+                      },
+                    })
+                  );
+                }
                 dashDataRefretch();
                 refetch();
                 toggleModify();

@@ -9,7 +9,6 @@ import SimpleBottomNavigation from '../Common/BottomNavigation/SimpleBottomNavig
 import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
 import ModaleCreateCircle from './ModaleCreateCircle';
 import Card from './Card';
-import CustomizedSnackbars from '../Common/Snackbar/Snackbar';
 import DashbordLoader from './DashbordLoader';
 import ModaleJoinCircle from './ModaleJoinCircle';
 import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
@@ -133,14 +132,14 @@ export const Dashboard = () => {
           toggleJoin={toggleJoin}
           joinCircleError={joinCircleError}
         />
-        <CustomizedSnackbars
+        {/* <CustomizedSnackbars
           dataCreateCircle={dataCreateCircle}
           openSnack={openSnack}
           setOpenSnack={setOpenSnack}
           severity='success'
           isSuccess={createCircleSuccess}
           message={''}
-        />
+        /> */}
       </>
     );
   }

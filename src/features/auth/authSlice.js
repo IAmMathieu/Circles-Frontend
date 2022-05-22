@@ -56,8 +56,14 @@ export const authSlice = createSlice({
       state.lastname = lastname;
       state.surname = surname;
     },
-    clearList: () => {
-      return initialState;
+    clearList: (state, action) => {
+      state.birthdate = '';
+      state.email = '';
+      state.firstname = '';
+      state.portrait_url = '';
+      state.lastname = '';
+      state.surname = '';
+      state.password = '';
     },
   },
 });

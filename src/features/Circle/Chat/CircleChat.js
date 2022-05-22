@@ -97,7 +97,7 @@ const Chat = ({
       }}
     >
       <Grid container className='w-full flex row'>
-        {/* <Grid
+        {/* <Grida
           item
           xs={0}
           sm={3}
@@ -134,7 +134,7 @@ const Chat = ({
               <ListItemText primary='Cindy Baker'>Cindy Baker</ListItemText>
             </ListItem>
           </List>
-        </Grid> */}
+        </Grida> */}
         <Grid
           item
           xs={12}

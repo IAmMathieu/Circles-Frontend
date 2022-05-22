@@ -7,6 +7,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Box, Modal, styled, Typography } from '@mui/material';
 import { handleChange } from './dashboardSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { snackbarHandle } from '../SnackbarGlobal/eventSlice';
 
 const style = {
   position: 'absolute',
@@ -47,14 +48,38 @@ export default function ModaleCreateCircle({
           autoComplete='off'
           onSubmit={async (event) => {
             event.preventDefault();
-            await createCircle({
-              token,
-              user_id,
-              name,
-              description,
-              color,
-              img_url,
-            });
+            try {
+              await createCircle({
+                token,
+                user_id,
+                name,
+                description,
+                color,
+                img_url,
+              });
+              dispatch(
+                snackbarHandle({
+                  name: 'snackbarhandle',
+                  data: {
+                    open: true,
+                    success: true,
+                    message: 'Votre cercle est créé!',
+                  },
+                })
+              );
+            } catch (error) {
+              dispatch(
+                snackbarHandle({
+                  name: 'snackbarhandle',
+                  data: {
+                    open: true,
+                    success: false,
+                    message: 'Une erreur est survenue',
+                  },
+                })
+              );
+            }
+
             refetch();
             toggleCreate();
           }}

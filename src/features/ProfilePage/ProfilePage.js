@@ -26,6 +26,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Typography from '@mui/material/Typography';
 import { useLocalstorageState } from 'rooks';
+import { snackbarHandle } from '../SnackbarGlobal/eventSlice';
 
 //!------------
 //! Ajouter le oldpassword pour modifier des données et/ou supprimer
@@ -217,7 +218,30 @@ function ProfilePage() {
                   variant='contained'
                   onClick={async (e) => {
                     e.preventDefault();
-                    await updateProfilUser(inputData);
+                    try {
+                      await updateProfilUser(inputData);
+                      dispatch(
+                        snackbarHandle({
+                          name: 'snackbarhandle',
+                          data: {
+                            open: true,
+                            success: true,
+                            message: 'Votre profil a bien été mis à jour.',
+                          },
+                        })
+                      );
+                    } catch (error) {
+                      dispatch(
+                        snackbarHandle({
+                          name: 'snackbarhandle',
+                          data: {
+                            open: true,
+                            success: false,
+                            message: 'Un problème est survenu.',
+                          },
+                        })
+                      );
+                    }
                   }}
                 >
                   Modifier
@@ -272,13 +296,36 @@ function ProfilePage() {
                     delete newObj[key];
                   }
                 }
-                await deleteProfilUser(newObj);
-                dispatch(
-                  handleToken({
-                    token: '',
-                    user_id: '',
-                  })
-                );
+                try {
+                  await deleteProfilUser(newObj);
+                  dispatch(
+                    handleToken({
+                      token: '',
+                      user_id: '',
+                    })
+                  );
+                  dispatch(
+                    snackbarHandle({
+                      name: 'snackbarhandle',
+                      data: {
+                        open: true,
+                        success: true,
+                        message: 'Votre profil a bien été suprrimé. Au revoir!',
+                      },
+                    })
+                  );
+                } catch (error) {
+                  dispatch(
+                    snackbarHandle({
+                      name: 'snackbarhandle',
+                      data: {
+                        open: true,
+                        success: false,
+                        message: 'Une erreur est survenue.',
+                      },
+                    })
+                  );
+                }
                 removeStorage('token');
                 removeStorage('user_id');
               }}
