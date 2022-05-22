@@ -13,7 +13,7 @@ import {
 } from './ProfilApi';
 import { Loading } from '../Loading/Loading';
 import { removeStorage } from '../../utils/helperLocalStorage';
-import { handleToken } from '../auth/authSlice';
+import { handleToken, clearList } from '../auth/authSlice';
 
 //! MUI
 import Box from '@mui/material/Box';
@@ -49,14 +49,20 @@ function ProfilePage() {
   /**
    * Query profil data when coming to the page
    */
-  const { data, isLoading } = useGetProfilUserQuery({
+  const {
+    data,
+    isLoading,
+    refetch: refetchProfilUser,
+  } = useGetProfilUserQuery({
     token,
     user_id,
   });
-  const [updateProfilUser, { isLoading: isLoadingUpdate, error }] =
-    useUpdateProfilUserMutation();
+  const [
+    updateProfilUser,
+    { refetch: updateUserRefetch, isLoading: isLoadingUpdate, error },
+  ] = useUpdateProfilUserMutation();
   const [deleteProfilUser] = useDeleteProfilUserMutation();
-
+  console.log('error', error);
   useEffect(() => {
     document.title = `Circle - Profil`;
   }, []);
@@ -220,6 +226,7 @@ function ProfilePage() {
                     e.preventDefault();
                     try {
                       await updateProfilUser(inputData);
+                      refetchProfilUser();
                       dispatch(
                         snackbarHandle({
                           name: 'snackbarhandle',
@@ -237,7 +244,7 @@ function ProfilePage() {
                           data: {
                             open: true,
                             success: false,
-                            message: 'Un problème est survenu.',
+                            message: 'Une erreur est survenue.',
                           },
                         })
                       );
@@ -248,12 +255,8 @@ function ProfilePage() {
                 </Button>
                 <Button
                   sx={{
-                    ':hover': {
-                      color: 'white',
-                      backgroundColor: '#f50303',
-                    },
                     '&.MuiButton-root': {
-                      backgroundColor: '#EE9F28',
+                      backgroundColor: 'red',
                     },
                   }}
                   variant='contained'
@@ -304,6 +307,7 @@ function ProfilePage() {
                       user_id: '',
                     })
                   );
+                  dispatch(clearList());
                   dispatch(
                     snackbarHandle({
                       name: 'snackbarhandle',
