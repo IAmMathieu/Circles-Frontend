@@ -22,6 +22,7 @@ import {
 import ModalEvent from '../Circle/Calendar/ModalEvent';
 import { handleChange } from '../Circle/Calendar/CalendarSlice';
 import CustomToolbar from './CustomToolBar';
+import { Button } from '@mui/material';
 // FIN CALENDRIER
 const initialState = {
   title: null,
@@ -94,6 +95,12 @@ export const CirclePage = ({
           }}
         >
           <Fab
+            sx={{
+              color: 'var(--maincolor)',
+              '&.MuiButtonBase-root': {
+                backgroundColor: 'var(--subbackground)',
+              },
+            }}
             aria-label='add'
             variant='extended'
             onClick={() => {

@@ -8,7 +8,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { useLoginUserMutation, useRegisterUserMutation } from './authApi';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleChange } from '../../features/auth/authSlice';
+import { clearList, handleChange } from '../../features/auth/authSlice';
 import { Loading } from '../Loading/Loading';
 import { useNavigate } from 'react-router';
 import { Typography } from '@mui/material';
@@ -44,14 +44,10 @@ export const LoginForm = () => {
       error,
     },
   ] = useRegisterUserMutation();
-  console.log(`🚀 ~ error`, error);
   /**
    * Add classlist to the container when click
    */
 
-  useEffect(() => {
-    registerIsSuccess && toggleSnacke();
-  }, [registerIsSuccess]);
   const handleSwitch = () => {
     const container = document.getElementById('container');
     container.classList.toggle('right-panel-active');
@@ -76,11 +72,23 @@ export const LoginForm = () => {
                 birthdate,
                 surname,
               });
+              clearList();
+              toggleSnacke();
             }}
           >
-            <Input name='Prénom' input='firstname' type={'text'} />
-            <Input name='Nom' input='lastname' type={'text'} />
-            <Input name='Pseudo' input='surname' type={'text'} />
+            <Input
+              name='Prénom'
+              input='firstname'
+              value={firstname}
+              type={'text'}
+            />
+            <Input name='Nom' input='lastname' value={lastname} type={'text'} />
+            <Input
+              name='Pseudo'
+              input='surname'
+              value={surname}
+              type={'text'}
+            />
             <Input
               name='E-mail'
               input='email'
@@ -144,6 +152,7 @@ export const LoginForm = () => {
                 className='input'
                 color='primary'
                 name='Adresse mail'
+                value={email}
                 input='email'
                 type='email'
                 error={loginIsError}
@@ -151,6 +160,7 @@ export const LoginForm = () => {
               <Input
                 className='input'
                 name='Mot de passe'
+                value={password}
                 input='password'
                 type='password'
                 error={loginIsError}

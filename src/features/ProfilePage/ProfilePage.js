@@ -25,6 +25,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Typography from '@mui/material/Typography';
+import { useLocalstorageState } from 'rooks';
 
 //!------------
 //! Ajouter le oldpassword pour modifier des données et/ou supprimer
@@ -41,7 +42,9 @@ function ProfilePage() {
 
   const dispatch = useDispatch();
   const inputData = useSelector((state) => state.auth);
-  const { token, user_id } = inputData;
+  // const { token, user_id } = inputData;
+  const [token, setToken] = useLocalstorageState('token', 0);
+  const [user_id, setUserId] = useLocalstorageState('user_id', 0);
   /**
    * Query profil data when coming to the page
    */
@@ -142,24 +145,24 @@ function ProfilePage() {
             >
               <Input
                 helperText={'Prénom'}
-                defaultValue={data?.firstname}
                 input='firstname'
                 type={'text'}
+                value={data?.firstname}
               />
               <Input
-                defaultValue={data?.lastname}
+                value={data?.lastname}
                 input='lastname'
                 type={'text'}
                 helperText={'Nom'}
               />
               <Input
-                defaultValue={data?.surname}
+                value={data?.surname}
                 input='surname'
                 type={'text'}
                 helperText={'Pseudo'}
               />
               <Input
-                defaultValue={data?.email}
+                value={data?.email}
                 input='email'
                 type={'email'}
                 helperText={'Email'}
@@ -168,13 +171,13 @@ function ProfilePage() {
               />
               <Input
                 name='Ancien mot de passe'
-                input='oldPassword'
+                input='password'
                 type={'password'}
               />
               <Input
                 className={'mb-5 max-w-screen-sm'}
                 name='Nouveau mot de passe'
-                input='password'
+                input='newpassword'
                 type={'password'}
               />
               <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -196,24 +199,24 @@ function ProfilePage() {
                   renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
-              <Box component='div' sx={{ margin: '0.8rem' }}>
+              <Box
+                component='div'
+                sx={{ margin: '0.8rem', display: 'flex', gap: '1rem' }}
+              >
                 <Button
                   sx={{
+                    backgroundColor: 'red',
                     ':hover': {
                       color: 'white',
                       backgroundColor: '#f57803',
+                    },
+                    '&.MuiButton-root': {
+                      backgroundColor: '#EE9F28',
                     },
                   }}
                   variant='contained'
                   onClick={async (e) => {
                     e.preventDefault();
-                    // const newObj = await { ...inputData };
-                    // for (const key in newObj) {
-                    //   if (newObj[key] === '') {
-                    //     delete newObj[key];
-                    //   }
-                    // }
-                    console.log(`🚀 ~ inputData`, inputData);
                     await updateProfilUser(inputData);
                   }}
                 >
@@ -224,6 +227,9 @@ function ProfilePage() {
                     ':hover': {
                       color: 'white',
                       backgroundColor: '#f50303',
+                    },
+                    '&.MuiButton-root': {
+                      backgroundColor: 'red',
                     },
                   }}
                   variant='contained'

@@ -30,7 +30,6 @@ export const authSlice = createSlice({
      * @param {*} action
      */
     handleChange: (state, action) => {
-      console.log(`🚀 ~ action`, action);
       /* state[nomDuChamp] --> En fonction ce sera email ou password(si on est sur l'input email, ce sera email) et on modifie la valeur basé sur le payload envoyé.
       Ici ce sera donc state[email] = action.payload.payload qui est égal à la valeur renseigné par l'utilisateur
       */
@@ -57,10 +56,20 @@ export const authSlice = createSlice({
       state.lastname = lastname;
       state.surname = surname;
     },
+    clearList: (state, action) => {
+      state.firstname = '';
+      state.lastname = '';
+      state.surname = '';
+      state.email = '';
+      state.password = '';
+      state.birthdate = moment().format('YYYY-MM-DD');
+      state.portrait_url = '';
+    },
   },
 });
 
-export const { handleChange, handleToken, handleUser } = authSlice.actions;
+export const { handleChange, handleToken, handleUser, clearList } =
+  authSlice.actions;
 
 // we export the reducer of our slice
 export default authSlice.reducer;
