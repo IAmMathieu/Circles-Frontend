@@ -13,9 +13,11 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: '90vw',
+  maxWidth: '1000px',
   height: '50%',
-  bgcolor: 'background.paper',
+  // bgcolor: 'background.paper',
+  backgroundColor: 'var(--subbackground)',
   color: 'var(--backgroundbutton)',
   border: '2px solid #000',
   boxShadow: 24,
@@ -57,7 +59,15 @@ export default function ModaleCreateCircle({
             toggleCreate();
           }}
         >
-          <Typography sx={{ fontSize: '2rem', fontWeight: '700' }}>
+          <Typography
+            sx={{
+              fontSize: {
+                xs: 'calc(1vw + 1vh + 3vmin)',
+                lg: 'calc(1vw + 1vh + 1vmin)',
+              },
+              fontWeight: '700',
+            }}
+          >
             Créer votre propre Cercle !
           </Typography>
           <TextField

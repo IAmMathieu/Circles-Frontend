@@ -83,7 +83,6 @@ export const CirclePage = ({
   const [createEvent] = useCreateEventMutation();
   const [updateEvent, { error }] = useUpdateEventMutation();
   const [deleteEvent] = useDeleteEventMutation();
-  console.log(`🚀 ~ error`, error);
   return (
     <div className='container-circle w-full '>
       <Box className='test1' style={{ marginTop: '1rem' }}>
