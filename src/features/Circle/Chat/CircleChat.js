@@ -93,7 +93,7 @@ const Chat = ({
     <Box
       className='mb-3 w-[95vw] custom-bk:w-full rounded-lg p-5 custom-bk:p-10 flex column shadow-2xl darkMode:shadow-none max-w-[2000px] '
       sx={{
-        height: { xs: '65vh', md: '75vh', lg: '90vh' },
+        height: { xs: '65vh', md: '75vh', lg: '66vh' },
       }}
     >
       <Grid container className='w-full flex row'>
