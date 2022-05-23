@@ -10,10 +10,11 @@ import { Box } from '@mui/system';
 import { dateFormat } from '../../../utils/dateFormat';
 
 export default function OtherAnswer({ surname, time, text, img_url }) {
+  console.log(`🚀 ~ img_url`, img_url);
   return (
     <div>
       <ListItem key='2'>
-        <Grid container className='flex column gap-4 justify-start proutbot'>
+        <Grid container className='flex column gap-4 justify-start '>
           <Box className='order-2'>
             <Grid className='w-fit' item xs={12}>
               <ListItemText align='right' primary={text}></ListItemText>

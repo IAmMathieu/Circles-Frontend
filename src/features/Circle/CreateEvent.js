@@ -11,7 +11,7 @@ import { Box } from '@mui/system';
 export default function CreateEvent() {
   return (
     <div>
-      <Dialog >
+      <Dialog>
         <DialogTitle>Créer un événement : </DialogTitle>
         <DialogContent>
           {/* <DialogContentText>
@@ -36,7 +36,7 @@ export default function CreateEvent() {
               onChange={(event) => {}}
             />
             <DialogActions>
-              <Button >Annuler</Button>
+              <Button>Annuler</Button>
               <Button type='submit'>Rejoindre</Button>
             </DialogActions>
           </Box>

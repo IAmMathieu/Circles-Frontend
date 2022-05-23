@@ -167,7 +167,7 @@ const Chat = ({
           >
             {/* Demander a Mathieu de mettre l'user_id pour filtrer les messages
              reçus et envoyés + l'img url + si le bot, on reçois une réponse du bot (id unique pour le bot? )  */}
-
+            {console.log(messageToMap)}
             {messageToMap?.map((message, i) => {
               // Si on envoie
               if (circleIsLoading) {
