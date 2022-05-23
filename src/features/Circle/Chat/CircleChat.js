@@ -49,7 +49,8 @@ const Chat = ({
   // Get messages from de BDD
   useEffect(() => {
     if (circleData && !allowMessage) {
-      const messages = circleData.messages;
+      const messages = circleData?.messages || '';
+
       const arrayToSort = [...messages];
 
       const messageFinal = arrayToSort.sort((a, b) =>
@@ -57,7 +58,7 @@ const Chat = ({
           moment(b.time, 'YYYY-MM-DD HH:mm:ss')
         )
       );
-      console.log(`🚀 ~ messageFinal`, messageFinal);
+
       setMessageToMap(messageFinal);
       setAllowMessage(true);
     }
@@ -167,7 +168,7 @@ const Chat = ({
           >
             {/* Demander a Mathieu de mettre l'user_id pour filtrer les messages
              reçus et envoyés + l'img url + si le bot, on reçois une réponse du bot (id unique pour le bot? )  */}
-            {console.log(messageToMap)}
+
             {messageToMap?.map((message, i) => {
               // Si on envoie
               if (circleIsLoading) {
