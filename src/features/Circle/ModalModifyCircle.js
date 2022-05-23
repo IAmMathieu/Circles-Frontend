@@ -9,6 +9,10 @@ import { useLocalstorageState } from 'rooks';
 import { useNavigate } from 'react-router';
 import { snackbarHandle } from '../SnackbarGlobal/eventSlice';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { InputAdornment } from '@mui/material';
+import DoneIcon from '@mui/icons-material/Done';
+import { useState } from 'react';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -36,16 +40,18 @@ export default function ModaleModifyCircle({
   deleteCircle,
   circleRefetch,
   dataModifyCircle,
+  inviteCircle,
+  unique_code,
 }) {
+  console.log(unique_code);
   const [token, setToken] = useLocalstorageState('token', 0);
   const [user_id, setUserId] = useLocalstorageState('user_id', 0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { circle_id, name, description, color, img_url } = useSelector(
     (state) => state.circle
   );
-
+  const [emailInvite, setEmailInvite] = useState('');
   const { refetch: dashDataRefretch } = useGetUserDashBoardQuery({
     token,
     user_id,
@@ -231,7 +237,8 @@ export default function ModaleModifyCircle({
               Supprimer
             </Button>
           </DialogActions>
-          <Tooltip title='Code secret du cercle'>
+
+          {/* <Tooltip title='Code secret du cercle'>
             <IconButton
               sx={{
                 position: 'absolute',
@@ -255,7 +262,7 @@ export default function ModaleModifyCircle({
             >
               <ContentCopyIcon />
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
         </Box>
       </Modal>
     </div>

@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import {
   useDeleteCircleMutation,
   useGetCircleQuery,
+  useInviteCircleMutation,
   useModifyCircleMutation,
 } from './CircleApi';
 import CircleBottomNavigation from './CircleBottomNavigation';
@@ -16,6 +17,7 @@ import ModalModifyCircle from './ModalModifyCircle';
 import { changeCircle } from './CircleSlice';
 import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
 import { snackbarHandle } from '../SnackbarGlobal/eventSlice';
+import ModaleJoinCircle from '../Dashboard/ModaleJoinCircle';
 export default function Circle() {
   // Get id of the route
 
@@ -30,6 +32,10 @@ export default function Circle() {
   );
   const [skip, setSkip] = useState(true);
 
+  const [openInvite, setOpenInvite] = useState(false);
+  const toggleInvite = () => {
+    setOpenInvite(!openInvite);
+  };
   useEffect(() => {
     if (token !== null && user_id !== null) {
       setSkip(false);
@@ -76,6 +82,8 @@ export default function Circle() {
       isSuccess: modifyCircleSuccess,
     },
   ] = useModifyCircleMutation();
+  const [inviteCircle, { isSuccess: inviteCircleSuccess }] =
+    useInviteCircleMutation();
   const [
     deleteCircle,
     {
@@ -113,10 +121,16 @@ export default function Circle() {
   return (
     // <Box className=' relative flex flex-col items-center p-5 h-screen custom-bk:pr-[10vh] pt-20 custom-bk:pt-40 overflow-hidden'>
     <Box className=' relative flex flex-col items-center pt-5 pl-0 custom-bk:pl-20 h-screen custom-bk:pr-[5vh] overflow-hidden'>
-      <CircleHeader circleData={circleData} toggleModify={toggleModify} />
+      <CircleHeader
+        circleData={circleData}
+        toggleModify={toggleModify}
+        toggleInvite={toggleInvite}
+      />
       {/* <Button onClick={toggleModify}>TestUpdate</Button> */}
 
       <ModalModifyCircle
+        unique_code={circleData?.unique_code}
+        inviteCircle={inviteCircle}
         refetch={circleRefetch}
         dataModifyCircle={circleData}
         modifyCircle={modifyCircle}
@@ -126,6 +140,12 @@ export default function Circle() {
         modifyCircleError={modifyCircleError}
         deleteCircle={deleteCircle}
         circleRefetch={circleRefetch}
+      />
+      <ModaleJoinCircle
+        openInvite={openInvite}
+        toggleInvite={toggleInvite}
+        inviteCircle={inviteCircle}
+        unique_code={circleData?.unique_code}
       />
       {menu === 'calendar' ? (
         <CirclePage

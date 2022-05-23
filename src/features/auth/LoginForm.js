@@ -1,5 +1,5 @@
 import { Input } from '../Common/Input/Input';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './styles.scss';
 import './../../styles/variables.css';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -23,9 +23,16 @@ import ModalResetPassword from './ModalResetPassword';
 export const LoginForm = () => {
   const dispatch = useDispatch();
   // Get email and password from the slice state auth
-  const { email, password, firstname, lastname, birthdate, surname } =
-    useSelector((state) => state.auth);
-  console.log(`🚀 ~ email`, email);
+  const {
+    email,
+    password,
+    firstname,
+    lastname,
+    birthdate,
+    surname,
+    circleCode,
+    userExist,
+  } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const [openSnacke, setOpenSnacke] = useState(false);
@@ -33,6 +40,36 @@ export const LoginForm = () => {
   const toggleSnacke = () => {
     setOpenSnacke(!openSnacke);
   };
+  useEffect(() => {
+    // if (circleCode && userExist === true) {
+    if (circleCode && userExist === 'true') {
+      dispatch(
+        snackbarHandle({
+          name: 'snackbarhandle',
+          data: {
+            open: true,
+            success: true,
+            message:
+              "Veuillez vous connecter pour valider l'adhésion à ce cercle",
+          },
+        })
+      );
+    }
+    if (circleCode && userExist === 'false') {
+      console.log('ok 22');
+      dispatch(
+        snackbarHandle({
+          name: 'snackbarhandle',
+          data: {
+            open: true,
+            success: true,
+            message:
+              "Veuillez créer votre compte pour valider l'adhésion à ce cercle",
+          },
+        })
+      );
+    }
+  }, [circleCode, userExist]);
   /**
    * Change the skip state, allow to fetch data from the server
    */
@@ -95,6 +132,7 @@ export const LoginForm = () => {
                   password,
                   birthdate,
                   surname,
+                  circleCode,
                 });
                 dispatch(clearList());
                 dispatch(
@@ -200,6 +238,7 @@ export const LoginForm = () => {
               await loginUser({
                 email,
                 password,
+                circleCode,
               });
               dispatch(clearList());
             }}
