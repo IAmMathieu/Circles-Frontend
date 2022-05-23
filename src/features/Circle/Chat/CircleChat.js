@@ -20,7 +20,7 @@ import UserAnswer from './UserAnswer';
 import OtherAnswer from './OtherAnswer';
 import BotMessage from './BotMessage';
 import './style.scss';
-
+import moment from 'moment';
 const Chat = ({
   CircleIsSuccess,
   circleIsLoading,
@@ -28,6 +28,7 @@ const Chat = ({
   profilData,
   user_id,
   circle_id,
+  circleRefetch,
 }) => {
   const client = useRef();
   const chat = useRef();
@@ -49,7 +50,15 @@ const Chat = ({
   useEffect(() => {
     if (circleData && !allowMessage) {
       const messages = circleData.messages;
-      setMessageToMap(messages);
+      const arrayToSort = [...messages];
+
+      const messageFinal = arrayToSort.sort((a, b) =>
+        moment(a.time, 'YYYY-MM-DD HH:mm:ss').diff(
+          moment(b.time, 'YYYY-MM-DD HH:mm:ss')
+        )
+      );
+      console.log(`🚀 ~ messageFinal`, messageFinal);
+      setMessageToMap(messageFinal);
       setAllowMessage(true);
     }
   }, [circle_id, circleData]);
@@ -74,10 +83,16 @@ const Chat = ({
 
   useEffect(() => {
     // if (messageToMap) {
-    if (messageToMap) {
-      setMessageToMap([...messageToMap, ioData]);
-    } else {
-      setMessageToMap([ioData && ioData]);
+    // if (messageToMap) {
+    //   setMessageToMap([...messageToMap, ioData]);
+    // } else {
+    //   setMessageToMap([ioData && ioData]);
+    // }
+    if (ioData && ioData !== '') {
+      messageToMap
+        ? setMessageToMap([...messageToMap, ioData])
+        : setMessageToMap([ioData && ioData]);
+      setIoData('');
     }
     // chat.current.scroll(0, chat.current.getBoundingClientRect().height);
     // chat.current.scrollIntoView({ behavior: 'smooth' });
@@ -93,7 +108,7 @@ const Chat = ({
     <Box
       className='mb-3 w-[95vw] custom-bk:w-full rounded-lg p-5 custom-bk:p-10 flex column shadow-2xl darkMode:shadow-none max-w-[2000px] '
       sx={{
-        height: { xs: '65vh', md: '75vh', lg: '90vh' },
+        height: { xs: '65vh', md: '75vh', lg: '66vh' },
       }}
     >
       <Grid container className='w-full flex row'>
@@ -152,7 +167,7 @@ const Chat = ({
           >
             {/* Demander a Mathieu de mettre l'user_id pour filtrer les messages
              reçus et envoyés + l'img url + si le bot, on reçois une réponse du bot (id unique pour le bot? )  */}
-
+            {console.log(messageToMap)}
             {messageToMap?.map((message, i) => {
               // Si on envoie
               if (circleIsLoading) {
@@ -200,7 +215,7 @@ const Chat = ({
                       surname={message.surname}
                       time={message.time}
                       text={message.text}
-                      img_url={message.img_url}
+                      img_url={profilData.img_url}
                     />
                   );
                 }
@@ -256,7 +271,11 @@ const Chat = ({
                   setMessagesWrite(event.target.value);
                 }}
                 onKeyPress={(e) => {
-                  if (e.key === 'Enter' && messagesWrite.length > 0) {
+                  if (
+                    e.key === 'Enter' &&
+                    messagesWrite.length > 0 &&
+                    messagesWrite
+                  ) {
                     client.current.emit('chatMessage', messagesWrite);
                     setMessagesWrite('');
                   }
@@ -270,6 +289,7 @@ const Chat = ({
                         onClick={() => {
                           client.current.emit('chatMessage', messagesWrite);
                           setMessagesWrite('');
+                          // circleRefetch();
                         }}
                       >
                         <SendIcon />

@@ -141,11 +141,10 @@ export const LoginForm = () => {
               <DatePicker
                 label='Birth date'
                 name='birthdate'
-                value={
-                  birthdate === '' ? moment().format('YYYY-MM-DD') : birthdate
-                }
+                value={birthdate}
                 required={true}
                 format='yyyy-mm-dd'
+                inputFormat='dd/MM/yyyy'
                 onChange={(event) => {
                   // Reformatage de la date pour l'envoie vers la BDD
                   const [date] = event.toISOString().split('T');

@@ -14,7 +14,6 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
   height: '30%',
   bgcolor: 'var(--background)',
   color: 'var(--backgroundbutton)',
@@ -22,6 +21,8 @@ const style = {
   boxShadow: 24,
   borderRadius: '20px',
   p: 4,
+  width: '90vw',
+  maxWidth: '800px',
 };
 
 export default function ModaleJoinCircle({

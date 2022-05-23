@@ -99,6 +99,20 @@ const extendedApi = emptySplitApi.injectEndpoints({
         };
       },
     }),
+    inviteByEmail: builder.mutation({
+      /**
+       * Query for login user. Take the email and password on parameter, and send it to the server.
+       * @param {*} param0
+       * @returns
+       */
+      query: ({ code_activate }) => {
+        return {
+          url: `invite/${code_activate}`,
+          method: 'POST',
+          header: 'Content-Type: application/x-www-form-urlencoded',
+        };
+      },
+    }),
   }),
   overrideExisting: false,
 });
