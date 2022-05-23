@@ -25,6 +25,7 @@ import { textFieldColor } from '../features/Common/MUITheme/muiTheme';
 import { Activate } from '../features/Activate/Activate';
 import { ErrorPage } from './../features/404/404';
 import { SnackbarGlobal } from '../features/SnackbarGlobal/SnackbarGlobal';
+import ResetPassword from '../features/auth/ResetPassword';
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
@@ -95,6 +96,12 @@ const App = () => {
             path='/'
             element={
               tokenState ? <Navigate to='/dashboard' replace /> : <Homepage />
+            }
+          />
+          <Route
+            path='/reset-password/:reset_code'
+            element={
+              tokenState ? <Navigate to='/dashboard' replace /> : <ResetPassword />
             }
           />
           <Route path='/activate/:code_activate' element={<Activate />} />
