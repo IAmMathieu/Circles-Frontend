@@ -200,7 +200,7 @@ const Chat = ({
                       surname={message.surname}
                       time={message.time}
                       text={message.text}
-                      img_url={message.img_url}
+                      img_url={profilData.img_url}
                     />
                   );
                 }
