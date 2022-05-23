@@ -13,13 +13,14 @@ const extendedApi = emptySplitApi.injectEndpoints({
        * @param {*} param0
        * @returns
        */
-      query: ({ email, password }) => {
+      query: ({ email, password, circleCode }) => {
         return {
           url: 'login',
           method: 'POST',
           body: new URLSearchParams({
             email: email,
             password: password,
+            circleCode,
           }),
           header: 'Content-Type: application/x-www-form-urlencoded',
         };
@@ -47,7 +48,15 @@ const extendedApi = emptySplitApi.injectEndpoints({
        * @param {*} param0
        * @returns
        */
-      query: ({ firstname, lastname, birthdate, email, password, surname }) => {
+      query: ({
+        firstname,
+        lastname,
+        birthdate,
+        email,
+        password,
+        surname,
+        circleCode,
+      }) => {
         return {
           url: 'register',
           method: 'POST',
@@ -58,6 +67,7 @@ const extendedApi = emptySplitApi.injectEndpoints({
             email,
             password,
             birthdate,
+            circleCode,
           }),
           header: 'Content-Type: application/x-www-form-urlencoded',
         };

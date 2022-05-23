@@ -126,7 +126,7 @@ const App = () => {
           <Route path='/faq' theme={muiTheme} element={<FAQ />} />
           <Route path='/contact' theme={muiTheme} element={<ContactPage />} />
           <Route
-            path='/invite/:circlecode'
+            path='/invite/:circleInfo'
             theme={muiTheme}
             element={<InviteDashboard />}
           />

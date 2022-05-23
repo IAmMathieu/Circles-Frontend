@@ -1,13 +1,15 @@
 import { Container, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 import { setStorage } from '../../utils/helperLocalStorage';
 import { useActivateEmailQuery } from '../auth/authApi';
-import { handleToken } from '../auth/authSlice';
+import { handleChange, handleToken } from '../auth/authSlice';
 import { Loading } from '../Loading/Loading';
 import DashbordLoader from '../Dashboard/DashbordLoader';
 import { useSearchParams } from 'react-router-dom';
+import { useLocalstorageState } from 'rooks';
+import { useJoinCircleMutation } from '../Circle/CircleApi';
 export const InviteDashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -15,53 +17,40 @@ export const InviteDashboard = () => {
   const { data, isLoading, isSuccess, isError } = useActivateEmailQuery({
     code_activate,
   });
+  const [
+    joinCircle,
+    {
+      data: dataJoinCircle,
+      isError: joinCircleError,
+      isSuccess: joinCircleSuccess,
+    },
+  ] = useJoinCircleMutation();
   // const {circlecode} = useParams();
-  const text = useParams();
-  const test = useSearchParams();
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     const timer = setTimeout(() => {
-  //       if (
-  //         data?.token !== null &&
-  //         data?.token !== undefined &&
-  //         data?.user_id !== null &&
-  //         data?.user_id !== undefined
-  //       ) {
-  //         dispatch(handleToken({ token: data?.token, user_id: data?.user_id }));
-  //         setStorage('token', data?.token);
-  //         setStorage('user_id', data?.user_id);
-  //       }
-  //       navigate('/dashboard', { replace: true });
-  //     }, 3000);
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [isSuccess]);
-  return (
-    <></>
-    // <Container
-    //   sx={{
-    //     display: 'flex',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     height: '100%',
-    //   }}
-    // >
-    //   {isSuccess ? (
-    //     <>
-    //       <Typography
-    //         variant={'h4'}
-    //         sx={{ marginBottom: { xs: '8rem', lg: '5rem' } }}
-    //       >
-    //         Votre e-mail est bien validé, redirection ...
-    //       </Typography>
-    //       <DashbordLoader
-    //         text={'Your account is activating, please wait...'}
-    //         time={3}
-    //       />
-    //     </>
-    //   ) : (
-    //     ''
-    //   )}
-    // </Container>
-  );
+  const { circleInfo } = useParams();
+  const [searchParams] = useSearchParams();
+  const userExist = searchParams.get('user-exist');
+  const [token, setToken] = useLocalstorageState('token', 0);
+  const [user_id, setUser_id] = useLocalstorageState('user_id', 0);
+  if (token) {
+    joinCircle({
+      token,
+      user_id,
+      unique_code: circleInfo,
+    });
+    navigate('/dashboard', { replace: 'true' });
+  } else {
+    dispatch(
+      handleChange({
+        name: 'circleCode',
+        payload: circleInfo,
+      })
+    );
+    dispatch(
+      handleChange({
+        name: 'userExist',
+        payload: userExist,
+      })
+    );
+    navigate('/', { replace: 'true' });
+  }
 };
