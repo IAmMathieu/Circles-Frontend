@@ -1,5 +1,6 @@
-import { Box, Container, Paper, Typography } from '@mui/material';
+import { Box, Container, IconButton, Paper, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import EditIcon from '@mui/icons-material/Edit';
 import { handleChange } from './CircleSlice';
 export default function CircleHeader({ circleData, toggleModify }) {
@@ -91,6 +92,16 @@ export default function CircleHeader({ circleData, toggleModify }) {
             Chat
           </Typography>
         </Box>
+        <IconButton
+          sx={{
+            position: 'absolute',
+            right: '1rem',
+            top: '50%',
+            transform: 'translateY(-50%)',
+          }}
+        >
+          <PersonAddIcon sx={{ fontSize: { xs: '1.5rem', lg: '2.5rem' } }} />
+        </IconButton>
       </Paper>
     </Container>
   );
