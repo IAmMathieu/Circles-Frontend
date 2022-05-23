@@ -7,7 +7,7 @@ import { handleChange } from './CircleSlice';
 import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
 import { useLocalstorageState } from 'rooks';
 import { useNavigate } from 'react-router';
-import { snackbarHandle } from '../SnackbarGlobal/eventSlice';
+import { snackbarHandle } from '../Common/SnackbarGlobal/eventSlice';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { InputAdornment } from '@mui/material';
 import DoneIcon from '@mui/icons-material/Done';

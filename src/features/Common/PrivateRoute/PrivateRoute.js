@@ -1,7 +1,4 @@
-import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import useLocalStorage from 'use-local-storage';
-import { getStorage } from '../../utils/helperLocalStorage';
 
 /**
  * Get the token and use it for checking if the routes are ok. If the token is not ok, we are redirect to the "/" location and replace the history

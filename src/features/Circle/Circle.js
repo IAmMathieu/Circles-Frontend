@@ -8,7 +8,6 @@ import {
   useModifyCircleMutation,
 } from './CircleApi';
 import CircleBottomNavigation from './CircleBottomNavigation';
-import { CirclePage } from '../CirclePage/CirclePage';
 import CircleChat from './Chat/CircleChat';
 import CircleHeader from './CircleHeader';
 import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
@@ -16,8 +15,8 @@ import { useEffect, useState } from 'react';
 import ModalModifyCircle from './ModalModifyCircle';
 import { changeCircle } from './CircleSlice';
 import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
-import { snackbarHandle } from '../SnackbarGlobal/eventSlice';
 import ModaleJoinCircle from '../Dashboard/ModaleJoinCircle';
+import { CircleCalendar } from './Calendar/CircleCalendar';
 export default function Circle() {
   // Get id of the route
 
@@ -27,7 +26,7 @@ export default function Circle() {
   const { user_id, token } = useSelector((state) => state.auth);
   const [dataCircle, setDataCircle] = useState();
   // Get the menu from the state circle
-  const { menu, name, description, color, img_url } = useSelector(
+  const { menu, name, description, img_url } = useSelector(
     (state) => state.circle
   );
   const [skip, setSkip] = useState(true);
@@ -148,7 +147,7 @@ export default function Circle() {
         unique_code={circleData?.unique_code}
       />
       {menu === 'calendar' ? (
-        <CirclePage
+        <CircleCalendar
           circleRefetch={circleRefetch}
           circleData={circleData}
           profilData={profilData}

@@ -1,5 +1,4 @@
 import ListItem from '@mui/material/ListItem';
-import { NavLink } from 'react-router-dom';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import LightModeIcon from '@mui/icons-material/LightMode';
@@ -25,7 +24,7 @@ function MiniDrawerDarkMode({ open, setTheme, theme }) {
             justifyContent: 'center',
           }}
         >
-          {theme === 'dark' ? <DarkModeIcon /> : <LightModeIcon />}
+          {theme === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
         </ListItemIcon>
         <ListItemText
           primary={theme === 'dark' ? 'Darkmode' : 'Lightmode'}

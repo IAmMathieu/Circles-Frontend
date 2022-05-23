@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import io from 'socket.io-client';
 import SendIcon from '@mui/icons-material/Send';
-import { Box, styled } from '@mui/system';
+import { Box } from '@mui/system';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 import { useEffect, useRef, useState } from 'react';

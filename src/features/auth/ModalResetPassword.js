@@ -2,10 +2,8 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import DialogActions from '@mui/material/DialogActions';
 import { Box } from '@mui/system';
-import { useDispatch, useSelector } from 'react-redux';
 import { Modal, Typography } from '@mui/material';
 import { useState } from 'react';
-import { handleChange } from './authSlice';
 
 const style = {
   position: 'absolute',
@@ -28,12 +26,9 @@ export default function ModalResetPassword({
   toggleModal,
   resetPassword,
 }) {
-
   const [email, setEmail] = useState('');
 
   return (
-
-
     <div>
       <Modal open={openModal} onClose={toggleModal}>
         <Box
@@ -41,7 +36,7 @@ export default function ModalResetPassword({
           component='form'
           onSubmit={(event) => {
             event.preventDefault();
-            resetPassword({email});
+            resetPassword({ email });
             toggleModal();
             setEmail('');
           }}
