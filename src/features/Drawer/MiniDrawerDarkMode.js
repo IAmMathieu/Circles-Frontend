@@ -1,5 +1,4 @@
 import ListItem from '@mui/material/ListItem';
-import { NavLink } from 'react-router-dom';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import LightModeIcon from '@mui/icons-material/LightMode';

@@ -11,7 +11,7 @@ import {
   useUpdateProfilUserMutation,
   useDeleteProfilUserMutation,
 } from './ProfilApi';
-import { Loading } from '../Loading/Loading';
+import { Loading } from '../Common/Loading/Loading';
 import { removeStorage } from '../../utils/helperLocalStorage';
 import { handleToken, clearList } from '../auth/authSlice';
 
@@ -26,7 +26,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Typography from '@mui/material/Typography';
 import { useLocalstorageState } from 'rooks';
-import { snackbarHandle } from '../SnackbarGlobal/eventSlice';
+import { snackbarHandle } from '../Common/SnackbarGlobal/eventSlice';
 
 //!------------
 //! Ajouter le oldpassword pour modifier des données et/ou supprimer

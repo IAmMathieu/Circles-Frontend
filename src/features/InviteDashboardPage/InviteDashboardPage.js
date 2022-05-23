@@ -1,16 +1,11 @@
-import { Container, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useLocation, useNavigate, useParams } from 'react-router';
-import { setStorage } from '../../utils/helperLocalStorage';
-import { useActivateEmailQuery } from '../auth/authApi';
-import { handleChange, handleToken } from '../auth/authSlice';
-import { Loading } from '../Loading/Loading';
-import DashbordLoader from '../Dashboard/DashbordLoader';
+import { useNavigate, useParams } from 'react-router';
+import { handleChange } from '../auth/authSlice';
 import { useSearchParams } from 'react-router-dom';
 import { useLocalstorageState } from 'rooks';
 import { useJoinCircleMutation } from '../Circle/CircleApi';
-import { snackbarHandle } from '../SnackbarGlobal/eventSlice';
+import { snackbarHandle } from '../Common/SnackbarGlobal/eventSlice';
 export const InviteDashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
