@@ -78,6 +78,7 @@ export const LoginForm = () => {
   return (
     <>
       {loginIsLoading && <Loading />}
+      
       <div className='container' id='container'>
         <div className='form-container sign-up-container'>
           <h4 className='mobile-title mobile-title--signup'>S'enregistrer</h4>

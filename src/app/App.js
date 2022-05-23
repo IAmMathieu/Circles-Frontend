@@ -1,10 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router';
-import { Homepage } from '../features/Homepage/Homepage';
 import { Dashboard } from '../features/Dashboard/Dashboard';
 import './App.scss';
 import useLocalStorage from 'use-local-storage';
 import { ThemeProvider } from '@emotion/react';
-import { CirclePage } from './../features/CirclePage/CirclePage';
 
 import {
   MuiThemeLight,
@@ -21,11 +19,11 @@ import ContactPage from '../features/ContactPage/ContactPage';
 import MiniDrawer from '../features/Drawer/miniDrawer';
 import { CssBaseline } from '@mui/material';
 import Circle from '../features/Circle/Circle';
-import { textFieldColor } from '../features/Common/MUITheme/muiTheme';
 import { Activate } from '../features/Activate/Activate';
 import { ErrorPage } from './../features/404/404';
 import { SnackbarGlobal } from '../features/SnackbarGlobal/SnackbarGlobal';
 import ResetPassword from '../features/auth/ResetPassword';
+import { Login } from '../features/auth/Login';
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
@@ -71,10 +69,6 @@ const App = () => {
   /**
    * Allow to switch a theme
    */
-  const switchTheme = () => {
-    const newTheme = theme === 'light' ? 'light' : 'dark';
-    setTheme(newTheme);
-  };
 
   const muiTheme = theme === 'light' ? MuiThemeLight : MuiThemeDark;
   document.body.dataset.theme = theme;
@@ -95,13 +89,21 @@ const App = () => {
           <Route
             path='/'
             element={
-              tokenState ? <Navigate to='/dashboard' replace /> : <Homepage />
+              tokenState ? (
+                <Navigate to='/dashboard' replace />
+              ) : (
+                <Login setTheme={setTheme} theme={theme} />
+              )
             }
           />
           <Route
             path='/reset-password/:reset_code'
             element={
-              tokenState ? <Navigate to='/dashboard' replace /> : <ResetPassword />
+              tokenState ? (
+                <Navigate to='/dashboard' replace />
+              ) : (
+                <ResetPassword />
+              )
             }
           />
           <Route path='/activate/:code_activate' element={<Activate />} />

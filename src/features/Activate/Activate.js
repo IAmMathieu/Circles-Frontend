@@ -5,7 +5,6 @@ import { useNavigate, useParams } from 'react-router';
 import { setStorage } from '../../utils/helperLocalStorage';
 import { useActivateEmailQuery } from '../auth/authApi';
 import { handleToken } from '../auth/authSlice';
-import { Loading } from '../Loading/Loading';
 import DashbordLoader from '../Dashboard/DashbordLoader';
 export const Activate = () => {
   const dispatch = useDispatch();
