@@ -25,6 +25,7 @@ import { textFieldColor } from '../features/Common/MUITheme/muiTheme';
 import { Activate } from '../features/Activate/Activate';
 import { ErrorPage } from './../features/404/404';
 import { SnackbarGlobal } from '../features/SnackbarGlobal/SnackbarGlobal';
+import { InviteDashboard } from '../features/InviteDashboardPage/InviteDashboardPage';
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
@@ -124,6 +125,11 @@ const App = () => {
           />
           <Route path='/faq' theme={muiTheme} element={<FAQ />} />
           <Route path='/contact' theme={muiTheme} element={<ContactPage />} />
+          <Route
+            path='/invite/:circlecode'
+            theme={muiTheme}
+            element={<InviteDashboard />}
+          />
           <Route path='*' theme={muiTheme} element={<ErrorPage />} />
         </Routes>
         <SnackbarGlobal />
