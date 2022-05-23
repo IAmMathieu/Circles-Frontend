@@ -37,7 +37,7 @@ export const LoginForm = () => {
   };
   useEffect(() => {
     // if (circleCode && userExist === true) {
-    if (circleCode && userExist) {
+    if (circleCode && userExist === 'true') {
       dispatch(
         snackbarHandle({
           name: 'snackbarhandle',
@@ -50,7 +50,7 @@ export const LoginForm = () => {
         })
       );
     }
-    if (circleCode && !userExist) {
+    if (circleCode && userExist === 'false') {
       console.log('ok 22');
       dispatch(
         snackbarHandle({
@@ -58,7 +58,8 @@ export const LoginForm = () => {
           data: {
             open: true,
             success: true,
-            message: "Veuillez créer pour valider l'adhésion à ce cercle",
+            message:
+              "Veuillez créer votre compte pour valider l'adhésion à ce cercle",
           },
         })
       );

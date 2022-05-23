@@ -62,7 +62,7 @@ export default function ModaleJoinCircle({
               textDecoration: 'underline',
             }}
           >
-            Rejoignez un cercle :{' '}
+            E-mail de la personne à inviter :
           </Typography>
           <TextField
             autoFocus
@@ -85,7 +85,7 @@ export default function ModaleJoinCircle({
           />
           <DialogActions>
             <Button onClick={toggleJoin}>Annuler</Button>
-            <Button type='submit'>Rejoindre</Button>
+            <Button type='submit'>Inviter</Button>
           </DialogActions>
         </Box>
       </Modal>

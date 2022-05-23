@@ -20,7 +20,7 @@ const extendedApi = emptySplitApi.injectEndpoints({
           body: new URLSearchParams({
             email: email,
             password: password,
-            circleCode,
+            unique_code: circleCode,
           }),
           header: 'Content-Type: application/x-www-form-urlencoded',
         };
@@ -67,7 +67,7 @@ const extendedApi = emptySplitApi.injectEndpoints({
             email,
             password,
             birthdate,
-            circleCode,
+            unique_code: circleCode,
           }),
           header: 'Content-Type: application/x-www-form-urlencoded',
         };

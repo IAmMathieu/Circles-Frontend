@@ -124,14 +124,14 @@ export const Dashboard = () => {
           toggleCreate={toggleCreate}
           createCircleError={createCircleError}
         />
-        <ModaleJoinCircle
+        {/* <ModaleJoinCircle
           refetch={refetch}
           joinCircle={joinCircle}
           joinCircleSuccess={joinCircleSuccess}
           open={openJoin}
           toggleJoin={toggleJoin}
           joinCircleError={joinCircleError}
-        />
+        /> */}
         {/* <CustomizedSnackbars
           dataCreateCircle={dataCreateCircle}
           openSnack={openSnack}

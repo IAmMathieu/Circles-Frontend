@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import {
   useDeleteCircleMutation,
   useGetCircleQuery,
+  useInviteCircleMutation,
   useModifyCircleMutation,
 } from './CircleApi';
 import CircleBottomNavigation from './CircleBottomNavigation';
@@ -76,6 +77,8 @@ export default function Circle() {
       isSuccess: modifyCircleSuccess,
     },
   ] = useModifyCircleMutation();
+  const [inviteCircle, { isSuccess: inviteCircleSuccess }] =
+    useInviteCircleMutation();
   const [
     deleteCircle,
     {
@@ -117,6 +120,8 @@ export default function Circle() {
       {/* <Button onClick={toggleModify}>TestUpdate</Button> */}
 
       <ModalModifyCircle
+        unique_code={circleData?.unique_code}
+        inviteCircle={inviteCircle}
         refetch={circleRefetch}
         dataModifyCircle={circleData}
         modifyCircle={modifyCircle}
