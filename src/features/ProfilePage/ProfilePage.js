@@ -62,7 +62,6 @@ function ProfilePage() {
     { refetch: updateUserRefetch, isLoading: isLoadingUpdate, error },
   ] = useUpdateProfilUserMutation();
   const [deleteProfilUser] = useDeleteProfilUserMutation();
-  console.log('error', error);
   useEffect(() => {
     document.title = `Circle - Profil`;
   }, []);
