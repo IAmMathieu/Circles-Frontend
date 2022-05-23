@@ -8,6 +8,8 @@ import { Box } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleChange } from './dashboardSlice';
 import { Modal, Typography } from '@mui/material';
+import { snackbarHandle } from '../SnackbarGlobal/eventSlice';
+import { useState } from 'react';
 
 const style = {
   position: 'absolute',
@@ -26,31 +28,52 @@ const style = {
 };
 
 export default function ModaleJoinCircle({
-  open,
-  toggleJoin,
-  joinCircle,
-  refetch,
-  joinCircleError,
-  joinCircleSuccess,
+  openInvite,
+  toggleInvite,
+  inviteCircle,
+  unique_code,
 }) {
   const dispatch = useDispatch();
   const { token, user_id } = useSelector((state) => state.auth);
   const { circle_code } = useSelector((state) => state.dashboard);
+  const [emailInvite, setEmailInvite] = useState('');
   return (
     <div>
-      <Modal open={open} onClose={toggleJoin}>
+      <Modal open={openInvite} onClose={toggleInvite}>
         <Box
           sx={style}
           component='form'
           onSubmit={async (event) => {
             event.preventDefault();
-            await joinCircle({
-              token,
-              user_id,
-              circle_code,
-            });
-            refetch();
-            toggleJoin();
+            try {
+              await inviteCircle({
+                email: emailInvite,
+                token,
+                unique_code,
+              });
+              dispatch(
+                snackbarHandle({
+                  name: 'snackbarhandle',
+                  data: {
+                    open: true,
+                    success: true,
+                    message: "L'e-mail d'invitation a bien été envoyé.",
+                  },
+                })
+              );
+            } catch (error) {
+              dispatch(
+                snackbarHandle({
+                  name: 'snackbarhandle',
+                  data: {
+                    open: true,
+                    success: false,
+                    message: 'Une erreur est survenue.',
+                  },
+                })
+              );
+            }
+            toggleInvite();
           }}
         >
           <Typography
@@ -69,22 +92,14 @@ export default function ModaleJoinCircle({
             margin='dense'
             id='circle_code'
             label='Code du cercle'
-            error={joinCircleError}
             type='text'
             fullWidth
             variant='standard'
             InputLabelProps={{ style: { color: 'var(--maincolor-reverse)' } }}
-            onChange={(event) => {
-              dispatch(
-                handleChange({
-                  name: 'circle_code',
-                  payload: event.target.value,
-                })
-              );
-            }}
+            onChange={(e) => setEmailInvite(e.target.value)}
           />
           <DialogActions>
-            <Button onClick={toggleJoin}>Annuler</Button>
+            <Button onClick={toggleInvite}>Annuler</Button>
             <Button type='submit'>Inviter</Button>
           </DialogActions>
         </Box>

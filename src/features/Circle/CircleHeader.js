@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import EditIcon from '@mui/icons-material/Edit';
 import { handleChange } from './CircleSlice';
-export default function CircleHeader({ circleData, toggleModify }) {
+export default function CircleHeader({
+  circleData,
+  toggleModify,
+  toggleInvite,
+}) {
   const { token } = useSelector((state) => state.auth);
   const { circle_id, menu } = useSelector((state) => state.circle);
   const dispatch = useDispatch();
@@ -93,6 +97,7 @@ export default function CircleHeader({ circleData, toggleModify }) {
           </Typography>
         </Box>
         <IconButton
+          onClick={() => toggleInvite()}
           sx={{
             position: 'absolute',
             right: '1rem',

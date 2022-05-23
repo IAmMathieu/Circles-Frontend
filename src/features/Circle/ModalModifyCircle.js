@@ -237,65 +237,7 @@ export default function ModaleModifyCircle({
               Supprimer
             </Button>
           </DialogActions>
-          <Box
-            sx={{
-              position: 'absolute',
-              top: '1rem',
-              right: '1rem',
-            }}
-          >
-            <TextField
-              size='small'
-              label='Invitez dans le cercle'
-              onChange={(e) => setEmailInvite(e.target.value)}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position='end'>
-                    <IconButton
-                      type='submit'
-                      aria-label='search'
-                      onClick={async (event) => {
-                        event.preventDefault();
-                        try {
-                          await inviteCircle({
-                            email: emailInvite,
-                            token,
-                            unique_code,
-                          });
-                          dispatch(
-                            snackbarHandle({
-                              name: 'snackbarhandle',
-                              data: {
-                                open: true,
-                                success: true,
-                                message: 'Votre cercle a bien été modifié.',
-                              },
-                            })
-                          );
-                        } catch (error) {
-                          dispatch(
-                            snackbarHandle({
-                              name: 'snackbarhandle',
-                              data: {
-                                open: true,
-                                success: false,
-                                message: 'Une erreur est survenue.',
-                              },
-                            })
-                          );
-                        }
-                        circleRefetch();
-                        dashDataRefretch();
-                        toggleModify();
-                      }}
-                    >
-                      <DoneIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Box>
+
           {/* <Tooltip title='Code secret du cercle'>
             <IconButton
               sx={{
