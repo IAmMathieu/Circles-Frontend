@@ -69,13 +69,13 @@ const circleApi = emptySplitApi.injectEndpoints({
       },
     }),
     joinCircle: builder.mutation({
-      query: ({ token, user_id, circle_code }) => {
+      query: ({ token, user_id, unique_code }) => {
         return {
           url: `circle/new/${user_id}`,
           method: 'POST',
           contentType: 'application/json',
           body: new URLSearchParams({
-            unique_code: circle_code,
+            unique_code,
           }),
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -100,6 +100,23 @@ const circleApi = emptySplitApi.injectEndpoints({
         };
       },
     }),
+    inviteCircle: builder.mutation({
+      query: ({ unique_code, email, token }) => {
+        return {
+          url: `circle/invite`,
+          method: 'POST',
+          contentType: 'application/json',
+          body: new URLSearchParams({
+            unique_code,
+            email,
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
   }),
   overrideExisting: false,
 });
@@ -110,4 +127,5 @@ export const {
   useJoinCircleMutation,
   useDeleteCircleMutation,
   useModifyCircleMutation,
+  useInviteCircleMutation,
 } = circleApi;

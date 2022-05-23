@@ -27,29 +27,27 @@ export default function SimpleBottomNavigation({
       }}
     >
       <BottomNavigation className='h-full px-10' showLabels>
-
-          <BottomNavigationAction
-            label='Créer'
-            icon={<AddCircleIcon />}
-            onClick={() => {
-              handleClickOpenCreate();
-            }}
-          />
-          <BottomNavigationAction
+        <BottomNavigationAction
+          label='Créer'
+          icon={<AddCircleIcon />}
+          onClick={() => {
+            handleClickOpenCreate();
+          }}
+        />
+        {/* <BottomNavigationAction
             label='Rejoindre'
             icon={<GroupsIcon />}
             onClick={() => {
               handleClickOpenJoin();
             }}
-          />
-           <BottomNavigationAction
-            label='Découvrir'
-            icon={<SearchIcon />}
-            onClick={() => {
-              handleClickOpenJoin();
-            }}
-          />
-         
+          /> */}
+        <BottomNavigationAction
+          label='Découvrir'
+          icon={<SearchIcon />}
+          onClick={() => {
+            handleClickOpenJoin();
+          }}
+        />
       </BottomNavigation>
     </Box>
   );

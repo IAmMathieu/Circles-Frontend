@@ -16,6 +16,8 @@ const initialState = {
   user_id: '',
   oldPassword: '',
   error: '',
+  circleCode: '',
+  userExist: false,
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 // Tranche de state (le "slice)")
@@ -64,6 +66,8 @@ export const authSlice = createSlice({
       state.lastname = '';
       state.surname = '';
       state.password = '';
+      state.circleCode = '';
+      state.userExist = false;
     },
   },
 });

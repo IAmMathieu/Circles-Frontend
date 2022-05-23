@@ -38,6 +38,7 @@ const Chat = ({
   const [messagesWrite, setMessagesWrite] = useState('');
   // Les messages sur lesquels on map, on alloue les donnée des messages en premier state
   const [messageToMap, setMessageToMap] = useState(circleData?.messages);
+  console.log(`🚀 ~ messageToMap`, messageToMap);
 
   const handleEnterPress = (e) => {
     if (e.key === 'Enter') {
@@ -90,6 +91,7 @@ const Chat = ({
     //   setMessageToMap([ioData && ioData]);
     // }
     if (ioData && ioData !== '') {
+      console.log(`🚀 ~ ioData`, ioData);
       messageToMap
         ? setMessageToMap([...messageToMap, ioData])
         : setMessageToMap([ioData && ioData]);
@@ -235,7 +237,7 @@ const Chat = ({
                         borderRadius: '5px',
                       }}
                     >
-                      <BotMessage key={message + i} text={message.text} />
+                      <BotMessage key={message + i} text={message.img_url} />
                     </Box>
                   );
                 }
@@ -244,7 +246,7 @@ const Chat = ({
                   /*  Si autre personne */
                   return (
                     <OtherAnswer
-                      key={message + i}
+                      key={message + i + 'bot'}
                       surname={message.surname}
                       time={message.time}
                       text={message.text}
