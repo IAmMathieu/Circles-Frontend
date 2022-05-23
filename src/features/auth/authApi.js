@@ -99,6 +99,23 @@ const extendedApi = emptySplitApi.injectEndpoints({
         };
       },
     }),
+    resetPassword: builder.mutation({
+      /**
+       * Query for reset password
+       * @param {*} param0
+       * @returns
+       */
+       query: ({ email }) => {
+        return {
+          url: 'reset-password',
+          method: 'POST',
+          body: new URLSearchParams({
+            email: email,
+          }),
+          header: 'Content-Type: application/x-www-form-urlencoded',
+        };
+      },
+    }),
     inviteByEmail: builder.mutation({
       /**
        * Query for login user. Take the email and password on parameter, and send it to the server.
@@ -121,4 +138,5 @@ export const {
   useLoginUserMutation,
   useRegisterUserMutation,
   useActivateEmailQuery,
+  useResetPasswordMutation,
 } = extendedApi;

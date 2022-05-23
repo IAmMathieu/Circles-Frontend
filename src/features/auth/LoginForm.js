@@ -1,20 +1,25 @@
 import { Input } from '../Common/Input/Input';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './styles.scss';
 import './../../styles/variables.css';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { useLoginUserMutation, useRegisterUserMutation } from './authApi';
+import {
+  useLoginUserMutation,
+  useRegisterUserMutation,
+  useResetPasswordMutation,
+} from './authApi';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearList, handleChange } from '../../features/auth/authSlice';
 import { Loading } from '../Loading/Loading';
 import { useNavigate } from 'react-router';
-import { Typography } from '@mui/material';
+import { Link, Typography } from '@mui/material';
 import SnackBarAuth from './SnackBarAuth';
 import moment from 'moment-timezone';
 import { snackbarHandle } from '../SnackbarGlobal/eventSlice';
+import ModalResetPassword from './ModalResetPassword';
 export const LoginForm = () => {
   const dispatch = useDispatch();
   // Get email and password from the slice state auth
@@ -56,6 +61,15 @@ export const LoginForm = () => {
   /**
    * Add classlist to the container when click
    */
+
+  /**
+   * Opening of modal for reset password
+   */
+  const [openModal, setOpenModal] = useState(false);
+  const toggleModal = () => {
+    setOpenModal(!openModal);
+  };
+  const [resetPassword] = useResetPasswordMutation();
 
   const handleSwitch = () => {
     const container = document.getElementById('container');
@@ -238,9 +252,13 @@ export const LoginForm = () => {
               )}
             </div>
 
-            <a className='forgot_password' href='/'>
+            <Link
+              className='forgot_password'
+              onClick={toggleModal}
+              sx={{ cursor: 'pointer' }}
+            >
               Mot de passe oublié?
-            </a>
+            </Link>
             <button className='button' type={'submit'} variant='contained'>
               Se connecter
             </button>
@@ -292,6 +310,11 @@ export const LoginForm = () => {
         openSnacke={openSnacke}
         setOpenSnacke={setOpenSnacke}
         toggleSnacke={toggleSnacke}
+      />
+      <ModalResetPassword
+        openModal={openModal}
+        toggleModal={toggleModal}
+        resetPassword={resetPassword}
       />
     </>
   );

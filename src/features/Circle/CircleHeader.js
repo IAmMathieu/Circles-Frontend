@@ -54,7 +54,7 @@ export default function CircleHeader({ circleData, toggleModify }) {
             {circleData?.name}
           </Typography>
           <EditIcon
-            sx={{ fontSize: 'calc(1vw + 1vh + -)' }}
+            sx={{ fontSize: 'calc(1vw + 1vh + -)', cursor: 'pointer' }}
             onClick={() => {
               toggleModify();
             }}
@@ -77,6 +77,7 @@ export default function CircleHeader({ circleData, toggleModify }) {
             onClick={() => {
               dispatch(handleChange({ name: 'menu', payload: 'calendar' }));
             }}
+            sx={{cursor: 'pointer'}}
           >
             Calendrier
           </Typography>
@@ -87,6 +88,7 @@ export default function CircleHeader({ circleData, toggleModify }) {
             onClick={() => {
               dispatch(handleChange({ name: 'menu', payload: 'chat' }));
             }}
+            sx={{cursor: 'pointer'}}
           >
             Chat
           </Typography>
