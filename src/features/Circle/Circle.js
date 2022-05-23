@@ -145,6 +145,7 @@ export default function Circle() {
           user_id={user_id}
           circle_id={circle_id}
           circleIsLoading={circleIsLoading}
+          circleRefetch={circleRefetch}
         />
       )}
       <CircleBottomNavigation />

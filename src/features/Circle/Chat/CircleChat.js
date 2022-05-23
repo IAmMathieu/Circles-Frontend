@@ -20,7 +20,7 @@ import UserAnswer from './UserAnswer';
 import OtherAnswer from './OtherAnswer';
 import BotMessage from './BotMessage';
 import './style.scss';
-
+import moment from 'moment';
 const Chat = ({
   CircleIsSuccess,
   circleIsLoading,
@@ -28,6 +28,7 @@ const Chat = ({
   profilData,
   user_id,
   circle_id,
+  circleRefetch,
 }) => {
   const client = useRef();
   const chat = useRef();
@@ -49,7 +50,15 @@ const Chat = ({
   useEffect(() => {
     if (circleData && !allowMessage) {
       const messages = circleData.messages;
-      setMessageToMap(messages);
+      const arrayToSort = [...messages];
+
+      const messageFinal = arrayToSort.sort((a, b) =>
+        moment(a.time, 'YYYY-MM-DD HH:mm:ss').diff(
+          moment(b.time, 'YYYY-MM-DD HH:mm:ss')
+        )
+      );
+      console.log(`🚀 ~ messageFinal`, messageFinal);
+      setMessageToMap(messageFinal);
       setAllowMessage(true);
     }
   }, [circle_id, circleData]);
@@ -74,10 +83,16 @@ const Chat = ({
 
   useEffect(() => {
     // if (messageToMap) {
-    if (messageToMap) {
-      setMessageToMap([...messageToMap, ioData]);
-    } else {
-      setMessageToMap([ioData && ioData]);
+    // if (messageToMap) {
+    //   setMessageToMap([...messageToMap, ioData]);
+    // } else {
+    //   setMessageToMap([ioData && ioData]);
+    // }
+    if (ioData && ioData !== '') {
+      messageToMap
+        ? setMessageToMap([...messageToMap, ioData])
+        : setMessageToMap([ioData && ioData]);
+      setIoData('');
     }
     // chat.current.scroll(0, chat.current.getBoundingClientRect().height);
     // chat.current.scrollIntoView({ behavior: 'smooth' });
@@ -256,7 +271,11 @@ const Chat = ({
                   setMessagesWrite(event.target.value);
                 }}
                 onKeyPress={(e) => {
-                  if (e.key === 'Enter' && messagesWrite.length > 0) {
+                  if (
+                    e.key === 'Enter' &&
+                    messagesWrite.length > 0 &&
+                    messagesWrite
+                  ) {
                     client.current.emit('chatMessage', messagesWrite);
                     setMessagesWrite('');
                   }
@@ -270,6 +289,7 @@ const Chat = ({
                         onClick={() => {
                           client.current.emit('chatMessage', messagesWrite);
                           setMessagesWrite('');
+                          // circleRefetch();
                         }}
                       >
                         <SendIcon />
