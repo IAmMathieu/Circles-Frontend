@@ -1,10 +1,13 @@
+// MUI Components
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import ListItemText from '@mui/material/ListItemText';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-function MiniDrawerDarkMode({ open, setTheme, theme }) {
+
+
+export default function MiniDrawerDarkMode({ open, setTheme, theme }) {
   return (
     <ListItem key={'Darmode'} disablePadding sx={{ display: 'block' }}>
       <ListItemButton
@@ -35,4 +38,3 @@ function MiniDrawerDarkMode({ open, setTheme, theme }) {
   );
 }
 
-export default MiniDrawerDarkMode;

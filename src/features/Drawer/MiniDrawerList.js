@@ -1,15 +1,23 @@
-import ListItem from '@mui/material/ListItem';
-import Tooltip from '@mui/material/Tooltip';
-import { NavLink } from 'react-router-dom';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import { Avatar, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { changeCircle } from '../Circle/CircleSlice';
 
-function MiniDrawerList({
+// MUI Components
+import ListItem from '@mui/material/ListItem';
+import Tooltip from '@mui/material/Tooltip';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import { Avatar, Typography } from '@mui/material';
+
+// MUI Icons
+import HomeIcon from '@mui/icons-material/Home';
+import HelpIcon from '@mui/icons-material/Help';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import LogoutIcon from '@mui/icons-material/Logout';
+import CancelIcon from '@mui/icons-material/Cancel';
+
+export default function MiniDrawerList({
   name,
   desc,
   circle_id,
@@ -32,6 +40,24 @@ function MiniDrawerList({
     }
   };
 
+  let compIcon = '';
+  switch (icon) {
+    case 'Home':
+      compIcon = <HomeIcon />;
+      break;
+    case 'FAQ':
+      compIcon = <HelpIcon />;
+      break;
+    case 'Contact':
+      compIcon = <QuestionAnswerIcon />;
+      break;
+    case 'Disconnect':
+      compIcon = <LogoutIcon />;
+      break;
+    default:
+      compIcon = <CancelIcon />;
+  }
+
   return (
     <ListItem
       key={name}
@@ -43,13 +69,6 @@ function MiniDrawerList({
         title={<Typography fontSize='1rem'>{name}</Typography>}
         placement='right'
       >
-        {/* <NavLink
-          to={url}
-          
-          className={({ isActive }) =>
-            isActive ? 'nav-active' : 'nav-inactive'
-          }
-        > */}
         <ListItemButton
           sx={{
             minHeight: 48,
@@ -75,9 +94,17 @@ function MiniDrawerList({
                 src={img_url}
               />
             ) : icon ? (
-              <i
-                className={`${icon} MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root`}
-              ></i>
+              <ListItemIcon
+                sx={{
+                  width: '1.5rem',
+                  height: '1.5rem',
+                  mr: 0,
+                    // justifyContent: open ? 0 : 'center',
+
+                }}
+              >
+                {compIcon}
+              </ListItemIcon>
             ) : (
               ''
             )}
@@ -89,5 +116,3 @@ function MiniDrawerList({
     </ListItem>
   );
 }
-
-export default MiniDrawerList;
