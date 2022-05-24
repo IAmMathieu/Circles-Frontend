@@ -1,46 +1,80 @@
-# Getting Started with Create React App and Redux
+# Circles
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+Circles est un réseau de communication entre différents membres d’un cercle de connaissances. Cela peut être un cercle au sein d’une famille, d’amis, de collègues ou d’amateurs partageant une même passion.
 
-## Available Scripts
+## Stack
 
-In the project directory, you can run:
+Ce projet a pu être construit grâce aux technologies suivantes :
 
-### `npm start`
+```
+React
+Redux ToolKit (Queries)
+ESlint
+Socket IO
+Express
+Node.js
+PostgreSQL
+Sqitch
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Ont aussi été incorporées les librairies suivantes :
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+Tailwind
+MUI
+Intro.js
+Big Calendar
+Moment
+Joi
+Sanitize HTML
+Bcrypt
+JSONWebToken
+NodeMailer
+PG
+RandomString
+DotEnv
+Cors
+APIDoc
+```
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Pour faire tourner l'application en local :
 
-### `npm run build`
+1 - Installer les dépendances :
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`yarn`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2 - Lancer le script :
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`yarn start`
 
-### `npm run eject`
+## Problèmes connus
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Le refactoring est à retravailler. La performance pourrait sans doute être améliorée.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Features à venir
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Plein ! L'avantage, mais aussi l'inconvénient, de Circles est d'être très évolutif selon les idées. Nous pouvons lister :
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- la possibilité d'uploader ses propres photos pour illustrer ses cercles et pour la photo de profil,
 
-## Learn More
+- to-do list (qui peut servir de liste de courses, de gestion de cadeau d'anniversaire etc.),
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- un système de bloc-notes,
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- un album photo par cercle,
+
+- un système de drag and drop pour que l'admin du cercle puisse choisir exactement les modules dont il a besoin pour son réseau (cela vaut aussi pour le dashboard),
+
+- typing sur le chat,
+
+- un doodle,
+
+- un système de gestion des finances (cadeau commun)
+
+## Démo
+
+[Lien vers surge](https://ocircles.surge.sh/)
+
+[Documentation](https://cerclesdoc.herokuapp.com/)
