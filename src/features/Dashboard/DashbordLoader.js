@@ -1,8 +1,8 @@
-import * as React from 'react';
 import PropTypes from 'prop-types';
 import LinearProgress from '@mui/material/LinearProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { useEffect, useState } from 'react';
 
 function DashbordLoader(props) {
   return (
@@ -28,9 +28,9 @@ DashbordLoader.propTypes = {
 };
 
 export default function LinearWithValueLabel({ text, time }) {
-  const [progress, setProgress] = React.useState(10);
+  const [progress, setProgress] = useState(10);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timer = setInterval(() => {
       setProgress((prevProgress) =>
         prevProgress >= 100 ? 10 : prevProgress + 10

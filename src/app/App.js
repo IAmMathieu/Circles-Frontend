@@ -9,7 +9,7 @@ import {
   MuiThemeDark,
 } from '../features/Common/MUITheme/muiTheme';
 import { getStorage } from '../utils/helperLocalStorage';
-import { PrivateRoute } from '../features/PrivateRoute/PrivateRoute';
+import { PrivateRoute } from '../features/Common/PrivateRoute/PrivateRoute';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleToken } from '../features/auth/authSlice';
@@ -21,7 +21,7 @@ import { CssBaseline } from '@mui/material';
 import Circle from '../features/Circle/Circle';
 import { Activate } from '../features/Activate/Activate';
 import { ErrorPage } from './../features/404/404';
-import { SnackbarGlobal } from '../features/SnackbarGlobal/SnackbarGlobal';
+import { SnackbarGlobal } from '../features/Common/SnackbarGlobal/SnackbarGlobal';
 import ResetPassword from '../features/auth/ResetPassword';
 import { Login } from '../features/auth/Login';
 import { InviteDashboard } from '../features/InviteDashboardPage/InviteDashboardPage';

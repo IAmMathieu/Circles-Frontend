@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { styled, makeStyles } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -9,7 +9,6 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { removeStorage } from '../../utils/helperLocalStorage';
 import { handleToken } from '../auth/authSlice';
-import { useNavigate } from 'react-router';
 import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
 import MiniDrawerList from './MiniDrawerList';
 import logo from './../../logo.svg';
@@ -106,11 +105,10 @@ export default function MiniDrawer({
   const closeDrawer = () => {
     setOpen(false);
   };
-  const { surname, logged, token, user_id, portrait_url } = useSelector(
+  const { token, user_id } = useSelector(
     (state) => state.auth
   );
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   // const theme = useTheme();
 
   const { data: circlesData } = useGetUserDashBoardQuery(

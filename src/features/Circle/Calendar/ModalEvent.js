@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import moment from 'moment-timezone';
 import {
@@ -10,7 +10,6 @@ import {
   DialogActions,
   FormControlLabel,
   FormGroup,
-  IconButton,
   Stack,
   Switch,
   TextField,
@@ -18,19 +17,17 @@ import {
 import {
   DatePicker,
   DateTimePicker,
-  DesktopDateTimePicker,
   LocalizationProvider,
 } from '@mui/x-date-pickers';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { MobileDateTimePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { handleChange } from './CalendarSlice';
 import { useParams } from 'react-router';
 import { useGetUserDashBoardQuery } from '../../Dashboard/DashboardApi';
-import { snackbarHandle } from '../../SnackbarGlobal/eventSlice';
+import { snackbarHandle } from '../../Common/SnackbarGlobal/eventSlice';
 
 const style = {
   position: 'absolute',
@@ -65,16 +62,10 @@ export default function ModalEvent({
   const { circle_id } = useParams();
   const [valid, setValid] = useState(false);
 
-  const openValid = () => {
-    setValid(true);
-  };
+
   const closeValid = () => {
     setValid(false);
   };
-  const [startDate, setStartDate] = useState(
-    new Date('2018-01-01 00:00:00.000Z')
-  );
-  const [endDate, setEndDate] = useState(new Date('2018-01-01 00:00:00.000Z'));
 
   const [skip, setSkip] = useState(true);
   const { refetch: dashDataRefretch } = useGetUserDashBoardQuery(
@@ -214,6 +205,7 @@ export default function ModalEvent({
               <DeleteIcon
                 onClick={() => setValid(true)}
                 color='error'
+                cursor='pointer'
                 sx={{ position: 'absolute', top: '2rem', right: '2rem' }}
               />
             )}

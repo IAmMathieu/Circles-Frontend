@@ -7,7 +7,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Box, Modal, styled, Typography } from '@mui/material';
 import { handleChange } from './dashboardSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { snackbarHandle } from '../SnackbarGlobal/eventSlice';
+import { snackbarHandle } from '../Common/SnackbarGlobal/eventSlice';
 
 const style = {
   position: 'absolute',

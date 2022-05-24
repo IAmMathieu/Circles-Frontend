@@ -8,7 +8,7 @@ import { Box } from '@mui/system';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleChange } from './dashboardSlice';
 import { Modal, Typography } from '@mui/material';
-import { snackbarHandle } from '../SnackbarGlobal/eventSlice';
+import { snackbarHandle } from '../Common/SnackbarGlobal/eventSlice';
 import { useState } from 'react';
 
 const style = {

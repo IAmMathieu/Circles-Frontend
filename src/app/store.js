@@ -4,7 +4,7 @@ import authReducer from '../features/auth/authSlice';
 import dashboardReducer from '../features/Dashboard/dashboardSlice';
 import circleReducer from '../features/Circle/CircleSlice';
 import calendarReducer from '../features/Circle/Calendar/CalendarSlice';
-import eventReducer from '../features/SnackbarGlobal/eventSlice';
+import eventReducer from '../features/Common/SnackbarGlobal/eventSlice';
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice

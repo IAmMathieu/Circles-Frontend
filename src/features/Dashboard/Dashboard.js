@@ -1,24 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
-import { useSelector } from 'react-redux';
-import {
-  useCreateCircleMutation,
-  useJoinCircleMutation,
-} from '../Circle/CircleApi';
-import SimpleBottomNavigation from '../Common/BottomNavigation/SimpleBottomNavigation';
+import { useCreateCircleMutation } from '../Circle/CircleApi';
+import SimpleBottomNavigation from './SimpleBottomNavigation';
 import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
 import ModaleCreateCircle from './ModaleCreateCircle';
 import Card from './Card';
 import DashbordLoader from './DashbordLoader';
-import ModaleJoinCircle from './ModaleJoinCircle';
 import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
 import { useLocalstorageState } from 'rooks';
 import { Link } from 'react-router-dom';
+
 export const Dashboard = () => {
-  // const { token, user_id, portrait_url } = useSelector((state) => state.auth);
-  const { name, description, color, img_url } = useSelector(
-    (state) => state.dashboard
-  );
   const [token, setToken] = useLocalstorageState('token', 0);
   const [user_id, setUserId] = useLocalstorageState('user_id', 0);
   const {
@@ -43,15 +35,6 @@ export const Dashboard = () => {
       isSuccess: createCircleSuccess,
     },
   ] = useCreateCircleMutation();
-
-  const [
-    joinCircle,
-    {
-      data: dataJoinCircle,
-      isError: joinCircleError,
-      isSuccess: joinCircleSuccess,
-    },
-  ] = useJoinCircleMutation();
 
   const toggleCreate = () => {
     setOpenCreate(!openCreate);
@@ -124,22 +107,6 @@ export const Dashboard = () => {
           toggleCreate={toggleCreate}
           createCircleError={createCircleError}
         />
-        {/* <ModaleJoinCircle
-          refetch={refetch}
-          joinCircle={joinCircle}
-          joinCircleSuccess={joinCircleSuccess}
-          open={openJoin}
-          toggleJoin={toggleJoin}
-          joinCircleError={joinCircleError}
-        /> */}
-        {/* <CustomizedSnackbars
-          dataCreateCircle={dataCreateCircle}
-          openSnack={openSnack}
-          setOpenSnack={setOpenSnack}
-          severity='success'
-          isSuccess={createCircleSuccess}
-          message={''}
-        /> */}
       </>
     );
   }
