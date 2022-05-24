@@ -1,9 +1,10 @@
+
+# Circles
+<p>&nbsp;</p>
 <p align="center">
   <img src="./fullLogoLight.png" />
 </p>
-
-# Circles
-
+<p>&nbsp;</p>
 Circles est un réseau de communication entre différents membres d’un cercle de connaissances. Cela peut être un cercle au sein d’une famille, d’amis, de collègues ou d’amateurs partageant une même passion.
 
 <p>&nbsp;</p>
