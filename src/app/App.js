@@ -175,7 +175,7 @@ const App = () => {
             await updateProfilUser({
               token,
               user_id,
-              firstconnect: 'true',
+              firstconnect: true,
               birthdate: '',
             });
           }

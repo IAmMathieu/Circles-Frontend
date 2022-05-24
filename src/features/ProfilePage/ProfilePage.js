@@ -130,12 +130,23 @@ function ProfilePage() {
               <FormControlLabel
                 control={
                   <Checkbox
-                    defaultChecked={data?.firstconnect === false ? true : false}
+                    defaultChecked={
+                      data?.firstconnect === false ||
+                      data?.firstcircle === false
+                        ? true
+                        : false
+                    }
                     onChange={(event) => {
                       dispatch(
                         handleChange({
                           name: 'firstconnect',
-                          payload: !event.target.checked,
+                          payload: event.target.checked ? false : true,
+                        })
+                      );
+                      dispatch(
+                        handleChange({
+                          name: 'firstcircle',
+                          payload: event.target.checked ? false : true,
                         })
                       );
                     }}
@@ -144,6 +155,7 @@ function ProfilePage() {
                 label='Infobulles'
               />
             </FormGroup>
+
             <Typography
               component='h2'
               sx={{

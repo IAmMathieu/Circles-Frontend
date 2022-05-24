@@ -38,6 +38,7 @@ const profilApi = emptySplitApi.injectEndpoints({
         newpassword,
         img_url,
         firstconnect,
+        firstcircle,
       }) => {
         return {
           url: `profil/${user_id}`,
@@ -52,6 +53,7 @@ const profilApi = emptySplitApi.injectEndpoints({
             birthdate,
             img_url,
             firstconnect,
+            firstcircle,
           }),
           headers: { Authorization: `Bearer ${token}` },
         };
