@@ -1,6 +1,5 @@
 import ListItem from '@mui/material/ListItem';
 import Tooltip from '@mui/material/Tooltip';
-import { NavLink } from 'react-router-dom';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -43,14 +42,8 @@ function MiniDrawerList({
         title={<Typography fontSize='1rem'>{name}</Typography>}
         placement='right'
       >
-        {/* <NavLink
-          to={url}
-          
-          className={({ isActive }) =>
-            isActive ? 'nav-active' : 'nav-inactive'
-          }
-        > */}
         <ListItemButton
+        aria-label='List of circles'
           sx={{
             minHeight: 48,
             justifyContent: open ? 'initial' : 'center',
@@ -62,6 +55,7 @@ function MiniDrawerList({
           }}
         >
           <ListItemIcon
+          alt='Circles icon'
             sx={{
               minWidth: 0,
               mr: open ? 3 : 'auto',
