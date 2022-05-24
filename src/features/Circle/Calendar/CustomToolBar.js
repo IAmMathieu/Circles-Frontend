@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { Navigate as navigate } from 'react-big-calendar';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 function ViewNamesGroup({ views: viewNames, view, messages, onView }) {
   return viewNames.map((name) => (
@@ -51,10 +53,8 @@ export default function CustomToolbar({
             border:'none'
           }}
         >
-          <i className="fa fa-fw fa-chevron-left"
-          style={{
-            fontSize:'2rem'
-          }}></i>
+
+          <ChevronLeftIcon sx={{fontSize: '2rem'}}/>
         </button>
 
         <span className="rbc-toolbar-label" style={{
@@ -70,10 +70,7 @@ export default function CustomToolbar({
             border:'none',
           }}
         >
-          <i className="fa fa-fw fa-chevron-right"
-          style={{
-            fontSize:'2rem'
-          }}></i>
+          <ChevronRightIcon sx={{fontSize: '2rem'}}/>
         </button>
       </span>
     </div>
