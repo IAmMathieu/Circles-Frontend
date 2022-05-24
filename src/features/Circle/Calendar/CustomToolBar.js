@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
 import { Navigate as navigate } from 'react-big-calendar';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 function ViewNamesGroup({ views: viewNames, view, messages, onView }) {
   return viewNames.map((name) => (
@@ -51,10 +52,12 @@ export default function CustomToolbar({
             border:'none'
           }}
         >
-          <i className="fa fa-fw fa-chevron-left"
+
+          <ArrowBackIosNewIcon/>
+          {/* <i className="fa fa-fw fa-chevron-left"
           style={{
             fontSize:'2rem'
-          }}></i>
+          }}></i> */}
         </button>
 
         <span className="rbc-toolbar-label" style={{
