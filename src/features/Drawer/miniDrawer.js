@@ -140,6 +140,7 @@ export default function MiniDrawer({
     <Box className='test' sx={{ display: 'flex' }}>
       <CssBaseline />
       <IconButton
+      aria-label='Open drawer'
         className='z-10 drop-shadow-md'
         sx={{ position: 'fixed', left: '1rem', top: '1rem', boxShadow: 3 }}
         onClick={handleToggleOpen}
@@ -156,7 +157,7 @@ export default function MiniDrawer({
         onClose={closeDrawer}
       >
         <DrawerHeader>
-          <IconButton onClick={handleToggleOpen}>
+          <IconButton aria-label='Close drawer' onClick={handleToggleOpen}>
             {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
@@ -174,7 +175,7 @@ export default function MiniDrawer({
         <List>
           <ListItemButton onClick={handleClickOnCircleSubMenu}>
             <ListItemIcon>
-              <Avatar src={logo} sx={{width:'1.5rem', height: '1.5rem'}}/>
+              <Avatar alt='Circles logo' src={logo} sx={{width:'1.5rem', height: '1.5rem'}}/>
             </ListItemIcon>
             <ListItemText primary='Mes cercles' />
             {openCircleSubMenu ? <ExpandLess /> : <ExpandMore />}

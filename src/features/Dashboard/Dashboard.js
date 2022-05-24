@@ -63,7 +63,7 @@ export const Dashboard = () => {
             <img
               className='absolute left-1/2 transform -translate-x-1/2 w-24 h-24 custom-bk:w-52 custom-bk:h-52 rounded-full z-10 top-5 custom-bk:top-14 custom-bk:left-1/4 cursor-pointer'
               src={userData?.img_url}
-              alt=''
+              alt='Avatar user'
             />
           </Link>
           <Box className='card__container bg-darkysubg mb-3 h-[90%] w-full rounded-lg custom-bk:ml-[15vh] p-5 custom-bk:p-10 shadow-2xl darkMode:shadow-none max-w-[2000px]'>
