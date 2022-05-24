@@ -1,59 +1,70 @@
+<p align="center">
+  <img src="./fullLogoLight.png" />
+</p>
+
 # Circles
 
 Circles est un réseau de communication entre différents membres d’un cercle de connaissances. Cela peut être un cercle au sein d’une famille, d’amis, de collègues ou d’amateurs partageant une même passion.
 
-## Stack
+<p>&nbsp;</p>
+
+# Stack
 
 Ce projet a pu être construit grâce aux technologies suivantes :
 
-```
-React
-Redux ToolKit (Queries)
-ESlint
-Socket IO
-Express
-Node.js
-PostgreSQL
-Sqitch
-```
+[React](https://fr.reactjs.org/) |
+[Redux ToolKit (Query)](https://redux-toolkit.js.org/rtk-query/overview) |
+[ESlint](https://github.com/eslint/eslint) |
+[Socket IO](https://socket.io/fr/) |
+[Express](https://expressjs.com/fr/) |
+[Node.js](https://nodejs.org/en/) |
+[PostgreSQL](https://www.postgresql.org/) |
+[Sqitch](https://sqitch.org/) |
+[Git Flow](https://github.com/petervanderdoes/gitflow-avh)
 
 Ont aussi été incorporées les librairies suivantes :
 
-```
-Tailwind
-MUI
-Intro.js
-Big Calendar
-Moment
-Joi
-Sanitize HTML
-Bcrypt
-JSONWebToken
-NodeMailer
-PG
-RandomString
-DotEnv
-Cors
-APIDoc
-```
+[Tailwind](https://tailwindcss.com/) |
+[MUI](https://mui.com/) |
+[Intro.js](https://introjs.com/) |
+[Big Calendar](http://jquense.github.io/react-big-calendar/examples) |
+[Moment](https://momentjs.com/) |
+[Joi](https://joi.dev/) |
+[Sanitize HTML](https://www.npmjs.com/package/sanitize-html) |
+[Bcrypt](https://www.npmjs.com/package/bcrypt) |
+[JSONWebToken](https://jwt.io/) |
+[NodeMailer](https://nodemailer.com/about/) |
+[RandomString](https://www.npmjs.com/package/randomstring) |
+[DotEnv](https://www.npmjs.com/package/dotenv) |
+[Cors](https://www.npmjs.com/package/cors) |
+[APIDoc](https://apidocjs.com/)
 
-## Installation
+<p>&nbsp;</p>
+
+# Installation
 
 Pour faire tourner l'application en local :
 
 1 - Installer les dépendances :
 
-`yarn`
+```
+yarn
+```
 
 2 - Lancer le script :
 
-`yarn start`
+```
+yarn start
+```
 
-## Problèmes connus
+<p>&nbsp;</p>
+
+# Problèmes connus
 
 Le refactoring est à retravailler. La performance pourrait sans doute être améliorée.
+<p>&nbsp;</p>
 
-## Features à venir
+# Features à venir
 
 Plein ! L'avantage, mais aussi l'inconvénient, de Circles est d'être très évolutif selon les idées. Nous pouvons lister :
 
@@ -72,8 +83,9 @@ Plein ! L'avantage, mais aussi l'inconvénient, de Circles est d'être très év
 - un doodle,
 
 - un système de gestion des finances (cadeau commun)
+<p>&nbsp;</p>
 
-## Démo
+# Démo
 
 [Lien vers surge](https://ocircles.surge.sh/)
 
