@@ -206,7 +206,7 @@ export default function MiniDrawer({
             <MiniDrawerList
               id='menu_faq'
               name='FAQ'
-              icon={'fa-solid fa-circle-question'}
+              icon={'FAQ'}
               url='/faq'
               open={open}
               handleToggleOpen={closeDrawer}
@@ -215,8 +215,8 @@ export default function MiniDrawer({
           <Box id='menu_contact'>
             <MiniDrawerList
               name='Contact'
-              icon={'fa-solid fa-comments'}
               url='/contact'
+              icon={'Contact'}
               open={open}
               handleToggleOpen={closeDrawer}
             />
@@ -238,7 +238,7 @@ export default function MiniDrawer({
           <Box id='menu_disconnect'>
             <MiniDrawerList
               name='Se déconnecter'
-              icon={'fa-solid fa-arrow-right-from-bracket'}
+              icon={'Disconnect'}
               url='/'
               open={open}
               handleToggleOpen={closeDrawer}
