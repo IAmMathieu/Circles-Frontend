@@ -11,9 +11,12 @@ import {
   useUpdateProfilUserMutation,
   useDeleteProfilUserMutation,
 } from './ProfilApi';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import { Loading } from '../Common/Loading/Loading';
 import { removeStorage } from '../../utils/helperLocalStorage';
-import { handleToken, clearList } from '../auth/authSlice';
+import { handleToken, clearList, handleChange } from '../auth/authSlice';
 
 //! MUI
 import Box from '@mui/material/Box';
@@ -123,6 +126,36 @@ function ProfilePage() {
               },
             }}
           >
+            <FormGroup sx={{ position: 'relative', left: '1rem', top: '1rem' }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    defaultChecked={
+                      data?.firstconnect === false ||
+                      data?.firstcircle === false
+                        ? true
+                        : false
+                    }
+                    onChange={(event) => {
+                      dispatch(
+                        handleChange({
+                          name: 'firstconnect',
+                          payload: event.target.checked ? false : true,
+                        })
+                      );
+                      dispatch(
+                        handleChange({
+                          name: 'firstcircle',
+                          payload: event.target.checked ? false : true,
+                        })
+                      );
+                    }}
+                  />
+                }
+                label='Infobulles'
+              />
+            </FormGroup>
+
             <Typography
               component='h2'
               sx={{

@@ -45,6 +45,7 @@ export default function CircleHeader({
         }}
       >
         <Box
+          id='begin_circle'
           sx={{
             position: 'absolute',
             top: '50%',
@@ -66,6 +67,7 @@ export default function CircleHeader({
           />
         </Box>
         <Box
+          id='circle_chat_button'
           sx={{
             display: { xs: 'none', md: 'flex' },
             position: 'absolute',
@@ -82,7 +84,7 @@ export default function CircleHeader({
             onClick={() => {
               dispatch(handleChange({ name: 'menu', payload: 'calendar' }));
             }}
-            sx={{cursor: 'pointer'}}
+            sx={{ cursor: 'pointer' }}
           >
             Calendrier
           </Typography>
@@ -93,13 +95,14 @@ export default function CircleHeader({
             onClick={() => {
               dispatch(handleChange({ name: 'menu', payload: 'chat' }));
             }}
-            sx={{cursor: 'pointer'}}
+            sx={{ cursor: 'pointer' }}
           >
             Chat
           </Typography>
         </Box>
         <IconButton
-        aria-label='invite button'
+          id='invite_circle'
+          aria-label='invite button'
           onClick={() => toggleInvite()}
           sx={{
             position: 'absolute',

@@ -18,6 +18,8 @@ const initialState = {
   error: '',
   circleCode: '',
   userExist: false,
+  firstconnect: false,
+  firstcircle: false,
 };
 // Crée automatiquement des actions avec le TODO_FUNCTION
 // Tranche de state (le "slice)")

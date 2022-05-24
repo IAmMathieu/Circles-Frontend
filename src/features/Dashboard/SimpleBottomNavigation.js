@@ -28,6 +28,7 @@ export default function SimpleBottomNavigation({
     >
       <BottomNavigation className='h-full px-10' showLabels>
         <BottomNavigationAction
+          id='circlecreate'
           label='Créer'
           icon={<AddCircleIcon />}
           onClick={() => {
