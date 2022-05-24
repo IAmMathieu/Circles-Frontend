@@ -109,9 +109,7 @@ export default function MiniDrawer({
   const closeDrawer = () => {
     setOpen(false);
   };
-  const { token, user_id } = useSelector(
-    (state) => state.auth
-  );
+  const { token, user_id } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   // const theme = useTheme();
 
@@ -140,7 +138,7 @@ export default function MiniDrawer({
     <Box className='test' sx={{ display: 'flex' }}>
       <CssBaseline />
       <IconButton
-      aria-label='Open drawer'
+        aria-label='Open drawer'
         className='z-10 drop-shadow-md'
         sx={{ position: 'fixed', left: '1rem', top: '1rem', boxShadow: 3 }}
         onClick={handleToggleOpen}
@@ -149,6 +147,7 @@ export default function MiniDrawer({
       </IconButton>
 
       <Drawer
+        id='menu'
         className={`Drawer__ui--custom ${
           open && 'Drawer__ui--open'
         } bg-buttonbg`}
@@ -162,7 +161,7 @@ export default function MiniDrawer({
           </IconButton>
         </DrawerHeader>
 
-        <List>
+        <List id='menu_dashboard'>
           <MiniDrawerList
             name='Dashboard'
             icon={'Home'}
@@ -173,9 +172,16 @@ export default function MiniDrawer({
         </List>
         <Divider variant='middle' />
         <List>
-          <ListItemButton onClick={handleClickOnCircleSubMenu}>
+          <ListItemButton
+            onClick={handleClickOnCircleSubMenu}
+            id='menu_circles'
+          >
             <ListItemIcon>
-              <Avatar alt='Circles logo' src={logo} sx={{width:'1.5rem', height: '1.5rem'}}/>
+              <Avatar
+                alt='Circles logo'
+                src={logo}
+                sx={{ width: '1.5rem', height: '1.5rem' }}
+              />
             </ListItemIcon>
             <ListItemText primary='Mes cercles' />
             {openCircleSubMenu ? <ExpandLess /> : <ExpandMore />}
@@ -196,38 +202,49 @@ export default function MiniDrawer({
         </List>
         <Divider variant='middle' />
         <List className='mt-auto'>
-          <MiniDrawerList
-            name='FAQ'
-            icon={'FAQ'}
-            url='/faq'
-            open={open}
-            handleToggleOpen={closeDrawer}
-          />
-          <MiniDrawerList
-            name='Contact'
-            icon={'Contact'}
-            url='/contact'
-            open={open}
-            handleToggleOpen={closeDrawer}
-          />
-          <MiniDrawerList
-            name='Mon compte'
-            img_url={userData?.img_url}
-            url='/profil'
-            open={open}
-            handleToggleOpen={closeDrawer}
-          />
+          <Box id='menu_faq'>
+            <MiniDrawerList
+              id='menu_faq'
+              name='FAQ'
+              icon={'fa-solid fa-circle-question'}
+              url='/faq'
+              open={open}
+              handleToggleOpen={closeDrawer}
+            />
+          </Box>
+          <Box id='menu_contact'>
+            <MiniDrawerList
+              name='Contact'
+              icon={'fa-solid fa-comments'}
+              url='/contact'
+              open={open}
+              handleToggleOpen={closeDrawer}
+            />
+          </Box>
+          <Box id='menu_profil'>
+            <MiniDrawerList
+              name='Mon compte'
+              img_url={userData?.img_url}
+              url='/profil'
+              open={open}
+              handleToggleOpen={closeDrawer}
+            />
+          </Box>
           <Divider variant='middle' />
-          <MiniDrawerDarkMode setTheme={setTheme} theme={theme} open={open} />
+          <Box id='menu_darkmode'>
+            <MiniDrawerDarkMode setTheme={setTheme} theme={theme} open={open} />
+          </Box>
           <Divider variant='middle' />
-          <MiniDrawerList
-            name='Se déconnecter'
-            icon={'Disconnect'}
-            url='/'
-            open={open}
-            handleToggleOpen={closeDrawer}
-            click={disconnect}
-          />
+          <Box id='menu_disconnect'>
+            <MiniDrawerList
+              name='Se déconnecter'
+              icon={'fa-solid fa-arrow-right-from-bracket'}
+              url='/'
+              open={open}
+              handleToggleOpen={closeDrawer}
+              click={disconnect}
+            />
+          </Box>
           <ListItemButton disabled>
             <ListItemIcon />
             <ListItemText

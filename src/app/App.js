@@ -1,16 +1,16 @@
-import { Routes, Route, Navigate } from 'react-router';
+import { Routes, Route, Navigate, useNavigate } from 'react-router';
 import { Dashboard } from '../features/Dashboard/Dashboard';
 import './App.scss';
 import useLocalStorage from 'use-local-storage';
 import { ThemeProvider } from '@emotion/react';
-
+import 'intro.js/introjs.css';
 import {
   MuiThemeLight,
   MuiThemeDark,
 } from '../features/Common/MUITheme/muiTheme';
 import { getStorage } from '../utils/helperLocalStorage';
 import { PrivateRoute } from '../features/Common/PrivateRoute/PrivateRoute';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleToken } from '../features/auth/authSlice';
 import ProfilePage from '../features/ProfilePage/ProfilePage';
@@ -25,10 +25,14 @@ import { SnackbarGlobal } from '../features/Common/SnackbarGlobal/SnackbarGlobal
 import ResetPassword from '../features/auth/ResetPassword';
 import { Login } from '../features/auth/Login';
 import { InviteDashboard } from '../features/InviteDashboardPage/InviteDashboardPage';
+import { Steps } from 'intro.js-react';
+import { useUpdateProfilUserMutation } from '../features/ProfilePage/ProfilApi';
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const inputData = useSelector((state) => state.auth);
   /**
    * Use for open or close the left menu
    */
@@ -61,7 +65,10 @@ const App = () => {
     )
       dispatch(handleToken({ token, user_id }));
   }, []);
-
+  const [
+    updateProfilUser,
+    { refetch: updateUserRefetch, isLoading: isLoadingUpdate, error },
+  ] = useUpdateProfilUserMutation();
   // Get the theme based on the prefer color scheme of the user, and get it to the local storage
   const [theme, setTheme] = useLocalStorage(
     'theme',
@@ -73,8 +80,111 @@ const App = () => {
 
   const muiTheme = theme === 'light' ? MuiThemeLight : MuiThemeDark;
   document.body.dataset.theme = theme;
+  //! Introjs
+  const [enabled, setEnabled] = useState(false);
+  const [initialStep, setInitialStep] = useState(0);
+  const onExit = () => {
+    setEnabled(false);
+  };
+
+  const steps = [
+    {
+      element: '#begin',
+      intro: 'Bienvenue dans votre dashboard ! Ici vous trouverez vos Cercles.',
+      // intro:
+      //   'Bienvenue dans votre dashboard. Il fais vide ici, et si nous créions un Cercle?',
+    },
+    {
+      element: '#circlecreate',
+      intro: 'Vous pouvez créer un cercle ici.',
+    },
+    {
+      element: '#menu',
+      intro:
+        'Voici le menu, il vous permettra de mieux vous repérer et naviguer.',
+      position: 'right',
+    },
+    {
+      element: '#menu_dashboard',
+      intro: 'Ici vous retrouverez le boutton pour accéder au dashboard',
+      position: 'right',
+    },
+    {
+      element: '#menu_circles',
+      intro: 'Ici vous retrouverez tous vos cercles',
+      position: 'right',
+    },
+    {
+      element: '#menu_faq',
+      intro: 'La page FAQ, pour tout savoir sur notre app.',
+      position: 'right',
+    },
+    {
+      element: '#menu_contact',
+      intro: "La page pour nous contacter, c'est ici que ça se passe",
+      position: 'right',
+    },
+    {
+      element: '#menu_profil',
+      intro: 'Votre profil est disponible ici.',
+      position: 'right',
+    },
+
+    {
+      element: '#menu_darkmode',
+      intro: 'Le darkmode menu, selon vos préférences.',
+      position: 'right',
+    },
+    {
+      element: '#menu_disconnect',
+      intro: 'Le boutton de déconnection',
+      position: 'right',
+    },
+    {
+      element: '#profil_infobulles',
+      intro:
+        'A vous de jouez ! Vous pouvez réactiver les infobulles dans la page profil.',
+      position: 'left',
+    },
+  ];
+  //! -----------------
   return (
     <div className='App relative'>
+      <Steps
+        enabled={enabled}
+        steps={steps}
+        initialStep={initialStep}
+        onExit={onExit}
+        onBeforeChange={(change) => {
+          if (change === 5) {
+            navigate('/faq');
+          }
+          if (change === 6) {
+            navigate('/contact');
+          }
+          if (change === 7) {
+            navigate('/profil');
+          }
+
+          if (change === 8) {
+            navigate('/dashboard');
+          }
+        }}
+        onChange={async (change) => {
+          if (change === steps.length - 1) {
+            await updateProfilUser({
+              token,
+              user_id,
+              firstconnect: 'true',
+              birthdate: '',
+            });
+          }
+        }}
+        exitOnEsc
+        options={{
+          doneLabel: "Let's go!",
+        }}
+      />
       <ThemeProvider theme={muiTheme}>
         <CssBaseline />
         {tokenState && (
@@ -112,7 +222,7 @@ const App = () => {
             path='/dashboard'
             element={
               <PrivateRoute token={tokenState}>
-                <Dashboard />
+                <Dashboard setEnabled={setEnabled} />
               </PrivateRoute>
             }
           />
