@@ -1,17 +1,13 @@
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import DialogActions from '@mui/material/DialogActions';
-import { Box, IconButton, Modal, Tooltip, Typography } from '@mui/material';
+import { Box, Modal, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleChange } from './CircleSlice';
 import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
 import { useLocalstorageState } from 'rooks';
 import { useNavigate } from 'react-router';
 import { snackbarHandle } from '../Common/SnackbarGlobal/eventSlice';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import { InputAdornment } from '@mui/material';
-import DoneIcon from '@mui/icons-material/Done';
-import { useState } from 'react';
 
 const style = {
   position: 'absolute',
@@ -44,14 +40,15 @@ export default function ModaleModifyCircle({
   unique_code,
 }) {
   console.log(unique_code);
+  // eslint-disable-next-line no-unused-vars
   const [token, setToken] = useLocalstorageState('token', 0);
+  // eslint-disable-next-line no-unused-vars
   const [user_id, setUserId] = useLocalstorageState('user_id', 0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { circle_id, name, description, color, img_url } = useSelector(
     (state) => state.circle
   );
-  const [emailInvite, setEmailInvite] = useState('');
   const { refetch: dashDataRefretch } = useGetUserDashBoardQuery({
     token,
     user_id,
