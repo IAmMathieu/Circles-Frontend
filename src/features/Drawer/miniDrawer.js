@@ -1,17 +1,28 @@
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { removeStorage } from '../../utils/helperLocalStorage';
+import { handleToken } from '../auth/authSlice';
+import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
+import MiniDrawerList from './MiniDrawerList';
+import logo from './../../logo.svg';
+import './miniDrawer.scss';
+import MiniDrawerDarkMode from './MiniDrawerDarkMode';
+import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
+
+// MUI Components
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import IconButton from '@mui/material/IconButton';
+
+// MUI Icons
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { removeStorage } from '../../utils/helperLocalStorage';
-import { handleToken } from '../auth/authSlice';
-import { useGetUserDashBoardQuery } from '../Dashboard/DashboardApi';
-import MiniDrawerList from './MiniDrawerList';
-import logo from './../../logo.svg';
+import MenuIcon from '@mui/icons-material/Menu';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 import {
   Avatar,
   Collapse,
@@ -20,13 +31,6 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
-import './miniDrawer.scss';
-import MiniDrawerDarkMode from './MiniDrawerDarkMode';
-import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
-import MenuIcon from '@mui/icons-material/Menu';
-import { useEffect, useState } from 'react';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
 
 const drawerWidth = 240;
 
@@ -160,7 +164,7 @@ export default function MiniDrawer({
         <List>
           <MiniDrawerList
             name='Dashboard'
-            icon={'fa-solid fa-table-columns'}
+            icon={'Home'}
             url='/dashboard'
             open={open}
             handleToggleOpen={closeDrawer}
@@ -170,7 +174,7 @@ export default function MiniDrawer({
         <List>
           <ListItemButton onClick={handleClickOnCircleSubMenu}>
             <ListItemIcon>
-              <Avatar src={logo} />
+              <Avatar src={logo} sx={{width:'1.5rem', height: '1.5rem'}}/>
             </ListItemIcon>
             <ListItemText primary='Mes cercles' />
             {openCircleSubMenu ? <ExpandLess /> : <ExpandMore />}
@@ -193,14 +197,14 @@ export default function MiniDrawer({
         <List className='mt-auto'>
           <MiniDrawerList
             name='FAQ'
-            icon={'fa-solid fa-circle-question'}
+            icon={'FAQ'}
             url='/faq'
             open={open}
             handleToggleOpen={closeDrawer}
           />
           <MiniDrawerList
             name='Contact'
-            icon={'fa-solid fa-comments'}
+            icon={'Contact'}
             url='/contact'
             open={open}
             handleToggleOpen={closeDrawer}
@@ -217,7 +221,7 @@ export default function MiniDrawer({
           <Divider variant='middle' />
           <MiniDrawerList
             name='Se déconnecter'
-            icon={'fa-solid fa-arrow-right-from-bracket'}
+            icon={'Disconnect'}
             url='/'
             open={open}
             handleToggleOpen={closeDrawer}
