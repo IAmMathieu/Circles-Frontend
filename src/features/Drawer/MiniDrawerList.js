@@ -70,6 +70,7 @@ export default function MiniDrawerList({
         placement='right'
       >
         <ListItemButton
+        aria-label='List of circles'
           sx={{
             minHeight: 48,
             justifyContent: open ? 'initial' : 'center',
@@ -81,6 +82,7 @@ export default function MiniDrawerList({
           }}
         >
           <ListItemIcon
+          alt='Circles icon'
             sx={{
               minWidth: 0,
               mr: open ? 3 : 'auto',

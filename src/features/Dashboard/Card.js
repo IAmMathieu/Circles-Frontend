@@ -78,6 +78,7 @@ export default function CircleCard({
                 src={admin_picture}
                 sx={{ bgcolor: red[500], width: '50px', height: '50px' }}
                 aria-label='recipe'
+                alt='Admin picture'
               ></Avatar>
             </Tooltip>
             <svg
@@ -118,7 +119,7 @@ export default function CircleCard({
             <Typography fontSize='1rem'>Membres connectés du cercle</Typography>
           }
         >
-          <IconButton className='text-lg'>
+          <IconButton aria-label='Numbers of connected' className='text-lg'>
             <Brightness1Icon
               className=' text-lg mr-2'
               color={`${nb_online === 0 ? 'error' : 'success'}`}
@@ -130,7 +131,7 @@ export default function CircleCard({
         <Tooltip
           title={<Typography fontSize='1rem'>Prochains événements</Typography>}
         >
-          <IconButton className='text-lg' onClick={toggleEvents}>
+          <IconButton aria-label='List of events' className='text-lg' onClick={toggleEvents}>
             <EventIcon className=' text-lg mr-2' />
             {nb_events}
           </IconButton>
