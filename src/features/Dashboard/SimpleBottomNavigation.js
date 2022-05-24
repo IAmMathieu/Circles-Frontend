@@ -4,6 +4,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import GroupsIcon from '@mui/icons-material/Groups';
 import SearchIcon from '@mui/icons-material/Search';
 import { BottomNavigationAction, Typography } from '@mui/material';
+
 import './SimpleBottomNavigation.scss';
 export default function SimpleBottomNavigation({
   handleClickOpenCreate,

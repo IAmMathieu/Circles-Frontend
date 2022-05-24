@@ -5,12 +5,14 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import { BottomNavigationAction, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { changeMenu } from './CircleSlice';
-
+import { useWindowSize } from 'rooks';
 export default function CircleBottomNavigation() {
+  const { innerWidth, innerHeight, outerHeight, outerWidth } = useWindowSize();
   const dispatch = useDispatch();
 
   return (
     <Box
+      id={innerWidth < 900 ? 'circle_chat_button' : ''}
       className='bottomNavigation'
       sx={{
         display: { sx: 'inherit', md: 'none' },
@@ -35,8 +37,11 @@ export default function CircleBottomNavigation() {
           icon={<AddCircleIcon />}
           onClick={() => dispatch(changeMenu('calendar'))}
         />
-        <BottomNavigationAction label='Chat' icon={<GroupsIcon />} onClick={() => dispatch(changeMenu('chat'))} />
-
+        <BottomNavigationAction
+          label='Chat'
+          icon={<GroupsIcon />}
+          onClick={() => dispatch(changeMenu('chat'))}
+        />
       </BottomNavigation>
     </Box>
   );

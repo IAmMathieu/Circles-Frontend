@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import EditIcon from '@mui/icons-material/Edit';
 import { handleChange } from './CircleSlice';
+import { useWindowSize } from 'rooks';
 export default function CircleHeader({
   circleData,
   toggleModify,
@@ -11,6 +12,7 @@ export default function CircleHeader({
   const { token } = useSelector((state) => state.auth);
   const { circle_id, menu } = useSelector((state) => state.circle);
   const dispatch = useDispatch();
+  const { innerWidth, innerHeight, outerHeight, outerWidth } = useWindowSize();
   return (
     <Container
       disableGutters
@@ -67,7 +69,7 @@ export default function CircleHeader({
           />
         </Box>
         <Box
-          id='circle_chat_button'
+          id={innerWidth > 899 ? 'circle_chat_button' : ''}
           sx={{
             display: { xs: 'none', md: 'flex' },
             position: 'absolute',
