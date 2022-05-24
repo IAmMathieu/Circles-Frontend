@@ -99,6 +99,7 @@ export default function CircleHeader({
           </Typography>
         </Box>
         <IconButton
+        aria-label='invite button'
           onClick={() => toggleInvite()}
           sx={{
             position: 'absolute',

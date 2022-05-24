@@ -154,24 +154,28 @@ function ProfilePage() {
                 input='firstname'
                 type={'text'}
                 defaultValue={data?.firstname}
+                name='firstname'
               />
               <Input
                 defaultValue={data?.lastname}
                 input='lastname'
                 type={'text'}
                 helperText={'Nom'}
+                name='lastname'
               />
               <Input
                 defaultValue={data?.surname}
                 input='surname'
                 type={'text'}
                 helperText={'Pseudo'}
+                name='surname'
               />
               <Input
                 defaultValue={data?.email}
                 input='email'
                 type={'email'}
                 helperText={'Email'}
+                name='email'
 
                 // error={loginIsError}
               />
