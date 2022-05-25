@@ -145,12 +145,10 @@ export default function Circle() {
   /**
    * Make the query for get the profil user information
    */
-  const { data: profilData } = useGetProfilUserQuery(
-    { token, user_id },
-    {
-      skip: skip,
-    }
-  );
+  const { data: profilData, refetch: refetchProfil } = useGetProfilUserQuery({
+    token,
+    user_id,
+  });
   //* Socket part
   /**
    * On détecte et relance le socket join une fois que le circle success a bien été fais.
@@ -194,6 +192,7 @@ export default function Circle() {
               birthdate: '',
               // firstconnect: profilData?.firstconnect,
             });
+            refetchProfil();
           }
         }}
         exitOnEsc
