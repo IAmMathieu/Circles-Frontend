@@ -30,12 +30,14 @@ import {
   useGetProfilUserQuery,
   useUpdateProfilUserMutation,
 } from '../features/ProfilePage/ProfilApi';
+import { useLocalstorageState } from 'rooks';
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const inputData = useSelector((state) => state.auth);
+  const [skip, setSkip] = useState(true);
   /**
    * Use for open or close the left menu
    */
@@ -48,14 +50,8 @@ const App = () => {
   /**
    * Get the token from the local storage
    */
-  const [token, setToken] = useLocalStorage(
-    'token',
-    getStorage('token') !== null ? getStorage('token') : undefined
-  );
-  const [user_id, setUser_id] = useLocalStorage(
-    'user_id',
-    getStorage('user_id') !== null ? getStorage('user_id') : undefined
-  );
+  const [token, setAppToken] = useState();
+  const [user_id, setAppUserId] = useState();
   /**
    * Get the token, and add it to the store(if exist)
    */
@@ -80,10 +76,13 @@ const App = () => {
   /**
    * Allow to switch a theme
    */
-  const { refetch: refetchProfilUser } = useGetProfilUserQuery({
-    token,
-    user_id,
-  });
+  const { refetch: refetchProfilUser } = useGetProfilUserQuery(
+    {
+      token,
+      user_id,
+    },
+    { skip: skip }
+  );
   const muiTheme = theme === 'light' ? MuiThemeLight : MuiThemeDark;
   document.body.dataset.theme = theme;
   //! Introjs
@@ -164,6 +163,9 @@ const App = () => {
       tooltipClass: 'customTooltip',
     },
   ];
+  useEffect(() => {
+    if (skip === false) refetchProfilUser();
+  }, [skip]);
   //! -----------------
   return (
     <div className='App relative'>
@@ -198,10 +200,8 @@ const App = () => {
               user_id,
               firstconnect: true,
               birthdate: '',
-
-              // firstcircle: profilData?.firstcircle,
             });
-            refetchProfilUser();
+            setSkip(false);
           }
         }}
         exitOnEsc
@@ -209,6 +209,7 @@ const App = () => {
           doneLabel: "Let's go!",
         }}
       />
+
       <ThemeProvider theme={muiTheme}>
         <CssBaseline />
         {tokenState && (
@@ -246,7 +247,11 @@ const App = () => {
             path='/dashboard'
             element={
               <PrivateRoute token={tokenState}>
-                <Dashboard setEnabled={setEnabled} />
+                <Dashboard
+                  setEnabled={setEnabled}
+                  setAppToken={setAppToken}
+                  setAppUserId={setAppUserId}
+                />
               </PrivateRoute>
             }
           />

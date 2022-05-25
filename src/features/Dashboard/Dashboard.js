@@ -10,7 +10,7 @@ import { useGetProfilUserQuery } from '../ProfilePage/ProfilApi';
 import { useLocalstorageState } from 'rooks';
 import { Link } from 'react-router-dom';
 
-export const Dashboard = ({ setEnabled }) => {
+export const Dashboard = ({ setEnabled, setAppToken, setAppUserId }) => {
   const [token, setToken] = useLocalstorageState('token', 0);
   const [user_id, setUserId] = useLocalstorageState('user_id', 0);
 
@@ -24,7 +24,10 @@ export const Dashboard = ({ setEnabled }) => {
     user_id,
   });
   // Detect if data are here, then modale launch
-
+  useEffect(() => {
+    setAppToken(token);
+    setAppUserId(user_id);
+  }, []);
   const [openCreate, setOpenCreate] = useState(false);
   const [openJoin, setOpenJoin] = useState(false);
 
