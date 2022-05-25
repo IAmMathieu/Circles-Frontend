@@ -96,71 +96,60 @@ const App = () => {
     {
       element: '#begin',
       intro: 'Bienvenue dans votre dashboard ! Ici vous trouverez vos Cercles.',
-      tooltipClass: 'customTooltip',
       // intro:
       //   'Bienvenue dans votre dashboard. Il fais vide ici, et si nous créions un Cercle?',
     },
     {
       element: '#circlecreate',
       intro: 'Vous pouvez créer un cercle ici.',
-      tooltipClass: 'customTooltip',
     },
     {
       element: '#menu',
       intro:
         'Voici le menu, il vous permettra de mieux vous repérer et naviguer.',
       position: 'right',
-      tooltipClass: 'customTooltip',
     },
     {
       element: '#menu_dashboard',
       intro: 'Ici vous retrouverez le boutton pour accéder au dashboard',
       position: 'right',
-      tooltipClass: 'customTooltip',
     },
     {
       element: '#menu_circles',
       intro: 'Ici vous retrouverez tous vos cercles',
       position: 'right',
-      tooltipClass: 'customTooltip',
     },
     {
       element: '#menu_faq',
       intro: 'La page FAQ, pour tout savoir sur notre app.',
       position: 'right',
-      tooltipClass: 'customTooltip',
     },
     {
       element: '#menu_contact',
       intro: "La page pour nous contacter, c'est ici que ça se passe",
       position: 'right',
-      tooltipClass: 'customTooltip',
     },
     {
       element: '#menu_profil',
       intro: 'Votre profil est disponible ici.',
       position: 'right',
-      tooltipClass: 'customTooltip',
     },
 
     {
       element: '#menu_darkmode',
       intro: 'Le darkmode menu, selon vos préférences.',
       position: 'right',
-      tooltipClass: 'customTooltip',
     },
     {
       element: '#menu_disconnect',
       intro: 'Le boutton de déconnection',
       position: 'right',
-      tooltipClass: 'customTooltip',
     },
     {
       element: '#profil_infobulles',
       intro:
         'A vous de jouez ! Vous pouvez réactiver les infobulles dans la page profil.',
       position: 'left',
-      tooltipClass: 'customTooltip',
     },
   ];
   useEffect(() => {
@@ -175,9 +164,6 @@ const App = () => {
         initialStep={initialStep}
         onExit={onExit}
         onBeforeChange={(change) => {
-          if (change === 2) {
-            handleToggleOpen();
-          }
           if (change === 5) {
             navigate('/faq');
           }
@@ -194,7 +180,6 @@ const App = () => {
         }}
         onChange={async (change) => {
           if (change === steps.length - 1) {
-            handleToggleOpen();
             await updateProfilUser({
               token,
               user_id,

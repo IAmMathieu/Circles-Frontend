@@ -34,33 +34,27 @@ export default function Circle() {
     {
       // element: '#begin_circle',
       intro: 'Bienvenue sur votre Cercle ! Voyons cela ensemble.',
-      tooltipClass: 'customTooltip',
     },
     {
       element: '#begin_circle',
       intro: 'Voici le nom de votre cercle, vous pouvez le modifier ici.',
-      tooltipClass: 'customTooltip',
     },
     {
       element: '#invite_circle',
       intro: 'Vous pouvez inviter ici un nouveau membre.',
-      tooltipClass: 'customTooltip',
     },
     {
       element: '#calendar_circle',
       intro:
         'Voici le calendrier,ici vous pourrez ajouter des évènements personnalisés',
-      tooltipClass: 'customTooltip',
     },
     {
       element: '#circle_chat_button',
       intro: 'Ici vous pouvez passer de calendrier à chat.',
-      tooltipClass: 'customTooltip',
     },
     {
       element: '#chat',
       intro: 'Et pour finir, voici le chat de votre Cercle.',
-      tooltipClass: 'customTooltip',
     },
   ];
   //! -----------------
@@ -190,7 +184,7 @@ export default function Circle() {
               user_id,
               firstcircle: true,
               birthdate: '',
-              // firstconnect: profilData?.firstconnect,
+              firstconnect: profilData?.firstconnect,
             });
             refetchProfil();
           }

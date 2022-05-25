@@ -145,120 +145,116 @@ export default function MiniDrawer({
       >
         <MenuIcon />
       </IconButton>
-      <Box id='menu'>
-        <Drawer
-          className={`Drawer__ui--custom ${
-            open && 'Drawer__ui--open'
-          } bg-buttonbg`}
-          variant='permanent'
-          open={open}
-          onClose={closeDrawer}
-        >
-          <DrawerHeader>
-            <IconButton aria-label='Close drawer' onClick={handleToggleOpen}>
-              {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-            </IconButton>
-          </DrawerHeader>
 
-          <List id='menu_dashboard'>
+      <Drawer
+        id='menu'
+        className={`Drawer__ui--custom ${
+          open && 'Drawer__ui--open'
+        } bg-buttonbg`}
+        variant='permanent'
+        open={open}
+        onClose={closeDrawer}
+      >
+        <DrawerHeader>
+          <IconButton aria-label='Close drawer' onClick={handleToggleOpen}>
+            {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          </IconButton>
+        </DrawerHeader>
+
+        <List id='menu_dashboard'>
+          <MiniDrawerList
+            name='Dashboard'
+            icon={'Home'}
+            url='/dashboard'
+            open={open}
+            handleToggleOpen={closeDrawer}
+          />
+        </List>
+        <Divider variant='middle' />
+        <List>
+          <ListItemButton
+            onClick={handleClickOnCircleSubMenu}
+            id='menu_circles'
+          >
+            <ListItemIcon>
+              <Avatar
+                alt='Circles logo'
+                src={logo}
+                sx={{ width: '1.5rem', height: '1.5rem' }}
+              />
+            </ListItemIcon>
+            <ListItemText primary='Mes cercles' />
+            {openCircleSubMenu ? <ExpandLess /> : <ExpandMore />}
+          </ListItemButton>
+          <Collapse in={openCircleSubMenu} timeout='auto'>
+            {circlesData?.map((circle) => (
+              <MiniDrawerList
+                key={circle.circle_id}
+                name={circle.name}
+                desc={circle.description}
+                img_url={circle.img_url}
+                circle_id={circle.circle_id}
+                open={open}
+                handleToggleOpen={closeDrawer}
+              />
+            ))}
+          </Collapse>
+        </List>
+        <Divider variant='middle' />
+        <List className='mt-auto'>
+          <Box id='menu_faq'>
             <MiniDrawerList
-              name='Dashboard'
-              icon={'Home'}
-              url='/dashboard'
+              id='menu_faq'
+              name='FAQ'
+              icon={'FAQ'}
+              url='/faq'
               open={open}
               handleToggleOpen={closeDrawer}
             />
-          </List>
+          </Box>
+          <Box id='menu_contact'>
+            <MiniDrawerList
+              name='Contact'
+              url='/contact'
+              icon={'Contact'}
+              open={open}
+              handleToggleOpen={closeDrawer}
+            />
+          </Box>
+          <Box id='menu_profil'>
+            <MiniDrawerList
+              name='Mon compte'
+              img_url={userData?.img_url}
+              url='/profil'
+              open={open}
+              handleToggleOpen={closeDrawer}
+            />
+          </Box>
           <Divider variant='middle' />
-          <List>
-            <ListItemButton
-              onClick={handleClickOnCircleSubMenu}
-              id='menu_circles'
-            >
-              <ListItemIcon>
-                <Avatar
-                  alt='Circles logo'
-                  src={logo}
-                  sx={{ width: '1.5rem', height: '1.5rem' }}
-                />
-              </ListItemIcon>
-              <ListItemText primary='Mes cercles' />
-              {openCircleSubMenu ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-            <Collapse in={openCircleSubMenu} timeout='auto'>
-              {circlesData?.map((circle) => (
-                <MiniDrawerList
-                  key={circle.circle_id}
-                  name={circle.name}
-                  desc={circle.description}
-                  img_url={circle.img_url}
-                  circle_id={circle.circle_id}
-                  open={open}
-                  handleToggleOpen={closeDrawer}
-                />
-              ))}
-            </Collapse>
-          </List>
+          <Box id='menu_darkmode'>
+            <MiniDrawerDarkMode setTheme={setTheme} theme={theme} open={open} />
+          </Box>
           <Divider variant='middle' />
-          <List className='mt-auto'>
-            <Box id='menu_faq'>
-              <MiniDrawerList
-                id='menu_faq'
-                name='FAQ'
-                icon={'FAQ'}
-                url='/faq'
-                open={open}
-                handleToggleOpen={closeDrawer}
-              />
-            </Box>
-            <Box id='menu_contact'>
-              <MiniDrawerList
-                name='Contact'
-                url='/contact'
-                icon={'Contact'}
-                open={open}
-                handleToggleOpen={closeDrawer}
-              />
-            </Box>
-            <Box id='menu_profil'>
-              <MiniDrawerList
-                name='Mon compte'
-                img_url={userData?.img_url}
-                url='/profil'
-                open={open}
-                handleToggleOpen={closeDrawer}
-              />
-            </Box>
-            <Divider variant='middle' />
-            <Box id='menu_darkmode'>
-              <MiniDrawerDarkMode
-                setTheme={setTheme}
-                theme={theme}
-                open={open}
-              />
-            </Box>
-            <Divider variant='middle' />
-            <Box id='menu_disconnect'>
-              <MiniDrawerList
-                name='Se déconnecter'
-                icon={'Disconnect'}
-                url='/'
-                open={open}
-                handleToggleOpen={closeDrawer}
-                click={disconnect}
-              />
-            </Box>
-            <ListItemButton disabled>
-              <ListItemIcon />
-              <ListItemText
-                disableTypography
-                primary='©Circle - 2022'
-                sx={{ fontSize: '12px' }}
-              />
-            </ListItemButton>
-          </List>
-        </Drawer>
-      </Box>
+          <Box id='menu_disconnect'>
+            <MiniDrawerList
+              name='Se déconnecter'
+              icon={'Disconnect'}
+              url='/'
+              open={open}
+              handleToggleOpen={closeDrawer}
+              click={disconnect}
+            />
+          </Box>
+          <ListItemButton disabled>
+            <ListItemIcon />
+            <ListItemText
+              disableTypography
+              primary='©Circle - 2022'
+              sx={{ fontSize: '12px' }}
+            />
+          </ListItemButton>
+        </List>
+      </Drawer>
     </Box>
   );
 }
