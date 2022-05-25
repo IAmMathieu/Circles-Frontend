@@ -106,7 +106,7 @@ function ProfilePage() {
               <img
                 src={data?.img_url}
                 alt='User Portrait'
-                className='p-1.5 rounded-full m-auto w-full'
+                className='p-1.5 rounded-full m-auto w-full object-cover aspect-square'
               />
             </Box>
           </Card>
