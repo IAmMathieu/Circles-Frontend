@@ -71,7 +71,7 @@ export const Dashboard = ({ setEnabled }) => {
         >
           <Link to='/profil'>
             <img
-              className='  absolute left-1/2 transform -translate-x-1/2 w-24 h-24 custom-bk:w-52 custom-bk:h-52 rounded-full z-50 top-5 custom-bk:top-14 custom-bk:left-1/4 cursor-pointer'
+              className='  absolute left-1/2 transform -translate-x-1/2 w-24 h-24 custom-bk:w-52 custom-bk:h-52 rounded-full z-50 object-cover top-5 custom-bk:top-14 custom-bk:left-1/4 cursor-pointer'
               src={userData?.img_url}
               alt='Avatar user'
             />
