@@ -26,7 +26,10 @@ import ResetPassword from '../features/auth/ResetPassword';
 import { Login } from '../features/auth/Login';
 import { InviteDashboard } from '../features/InviteDashboardPage/InviteDashboardPage';
 import { Steps } from 'intro.js-react';
-import { useUpdateProfilUserMutation } from '../features/ProfilePage/ProfilApi';
+import {
+  useGetProfilUserQuery,
+  useUpdateProfilUserMutation,
+} from '../features/ProfilePage/ProfilApi';
 // Detect the prefer color scheme from the user, and add it automatically to the local storage.
 const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const App = () => {
@@ -77,7 +80,10 @@ const App = () => {
   /**
    * Allow to switch a theme
    */
-
+  const { refetch: refetchProfilUser } = useGetProfilUserQuery({
+    token,
+    user_id,
+  });
   const muiTheme = theme === 'light' ? MuiThemeLight : MuiThemeDark;
   document.body.dataset.theme = theme;
   //! Introjs
@@ -195,6 +201,7 @@ const App = () => {
 
               // firstcircle: profilData?.firstcircle,
             });
+            refetchProfilUser();
           }
         }}
         exitOnEsc
